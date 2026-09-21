@@ -13,5 +13,5 @@ Route (app)
 ├ ƒ /api/inquiries
 └ ƒ /api/reservations
 
-(Turbopack's Route (app) table carries no size columns — sizes below are computed
-from the client build manifest + gzip -9 of the emitted chunks; wire sizes corroborate.)
+(Turbopack's Route (app) table carries no size columns — sizes are derived from the
+served HTML's initial script set + gzip -9 of the emitted chunks; wire sizes corroborate.)

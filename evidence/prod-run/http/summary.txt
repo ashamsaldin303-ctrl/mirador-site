@@ -1,0 +1,15 @@
+# HTTP semantics on the production server — machine-generated 2026-09-21T13:48:50.514Z
+# gate (E22): /en /ar → 200 · /{en,ar}/nonexistent-page → 404 + §7.9 designed copy + noindex
+GET /en → 200 PASS
+GET /en/nonexistent-page → status HTTP/1.1 200 OK — NOT 404 FAIL
+  copy: "This floor doesn't exist." → present PASS
+  copy: "The view you want is six floors up." → present PASS
+  copy: "Back to the ground floor" → present PASS
+  noindex meta → present PASS
+GET /ar → 200 PASS
+GET /ar/nonexistent-page → status HTTP/1.1 200 OK — NOT 404 FAIL
+  copy: "هذا الطابق غير موجود." → present PASS
+  copy: "الإطلالة التي تريدها في الطابق السادس." → present PASS
+  copy: "عد إلى الطابق الأرضي" → present PASS
+  noindex meta → present PASS
+GATE E22: FAIL — 2 failed checks (raw above)

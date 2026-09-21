@@ -1,16 +1,9 @@
-scripts/gates.sh: line 11: rg: command not found
 GATE G1 wordlist: PASS (0 hits)
-scripts/gates.sh: line 11: rg: command not found
 GATE G2 raw color: PASS (0 hits)
-scripts/gates.sh: line 11: rg: command not found
 GATE G3 arbitrary: PASS (0 hits)
-scripts/gates.sh: line 11: rg: command not found
 GATE G4 ad-hoc radii: PASS (0 hits)
-scripts/gates.sh: line 11: rg: command not found
 GATE G5 placeholder: PASS (0 hits)
-scripts/gates.sh: line 11: rg: command not found
 GATE G6 2nd runtime: PASS (0 hits)
-scripts/gates.sh: line 11: rg: command not found
 GATE G7 transition-all: PASS (0 hits)
 --- tsc --noEmit (whole repo) ---
 --- eslint . --max-warnings 0 ---

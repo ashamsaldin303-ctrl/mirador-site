@@ -1,0 +1,7 @@
+
+===== locale-atomic · run 2026-09-21T13:48:51.416Z =====
+# F1-3 · locale switch = atomic dir+lang flip in ONE frame, no full navigation
+# mutation records (verbatim): undefined
+# html after: lang=ar dir=rtl url=http://localhost:3000/ar
+# soft-nav marker survived full-navigation wipe: NO
+# performance navigation entries: 1 (1 = soft nav only)
