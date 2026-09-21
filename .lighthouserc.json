@@ -4,7 +4,8 @@
       "url": ["http://localhost:3000/en", "http://localhost:3000/ar"],
       "numberOfRuns": 3,
       "settings": {
-        "saveAssets": true
+        "saveAssets": true,
+        "chromeFlags": "--disable-dev-shm-usage --disable-gpu"
       }
     },
     "assert": {

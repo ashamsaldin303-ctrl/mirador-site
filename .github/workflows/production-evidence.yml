@@ -55,21 +55,9 @@ jobs:
       - name: Install Playwright chromium (+ system deps)
         run: bunx playwright install --with-deps chromium
 
-      - name: "Q2-prep: deterministic suite → evidence/prod-run/gates + audits"
-        run: |
-          mkdir -p evidence/prod-run/gates evidence/prod-run/audits
-          bash scripts/gates.sh 2>&1 | tee evidence/prod-run/gates/deterministic-suite.log
-          echo "--- tsc --noEmit (whole repo) ---" >> evidence/prod-run/gates/deterministic-suite.log
-          bunx tsc --noEmit 2>&1 | tee -a evidence/prod-run/gates/deterministic-suite.log
-          echo "--- eslint . --max-warnings 0 ---" >> evidence/prod-run/gates/deterministic-suite.log
-          bunx eslint . --max-warnings 0 2>&1 | tee -a evidence/prod-run/gates/deterministic-suite.log
-          echo "--- audits (fonts · tokens · copy) ---" > evidence/prod-run/audits/audits-run.log
-          bun run audit:fonts 2>&1 | tee -a evidence/prod-run/audits/audits-run.log
-          bun run audit:tokens 2>&1 | tee -a evidence/prod-run/audits/audits-run.log
-          bun run audit:copy 2>&1 | tee -a evidence/prod-run/audits/audits-run.log
-
       - name: "Q1: canonical migrate + seed + counts → evidence/prod-run/specs/seed-count.log"
         run: |
+          set -eo pipefail
           bun run migrate
           bun run seed
           bun -e '
@@ -96,6 +84,20 @@ jobs:
           console.log(lines.join("\n"));
           await db.$disconnect();'
 
+      - name: "Q2-prep: deterministic suite → evidence/prod-run/gates + audits"
+        run: |
+          set -eo pipefail
+          mkdir -p evidence/prod-run/gates evidence/prod-run/audits
+          bash scripts/gates.sh 2>&1 | tee evidence/prod-run/gates/deterministic-suite.log
+          echo "--- tsc --noEmit (whole repo) ---" >> evidence/prod-run/gates/deterministic-suite.log
+          bunx tsc --noEmit 2>&1 | tee -a evidence/prod-run/gates/deterministic-suite.log
+          echo "--- eslint . --max-warnings 0 ---" >> evidence/prod-run/gates/deterministic-suite.log
+          bunx eslint . --max-warnings 0 2>&1 | tee -a evidence/prod-run/gates/deterministic-suite.log
+          echo "--- audits (fonts · tokens · copy) ---" > evidence/prod-run/audits/audits-run.log
+          bun run audit:fonts 2>&1 | tee -a evidence/prod-run/audits/audits-run.log
+          bun run audit:tokens 2>&1 | tee -a evidence/prod-run/audits/audits-run.log
+          bun run audit:copy 2>&1 | tee -a evidence/prod-run/audits/audits-run.log
+
       - name: "Q1: production build (B1) → build-output.log"
         run: bun run build 2>&1 | tee build-output.log
 
@@ -117,6 +119,7 @@ jobs:
 
       - name: "Q3: HTTP semantics (E22) → evidence/prod-run/http/"
         run: |
+          set -eo pipefail
           mkdir -p evidence/prod-run/http
           cd evidence/prod-run/http
           curl -is -m 20 "http://localhost:3000/en" > en--200.txt
@@ -136,6 +139,7 @@ jobs:
 
       - name: "Q4c: 16 rendered snapshots + grep summary (E13 form)"
         run: |
+          set -eo pipefail
           mkdir -p evidence/prod-run/snapshots
           CID=$(bun -e 'const{PrismaClient}=require("@prisma/client");const db=new PrismaClient();const r=await db.reservation.findFirst({orderBy:{createdAt:"asc"}});console.log(r.id);await db.$disconnect()')
           echo "seed confirmation id: $CID"
@@ -175,6 +179,7 @@ jobs:
 
       - name: "Q4i: Lighthouse CI (E27) — mobile · 3 runs · medians"
         run: |
+          set -eo pipefail
           export CHROME_PATH="$(ls /home/runner/.cache/ms-playwright/chromium-*/chrome-linux*/chrome 2>/dev/null | head -1)"
           echo "CHROME_PATH resolved: ${CHROME_PATH:-NOT-FOUND}"
           [ -n "${CHROME_PATH:-}" ] || { echo "FATAL: chromium binary not found"; exit 1; }
@@ -190,6 +195,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
+          set -o pipefail
           mkdir -p evidence/prod-run/cold-start
           pkill -f ".next/standalone/server.js" || true
           sleep 2
@@ -235,9 +241,12 @@ jobs:
       - name: "E33: commit + push the prod-run evidence"
         if: always()
         run: |
+          set -o pipefail
           git config user.name "mirador-evidence-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add -f evidence/prod-run evidence/F12-2/prod-run evidence/F6-3/prod-run
+          mkdir -p evidence/F12-2/prod-run evidence/F6-3/prod-run
+          git add -f evidence/prod-run 2>/dev/null || true
+          git add -f evidence/F12-2/prod-run evidence/F6-3/prod-run 2>/dev/null || true
           git status --short | head -30
           git commit -m "prod-run evidence battery (prompt-3 Q1–Q4) — actions run ${{ github.run_number }} [surface: prod-run]" || echo "nothing to commit"
           git push

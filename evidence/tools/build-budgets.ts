@@ -1,23 +1,27 @@
 // MIRADOR — production build budgets (prompt-3 Q2 · E18/E19).
 // Run AFTER `bun run build` on the build-capable machine (build stdout teed to
-// build-output.log by the caller). Produces, under <surface>/F12-2/prod-run/
-// (or F12-2/ when EVIDENCE_SURFACE unset):
-//   route-size-table.txt  — the verbatim Route (app) table from the build log
-//   first-load-js-gz.txt  — per-route first-load JS gzip sums from app-build-manifest.json
-//   chunk-manifest.txt    — every .next/static/chunks JS: raw + gz + route refs + markers
-//   network-firstload.txt — corroborating wire sizes (Playwright, 7 routes × 2 locales)
-// and under <surface>/F6-3/: three-lazy-chunk.txt (lazy pack size + absence proof).
-// summary.md quotes the E19 budget rows beside the raw files.
+// build-output.log by the caller). Produces (E18's contract-explicit paths —
+// NOT surface-routed):
+//   evidence/F12-2/prod-run/{route-size-table.txt, first-load-js-gz.txt, chunk-manifest.txt, motion-stack.txt, network-firstload.txt, summary.md}
+//   evidence/F6-3/prod-run/three-lazy-chunk.txt
+// NOTE: Next 16 Turbopack's Route (app) table carries no size columns — the
+// budget numbers are computed from BUILD ARTIFACTS (the client build manifest
+// + gzip -9 of the emitted chunks) and corroborated by wire sizes (Playwright).
+// Manifest candidates (bundler-dependent): webpack emits
+// .next/app-build-manifest.json {route: [files]}; Turbopack emits
+// .next/client-build-manifest.json {rootMainFiles, rootMainFilesTree?, …}.
 // FROZEN budgets (parent Appendix A): first-load ≤150KB gz (hard 200KB) ·
-// three/fiber/drei lazy pack ≤400KB gz · motion stack (gsap+ScrollTrigger+Flip+lenis) ≤90KB gz base.
-import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from "node:fs";
+// three/fiber/drei lazy pack ≤400KB gz · motion stack ≤90KB gz base.
+import { readFileSync, writeFileSync, existsSync, readdirSync, statSync, mkdirSync } from "node:fs";
 import { gzipSync } from "node:zlib";
 import { join, relative } from "node:path";
 import { chromium } from "playwright";
-import { outDir, EVIDENCE_OUT, BASE } from "./lib";
+import { outDir, EVIDENCE_OUT, EVIDENCE_ROOT, BASE } from "./lib";
 
-const F12_2 = `${outDir("F12-2")}/prod-run`;
-const F6_3 = `${outDir("F6-3")}/prod-run`;
+const F12_2 = `${EVIDENCE_ROOT}F12-2/prod-run`; // E18 contract-explicit path
+const F6_3 = `${EVIDENCE_ROOT}F6-3/prod-run`; // sibling build family
+mkdirSync(F12_2, { recursive: true });
+mkdirSync(F6_3, { recursive: true });
 const FIRST_LOAD_BUDGET = 150_000;
 const FIRST_LOAD_HARD = 200_000;
 const THREE_PACK_BUDGET = 400_000;
@@ -42,20 +46,47 @@ const lines = buildLog.split("\n");
 const tableStart = lines.findIndex((l) => l.includes("Route (app)"));
 let routeTable = "(route table not found in build-output.log)";
 if (tableStart >= 0) {
-  const end = lines.findIndex((l, i) => i > tableStart && (l.includes("First Load JS shared by all") || l.trim() === ""));
+  const end = lines.findIndex((l, i) => i > tableStart + 1 && l.trim() === "");
   routeTable = lines.slice(tableStart, end > 0 ? end : tableStart + 30).join("\n");
 }
+routeTable += "\n\n(Turbopack's Route (app) table carries no size columns — sizes below are computed\nfrom the client build manifest + gzip -9 of the emitted chunks; wire sizes corroborate.)";
 writeFileSync(`${F12_2}/route-size-table.txt`, `${routeTable}\n`);
 
-// ---------- 2) per-route first-load JS gz from app-build-manifest.json ----------
+// ---------- 2) per-route first-load JS gz from the client build manifest ----------
 type Manifest = Record<string, string[]>;
-const manifestPath = ".next/app-build-manifest.json";
-if (!existsSync(manifestPath)) {
-  console.error(`FATAL: ${manifestPath} missing — cannot compute per-route first-load sets`);
+function loadRouteMap(): { map: Manifest; source: string } {
+  const webpackPath = ".next/app-build-manifest.json";
+  const turboPath = ".next/client-build-manifest.json";
+  if (existsSync(webpackPath)) {
+    const raw = JSON.parse(readFileSync(webpackPath, "utf8"));
+    const map: Manifest = {};
+    for (const [k, v] of Object.entries(raw)) if (Array.isArray(v)) map[k] = v as string[];
+    return { map, source: webpackPath };
+  }
+  if (existsSync(turboPath)) {
+    const raw = JSON.parse(readFileSync(turboPath, "utf8"));
+    const map: Manifest = {};
+    const tree = (raw as { rootMainFilesTree?: Record<string, string[]> }).rootMainFilesTree;
+    if (tree) {
+      for (const [k, v] of Object.entries(tree)) if (Array.isArray(v)) map[`app${k}page`.replace("//", "/")] = v;
+    }
+    if (Object.keys(map).length === 0 && Array.isArray((raw as { rootMainFiles?: string[] }).rootMainFiles)) {
+      map["app/root (all pages)"] = (raw as { rootMainFiles: string[] }).rootMainFiles;
+    }
+    return { map, source: turboPath };
+  }
+  console.error(`FATAL: neither ${webpackPath} nor ${turboPath} exists. .next listing:\n${readdirSync(".next").join("\n")}`);
   process.exit(1);
 }
-const manifest: Manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
-const disk = (url: string) => `.next${url.replace(/^\/_next/, "")}`;
+const { map: manifest, source: manifestSource } = loadRouteMap();
+const resolveChunk = (file: string): string | null => {
+  const probes = [
+    `.next${file.startsWith("/") ? "" : "/"}${file}`,
+    `.next/static${file.startsWith("/") ? "" : "/"}${file}`,
+  ];
+  for (const p of probes) if (existsSync(p)) return p;
+  return null;
+};
 
 const chunkInfo = new Map<string, { raw: number; gz: number }>();
 function info(d: string): { raw: number; gz: number } {
@@ -69,13 +100,13 @@ function info(d: string): { raw: number; gz: number } {
 }
 
 const firstLoadRows: string[] = [
-  `# per-route first-load JS (gzip -9) from .next/app-build-manifest.json — machine-generated ${new Date().toISOString()}`,
+  `# per-route first-load JS (gzip -9) from ${manifestSource} — machine-generated ${new Date().toISOString()}`,
   `# budget (FROZEN, parent Appendix A): ≤${FIRST_LOAD_BUDGET / 1000}KB gz per route (hard ${FIRST_LOAD_HARD / 1000}KB)`,
 ];
 let budgetFail = 0;
-const pageKeys = Object.keys(manifest).filter((k) => k.endsWith("/page") || k === "app/[locale]/page");
+const pageKeys = Object.keys(manifest).filter((k) => k.endsWith("/page") || k.includes("root"));
 for (const key of pageKeys) {
-  const jsFiles = manifest[key].filter((f) => f.endsWith(".js")).map(disk).filter(existsSync);
+  const jsFiles = manifest[key].map(resolveChunk).filter((d): d is string => !!d && d.endsWith(".js"));
   const totalGz = jsFiles.reduce((s, f) => s + info(f).gz, 0);
   const totalRaw = jsFiles.reduce((s, f) => s + info(f).raw, 0);
   const verdict =
@@ -99,7 +130,8 @@ const allChunks: string[] = [];
   }
 })(".next/static/chunks");
 const referenced = new Set<string>();
-for (const files of Object.values(manifest)) for (const f of files.filter((x) => x.endsWith(".js"))) referenced.add(disk(f));
+for (const files of Object.values(manifest))
+  for (const f of files.map(resolveChunk)) if (f) referenced.add(f);
 
 const manifestRows: string[] = [
   `# chunk manifest — every .next/static/chunks JS — machine-generated ${new Date().toISOString()}`,
@@ -120,7 +152,9 @@ for (const c of allChunks) {
   if (isLazy && markers.includes("three")) lazyThree.push(c);
 }
 // motion stack: route-referenced chunks carrying motion markers (base bundle)
-const pageLists = pageKeys.map((k) => manifest[k].filter((f) => f.endsWith(".js")).map(disk).filter(existsSync));
+const pageLists = pageKeys
+  .map((k) => manifest[k].map(resolveChunk).filter((d): d is string => !!d && d.endsWith(".js")))
+  .filter((l) => l.length > 0);
 const sharedBase: string[] = pageLists.reduce<string[]>(
   (acc, list) => acc.filter((x) => list.includes(x)),
   pageLists[0] ?? [],
@@ -213,7 +247,7 @@ const summary: string[] = [
   routeTable,
   "```",
   ``,
-  `## Per-route first-load JS gz (from app-build-manifest.json — raw file: first-load-js-gz.txt)`,
+  `## Per-route first-load JS gz (from ${manifestSource} — raw file: first-load-js-gz.txt)`,
   ...firstLoadRows.filter((l) => l.includes("→") || l.startsWith("GATE")),
   ``,
   `## three/fiber/drei lazy pack (raw file: ../F6-3/prod-run/three-lazy-chunk.txt)`,
@@ -231,5 +265,5 @@ const summary: string[] = [
   `- motion stack ≤90KB gz base: ${motionGz <= MOTION_BUDGET ? "PASS" : "FAIL"}`,
 ];
 writeFileSync(`${F12_2}/summary.md`, summary.join("\n") + "\n");
-console.log(`build-budgets done → ${EVIDENCE_OUT}F12-2/prod-run/ + F6-3/prod-run/ (first-load fails=${budgetFail}, threeGz=${threeGz}B, motionGz=${motionGz}B)`);
+console.log(`build-budgets done → ${F12_2}/ + ${F6_3}/ (first-load fails=${budgetFail}, threeGz=${threeGz}B, motionGz=${motionGz}B)`);
 if (budgetFail > 0 || threeGz > THREE_PACK_BUDGET || motionGz > MOTION_BUDGET) process.exit(1);
