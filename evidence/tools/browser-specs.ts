@@ -19,12 +19,24 @@ async function freshPage() {
   return { browser, context, page };
 }
 
+/** Navigate and wait for React hydration before interacting — on the PRODUCTION
+ *  build the client router hydrates slower than the dev server; clicking a
+ *  soft-nav Link pre-hydration falls back to a FULL navigation (wipes window
+ *  state — the round-2 spec crashed on exactly this). `window.next` is set by
+ *  the router bootstrap once hydrated. */
+async function gotoHydrated(page: import("playwright").Page, url: string) {
+  await page.goto(url, { waitUntil: "domcontentloaded" });
+  await page
+    .waitForFunction(() => typeof (window as unknown as { next?: unknown }).next !== "undefined", { timeout: 20000 })
+    .catch(() => {}); // never hard-fail a spec on the wait; the spec's own assertions decide
+}
+
 async function localeAtomic() {
   const log = specLog("locale-atomic");
   log(`# F1-3 · locale switch = atomic dir+lang flip in ONE frame, no full navigation`);
   const { browser, page } = await freshPage();
   try {
-    await page.goto(`${BASE}/en`, { waitUntil: "domcontentloaded" });
+    await gotoHydrated(page, `${BASE}/en`);
     await page.waitForSelector("a[aria-label=\"العربية\"]");
     // install the observer + soft-nav marker BEFORE the click
     await page.evaluate(() => {
@@ -70,7 +82,7 @@ async function localeAtomic() {
     log(`# html after: lang=${data.htmlLang} dir=${data.htmlDir} url=${data.url}`);
     log(`# soft-nav marker survived full-navigation wipe: ${data.softnavMarker === 1 ? "YES (no full navigation)" : "NO"}`);
     log(`# performance navigation entries: ${data.navigationEntries} (1 = soft nav only)`);
-    const muts = data.mutations as { attribute: string; batch: number }[];
+    const muts = (data.mutations ?? []) as { attribute: string; batch: number }[];
     const langRec = muts.find((m) => m.attribute === "lang");
     const dirRec = muts.find((m) => m.attribute === "dir");
     const sameBatch = !!langRec && !!dirRec && langRec.batch === dirRec.batch;
@@ -89,7 +101,7 @@ async function webglKill() {
   log(`# F6-4 · ?webgl=off → 0 <canvas>, poster treatment`);
   const { browser, page } = await freshPage();
   try {
-    await page.goto(`${BASE}/en?webgl=off`, { waitUntil: "domcontentloaded" });
+    await gotoHydrated(page, `${BASE}/en?webgl=off`);
     // journey sits below the fold — scroll into it so the lazy mount would fire if not killed
     await page.evaluate(() => {
       const el = Array.from(document.querySelectorAll("section, div")).find((n) =>
@@ -119,7 +131,7 @@ async function webglKill() {
     // control run WITHOUT the flag (fresh context) — WebGL2 via SwiftShader, canvas should MOUNT
     const ctx2 = await browser.newContext({ viewport: { width: 1440, height: 900 } });
     const page2 = await ctx2.newPage();
-    await page2.goto(`${BASE}/en`, { waitUntil: "domcontentloaded" });
+    await gotoHydrated(page2, `${BASE}/en`);
     await page2.evaluate(() => {
       const el = Array.from(document.querySelectorAll("section, div")).find((n) => /dusk|fire|the table/i.test(n.textContent ?? ""));
       (el as HTMLElement | undefined)?.scrollIntoView({ block: "center" });
@@ -143,7 +155,7 @@ async function booking() {
   const { browser, page } = await freshPage();
   try {
     const t0 = Date.now();
-    await page.goto(`${BASE}/en/reserve`, { waitUntil: "domcontentloaded" });
+    await gotoHydrated(page, `${BASE}/en/reserve`);
     await page.fill("#reserve-name", "Evidence Run");
     await page.fill("#reserve-phone", "+963 999 00901");
     // live availability: first ENABLED slot button (aria-label like "18:00 — N tables")
@@ -201,7 +213,7 @@ async function inquiry() {
   log(`# F8 · inquiry happy path — private-dining form → success state + row persisted`);
   const { browser, page } = await freshPage();
   try {
-    await page.goto(`${BASE}/en/private-dining`, { waitUntil: "domcontentloaded" });
+    await gotoHydrated(page, `${BASE}/en/private-dining`);
     await page.fill('input[name="name"]', "Evidence Run");
     await page.fill('input[name="phone"]', "+963 999 00902");
     await page.fill('textarea[name="message"]', "Evidence-run inquiry happy path: a quiet table for a private celebration.");
