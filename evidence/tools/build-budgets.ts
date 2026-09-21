@@ -5,18 +5,17 @@
 //   evidence/F12-2/prod-run/{route-size-table.txt, first-load-js-gz.txt, chunk-manifest.txt, motion-stack.txt, network-firstload.txt, summary.md}
 //   evidence/F6-3/prod-run/three-lazy-chunk.txt
 // NOTE: Next 16 Turbopack's Route (app) table carries no size columns — the
-// budget numbers are computed from BUILD ARTIFACTS (the client build manifest
-// + gzip -9 of the emitted chunks) and corroborated by wire sizes (Playwright).
-// Manifest candidates (bundler-dependent): webpack emits
-// .next/app-build-manifest.json {route: [files]}; Turbopack emits
-// .next/client-build-manifest.json {rootMainFiles, rootMainFilesTree?, …}.
+// budget numbers are derived from the SERVED HTML's initial script set (the
+// exact first-load JS the browser downloads) + gzip -9 of the emitted chunks,
+// corroborated by wire sizes (Playwright). .next/build-manifest.json is copied
+// verbatim as a raw build artifact.
 // FROZEN budgets (parent Appendix A): first-load ≤150KB gz (hard 200KB) ·
 // three/fiber/drei lazy pack ≤400KB gz · motion stack ≤90KB gz base.
-import { readFileSync, writeFileSync, existsSync, readdirSync, statSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, readdirSync, statSync, mkdirSync, copyFileSync } from "node:fs";
 import { gzipSync } from "node:zlib";
 import { join, relative } from "node:path";
 import { chromium } from "playwright";
-import { outDir, EVIDENCE_OUT, EVIDENCE_ROOT, BASE } from "./lib";
+import { outDir, EVIDENCE_OUT, EVIDENCE_ROOT, BASE, db, seedConfirmationId } from "./lib";
 
 const F12_2 = `${EVIDENCE_ROOT}F12-2/prod-run`; // E18 contract-explicit path
 const F6_3 = `${EVIDENCE_ROOT}F6-3/prod-run`; // sibling build family
@@ -49,44 +48,48 @@ if (tableStart >= 0) {
   const end = lines.findIndex((l, i) => i > tableStart + 1 && l.trim() === "");
   routeTable = lines.slice(tableStart, end > 0 ? end : tableStart + 30).join("\n");
 }
-routeTable += "\n\n(Turbopack's Route (app) table carries no size columns — sizes below are computed\nfrom the client build manifest + gzip -9 of the emitted chunks; wire sizes corroborate.)";
+routeTable += "\n\n(Turbopack's Route (app) table carries no size columns — sizes are derived from the\nserved HTML's initial script set + gzip -9 of the emitted chunks; wire sizes corroborate.)";
 writeFileSync(`${F12_2}/route-size-table.txt`, `${routeTable}\n`);
 
-// ---------- 2) per-route first-load JS gz from the client build manifest ----------
-type Manifest = Record<string, string[]>;
-function loadRouteMap(): { map: Manifest; source: string } {
-  const webpackPath = ".next/app-build-manifest.json";
-  const turboPath = ".next/client-build-manifest.json";
-  if (existsSync(webpackPath)) {
-    const raw = JSON.parse(readFileSync(webpackPath, "utf8"));
-    const map: Manifest = {};
-    for (const [k, v] of Object.entries(raw)) if (Array.isArray(v)) map[k] = v as string[];
-    return { map, source: webpackPath };
-  }
-  if (existsSync(turboPath)) {
-    const raw = JSON.parse(readFileSync(turboPath, "utf8"));
-    const map: Manifest = {};
-    const tree = (raw as { rootMainFilesTree?: Record<string, string[]> }).rootMainFilesTree;
-    if (tree) {
-      for (const [k, v] of Object.entries(tree)) if (Array.isArray(v)) map[`app${k}page`.replace("//", "/")] = v;
-    }
-    if (Object.keys(map).length === 0 && Array.isArray((raw as { rootMainFiles?: string[] }).rootMainFiles)) {
-      map["app/root (all pages)"] = (raw as { rootMainFiles: string[] }).rootMainFiles;
-    }
-    return { map, source: turboPath };
-  }
-  console.error(`FATAL: neither ${webpackPath} nor ${turboPath} exists. .next listing:\n${readdirSync(".next").join("\n")}`);
-  process.exit(1);
+// ---------- 2) per-route first-load JS gz — from the SERVED HTML (EVIDENCE_BASE_URL must be up) ----------
+// Each page's initial HTML carries exactly the <script src> / <link rel=preload|modulepreload href>
+// the browser downloads on first load — bundler-agnostic ground truth (no manifest
+// shape guessing). noModule polyfills are excluded (modern browsers skip them).
+// .next/build-manifest.json is copied verbatim beside as a raw build artifact.
+if (existsSync(".next/build-manifest.json")) {
+  copyFileSync(".next/build-manifest.json", `${F12_2}/build-manifest.json`);
 }
-const { map: manifest, source: manifestSource } = loadRouteMap();
+const prisma = db();
+const SEED_CONFIRMATION_ID = await seedConfirmationId(prisma);
+await prisma.$disconnect();
+const ROUTES: { name: string; path: string }[] = [
+  { name: "home", path: "" },
+  { name: "menu", path: "/menu" },
+  { name: "reserve", path: "/reserve" },
+  { name: "story", path: "/story" },
+  { name: "gallery", path: "/gallery" },
+  { name: "private-dining", path: "/private-dining" },
+  { name: "contact", path: "/contact" },
+  { name: "confirmation", path: `/confirmation/${SEED_CONFIRMATION_ID}` },
+];
+async function firstLoadSet(url: string): Promise<string[]> {
+  const html = await (await fetch(`${BASE}${url}`)).text();
+  const srcs = new Set<string>();
+  for (const m of html.matchAll(/<script\b[^>]*\bsrc="(\/[^"]+\.js)"[^>]*>/g)) {
+    if (!/nomodule/i.test(m[0])) srcs.add(m[1]);
+  }
+  for (const m of html.matchAll(/<link\b[^>]*\b(?:preload|modulepreload)\b[^>]*\bhref="(\/[^"]+\.js)"[^>]*>/g)) {
+    srcs.add(m[1]);
+  }
+  return [...srcs];
+}
 const resolveChunk = (file: string): string | null => {
-  const probes = [
-    `.next${file.startsWith("/") ? "" : "/"}${file}`,
-    `.next/static${file.startsWith("/") ? "" : "/"}${file}`,
-  ];
+  const probes = [`.next${file.replace(/^\/_next/, "")}`, `.next/static${file.replace(/^\/_next\/static/, "")}`];
   for (const p of probes) if (existsSync(p)) return p;
   return null;
 };
+const routeSets = new Map<string, string[]>(); // route label → resolved disk paths
+const htmlFetchErrors: string[] = [];
 
 const chunkInfo = new Map<string, { raw: number; gz: number }>();
 function info(d: string): { raw: number; gz: number } {
@@ -100,22 +103,35 @@ function info(d: string): { raw: number; gz: number } {
 }
 
 const firstLoadRows: string[] = [
-  `# per-route first-load JS (gzip -9) from ${manifestSource} — machine-generated ${new Date().toISOString()}`,
+  `# per-route first-load JS (gzip -9) from the SERVED HTML script set — machine-generated ${new Date().toISOString()}`,
+  `# derivation: <script src> + <link preload|modulepreload href> per route (noModule polyfills excluded)`,
   `# budget (FROZEN, parent Appendix A): ≤${FIRST_LOAD_BUDGET / 1000}KB gz per route (hard ${FIRST_LOAD_HARD / 1000}KB)`,
 ];
 let budgetFail = 0;
-const pageKeys = Object.keys(manifest).filter((k) => k.endsWith("/page") || k.includes("root"));
-for (const key of pageKeys) {
-  const jsFiles = manifest[key].map(resolveChunk).filter((d): d is string => !!d && d.endsWith(".js"));
-  const totalGz = jsFiles.reduce((s, f) => s + info(f).gz, 0);
-  const totalRaw = jsFiles.reduce((s, f) => s + info(f).raw, 0);
-  const verdict =
-    totalGz <= FIRST_LOAD_BUDGET ? "PASS" : totalGz <= FIRST_LOAD_HARD ? `FAIL (soft budget exceeded — under hard cap)` : "FAIL (hard cap exceeded)";
-  if (verdict !== "PASS") budgetFail++;
-  firstLoadRows.push(
-    `${key} — files=${jsFiles.length} raw=${totalRaw}B gz=${totalGz}B (${(totalGz / 1024).toFixed(1)}KB) → ${verdict}`,
-  );
-  for (const f of jsFiles) firstLoadRows.push(`    ${relative(".next", f)} gz=${info(f).gz}B`);
+for (const loc of ["en", "ar"] as const) {
+  for (const r of ROUTES) {
+    const label = `/${loc}${r.path || "/"}`;
+    const srcs = await firstLoadSet(`/${loc}${r.path}`).catch((e) => {
+      htmlFetchErrors.push(`${label}: ${String(e)}`);
+      return [] as string[];
+    });
+    const jsFiles = srcs.map(resolveChunk).filter((d): d is string => !!d);
+    const unresolved = srcs.filter((s) => !resolveChunk(s));
+    for (const u of unresolved) htmlFetchErrors.push(`${label}: chunk not on disk: ${u}`);
+    const totalGz = jsFiles.reduce((s, f) => s + info(f).gz, 0);
+    const totalRaw = jsFiles.reduce((s, f) => s + info(f).raw, 0);
+    const verdict =
+      totalGz <= FIRST_LOAD_BUDGET ? "PASS" : totalGz <= FIRST_LOAD_HARD ? `FAIL (soft budget exceeded — under hard cap)` : "FAIL (hard cap exceeded)";
+    if (verdict !== "PASS") budgetFail++;
+    firstLoadRows.push(
+      `${label} — files=${jsFiles.length} raw=${totalRaw}B gz=${totalGz}B (${(totalGz / 1024).toFixed(1)}KB) → ${verdict}`,
+    );
+    for (const f of jsFiles) firstLoadRows.push(`    ${relative(".next", f)} gz=${info(f).gz}B`);
+    routeSets.set(`${r.name}--${loc}`, jsFiles);
+  }
+}
+if (htmlFetchErrors.length > 0) {
+  firstLoadRows.push(`# WARNINGS: ${htmlFetchErrors.length} fetch/resolve issues:`, ...htmlFetchErrors.map((e) => `#   ${e}`));
 }
 firstLoadRows.push(budgetFail === 0 ? `GATE F12-2: PASS — every route first-load JS ≤${FIRST_LOAD_BUDGET / 1000}KB gz` : `GATE F12-2: FAIL — ${budgetFail} routes over budget`);
 writeFileSync(`${F12_2}/first-load-js-gz.txt`, firstLoadRows.join("\n") + "\n");
@@ -130,8 +146,7 @@ const allChunks: string[] = [];
   }
 })(".next/static/chunks");
 const referenced = new Set<string>();
-for (const files of Object.values(manifest))
-  for (const f of files.map(resolveChunk)) if (f) referenced.add(f);
+for (const files of routeSets.values()) for (const f of files) referenced.add(f);
 
 const manifestRows: string[] = [
   `# chunk manifest — every .next/static/chunks JS — machine-generated ${new Date().toISOString()}`,
@@ -151,10 +166,8 @@ for (const c of allChunks) {
   );
   if (isLazy && markers.includes("three")) lazyThree.push(c);
 }
-// motion stack: route-referenced chunks carrying motion markers (base bundle)
-const pageLists = pageKeys
-  .map((k) => manifest[k].map(resolveChunk).filter((d): d is string => !!d && d.endsWith(".js")))
-  .filter((l) => l.length > 0);
+// motion stack: chunks loaded by EVERY route (base bundle) carrying motion markers
+const pageLists = [...routeSets.values()];
 const sharedBase: string[] = pageLists.reduce<string[]>(
   (acc, list) => acc.filter((x) => list.includes(x)),
   pageLists[0] ?? [],
@@ -247,7 +260,7 @@ const summary: string[] = [
   routeTable,
   "```",
   ``,
-  `## Per-route first-load JS gz (from ${manifestSource} — raw file: first-load-js-gz.txt)`,
+  `## Per-route first-load JS gz (from the served HTML script set — raw file: first-load-js-gz.txt)`,
   ...firstLoadRows.filter((l) => l.includes("→") || l.startsWith("GATE")),
   ``,
   `## three/fiber/drei lazy pack (raw file: ../F6-3/prod-run/three-lazy-chunk.txt)`,
