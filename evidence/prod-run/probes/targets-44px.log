@@ -1,0 +1,182 @@
+# interactive target probe — machine-generated 2026-09-21T14:18:00.804Z
+# gate (F12-7): effective size ≥44×44 (WCAG floor 24×24 recorded for context)
+# scope per contract: nav · filters · forms · lightbox (visible targets only)
+
+## nav (home @375 + @1440) (@375, 11 visible targets)
+  <a> "Skip to content" — 1×1px → UNDER 44 (below WCAG floor)
+  <a> "MIRADOR" — 131×44px → ≥44
+  <a> "العربية" — 63×44px → ≥44
+  <button> "Open menu" — 44×44px → ≥44
+  <a> "Reserve a table" — 174×44px → ≥44
+  <a> "The menu" — 67×44px → ≥44
+  <a> "Reserve a table" — 174×44px → ≥44
+  <a> "The menu" — 67×44px → ≥44
+  <a> "+963 11 341 7700" — 124×44px → ≥44
+  <a> "Message us on WhatsApp" — 192×44px → ≥44
+  <a> "reservations@miradordamascus" — 275×44px → ≥44
+
+## nav desktop (header @1440, 9 targets)
+  <a> "MIRADOR" — 131×44px → ≥44
+  <a> "Home" — 69×44px → ≥44
+  <a> "Menu" — 66×44px → ≥44
+  <a> "Story" — 65×44px → ≥44
+  <a> "Gallery" — 76×44px → ≥44
+  <a> "Private Dining" — 130×44px → ≥44
+  <a> "Contact" — 85×44px → ≥44
+  <a> "العربية" — 63×44px → ≥44
+  <a> "Reserve a table" — 158×44px → ≥44
+
+## menu filters (@375) (@375, 45 visible targets)
+  <a> "Skip to content" — 1×1px → UNDER 44 (below WCAG floor)
+  <a> "MIRADOR" — 131×44px → ≥44
+  <a> "العربية" — 63×44px → ≥44
+  <button> "Open menu" — 44×44px → ≥44
+  <a> "To Begin" — 89×44px → ≥44
+  <a> "Bread & Butter" — 134×44px → ≥44
+  <a> "From the Hearth" — 148×44px → ≥44
+  <a> "Mains" — 68×44px → ≥44
+  <a> "Sides" — 64×44px → ≥44
+  <a> "To Finish" — 92×44px → ≥44
+  <button> "Vegetarian" — 108×44px → ≥44
+  <button> "Vegan" — 77×44px → ≥44
+  <button> "Gluten-free" — 112×44px → ≥44
+  <button> "Pescatarian" — 113×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 80×44px → ≥44
+  <a> "+963 11 341 7700" — 124×44px → ≥44
+  <a> "Message us on WhatsApp" — 192×44px → ≥44
+  <a> "reservations@miradordamascus" — 275×44px → ≥44
+
+## reserve form (@375) (@375, 83 visible targets)
+  <a> "Skip to content" — 1×1px → UNDER 44 (below WCAG floor)
+  <a> "MIRADOR" — 131×44px → ≥44
+  <a> "العربية" — 63×44px → ≥44
+  <button> "Open menu" — 44×44px → ≥44
+  <input> "(unnamed)" — 328×44px → ≥44
+  <input> "(unnamed)" — 328×44px → ≥44
+  <button> "Remove a guest" — 44×44px → ≥44
+  <button> "Add a guest" — 44×44px → ≥44
+  <a> "Private dining" — 89×18px → UNDER 44 (below WCAG floor)
+  <button> "Monday, September 21, 2026 — Closed Monday" — 64×63px → ≥44
+  <button> "Tuesday, September 22, 2026" — 64×63px → ≥44
+  <button> "Wednesday, September 23, 2026" — 64×63px → ≥44
+  <button> "Thursday, September 24, 2026" — 64×63px → ≥44
+  <button> "Friday, September 25, 2026" — 64×63px → ≥44
+  <button> "Saturday, September 26, 2026" — 64×63px → ≥44
+  <button> "Sunday, September 27, 2026" — 64×63px → ≥44
+  <button> "Monday, September 28, 2026 — Closed Monday" — 64×63px → ≥44
+  <button> "Tuesday, September 29, 2026" — 64×63px → ≥44
+  <button> "Wednesday, September 30, 2026" — 64×63px → ≥44
+  <button> "Thursday, October 1, 2026" — 64×63px → ≥44
+  <button> "Friday, October 2, 2026" — 64×63px → ≥44
+  <button> "Saturday, October 3, 2026" — 64×63px → ≥44
+  <button> "Sunday, October 4, 2026" — 64×63px → ≥44
+  <button> "Monday, October 5, 2026 — Closed Monday" — 64×63px → ≥44
+  <button> "Tuesday, October 6, 2026" — 64×63px → ≥44
+  <button> "Wednesday, October 7, 2026" — 64×63px → ≥44
+  <button> "Thursday, October 8, 2026" — 64×63px → ≥44
+  <button> "Friday, October 9, 2026" — 64×63px → ≥44
+  <button> "Saturday, October 10, 2026" — 64×63px → ≥44
+  <button> "Sunday, October 11, 2026" — 64×63px → ≥44
+  <button> "Monday, October 12, 2026 — Closed Monday" — 64×63px → ≥44
+  <button> "Tuesday, October 13, 2026" — 64×63px → ≥44
+  <button> "Wednesday, October 14, 2026" — 64×63px → ≥44
+  <button> "Thursday, October 15, 2026" — 64×63px → ≥44
+  <button> "Friday, October 16, 2026" — 64×63px → ≥44
+  <button> "Saturday, October 17, 2026" — 64×63px → ≥44
+  <button> "Sunday, October 18, 2026" — 64×63px → ≥44
+  <button> "Monday, October 19, 2026 — Closed Monday" — 64×63px → ≥44
+  <button> "Tuesday, October 20, 2026" — 64×63px → ≥44
+  <button> "Wednesday, October 21, 2026" — 64×63px → ≥44
+  <button> "Thursday, October 22, 2026" — 64×63px → ≥44
+  <button> "Friday, October 23, 2026" — 64×63px → ≥44
+  <button> "Saturday, October 24, 2026" — 64×63px → ≥44
+  <button> "Sunday, October 25, 2026" — 64×63px → ≥44
+  <button> "Monday, October 26, 2026 — Closed Monday" — 64×63px → ≥44
+  <button> "Tuesday, October 27, 2026" — 64×63px → ≥44
+  <button> "Wednesday, October 28, 2026" — 64×63px → ≥44
+  <button> "Thursday, October 29, 2026" — 64×63px → ≥44
+  <button> "Friday, October 30, 2026" — 64×63px → ≥44
+  <button> "Saturday, October 31, 2026" — 64×63px → ≥44
+  <button> "Sunday, November 1, 2026" — 64×63px → ≥44
+  <button> "Monday, November 2, 2026 — Closed Monday" — 64×63px → ≥44
+  <button> "Tuesday, November 3, 2026" — 64×63px → ≥44
+  <button> "Wednesday, November 4, 2026" — 64×63px → ≥44
+  <button> "Thursday, November 5, 2026" — 64×63px → ≥44
+  <button> "Friday, November 6, 2026" — 64×63px → ≥44
+  <button> "Saturday, November 7, 2026" — 64×63px → ≥44
+  <button> "Sunday, November 8, 2026" — 64×63px → ≥44
+  <button> "Monday, November 9, 2026 — Closed Monday" — 64×63px → ≥44
+  <button> "Tuesday, November 10, 2026" — 64×63px → ≥44
+  <button> "Wednesday, November 11, 2026" — 64×63px → ≥44
+  <button> "Thursday, November 12, 2026" — 64×63px → ≥44
+  <button> "Friday, November 13, 2026" — 64×63px → ≥44
+  <button> "Saturday, November 14, 2026" — 64×63px → ≥44
+  <button> "Sunday, November 15, 2026" — 64×63px → ≥44
+  <button> "Monday, November 16, 2026 — Closed Monday" — 64×63px → ≥44
+  <button> "Tuesday, November 17, 2026" — 64×63px → ≥44
+  <button> "Wednesday, November 18, 2026" — 64×63px → ≥44
+  <button> "Thursday, November 19, 2026" — 64×63px → ≥44
+  <button> "18:00 — 12 tables" — 160×72px → ≥44
+  <button> "18:30 — 12 tables" — 160×72px → ≥44
+  <button> "19:00 — 12 tables" — 160×72px → ≥44
+  <button> "19:30 — 12 tables" — 160×72px → ≥44
+  <button> "20:00 — 12 tables" — 160×72px → ≥44
+  <button> "20:30 — 12 tables" — 160×72px → ≥44
+  <button> "21:00 — 12 tables" — 160×72px → ≥44
+  <button> "21:30 — 12 tables" — 160×72px → ≥44
+  <button> "22:00 — 12 tables" — 160×72px → ≥44
+  <button> "22:30 — 12 tables" — 160×72px → ≥44
+  <button> "Reserve a table" — 328×44px → ≥44
+  <a> "+963 11 341 7700" — 124×44px → ≥44
+  <a> "Message us on WhatsApp" — 192×44px → ≥44
+  <a> "reservations@miradordamascus" — 275×44px → ≥44
+
+## gallery + lightbox (@375) (@375, 18 visible targets)
+  <a> "Skip to content" — 1×1px → UNDER 44 (below WCAG floor)
+  <a> "MIRADOR" — 131×44px → ≥44
+  <a> "العربية" — 63×44px → ≥44
+  <button> "Open menu" — 44×44px → ≥44
+  <button> "The City, Switched On" — 328×185px → ≥44
+  <button> "Long Exposure" — 328×185px → ≥44
+  <button> "The Pass, 21:00" — 328×410px → ≥44
+  <button> "Embers" — 328×410px → ≥44
+  <button> "A Single Place Set" — 328×410px → ≥44
+  <button> "First Pour" — 328×410px → ≥44
+  <button> "Amber Glass" — 328×410px → ≥44
+  <button> "The Final Flight" — 328×410px → ≥44
+  <a> "+963 11 341 7700" — 124×44px → ≥44
+  <a> "Message us on WhatsApp" — 192×44px → ≥44
+  <a> "reservations@miradordamascus" — 275×44px → ≥44
+  <button> "Close" — 44×44px → ≥44
+  <button> "Previous image" — 44×44px → ≥44
+  <button> "Next image" — 44×44px → ≥44
+
+UNDER-44 total: 5
+GATE F12-7: 5 targets under 44px (raw list above — effective-size/spacing evaluation recorded verbatim)

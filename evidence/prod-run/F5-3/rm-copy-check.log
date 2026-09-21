@@ -1,0 +1,6 @@
+# F5-3 RM emulation — machine-generated 2026-09-21T14:20:28.863Z
+act copy present: "The city switches on, window by window." → YES
+act copy present: "In the kitchen, fire does the quiet work" → YES
+act copy present: "one table holds the whole skyline" → YES
+matchMedia(prefers-reduced-motion: reduce) = true
+all acts present: PASS — static 3-act layout with full copy

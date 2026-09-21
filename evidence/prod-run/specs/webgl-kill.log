@@ -5,3 +5,10 @@
 # VERDICT: PASS — canvas unmounted, poster treatment present
 # CONTROL (no flag): webgl2=true canvases=1 — kill-switch contrast: flag=0 canvas, no-flag=1 canvas
 # note: auto-path (fps<30 for 3s) emulation is parent-scope F6-4; manual + control paths recorded here per prompt-2 P3 definition
+
+===== webgl-kill · run 2026-09-21T14:16:39.830Z =====
+# F6-4 · ?webgl=off → 0 <canvas>, poster treatment
+# canvases=0 journeyPosterImgs=3 heroPosterImgs=1 localStorage.mirador-webgl=null
+# VERDICT: PASS — canvas unmounted, poster treatment present
+# CONTROL (no flag): webgl2=true canvases=1 — kill-switch contrast: flag=0 canvas, no-flag=1 canvas
+# note: auto-path (fps<30 for 3s) emulation is parent-scope F6-4; manual + control paths recorded here per prompt-2 P3 definition

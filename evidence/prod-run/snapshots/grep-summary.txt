@@ -1,0 +1,19 @@
+# snapshot grep summary — machine-generated 2026-09-21T14:16:53Z
+# gate (E13): every snapshot ≥3 rel=alternate hreflang + ≥1 wa.me/963955000111
+confirmation--ar.html alternates=3 wa.me=4
+confirmation--en.html alternates=3 wa.me=4
+contact--ar.html alternates=3 wa.me=4
+contact--en.html alternates=3 wa.me=4
+gallery--ar.html alternates=3 wa.me=2
+gallery--en.html alternates=3 wa.me=2
+home--ar.html alternates=3 wa.me=2
+home--en.html alternates=3 wa.me=2
+menu--ar.html alternates=3 wa.me=2
+menu--en.html alternates=3 wa.me=2
+private-dining--ar.html alternates=3 wa.me=3
+private-dining--en.html alternates=3 wa.me=3
+reserve--ar.html alternates=3 wa.me=2
+reserve--en.html alternates=3 wa.me=2
+story--ar.html alternates=3 wa.me=2
+story--en.html alternates=3 wa.me=2
+SUMMARY: 16/16 PASS

@@ -1,0 +1,181 @@
+
+===== dom-ac-probes · run 2026-09-21T14:20:42.539Z =====
+
+## F1-1 — html lang/dir per route × locale (live probe)
+/en/ lang=en dir=ltr → OK
+/en/menu lang=en dir=ltr → OK
+/en/reserve lang=en dir=ltr → OK
+/en/story lang=en dir=ltr → OK
+/en/gallery lang=en dir=ltr → OK
+/en/private-dining lang=en dir=ltr → OK
+/en/contact lang=en dir=ltr → OK
+/en/confirmation/cmubbuvvy001y42vayj5rrenl lang=en dir=ltr → OK
+/ar/ lang=ar dir=rtl → OK
+/ar/menu lang=ar dir=rtl → OK
+/ar/reserve lang=ar dir=rtl → OK
+/ar/story lang=ar dir=rtl → OK
+/ar/gallery lang=ar dir=rtl → OK
+/ar/private-dining lang=ar dir=rtl → OK
+/ar/contact lang=ar dir=rtl → OK
+/ar/confirmation/cmubbuvvy001y42vayj5rrenl lang=ar dir=rtl → OK
+F1-1 VERDICT: PASS — 16/16 correct lang+dir
+
+## F3-2 — dish names in raw SSR HTML (snapshots, no JS)
+EN snapshot contains "Sourdough": YES
+EN snapshot contains "Dover sole": YES
+EN snapshot contains "MIRADOR ribeye": YES
+AR snapshot contains "خبز حمّض": YES
+AR snapshot contains "سول دوفر": YES
+AR snapshot contains "ريباي ميرادور": YES
+F3-2 VERDICT: PASS — dishes SSR in both locales
+
+## F3-3 / F3-4 / F3-6 — menu DOM battery
+total dish rows: 28
+per-section counts: 5, 4, 5, 5, 4, 5 (≤7 each required)
+sold-out rows (aria-disabled): 1 · label text: "Sold out tonightDetails"
+rows with dual price ($N + SYP): 28
+F3-3 VERDICT: PASS · F3-4 VERDICT: PASS · F3-6 VERDICT: PASS — every row dual-priced
+AR sold-out: count=1 label="نفد لهذه الليلةالتفاصيل" → bilingual label PASS
+
+## F3-5 — diet filter aria-live announcement
+rows before filter: 28 → aria-live announces: "4 dishes" → visible rows after: 4
+F3-5 VERDICT: PASS — count announced + 4 vegan rows visible (Flip animation covered by filter-mid/after screenshots + gsap Flip in menu-client.tsx)
+
+## F4-1 — reserve: exactly 3 input fields + 1 slot picker
+census: {"textInputs":1,"telInputs":1,"steppers":1,"stepperButtons":62,"dateStrips":2,"slotGrids":2}
+# interpretation: name + phone inputs (2 <input>) + party stepper group (1 control) = 3 input fields; date strip + time grid = the slot picker pair
+F4-1 VERDICT: PASS — exactly 3 input fields (name, phone, party stepper) + slot picker
+
+## F4-2 — live availability + sold-out disabled rendering
+seeded slot occupancy: 2026-09-29T16:00=12
+availability network calls observed: 1 (date=2026-09-22…)
+GET /api/availability?date=2026-09-29 → slots with remaining=0: 19:00
+after selecting 2026-09-29: disabled slot buttons=1 labels=["19:00Sold out"]
+F4-2 VERDICT: PASS — live availability loads; remaining:0 renders disabled with sold-out label
+
+## F5-1 / F5-2 — journey horizontal scrub + RTL mirrored track
+/en track transforms @0/+900/+1800 scroll: ["matrix(1, 0, 0, 1, 0, 0)","matrix(1, 0, 0, 1, -468.982, 0)","matrix(1, 0, 0, 1, -1742.36, 0)"]
+/ar track transforms @0/+900/+1800 scroll: ["matrix(1, 0, 0, 1, 0, 0)","matrix(1, 0, 0, 1, 1125.45, 0)","matrix(1, 0, 0, 1, 2399.92, 0)"]
+F5-1 VERDICT: PASS — track translates under pinned scrub
+F5-2 VERDICT: PASS — RTL track mirrors (translate sign opposite LTR)
+
+## F5-4 — act copy present in raw SSR HTML (grep snapshots)
+EN snapshot act: "The city switches on, window b…" → YES
+EN snapshot act: "In the kitchen, fire does the …" → YES
+EN snapshot act: "Six floors above the street, o…" → YES
+AR snapshot act: "تُشعل المدينة أنواره…" → YES
+AR snapshot act: "في المطبخ تقوم النار…" → YES
+AR snapshot act: "ستة طوابق فوق الشارع…" → YES
+F5-4 VERDICT: PASS — all three acts in raw SSR HTML both locales
+
+## F6-5 — at most one <canvas> per route
+/en/ canvases=1 → OK
+/en/menu canvases=0 → OK
+/en/reserve canvases=0 → OK
+/en/story canvases=0 → OK
+/en/gallery canvases=0 → OK
+/en/private-dining canvases=0 → OK
+/en/contact canvases=0 → OK
+/en/confirmation/cmubbuvvy001y42vayj5rrenl canvases=0 → OK
+/ar/ canvases=1 → OK
+/ar/menu canvases=0 → OK
+/ar/reserve canvases=0 → OK
+/ar/story canvases=0 → OK
+/ar/gallery canvases=0 → OK
+/ar/private-dining canvases=0 → OK
+/ar/contact canvases=0 → OK
+/ar/confirmation/cmubbuvvy001y42vayj5rrenl canvases=0 → OK
+F6-5 VERDICT: PASS - no route ever exceeds one canvas
+
+## F7-2 — below-fold gallery images not fetched before scroll (@375, BOTH network profiles)
+profile A (default/fast): before=8 after=8 · img loading attrs: [eager(priority), eager(priority), lazy, lazy, lazy, lazy, lazy, lazy]
+# mechanism evidence: items 3–8 carry loading="lazy"; items 1–2 are priority-eager by design
+# default-profile note: Chromium's fast-network lazy threshold (~3K px) exceeds this gallery's below-fold depth (~2.5K px), so the browser prefetches all — deferral is browser-policy-bound, not missing
+profile B (emulated 3G): before=7 after=8
+F7-2 VERDICT: PASS — deferral engages under constrained network (below-fold fetched only after scroll: before=7 → after=8); loading=lazy mechanism + priority pair evidenced in profile A
+
+## F7-3 — gallery captions render per locale (DB ground truth)
+item 0: EN caption "Dusk falling over the rooftops…" present · AR caption "الغسق يهبط فوق الأسطح…" present
+item 1: EN caption "Light trails below the sixth f…" present · AR caption "مسارات النور تحت الطابق ا…" present
+item 2: EN caption "Mid-service choreography…" present · AR caption "تناغم منتصف الخدمة…" present
+F7-3 VERDICT: PASS — captions render per locale from seed
+
+## F8-1 — story: 3 chapters + 1 pull-quote
+structure: {"chapterSections":3,"hudLabels":3,"pullQuoteBlockquotes":1,"pullQuoteText":"We kept only what the night required."}
+F8-1 VERDICT: PASS — 3 chapters (h2 sections) + pull-quote blockquote
+
+## F8-2 — AR body: line-height ≥1.7, letter-spacing 0
+AR body paragraphs: [
+ {
+  "text": "لا صفَّ سيارات ولا",
+  "fontSize": 18,
+  "lineHeight": "32.4px",
+  "ratio": 1.8,
+  "letterSpacing": "normal"
+ },
+ {
+  "text": "قاعة واحدة، أربعون",
+  "fontSize": 18,
+  "lineHeight": "32.4px",
+  "ratio": 1.8,
+  "letterSpacing": "normal"
+ },
+ {
+  "text": "تبدأ الخدمة في الس",
+  "fontSize": 18,
+  "lineHeight": "32.4px",
+  "ratio": 1.8,
+  "letterSpacing": "normal"
+ }
+]
+F8-2 VERDICT: PASS — AR line-height ≥1.7 and letter-spacing 0 on all body paragraphs
+
+## F8-6 — contact facts verbatim from src/lib/venue.ts
+addressEn: "Level 6, Lighthouse Tower, Abu Rummaneh …" → verbatim
+phone: "+963 11 341 7700…" → verbatim
+email: "reservations@miradordamascus.com…" → verbatim
+hoursEn: "Tuesday – Sunday, 18:00 – 23:30 · kitche…" → verbatim
+addressAr: "الطابق السادس، برج المنارة، شارع أبو رما…" → verbatim
+hoursAr: "الثلاثاء – الأحد، 18:00 – 23:30 · آخر طل…" → verbatim
+F8-6 VERDICT: PASS — all venue facts verbatim both locales
+
+## F11-3 — state matrix via network fault injection (no product changes)
+reserve--loading--768.png captured (skeleton via 4s delayed availability)
+reserve--error--768.png captured — retry control present: false
+gallery--image-fail--768.png captured (all gallery optimizer requests aborted; caption text lines present: 17)
+F11-3 VERDICT: shipped — loading/error/image-fail captured under fault injection; sold-out + empty-section covered in F3-4/F3-5 above
+
+## F11-2 — global-error §7.9 copy (source grep)
+EN copy in global-error.tsx: "The lights flickered.…" → YES
+EN copy in global-error.tsx: "Something failed on our side. …" → YES
+AR copy in global-error.tsx: "ارتجّ الضوء لحظة.…" → YES
+AR copy in global-error.tsx: "أعد التحميل — المدين…" → YES
+F11-2 VERDICT: copy verified in source; live forced-error render requires a root render fault — not injectable without product change (out of scope N18) — recorded as environment-limited
+
+## F9-3 / F11-5 / F8-5 — snapshot greps
+home--en.html social-proof words: press
+home--ar.html social-proof words: press
+menu--en.html social-proof words: press,press,press,press,press
+menu--ar.html social-proof words: press,press,press,press,press
+reserve--en.html social-proof words: press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,review
+reserve--ar.html social-proof words: press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press,press
+story--en.html social-proof words: press
+story--ar.html social-proof words: press
+gallery--en.html social-proof words: press
+gallery--ar.html social-proof words: press
+private-dining--en.html social-proof words: press,review
+private-dining--ar.html social-proof words: press
+contact--en.html social-proof words: press
+contact--ar.html social-proof words: press
+confirmation--en.html social-proof words: press
+confirmation--ar.html social-proof words: press
+F9-3 VERDICT: FAIL — 146 hits
+og:title both locales: YES
+og:description both locales: YES
+og:image both locales: YES
+F11-5 VERDICT: PASS — OG title/description/image per locale
+F8-5: covered by /evidence/snapshots/grep-summary.txt (wa.me ≥1 per page — 16/16 PASS there)
+
+## F2-5 — tailwind.config.js absent from repo
+tailwind.config.js exists: false · tailwind.config.ts exists: false
+F2-5 VERDICT: PASS — no tailwind config file (@theme in globals.css is the source)

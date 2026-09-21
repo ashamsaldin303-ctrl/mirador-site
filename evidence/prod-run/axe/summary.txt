@@ -1,0 +1,53 @@
+# axe summary — machine-generated 2026-09-21T14:18:09.028Z
+# gate: 0 critical + 0 serious per route × locale × viewport (parent §9, E10)
+# @axe-core/playwright 4.13.0 (axe-core pinned by it — see lockfile)
+home--en--375.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+menu--en--375.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+reserve--en--375.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+story--en--375.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+gallery--en--375.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+private-dining--en--375.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+contact--en--375.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+confirmation--en--375.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+home--ar--375.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+menu--ar--375.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+reserve--ar--375.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+story--ar--375.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+gallery--ar--375.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+private-dining--ar--375.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+contact--ar--375.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+confirmation--ar--375.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+home--en--768.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+menu--en--768.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+reserve--en--768.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+story--en--768.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+gallery--en--768.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+private-dining--en--768.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+contact--en--768.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+confirmation--en--768.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+home--ar--768.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+menu--ar--768.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+reserve--ar--768.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+story--ar--768.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+gallery--ar--768.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+private-dining--ar--768.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+contact--ar--768.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+confirmation--ar--768.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+home--en--1440.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+menu--en--1440.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+reserve--en--1440.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+story--en--1440.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+gallery--en--1440.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+private-dining--en--1440.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+contact--en--1440.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+confirmation--en--1440.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+home--ar--1440.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+menu--ar--1440.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+reserve--ar--1440.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+story--ar--1440.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+gallery--ar--1440.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+private-dining--ar--1440.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+contact--ar--1440.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+confirmation--ar--1440.json | critical=0 serious=0 moderate=0 minor=0 | rules: none
+TOTAL: 48 runs · critical=0 · serious=0
+GATE: PASS — 0 critical + 0 serious across all route × locale × viewport runs

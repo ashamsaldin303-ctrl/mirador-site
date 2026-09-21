@@ -1,0 +1,12 @@
+{
+  "url": "http://localhost:3000/en/contact",
+  "viewport": {
+    "width": 375,
+    "height": 812
+  },
+  "generatedAt": "2026-09-21T14:18:21.089Z",
+  "inapplicable": 50,
+  "incomplete": 2,
+  "passes": 39,
+  "violations": []
+}

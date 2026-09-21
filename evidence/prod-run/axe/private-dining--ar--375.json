@@ -1,0 +1,12 @@
+{
+  "url": "http://localhost:3000/ar/private-dining",
+  "viewport": {
+    "width": 375,
+    "height": 812
+  },
+  "generatedAt": "2026-09-21T14:18:31.775Z",
+  "inapplicable": 47,
+  "incomplete": 2,
+  "passes": 42,
+  "violations": []
+}

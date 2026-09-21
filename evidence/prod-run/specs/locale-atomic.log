@@ -13,3 +13,11 @@
 # soft-nav marker survived full-navigation wipe: YES (no full navigation)
 # performance navigation entries: 1 (1 = soft nav only)
 # VERDICT: PASS — lang+dir flipped in one MutationObserver batch (same frame), marker survived, zero full navigations
+
+===== locale-atomic · run 2026-09-21T14:16:36.388Z =====
+# F1-3 · locale switch = atomic dir+lang flip in ONE frame, no full navigation
+# mutation records (verbatim): [{"attribute":"lang","oldValue":"en","batch":1,"t":2698.5},{"attribute":"dir","oldValue":"ltr","batch":1,"t":2698.5},{"attribute":"lang","oldValue":null,"batch":1,"t":2698.6},{"attribute":"dir","oldValue":null,"batch":1,"t":2698.6}]
+# html after: lang=ar dir=rtl url=http://localhost:3000/ar
+# soft-nav marker survived full-navigation wipe: YES (no full navigation)
+# performance navigation entries: 1 (1 = soft nav only)
+# VERDICT: PASS — lang+dir flipped in one MutationObserver batch (same frame), marker survived, zero full navigations

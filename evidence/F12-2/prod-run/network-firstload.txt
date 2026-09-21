@@ -1,4 +1,4 @@
-# network first-load JS (transferSize, wire gz) — machine-generated 2026-09-21T14:03:46.636Z
+# network first-load JS (transferSize, wire gz) — machine-generated 2026-09-21T14:16:09.385Z
 # corroborates first-load-js-gz.txt (manifest-derived); server compression: Next standalone gzip
 /en/ — scripts=15 wireJS=238952B (233.4KB)
 /en/menu — scripts=17 wireJS=255444B (249.5KB)

@@ -1,0 +1,38 @@
+# console capture — machine-generated 2026-09-21T14:16:54.180Z
+# gate (F12-5): zero console ERRORS on all 8 paths × 2 locales
+# note: dev-mode info/warning noise (HMR, React DevTools hint, THREE deprecation) is recorded raw and NOT counted as errors
+
+## /en/ — messages: 0 total, ERRORS: 0
+
+## /en/menu — messages: 0 total, ERRORS: 0
+
+## /en/reserve — messages: 0 total, ERRORS: 0
+
+## /en/story — messages: 0 total, ERRORS: 0
+
+## /en/gallery — messages: 0 total, ERRORS: 0
+
+## /en/private-dining — messages: 0 total, ERRORS: 0
+
+## /en/contact — messages: 0 total, ERRORS: 0
+
+## /en/confirmation/cmubbuvvy001y42vayj5rrenl — messages: 0 total, ERRORS: 0
+
+## /ar/ — messages: 0 total, ERRORS: 0
+
+## /ar/menu — messages: 0 total, ERRORS: 0
+
+## /ar/reserve — messages: 0 total, ERRORS: 0
+
+## /ar/story — messages: 0 total, ERRORS: 0
+
+## /ar/gallery — messages: 0 total, ERRORS: 0
+
+## /ar/private-dining — messages: 0 total, ERRORS: 0
+
+## /ar/contact — messages: 0 total, ERRORS: 0
+
+## /ar/confirmation/cmubbuvvy001y42vayj5rrenl — messages: 0 total, ERRORS: 0
+
+TOTAL console ERRORS across 16 pages: 0
+GATE F12-5: PASS — zero console errors on 8 paths × 2 locales
