@@ -1,0 +1,38 @@
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/fb666693677e.jpg
+  -o raw-hero.jpg
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ae04764e3a4d.jpg
+  -o raw-act1.jpg
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9de6aedd6f97.jpg
+  -o raw-act2.jpg
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1ff75c9fc4e2.png
+  -o raw-act3.jpg
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a291ee25e65a.jpg
+  -o raw-story.jpg
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3bc8cce2ab47.jpg
+  -o raw-404.jpg
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/12a3367cb854.jpg
+  -o raw-og-en.jpg
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ec295385746a.jpg
+  -o raw-og-ar.jpg
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0cf764c7dac3.jpg
+  -o raw-sky1.jpg
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/85b4973a2ac6.jpg
+  -o raw-sky2.jpg
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/14145a47cbc4.jpg
+  -o raw-fire3.jpg
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/969e4a7dfd3a.jpg
+  -o raw-fire4.jpg
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cafc04b8fa9b.jpg
+  -o raw-plates5.jpg
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/192369edd69a.jpg
+  -o raw-plates6.jpg
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5096c89af7f1.jpg
+  -o raw-room7.jpg
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9735ad25e2a7.jpg
+  -o raw-room8.jpg
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3dd8d3f749da.jpg
+  -o raw-sourdough.jpg
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c3791798116c.jpg
+  -o raw-ribeye.jpg
+https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/debdc0c4bed0.jpg
+  -o raw-tart.jpg

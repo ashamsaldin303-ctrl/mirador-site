@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "Middle East city skyline at night aerial view glowing lights",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1dff01c69100.jpg",
+      "caption": "Aerial night view of a sprawling city skyline with glowing roads, light trails, and illuminated high-rise buildings.",
+      "source": "Mid-Day",
+      "original_width": "1280px",
+      "original_height": "720px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/697120050072.jpeg",
+      "caption": "A collage comparing nighttime aerial skylines labeled \"(New York City)\" and \"Ho Chi Minh City (Saigon)\"; contains small watermark, not suitable for background.",
+      "source": "Reddit",
+      "original_width": "1080px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0cf764c7dac3.jpg",
+      "caption": "New York City night skyline with 9/11 Tribute in Light beams illuminating cloudy sky above Manhattan. Suitable for background image.",
+      "source": "TIME",
+      "original_width": "3840px",
+      "original_height": "2560px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/fcd40552bfae.jpg",
+      "caption": "Aerial nighttime view of a glowing city grid, likely New York, with rivers, bridges, and scattered lights. Suitable for background image.",
+      "source": "Reddit",
+      "original_width": "1080px",
+      "original_height": "803px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/12d7e3edb1e2.jpg",
+      "caption": "Aerial sunset view of Dubai's skyline with skyscrapers, coastline, and dramatic clouds; high clarity, no text or watermark — suitable for background image",
+      "source": "Smithsonian Magazine",
+      "original_width": "1200px",
+      "original_height": "801px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c41e8acd3cc8.jpeg",
+      "caption": "A stunning nighttime panoramic view of a brightly lit city skyline seen from dark hills, with aircraft light trails in the sky. High clarity, strong visual impact, no watermarks or text. Suitable for background image.",
+      "source": "Reddit",
+      "original_width": "6720px",
+      "original_height": "4480px"
+    }
+  ]
+}

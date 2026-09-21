@@ -1,0 +1,86 @@
+// MIRADOR — /confirmation/[id] (§4.3, §7.9): "The table is yours." — the
+// reservation persisted (F4-5), the summary renders from the DB, the
+// WhatsApp deep link is rebuilt server-side (§8.4). Unknown id → notFound()
+// (the designed 404 surface). Next 16: params is a Promise — awaited (§2.4-B).
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { db } from "@/lib/db";
+import { getDictionary, type Locale } from "@/lib/i18n";
+import { damascusDate, damascusTime } from "@/lib/slots";
+import { confirmationMessage, waHref } from "@/lib/whatsapp";
+import { ReservationSummary, WhatsAppConfirm } from "@/components/reserve/summary";
+
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; id: string }>;
+}): Promise<Metadata> {
+  const { locale: raw, id } = await params;
+  const locale: Locale = raw === "ar" ? "ar" : "en";
+  // commit the 404 status BEFORE the streaming shell flushes (F11-1)
+  const reservation = await db.reservation.findUnique({ where: { id }, select: { id: true } });
+  if (!reservation) notFound();
+  return {
+    title: getDictionary(locale)["confirm.title"],
+    alternates: {
+      canonical: `/${locale}/confirmation/${id}`,
+      languages: {
+        en: `/en/confirmation/${id}`,
+        ar: `/ar/confirmation/${id}`,
+        "x-default": `/en/confirmation/${id}`,
+      },
+    },
+  };
+}
+
+export default async function ConfirmationPage({
+  params,
+}: {
+  params: Promise<{ locale: string; id: string }>;
+}) {
+  const { locale: raw, id } = await params;
+  const locale: Locale = raw === "ar" ? "ar" : "en";
+  const dict = getDictionary(locale);
+
+  const reservation = await db.reservation.findUnique({ where: { id } });
+  if (!reservation) notFound();
+
+  const date = damascusDate(reservation.slot);
+  const time = damascusTime(reservation.slot);
+  const href = waHref(
+    confirmationMessage(locale, {
+      name: reservation.name,
+      partySize: reservation.partySize,
+      date,
+      time,
+      id: reservation.id,
+    }),
+  );
+
+  return (
+    <section className="mx-auto flex w-full max-w-xl flex-col gap-8 px-4 pb-24 pt-32 sm:px-6">
+      <header className="flex flex-col gap-6">
+        <h1 className="font-display text-h1 text-amber">{dict["confirm.title"]}</h1>
+        <hr className="hud-rule" />
+      </header>
+      <ReservationSummary
+        strings={{
+          name: dict["confirm.name"],
+          party: dict["confirm.party"],
+          date: dict["confirm.date"],
+          time: dict["confirm.time"],
+          table: dict["confirm.table"],
+          partyUnit: dict["reserve.partyUnit"],
+        }}
+        name={reservation.name}
+        partySize={reservation.partySize}
+        slot={reservation.slot}
+        tableNumber={reservation.tableNumber}
+      />
+      <WhatsAppConfirm href={href} label={dict["confirm.whatsapp"]} />
+      <p className="text-small text-muted">{dict["confirm.note"]}</p>
+    </section>
+  );
+}

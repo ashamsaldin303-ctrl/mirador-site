@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "city rooftops at dusk with warm window lights switching on",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/82fbc59cd93b.jpg",
+      "caption": "A silhouetted firefighter walks through a smoke-filled, wet street amid fire hoses, wreckage, and a fire truck. Suitable for background image",
+      "source": "CalMatters",
+      "original_width": "2000px",
+      "original_height": "1334px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cd2a49a97e32.jpg",
+      "caption": "Aerial twilight panorama of Siena, Italy, featuring the tall Torre del Mangia, terracotta rooftops, and illuminated Piazza del Campo. Suitable for background image.",
+      "source": "GetYourGuide",
+      "original_width": "1440px",
+      "original_height": "600px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bc5716c4076c.png",
+      "caption": "Modern concrete apartment building with warmly lit windows at dusk, city skyline background, no text or watermarks, high clarity, suitable for background image.",
+      "source": "SplitShire",
+      "original_width": "1376px",
+      "original_height": "768px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3b4e60d5332e.jpg",
+      "caption": "Luxurious dining room with transparent sculptural chairs and gold pendant art, overlooking a panoramic sunset city skyline.",
+      "source": "AD Middle East",
+      "original_width": "1600px",
+      "original_height": "900px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4661db0f708b.jpg",
+      "caption": "Night street scene with Christmas lights draped over trees, parked cars, illuminated church tower, festive holiday decorations.",
+      "source": "News4JAX",
+      "original_width": "1432px",
+      "original_height": "736px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0c6bb9605251.jpg",
+      "caption": "A woman on a tall swing high above Berlin at dusk, with the illuminated TV Tower and city skyline. Suitable for background image.",
+      "source": "The New York Times",
+      "original_width": "1800px",
+      "original_height": "3201px"
+    }
+  ]
+}

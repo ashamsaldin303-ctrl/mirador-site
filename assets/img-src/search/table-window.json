@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "fine dining table set beside window with night city view",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1ff75c9fc4e2.png",
+      "caption": "An elegant dimly lit upscale restaurant interior with candlelit tables, curved mirrors, red carpet, and city views. No text or watermarks. Suitable for background image.",
+      "source": "Eater NY",
+      "original_width": "2132px",
+      "original_height": "1424px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/02f28556decd.jpg",
+      "caption": "Rooftop lounge interior at night, purple-blue lighting, women seated near floor-to-ceiling windows overlooking a glowing city skyline.",
+      "source": "Yelp",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ece3b3c90588.jpg",
+      "caption": "Charming corner restaurant \"Da Andrea Ristorante\" with vibrant pink flowers, blue awnings, and lush greenery. Text: \"DA ANDREA\", \"RISTORANTE\", \"EST 2001\", \"212-354-5973\", \"160\". Suitable for background image.",
+      "source": "Yelp",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1f881ce766cf.jpg",
+      "caption": "An elegant, bright coastal-style kitchen with marble island, navy bar stools, globe pendant lights, and wooden dining chairs.",
+      "source": "Homes and Gardens",
+      "original_width": "1600px",
+      "original_height": "900px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9b23ac10c389.jpg",
+      "caption": "An elegant Japanese restaurant private dining room with a long stone table, autumn maple decorations, wooden chairs, and dramatic rock wall lighting; suitable for background image",
+      "source": "Condé Nast Traveler",
+      "original_width": "2664px",
+      "original_height": "1998px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e57e59596fd1.jpg",
+      "caption": "An elegant rooftop restaurant interior at dusk, with Eiffel Tower view; high clarity, no text, visually striking—suitable for background image",
+      "source": "Kiss Me in Paris",
+      "original_width": "1400px",
+      "original_height": "778px"
+    }
+  ]
+}

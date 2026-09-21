@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "sourdough bread with cultured butter dark moody food photography",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/13c0ecd834c4.jpg",
+      "caption": "A moody dark still-life photograph of stacked artisan bread slices in a metal tray with a linen cloth and fork. A watermark reading \"Cristina...\" with \"2020\" appears at bottom. High clarity, strong visual impact: suitable for background image.",
+      "source": "Pinterest",
+      "original_width": "736px",
+      "original_height": "1106px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/afb8a318b5e9.jpg",
+      "caption": "A sliced dark rye bread loaf on a white serving board with butter, berry jam, and red caviar. Suitable for background image",
+      "source": "Beets & Bones",
+      "original_width": "3412px",
+      "original_height": "3388px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8c072a9e0053.png",
+      "caption": "Sliced homemade sourdough bread beside a jar of strawberry jam; watermark \"www.butterforall.com\" visible.",
+      "source": "Butter For All",
+      "original_width": "800px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/37f2e8ede01b.jpg",
+      "caption": "Sliced cranberry pumpkin seed artisan bread on a wooden cutting board, with scattered cranberries, seeds, and a bread knife. Suitable for background image.",
+      "source": "For The Pleasure Of Eating",
+      "original_width": "795px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6781690fcfbe.jpg",
+      "caption": "Freshly sliced homemade bread arranged on a black wire cooling rack, with a serrated knife on a wooden table. Suitable for background image",
+      "source": "The Clever Carrot",
+      "original_width": "800px",
+      "original_height": "1103px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/abffa010fe7f.jpg",
+      "caption": "Slices of artisan sourdough bread with open crumb and seeds, on a gray linen cloth, high clarity, no text.",
+      "source": "The Perfect Loaf",
+      "original_width": "1250px",
+      "original_height": "834px"
+    }
+  ]
+}

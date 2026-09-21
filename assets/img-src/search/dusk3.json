@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "query": "aerial view over city rooftops at dusk with warm lights",
+  "count": 8,
+  "ranked": true,
+  "captioned_count": 7,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/37ed77170e68.jpg",
+      "caption": "Aerial dusk view of a Mediterranean hillside village with red-tiled roofs and warm glowing streetlights. Contains Alamy watermarks.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "1063px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/21eed10e73b8.jpg",
+      "caption": "City of London skyline at sunset with skyscrapers, colorful sky; contains Alamy watermarks and text.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "956px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3da882e191f6.jpg",
+      "caption": "Man enjoying sunset drinks on a rooftop terrace overlooking Manhattan's Empire State Building skyline, golden skies, tree-lined streets. Suitable for background image.",
+      "source": "Uni4Edu",
+      "original_width": "1408px",
+      "original_height": "768px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/05b069564ba7.jpg",
+      "caption": "The image shows a restaurant interior with the word \"dusk\" on a wooden slat wall, overlooking a sunset landscape; suitable for background image.",
+      "source": "Mount Faber Peak",
+      "original_width": "2001px",
+      "original_height": "1176px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c11930d9a5ce.jpg",
+      "caption": "Aerial view of a small town at sunset, colorful sky, rooftops, streets, and lush green surroundings, high clarity, no watermark, suitable for background image.",
+      "source": "Wallpapers.com",
+      "original_width": "1280px",
+      "original_height": "720px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/61eed391c3da.jpg",
+      "caption": "",
+      "source": "Tripadvisor",
+      "original_width": "1200px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/728e128a1c04.jpg",
+      "caption": "A large fiery explosion with dark smoke rises above a city at dusk, apartment buildings and lit streets in foreground.",
+      "source": "WFMZ.com",
+      "original_width": "1175px",
+      "original_height": "1175px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/62013ded79c4.jpg",
+      "caption": "Aerial view of Beijing's Forbidden City at sunset, golden roofs glowing. Text reads \"故宫博物院\". High clarity, visually striking — suitable for background image.",
+      "source": "Wallpapers.com",
+      "original_width": "1920px",
+      "original_height": "1273px"
+    }
+  ]
+}

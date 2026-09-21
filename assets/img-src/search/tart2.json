@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "query": "dark chocolate tart slice moody dark background food photography",
+  "count": 8,
+  "ranked": true,
+  "captioned_count": 8,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d4a2e4be4efd.jpg",
+      "caption": "A woman in black sprinkles chocolate shavings over a cream-topped chocolate tart, dark moody food photography, no text.",
+      "source": "Murielle Banackissa",
+      "original_width": "1000px",
+      "original_height": "1500px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/87eab662a68c.jpg",
+      "caption": "Pancakes topped with strawberries and dripping chocolate, sprinkles falling, dark background; contains Alamy watermarks, not suitable for background.",
+      "source": "Alamy",
+      "original_width": "866px",
+      "original_height": "1390px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b084e84a2342.jpg",
+      "caption": "A slice of Black Forest chocolate cake with whipped cream and cherries on dark slate, high clarity, no watermark — suitable for background image",
+      "source": "Leonardo.Ai App",
+      "original_width": "1024px",
+      "original_height": "1024px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/43c69e6689a0.jpg",
+      "caption": "A hand pours coffee from a French press into a glass bowl of cream, with dark moody styling and scattered coffee beans.\n\nsuitable for background image",
+      "source": "Murielle Banackissa",
+      "original_width": "1000px",
+      "original_height": "1500px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b05c2336ba25.jpg",
+      "caption": "A glazed bundt cake topped with blackberries on a wooden cake stand by a bright window; rustic, moody food photography. Suitable for background image",
+      "source": "Pinterest",
+      "original_width": "980px",
+      "original_height": "1470px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c30842ffbc08.jpg",
+      "caption": "Dark moody overhead shot of chocolate cake with ice cream on a black plate, coffee glasses, spoons, no text. Suitable for background image.",
+      "source": "Unsplash",
+      "original_width": "3000px",
+      "original_height": "4500px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a0967c3b689f.jpg",
+      "caption": "Dark moody food photography: rustic pancakes topped with elderberries on a black ceramic plate, with a spoon of berries nearby. suitable for background image",
+      "source": "EverydayKitchenMagic's Newsletter - Substack",
+      "original_width": "5184px",
+      "original_height": "3456px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4e1068650a68.jpg",
+      "caption": "Moody food photography of rich chocolate brownies arranged on an aged metal tray, teal background, no text, high clarity, suitable for background image.",
+      "source": "Amy Treasure",
+      "original_width": "1500px",
+      "original_height": "1000px"
+    }
+  ]
+}

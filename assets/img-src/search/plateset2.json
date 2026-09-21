@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "single place setting with plate cutlery and napkin on dark restaurant table",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9ab258b5a3d6.jpg",
+      "caption": "Elegant wooden dining table set with crystal glasses, black and white plates, plaid napkins, and gold flatware.",
+      "source": "Homedit",
+      "original_width": "800px",
+      "original_height": "1067px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/dfac31d6d09d.jpg",
+      "caption": "Elegant restaurant table setting with white plates, silverware, glasses, napkin and green leaf; contains dreamstime.com watermarks and text \"dreamstime.com ID 393614930 © Yudo Wijaya\".",
+      "source": "Dreamstime.com",
+      "original_width": "1600px",
+      "original_height": "1004px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a40721a57c1b.jpg",
+      "caption": "Autumn table setting with plate, cutlery, orange ribbon, green gifts, dried oranges, and a \"Welcome\" tag; suitable for background image.",
+      "source": "Robert Welch® Designs",
+      "original_width": "1500px",
+      "original_height": "2253px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/71f420419317.jpg",
+      "caption": "Fork and knife on pink napkin beside white plates and wine glasses; contains Alamy watermark and stock photo text.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "952px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/03a6b7e70d21.jpeg",
+      "caption": "Elegant autumn-themed dining table setting with candles, floral plates, and a wine bottle. Text: APOTHIC. suitable for background image",
+      "source": "South House Designs",
+      "original_width": "1024px",
+      "original_height": "1024px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8f1ed488c3a9.jpg",
+      "caption": "Overhead rustic table setting with woven placemats, white plates, brown napkins, wine glasses, flowers; high clarity, suitable for background image.",
+      "source": "Hudson Grace",
+      "original_width": "1200px",
+      "original_height": "1500px"
+    }
+  ]
+}

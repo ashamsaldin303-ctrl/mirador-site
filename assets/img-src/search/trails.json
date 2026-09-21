@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "aerial view of city traffic light trails at night long exposure",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a9ac7cd04a25.jpg",
+      "caption": "Aerial long-exposure night shot of a highway with red and white light trails, city buildings, and greenery. Contains Alamy watermarks.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "950px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c5c4d605bf97.jpg",
+      "caption": "Night road with colorful blue, orange, and white car light trails; contains Alamy watermarks and text.",
+      "source": "Alamy",
+      "original_width": "866px",
+      "original_height": "1390px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/fda46332855d.jpg",
+      "caption": "Aerial long-exposure night view of a multi-lane highway with glowing orange and white car light trails. Contains Dreamstime watermarks and text: \"dreamstime.com\", \"ID 433030425 © Likhil Chukkala\".",
+      "source": "Dreamstime",
+      "original_width": "935px",
+      "original_height": "1690px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/85b4973a2ac6.jpg",
+      "caption": "Long-exposure highway at night showing white and red car light trails, dark city buildings and trees. Suitable for background image",
+      "source": "Unsplash",
+      "original_width": "3000px",
+      "original_height": "2000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7a8071f06340.jpg",
+      "caption": "Night aerial view of Minerva fountain with purple-lit fountains, statue, light trails, and city buildings. Contains Alamy watermark — not suitable for background.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "1065px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3941783c4ee6.jpeg",
+      "caption": "Aerial night long-exposure of a roundabout interchange, glowing red and white light trails, dark houses, no watermarks.",
+      "source": "Reddit",
+      "original_width": "2048px",
+      "original_height": "1152px"
+    }
+  ]
+}

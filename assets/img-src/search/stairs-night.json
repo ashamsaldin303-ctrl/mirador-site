@@ -1,0 +1,58 @@
+{
+  "success": true,
+  "query": "person walking down a dark staircase at night, warm tungsten light, cinematic",
+  "count": 7,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8059282adbea.jpg",
+      "caption": "A boy stands on a dim concrete staircase, silhouetted in a dramatic sunbeam streaming from a small window. Suitable for background image.",
+      "source": "Morphic",
+      "original_width": "1080px",
+      "original_height": "1920px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f54cc437adfb.jpg",
+      "caption": "A silhouetted woman in white shirt and jeans stands in a warmly lit doorway atop dark stairs.",
+      "source": "Filmmaker Magazine",
+      "original_width": "1240px",
+      "original_height": "696px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f67544052ec7.jpg",
+      "caption": "A person sits alone on vast stone steps with a backpack, black-and-white artistic photograph, strong visual impact, no text. Suitable for background image.",
+      "source": "Amateur Photographer",
+      "original_width": "1200px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8ebb8fb9c0b8.png",
+      "caption": "Dark image with Morphic logo, text \"Tracking shot prompts\", camera dolly on tracks fading into darkness.",
+      "source": "Morphic",
+      "original_width": "1920px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5c99dbd23b25.jpg",
+      "caption": "Black-and-white overhead view of intersecting metal staircases with handrails, an escalator, and stone walls; striking, clear, no watermark. Suitable for background image.",
+      "source": "Amateur Photographer",
+      "original_width": "1200px",
+      "original_height": "1600px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e6a8b9a47736.jpg",
+      "caption": "",
+      "source": "PicX Studio",
+      "original_width": "1200px",
+      "original_height": "675px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d844aa49f459.png",
+      "caption": "A lone silhouetted figure walks down a ruined city road beneath an apocalyptic red sky. Suitable for background image.",
+      "source": "SplitShire",
+      "original_width": "720px",
+      "original_height": "1280px"
+    }
+  ]
+}

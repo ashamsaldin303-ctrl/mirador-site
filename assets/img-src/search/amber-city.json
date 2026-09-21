@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "query": "city skyline at night from above, amber window lights, dark cinematic mood",
+  "count": 8,
+  "ranked": true,
+  "captioned_count": 7,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1a3bdd3defe6.jpg",
+      "caption": "",
+      "source": "Lemon8",
+      "original_width": "1712px",
+      "original_height": "2286px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e2a8e7c7a9fb.jpg",
+      "caption": "A nighttime cityscape featuring a green-lit pyramid skyscraper spire over illuminated buildings and harbor. Contains watermark: \"Lemon8 @perrytrails\" — not suitable for background use.",
+      "source": "Lemon8",
+      "original_width": "1284px",
+      "original_height": "1715px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ff289b4e6f16.jpg",
+      "caption": "Blurry night cityscape with bokeh lights. Contains multiple \"dreamstime\" watermarks, \"dreamstime.com\", and \"ID 467680333 © Nikita Burukhin\".",
+      "source": "Dreamstime.com",
+      "original_width": "1600px",
+      "original_height": "1156px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8654aac3217b.png",
+      "caption": "A futuristic blue-lit cyberpunk cityscape at night with flying drones and glowing skyscrapers; high visual impact, no watermarks—suitable for background image.",
+      "source": "SplitShire",
+      "original_width": "1024px",
+      "original_height": "1024px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ae5e64e0b0e0.png",
+      "caption": "A dystopian cyberpunk city with a glowing neon Big Ben clock tower, red lightning veins, futuristic skyscrapers, rain, and neon billboards.",
+      "source": "SplitShire",
+      "original_width": "842px",
+      "original_height": "1264px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bf8aa574e51c.jpg",
+      "caption": "A dark fantastical palace with glowing blue domed towers, stormy smoke, lightning. High visual impact, no watermark. Suitable for background image.",
+      "source": "SplitShire",
+      "original_width": "880px",
+      "original_height": "1184px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b8060f0e8750.jpg",
+      "caption": "A dramatic painting of a nighttime city skyline with glowing golden skyscrapers reflected in blue water under stormy clouds. Suitable for background image.",
+      "source": "Fy!",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a6c9fe95f303.jpg",
+      "caption": "Blurred nighttime cityscape with autumn leaves, bokeh building lights; contains Dreamstime watermarks and \"ID 412755394 © Vita Popova\" text.",
+      "source": "Dreamstime.com",
+      "original_width": "1600px",
+      "original_height": "1157px"
+    }
+  ]
+}

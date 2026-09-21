@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "Damascus Syria city skyline at night aerial view with lights",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6f2053f21db8.jpg",
+      "caption": "Aerial night view of a brightly lit city with major road interchange. Contains Alamy watermarks and ID text, so not suitable for background image.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "1060px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/67d6bb0fc8de.jpg",
+      "caption": "Aerial night view of a sprawling city with scattered glowing lights, dark rooftops, and illuminated streets. Contains Alamy watermarks, not suitable for background image.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "956px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/25d2b52ab600.jpg",
+      "caption": "A sprawling city at night viewed from above, glowing with colorful orange, green, and yellow lights under dark sky. Suitable for background image.",
+      "source": "Visit Damascus Syria",
+      "original_width": "1600px",
+      "original_height": "1064px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/182216624bed.jpg",
+      "caption": "A panoramic nighttime cityscape with countless glowing lights spreading across a vast urban area; dark, no visible text; contains a faint watermark.",
+      "source": "Dreamstime",
+      "original_width": "1600px",
+      "original_height": "545px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/73968ae26c8e.jpg",
+      "caption": "A dazzling nighttime aerial cityscape with glowing golden lights, a stadium, and a mountain backdrop. High clarity, no watermarks — suitable for background image",
+      "source": "Visit Damascus Syria",
+      "original_width": "1280px",
+      "original_height": "720px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/69691315ef77.jpg",
+      "caption": "A stunning sunset over Damascus, featuring the Umayyad Mosque's dome and minarets, with golden city skyline and mountains behind. Suitable for background image.",
+      "source": "Visit Damascus Syria",
+      "original_width": "1672px",
+      "original_height": "941px"
+    }
+  ]
+}

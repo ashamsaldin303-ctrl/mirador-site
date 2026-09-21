@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "query": "moody candlelit fine dining place setting on dark table overhead view",
+  "count": 8,
+  "ranked": true,
+  "captioned_count": 7,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f882a32b918f.jpg",
+      "caption": "An elegant candlelit dinner table with stacked plates, silverware, dried flowers, and a handwritten place card.",
+      "source": "Chris Loves Julia",
+      "original_width": "781px",
+      "original_height": "1172px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f82e47f098e1.jpg",
+      "caption": "",
+      "source": "Dreamstime.com",
+      "original_width": "1600px",
+      "original_height": "1157px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1d2d40127630.jpg",
+      "caption": "Elegant table setting with black plates, pink napkins, green candles in gold holders, and amber glasses, no text.",
+      "source": "Jojotastic",
+      "original_width": "750px",
+      "original_height": "1125px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9c8b65502c86.jpg",
+      "caption": "Elegant vintage dining room with glass bubble chandelier, pastoral mural wallpaper, lit candles, and floral tablecloth setting; suitable for background image",
+      "source": "Chris Loves Julia",
+      "original_width": "781px",
+      "original_height": "1172px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c7588aaa23c3.jpg",
+      "caption": "Elegant dining table set with plates, wine glasses, lit candles, and pampas grass decorations; contains Dreamstime watermarks and footer text \"dreamstime.com\", \"ID 438498026 © Viktor Bondar\".",
+      "source": "Dreamstime.com",
+      "original_width": "1066px",
+      "original_height": "1690px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cf70d404c399.jpg",
+      "caption": "Fine dining restaurant table with scallops, wine, bread, and Manhattan skyline at night. Text: \"Manhatta,\" \"$$$$,\" \"the best scallops I've had,\" \"lemon8 @nessiemessiesassie.\"",
+      "source": "Lemon8",
+      "original_width": "810px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bc57d177c6f1.jpg",
+      "caption": "Cozy autumn dining room with wooden table, fall leaf centerpiece, candles, neutral tableware, black chairs, and warm natural decor.",
+      "source": "TheCoolist",
+      "original_width": "1080px",
+      "original_height": "1350px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ff07093b4ba2.jpg",
+      "caption": "A hand holds a framed painting depicting a rustic candlelit dining table with bread, plates, and wooden chairs by a window. No text or watermarks; high clarity. Suitable for background image.",
+      "source": "Etsy",
+      "original_width": "3000px",
+      "original_height": "3000px"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "query": "sliced sourdough bread with butter dark moody food photography",
+  "count": 8,
+  "ranked": true,
+  "captioned_count": 8,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3dd8d3f749da.jpg",
+      "caption": "Gemini分析异常",
+      "source": "Kristen Shaw Photography",
+      "original_width": "1000px",
+      "original_height": "1500px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6a01754bd414.jpg",
+      "caption": "Rustic bread loaf and slices on gray plate atop wooden board, with serrated knife and text \"BHL&\".",
+      "source": "Black Honey & Lime",
+      "original_width": "800px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d3ba054f33b0.jpg",
+      "caption": "Two crusty sourdough bread loaves held over wooden table with red checkered cloth; contains Alamy watermark.",
+      "source": "Alamy",
+      "original_width": "867px",
+      "original_height": "1390px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c8a59579260d.jpg",
+      "caption": "A freshly baked round sourdough bread loaf with scored crust, resting on a striped cloth, high clarity, no watermark. Suitable for background image.",
+      "source": "The Storied Recipe",
+      "original_width": "1118px",
+      "original_height": "1118px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1aeed8c97009.jpg",
+      "caption": "Framed oil painting of rustic bread loaf, slices, butter, and jars on wooden cutting board. Contains watermark text \"PIXEL TO PRINT.\"",
+      "source": "Etsy",
+      "original_width": "2048px",
+      "original_height": "2048px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f11d7651ff80.jpg",
+      "caption": "Freshly sliced homemade white bread arranged on a black wire cooling rack beside a serrated knife on rustic wooden table.",
+      "source": "The Clever Carrot",
+      "original_width": "800px",
+      "original_height": "1103px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5fb800e85fb1.jpg",
+      "caption": "Overhead food photography: scrambled eggs on toast with radishes, butter, bread, and salt on rustic linen. No text or watermark; high visual quality.",
+      "source": "Two Red Bowls",
+      "original_width": "819px",
+      "original_height": "1024px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/939e4f9bf7d0.jpg",
+      "caption": "A sourdough bread bowl filled with creamy clam chowder, on branded \"Sourdough\" wrapping paper, with blurred sandwiches behind. Suitable for background image",
+      "source": "Yelp",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    }
+  ]
+}

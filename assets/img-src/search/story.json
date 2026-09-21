@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "warm restaurant interior with city lights at night through window",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a291ee25e65a.jpg",
+      "caption": "A woman reads a book in a cozy café on a rainy evening, with live musicians, warm lamp, coffee cup. No watermark, high visual impact — suitable for background image",
+      "source": "Leonardo AI",
+      "original_width": "1376px",
+      "original_height": "768px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a1f1d8e7001c.jpg",
+      "caption": "Cozy café interior with glowing pendant lights, coffee cup reading \"PORSE,\" rainy blurred street outside; high clarity, visually striking — suitable for background image",
+      "source": "Leonardo.Ai App",
+      "original_width": "1344px",
+      "original_height": "768px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3292f076317a.jpg",
+      "caption": "Elegant banquet hall with round tables, white floral centerpieces, gold chairs, and panoramic night city views through floor-to-ceiling windows.",
+      "source": "www.windowsatmarquette.com",
+      "original_width": "2000px",
+      "original_height": "1336px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0d9825f807be.png",
+      "caption": "A luxurious warm-lit bar interior with velvet stools, sheer curtains, and floor-to-ceiling windows overlooking a glowing city street.",
+      "source": "SipTheStyle",
+      "original_width": "980px",
+      "original_height": "980px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/779f510d0e21.jpg",
+      "caption": "Cozy corner restaurant at dusk with glowing windows, outdoor seating, planters, wet street reflections; contains Dreamstime watermark.",
+      "source": "Dreamstime.com",
+      "original_width": "1600px",
+      "original_height": "1130px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/181636365780.jpg",
+      "caption": "Elegant dim restaurant interior with crystal chandeliers, red banquette seating, white tablecloths, and a wooden bar; no text, high clarity — suitable for background image.",
+      "source": "Wallpaper Magazine",
+      "original_width": "1920px",
+      "original_height": "1080px"
+    }
+  ]
+}

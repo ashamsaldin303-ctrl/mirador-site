@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "query": "elegant dark restaurant dining room warm pendant lamps set tables",
+  "count": 8,
+  "ranked": true,
+  "captioned_count": 7,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ad1e8a06e11d.jpg",
+      "caption": "Elegant dining room with long wooden table, green velvet chairs, glass chandelier, marble bar, and city view.",
+      "source": "Sparkle Light",
+      "original_width": "1024px",
+      "original_height": "1024px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/76f31dde4b8c.jpg",
+      "caption": "Elegant dining room with wooden table, woven chairs, pleated pendant lamp, black cabinet, and framed painting. Suitable for background image.",
+      "source": "Livingetc",
+      "original_width": "2000px",
+      "original_height": "2800px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/aecccf626566.jpg",
+      "caption": "Elegant dining room with barrel-vaulted ceiling, spherical silver chandelier, glossy dark wood table, and blue velvet chairs.",
+      "source": "ELLE Decor",
+      "original_width": "819px",
+      "original_height": "1225px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0b5b85c8ab9e.jpg",
+      "caption": "An elegant dining room with a white table, mixed upholstered chairs, cream pendant lamps, and sage-green walls. Suitable for background image.",
+      "source": "Livingetc",
+      "original_width": "2000px",
+      "original_height": "2400px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/eaf8fdeb8548.jpg",
+      "caption": "An elegantly decorated restaurant interior with pampas grass chandeliers, set tables, wine glasses, and candles; contains Alamy watermarks and stock image ID text.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "956px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/12b05c97ccf7.jpg",
+      "caption": "A modern dining setup with wooden table and chairs beneath a cluster of metallic pendant lamps against deep red walls. No text or watermarks. Suitable for background image.",
+      "source": "Homedit",
+      "original_width": "1200px",
+      "original_height": "1800px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/49ce149e2b74.webp",
+      "caption": "",
+      "source": "CharmyDecor",
+      "original_width": "1545px",
+      "original_height": "1545px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/571f3d332241.jpg",
+      "caption": "Opulent dark-toned lounge interior with brass chandelier, gilded mirror, fireplace, floral wallpaper, and velvet seating; no text.",
+      "source": "Condé Nast Traveler",
+      "original_width": "1280px",
+      "original_height": "960px"
+    }
+  ]
+}

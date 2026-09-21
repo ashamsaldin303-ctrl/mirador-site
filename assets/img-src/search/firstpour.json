@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "red wine being poured into glass dark moody restaurant",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f6e33fbc0fbd.jpg",
+      "caption": "Red wine being poured into wine glasses on a white table; contains Dreamstime watermarks and ID text \"ID 361066829 © David Pruter\".",
+      "source": "Dreamstime.com",
+      "original_width": "1066px",
+      "original_height": "1690px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/192369edd69a.jpg",
+      "caption": "Gemini分析异常",
+      "source": "The Infatuation",
+      "original_width": "5883px",
+      "original_height": "3922px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/afe1c7c49666.jpg",
+      "caption": "People toasting with red and white wine glasses over a wooden table with a cheese platter.",
+      "source": "Pinterest",
+      "original_width": "736px",
+      "original_height": "1308px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/49f132a4a759.jpg",
+      "caption": "A cozy wine bar interior with rows of wine bottles by the window, cane chairs, wooden tables, reversed \"FORZA WINE\" text on glass.",
+      "source": "Stylist",
+      "original_width": "1280px",
+      "original_height": "1024px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ae2b424a1e61.jpg",
+      "caption": "A snifter glass of red drink with ice sits on dark soil beside rosemary sprigs on a black background. Contains \"depositphotos\" watermarks and Image ID: 320263478, www.depositphotos.com text.",
+      "source": "DepositPhotos",
+      "original_width": "1280px",
+      "original_height": "1700px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0dedc024e744.jpg",
+      "caption": "Four smiling people at an outdoor wine festival holding wine glasses, wearing \"Big Sur Food & Wine Festival\" aprons, surrounded by wine bottles.",
+      "source": "Edible Monterey Bay",
+      "original_width": "1024px",
+      "original_height": "771px"
+    }
+  ]
+}

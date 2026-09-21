@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "query": "Beirut city skyline at night glowing lights from above",
+  "count": 8,
+  "ranked": true,
+  "captioned_count": 8,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4ebd1847395d.jpg",
+      "caption": "Canvas wall art of an illuminated coastal city skyline at dusk, displayed above a gray sofa; text reads \"Also available in 3 and 5 panel\".",
+      "source": "Zellart Canvas Prints",
+      "original_width": "1694px",
+      "original_height": "1694px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/297f545f6a85.jpg",
+      "caption": "Aerial night view of highway light trails under dramatic red clouds in Bangkok. Contains \"icepreaw\" watermarks and Shutterstock branding; not suitable for background image.",
+      "source": "Shutterstock",
+      "original_width": "1500px",
+      "original_height": "1099px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/671b822fa317.jpg",
+      "caption": "A coastal cityscape under dramatic cloudy skies with sunbeams; dense buildings, hills, and harbor visible. Contains Alamy watermarks and ID text (2PDPP9K). Not suitable as background due to watermarks.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "951px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/11c6eac9e439.jpg",
+      "caption": "Aerial view of Beirut's marina skyline at sunset, with yachts, high-rises, and dramatic clouds. Contains visible \"depositphotos\" watermarks and Image ID 390548180, so not suitable for background image.",
+      "source": "DepositPhotos",
+      "original_width": "1600px",
+      "original_height": "1171px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ba73b6dc3672.jpg",
+      "caption": "A woman and child cross a sunny cobblestone street in downtown Beirut, with the Mohammad Al-Amin Mosque's minarets visible between historic golden stone buildings. Contains \"depositphotos\" watermarks and Image ID 218037366 text; not suitable as background image.",
+      "source": "DepositPhotos",
+      "original_width": "1600px",
+      "original_height": "1167px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ca0abc27081f.jpg",
+      "caption": "Vibrant nighttime Seoul street scene with neon Korean signs, pedestrians, police car, cosmetics shops, no watermark.",
+      "source": "Quartz",
+      "original_width": "1400px",
+      "original_height": "931px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/fb666693677e.jpg",
+      "caption": "Illuminated Dubai Canal skyline at dusk, glowing skyscrapers reflecting on water, vibrant cityscape, no watermarks or text.",
+      "source": "Expedia",
+      "original_width": "3840px",
+      "original_height": "2160px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/76db6cb9bc40.jpg",
+      "caption": "Colorful Mediterranean-style buildings with arched balconies, blue shutters, and clear sky; contains Shutterstock watermarks and text.",
+      "source": "Shutterstock",
+      "original_width": "1500px",
+      "original_height": "1100px"
+    }
+  ]
+}

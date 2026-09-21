@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "query": "aerial night view of a city with warm golden street lights sprawling below, cinematic",
+  "count": 8,
+  "ranked": true,
+  "captioned_count": 7,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2dc9f490a665.jpg",
+      "caption": "Aerial nighttime cityscape with illuminated high-rise buildings; contains Alamy watermarks and logo.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "1063px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/49dbb21ff5fc.jpg",
+      "caption": "Autumn evening city sidewalk with scattered leaves, lit shops, string lights, and trees; contains Alamy watermarks and ID text.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "956px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f34861462ad8.jpg",
+      "caption": "A dark empty suburban road at night, lit by yellow streetlights; contains Alamy watermarks and image ID text.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "951px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/86360be119e0.jpg",
+      "caption": "Aerial night view of Dubai's illuminated skyline with glowing highway interchanges, skyscrapers, and light trails. Contains Dreamstime watermarks and ID text (ID 365824214, Stefan Walti), so not suitable for background image.",
+      "source": "Dreamstime.com",
+      "original_width": "1600px",
+      "original_height": "1156px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5169f1319c2d.jpg",
+      "caption": "A stunning nighttime aerial view of San Francisco's illuminated skyline and cityscape under a dark blue sky. Suitable for background image.",
+      "source": "Yelp",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2703f870c5c0.jpg",
+      "caption": "A vibrant nighttime aerial cityscape with illuminated skyscrapers and glowing streets stretching to the horizon; high clarity, visually striking, no watermark. Suitable for background image",
+      "source": "Northabroad",
+      "original_width": "1920px",
+      "original_height": "1280px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7a6234a9e721.jpg",
+      "caption": "",
+      "source": "Shutterstock",
+      "original_width": "1500px",
+      "original_height": "1600px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f35c68c73a18.jpeg",
+      "caption": "A black-and-white satellite image of a sprawling city at night, with bright dense urban areas and dark water/wetland regions. No visible text or watermarks. Suitable for background image",
+      "source": "PetaPixel",
+      "original_width": "2560px",
+      "original_height": "2442px"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "elegant dark restaurant dining room with warm candlelight",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ec295385746a.jpg",
+      "caption": "Elegant dimly lit restaurant interior with warm pendant lamps, set tables, leather chairs, and greenery. Suitable for background image.",
+      "source": "Future Light",
+      "original_width": "1600px",
+      "original_height": "700px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d444621d6caa.jpg",
+      "caption": "An elegant dining room with black chairs, moss chandelier, landscape murals, candles, and a mounted TV. Suitable for background image",
+      "source": "Eden Chicago",
+      "original_width": "782px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4bc123f7d277.png",
+      "caption": "Elegant upscale restaurant interior with white round tables, blue velvet chairs, modern globe chandeliers, and warm lighting.",
+      "source": "Ultra Beam Lighting",
+      "original_width": "1248px",
+      "original_height": "832px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/33c83922e30a.jpg",
+      "caption": "Dim, moody restaurant interior with an ornate Gothic fireplace, burning fire, wooden table, wine glasses, and warm glowing lamps.",
+      "source": "Eater DC",
+      "original_width": "1080px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ec6e20fa4b64.jpg",
+      "caption": "A rustic Halloween-themed dinner table with dark candles, wine glasses, plates tied with rosemary, greenery, and colorful frame border.",
+      "source": "Pinterest",
+      "original_width": "736px",
+      "original_height": "1104px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/91b3f3aecaf2.jpg",
+      "caption": "Elegant private dining room with red walls, wood-paneled ceiling, long white-tablecloth table set with wine glasses, floral centerpiece, framed photos, and screen.",
+      "source": "The Metropolitan Grill",
+      "original_width": "2560px",
+      "original_height": "1707px"
+    }
+  ]
+}

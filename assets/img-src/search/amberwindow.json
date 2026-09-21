@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "warm amber light glowing through a window at dusk",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5deee299b009.jpg",
+      "caption": "A warmly lit house window glowing on a rainy night, golden light reflecting in puddles on the wet street.\n\nsuitable for background image",
+      "source": "Leonardo AI",
+      "original_width": "1440px",
+      "original_height": "1440px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5096c89af7f1.jpg",
+      "caption": "Warm sunlight streams through a window, illuminating a fuzzy textured object with lens flare. Suitable for background image.",
+      "source": "Unsplash",
+      "original_width": "3000px",
+      "original_height": "4500px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b38ef440bc04.jpg",
+      "caption": "A blurry, warm-toned sunset through a window with plants silhouetted; contains Alamy watermarks and is blurry.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "982px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b2e5977247b9.jpg",
+      "caption": "Two LED candles glowing amber on dark wood, with text \"Bright Warm Amber Glow & Softly Flickering Flame, Smokeless, Flickering\" (marketing product image, not suitable as background image).",
+      "source": "Amazon.com",
+      "original_width": "1480px",
+      "original_height": "1480px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3358bcf63c78.jpeg",
+      "caption": "Dense high-rise residential building facade at night, many lit windows and air conditioners, no text or watermark.",
+      "source": "Medium",
+      "original_width": "1400px",
+      "original_height": "935px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0f5b13b1c11e.jpg",
+      "caption": "A glowing LED candle in a spherical metal cage lantern hangs from a chain among dark branches at night, with overlaid advertising text: \"Freedom to Glow, Without the Cost / Lanterns, Gardens, Windows—Your Design, Your Rules.\"",
+      "source": "Amazon.in",
+      "original_width": "1600px",
+      "original_height": "1600px"
+    }
+  ]
+}

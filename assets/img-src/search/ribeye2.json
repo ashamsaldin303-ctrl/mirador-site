@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "medium rare sliced steak served on a dark plate",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e2374eed2eb7.jpg",
+      "caption": "Sliced medium-rare steak on a knife over dark wood, scattered sea salt and peppercorns; contains Alamy watermark, not suitable for background.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "957px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/045e3c9ec399.jpg",
+      "caption": "A sliced medium-rare grilled steak with juicy pink center served on a dark slate board. Suitable for background image.",
+      "source": "Rib and Chop House",
+      "original_width": "1000px",
+      "original_height": "878px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ecd3b15e7c4c.jpg",
+      "caption": "Steak doneness infographic with five sliced levels and temperatures on dark background; contains moderate text and Lemon8 watermark.",
+      "source": "Lemon8 App",
+      "original_width": "1080px",
+      "original_height": "1401px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8d92fbae769c.jpg",
+      "caption": "Sliced medium-rare steak garnished with herbs beside a black chef knife, Yorkshire puddings, and roasted garlic on a dark rustic tray.",
+      "source": "Dalstrong UK",
+      "original_width": "1024px",
+      "original_height": "1024px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/689477955c8c.jpg",
+      "caption": "Sliced medium-rare steak garnished with herbs, cherry tomatoes, mushrooms, and sea salt on dark slate.",
+      "source": "Algae Cooking Club",
+      "original_width": "1920px",
+      "original_height": "1280px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c557b517bc95.jpg",
+      "caption": "A close-up of a juicy sliced medium-rare steak with broccoli and potatoes on a dark plate, fork lifting a slice. suitable for background image",
+      "source": "FoodFireFriends",
+      "original_width": "1200px",
+      "original_height": "800px"
+    }
+  ]
+}

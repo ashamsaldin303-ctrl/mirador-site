@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "city skyline at blue hour with building lights on seen from above",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ae04764e3a4d.jpg",
+      "caption": "A stunning nighttime aerial view of Hong Kong's illuminated skyline and Victoria Harbour, but the image contains repeated \"Unsplash+\" watermarks throughout, so it is not suitable for background image.",
+      "source": "Unsplash",
+      "original_width": "3000px",
+      "original_height": "4501px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/19815a0c9aef.jpeg",
+      "caption": "A panoramic view of Hong Kong's dense skyscrapers and harbor from Victoria Peak, clear and visually striking. Suitable for background image.",
+      "source": "Velvet Escape",
+      "original_width": "1280px",
+      "original_height": "920px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e44bbda1ace3.jpg",
+      "caption": "Las Vegas Sphere at night displaying a giant realistic human eye, with ferris wheel and illuminated casino hotels.",
+      "source": "The New Yorker",
+      "original_width": "2089px",
+      "original_height": "1175px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/89d332a6b5e3.jpeg",
+      "caption": "Night cityscape of illuminated skyscrapers, including Bank of China building, with a glowing white bridge reflecting on dark water. High clarity, strong visual impact, suitable for background image.",
+      "source": "Pexels",
+      "original_width": "3926px",
+      "original_height": "5889px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7437590ced30.jpg",
+      "caption": "Two children in white clothes look through tower viewers at the sunny New York City skyline featuring the Empire State Building. Suitable for background image.",
+      "source": "New York Pass",
+      "original_width": "3840px",
+      "original_height": "2560px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/68ce372513e2.jpg",
+      "caption": "Night skyline of Beijing's CBD featuring CITIC Tower and CCTV headquarters, glowing blue city lights under dark sky; suitable for background image",
+      "source": "Unsplash",
+      "original_width": "3000px",
+      "original_height": "1794px"
+    }
+  ]
+}

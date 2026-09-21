@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "query": "sliced medium rare ribeye steak on a dark plate, moody dim restaurant candlelight",
+  "count": 8,
+  "ranked": true,
+  "captioned_count": 8,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c3791798116c.jpg",
+      "caption": "A steak dinner with mashed potatoes and red wine on a plate reading \"STOCKYARDS,\" set in a bar.",
+      "source": "Yelp",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/50abc21855fc.jpg",
+      "caption": "Sliced medium-rare steak garnished with cilantro, roasted vegetables, and sauce drizzle on a dark plate. suitable for background image",
+      "source": "Yelp",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3132fb771a0e.jpg",
+      "caption": "Sliced medium-rare steak with parmesan fries and a roasted chicken leg on white plates, wooden table, no text, suitable for background image.",
+      "source": "Yelp",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/25d48675daf5.jpg",
+      "caption": "A close-up of grilled lamb chops on a white plate, served with grains, greens, and crispy garnish.",
+      "source": "Yelp",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4e1201bbbe8a.jpg",
+      "caption": "Close-up of a steak topped with mushrooms and greens, blurred red wine glasses in background, no text, visually striking, suitable for background image",
+      "source": "Yelp",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/186dd908caad.jpg",
+      "caption": "A hand with white nail polish scoops a spoon into a baked almond-topped dessert, with coffee cup nearby.",
+      "source": "Yelp",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a74715c6128e.png",
+      "caption": "A dimly lit, moody bar interior with patrons, liquor shelves, warm lamps, and vintage decor.",
+      "source": "Dallas Observer",
+      "original_width": "1331px",
+      "original_height": "880px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1ad65c1d6ae0.jpg",
+      "caption": "A dimly lit steakhouse table featuring a large grilled steak, pasta dishes, sides, red wine glass, candle, and sauce bottle.",
+      "source": "Yelp",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    }
+  ]
+}

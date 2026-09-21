@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "glowing charcoal embers close up in the dark",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2f5872d0214d.jpg",
+      "caption": "Glowing red-hot charcoal embers burning against a black background. Contains \"alamy\" watermark and Image ID: 3E7ACBW, www.alamy.com. Not suitable for background image.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "821px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/299ef62c1c12.jpg",
+      "caption": "Glowing red-orange hot charcoal embers with faint blue flames against a dark background; contains \"123RF\" watermarks.",
+      "source": "123RF",
+      "original_width": "1300px",
+      "original_height": "866px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a2f091e6e739.jpg",
+      "caption": "Close-up of burning firewood with vivid orange flames and glowing embers. Contains Alamy watermarks; not suitable as background.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "956px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/91b3847acbca.jpg",
+      "caption": "Glowing orange embers close-up with text \"GLOWING EMBERS\" and a \"4K HDR\" logo watermark; visually striking.",
+      "source": "YouTube",
+      "original_width": "1280px",
+      "original_height": "720px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7d7e38e64134.jpg",
+      "caption": "Glowing orange campfire embers and sparks among dark stones at night; contains depositphotos watermarks and logo.",
+      "source": "DepositPhotos",
+      "original_width": "1600px",
+      "original_height": "1168px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/70c77239f840.jpg",
+      "caption": "Glowing red and orange burning charcoal embers fill the frame; contains visible \"123RF\" watermarks, so not a background image.",
+      "source": "123RF",
+      "original_width": "1300px",
+      "original_height": "731px"
+    }
+  ]
+}

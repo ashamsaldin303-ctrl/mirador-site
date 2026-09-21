@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "night city skyline seen from restaurant table with wine glass",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/260803df91df.jpg",
+      "caption": "Two wine glasses on a table before a window overlooking Singapore's Marina Bay skyline at night. Watermarked (Dreamstime), not suitable for background.",
+      "source": "Dreamstime.com",
+      "original_width": "1600px",
+      "original_height": "1157px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/da066f0cbde4.jpg",
+      "caption": "Cozy restaurant table with wine glasses, desserts, and menus by a window, overlooking blurred city night lights (watermark \"@mooncakepictures\" bottom-left).",
+      "source": "skylon-restaurant.co.uk",
+      "original_width": "2048px",
+      "original_height": "1365px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bbcac857eeb6.jpg",
+      "caption": "Elegant scallop dish with white wine glasses against Singapore's illuminated Marina Bay skyline at dusk; high quality, visually striking — suitable for background image",
+      "source": "Vulcan Post",
+      "original_width": "1200px",
+      "original_height": "675px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/12a3367cb854.jpg",
+      "caption": "Aerial nighttime view of illuminated Chicago skyline with glowing skyscrapers and Lake Michigan at dusk. Suitable for background image.",
+      "source": "www.signatureroom.com",
+      "original_width": "3504px",
+      "original_height": "2336px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f2dae51ea61b.jpg",
+      "caption": "Diners at a high-rise restaurant with panoramic Manhattan skyline views through floor-to-ceiling windows, vintage atmosphere.",
+      "source": "Reddit",
+      "original_width": "2000px",
+      "original_height": "1308px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e47b144e80ce.jpg",
+      "caption": "A bright rooftop dining table filled with pizza, salad, oysters, fruits, and wine, overlooking lush city greenery.",
+      "source": "SO/ Hotels",
+      "original_width": "1200px",
+      "original_height": "1400px"
+    }
+  ]
+}

@@ -1,172 +1,244 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 /* ---------------------------------------------------------------------------
-   FULL-STACK AGENT PLAYGROUND — DESIGN TOKEN CONTRACT
-   One authoritative file (§5). Re-skinned away from default shadcn (anti-slop §8):
-   warm copper brand on stone-tinted neutrals. All colors in OKLCH.
-   Contrast pairs computed at token-definition time (§6.3):
-   light  — fg 14.7:1 · muted 7.4:1 · primary 6.8:1 · ring 4.6:1
-   dark   — fg 15.2:1 · muted 6.2:1 · primary 9:1  · ring 6.7:1
---------------------------------------------------------------------------- */
+   MIRADOR — DESIGN TOKEN CONTRACT (FROZEN — brief §5, F2-1 diff target)
+   Tailwind 4 CSS-first. The file tailwind.config.ts does NOT exist (F2-5).
+   Dark-only v1 — there is no light theme (§5.2); color-scheme: dark.
+   Every §5.2 color, §5.3 font var + type scale, §5.4 spacing/radius/duration
+   lives here with the exact brief names and values. AR typography rules
+   (§5.3) are enforced via [dir="rtl"] variable overrides.
+   --------------------------------------------------------------------------- */
+
+/* — self-hosted WOFF2 subsets (public/fonts/) — display: swap, unicode-range — */
+/* EN display: Fraunces variable (wght 400–600, latin) */
+@font-face {
+  font-family: "Fraunces";
+  src: url("/fonts/fraunces-var-latin.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-007E, U+00A0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026;
+}
+/* EN body: Instrument Sans variable (wght 400–600, latin) */
+@font-face {
+  font-family: "Instrument Sans";
+  src: url("/fonts/instrument-sans-var-latin.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-007E, U+00A0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026;
+}
+/* AR display: Amiri 400 + 700 (corpus-subset arabic + latin for digits/«»/punct) */
+@font-face {
+  font-family: "Amiri";
+  src: url("/fonts/amiri-400-arabic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: "Amiri";
+  src: url("/fonts/amiri-400-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-007E, U+00A0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026;
+}
+@font-face {
+  font-family: "Amiri";
+  src: url("/fonts/amiri-700-arabic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: "Amiri";
+  src: url("/fonts/amiri-700-latin.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-007E, U+00A0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026;
+}
+/* AR body: IBM Plex Sans Arabic 400/500/600 (full arabic block + latin subsets) */
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  src: url("/fonts/plex-arabic-400-arabic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  src: url("/fonts/plex-arabic-400-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-007E, U+00A0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026;
+}
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  src: url("/fonts/plex-arabic-500-arabic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  src: url("/fonts/plex-arabic-500-latin.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-007E, U+00A0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026;
+}
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  src: url("/fonts/plex-arabic-600-arabic.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  src: url("/fonts/plex-arabic-600-latin.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-007E, U+00A0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026;
+}
 
 @theme {
-  /* Type scale — leading/tracking applied via ltr:/rtl: variants (Arabic never
-     gets letter-spacing; Arabic display needs higher leading — §6.2) */
-  --text-kicker: 0.75rem;
-  --text-kicker--line-height: 1.5;
-  --text-kicker--font-weight: 500;
+  /* — color roles — night over the city (FROZEN §5.2, WCAG-computed on #0A0A0B) — */
+  --color-night: #0A0A0B;   /* page base — the sky */
+  --color-surface: #141417; /* raised surface */
+  --color-line: #26262B;    /* hairline / divider */
+  --color-ink: #F2EFE8;     /* primary text — ivory · 17.2:1 AAA */
+  --color-muted: #A6A199;   /* secondary text · 7.7:1 AAA */
+  --color-amber: #CBA35C;   /* accent — city amber · 8.4:1 AAA */
+  --color-copper: #B87333;  /* secondary accent · 5.2:1 AA (large text/UI only) */
+  --color-error: #C96F5A;   /* form errors + sold-out · 5.6:1 AA */
+  --color-success: #7FA974; /* confirmation · 7.4:1 AA */
 
-  --text-section: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem);
-  --text-section--font-weight: 700;
-
-  --text-display: clamp(2.25rem, 1.4rem + 3.4vw, 4rem);
-  --text-display--font-weight: 700;
-
-  --text-hero: clamp(2.5rem, 1rem + 6vw, 5.75rem);
-  --text-hero--font-weight: 700;
-
+  /* — spacing: 4px base — generates the ONLY permitted spacing scale 4..128 — */
   --spacing: 0.25rem;
-  --radius: 0.5rem;
 
-  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-soft: cubic-bezier(0.55, 0, 1, 0.45);
+  /* — radius: luxury = sharp edges; nothing rounder than 8px except pills — */
+  --radius-sm: 2px;
+  --radius: 4px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 8px;
+
+  /* — font variables (F2-1 exact names, §5.3) — */
+  --font-display-en: "Fraunces", serif;
+  --font-display-ar: "Amiri", serif;
+  --font-body-en: "Instrument Sans", sans-serif;
+  --font-body-ar: "IBM Plex Sans Arabic", sans-serif;
+
+  /* — type scale (§5.3): fluid display clamps, modular body track —
+       line-heights are EN defaults; [dir="rtl"] overrides below apply AR values */
+  --text-display-xl: clamp(3.5rem, 9vw, 10rem);
+  --text-display-xl--line-height: 1.05;
+  --text-display-xl--font-weight: 400;
+
+  --text-h1: clamp(2.75rem, 6vw, 8.75rem);
+  --text-h1--line-height: 1.1;
+  --text-h1--font-weight: 400;
+
+  --text-h2: clamp(2rem, 4vw, 3.5rem);
+  --text-h2--line-height: 1.15;
+  --text-h2--font-weight: 400;
+
+  --text-h3: clamp(1.5rem, 2.5vw, 2rem);
+  --text-h3--line-height: 1.2;
+  --text-h3--font-weight: 400;
+
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.6;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
+
+  --text-micro: 0.75rem;
+  --text-micro--line-height: 1.4;
+  --text-micro--font-weight: 500;
+  --text-micro--letter-spacing: 0.08em; /* EN only — reset to 0 for AR below (NEVER-10) */
+
+  /* — motion durations (§5.4; mirror constants in src/lib/motion.ts) — */
+  --duration-fast: 100ms;
+  --duration-base: 200ms;
+  --duration-slow: 350ms;
+  --duration-signature: 600ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1); /* expo.out */
 }
 
 @theme inline {
-  --font-sans: var(--font-latin), var(--font-arabic), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-mono-code), ui-monospace, "SF Mono", "Cascadia Mono", monospace;
+  /* per-locale stacks resolve at runtime via --font-display-stack/--font-body-stack */
+  --font-sans: var(--font-body-stack);
+  --font-serif: var(--font-display-stack);
+  --font-display: var(--font-display-stack);
 
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-success: var(--success);
-  --color-success-foreground: var(--success-foreground);
-  --color-warning: var(--warning);
-  --color-warning-foreground: var(--warning-foreground);
-  --color-terminal: var(--terminal);
-  --color-terminal-foreground: var(--terminal-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  /* shadcn/ui semantic layer — restyled EXCLUSIVELY via MIRADOR tokens (NEVER-3) */
+  --color-background: var(--color-night);
+  --color-foreground: var(--color-ink);
+  --color-card: var(--color-surface);
+  --color-card-foreground: var(--color-ink);
+  --color-popover: var(--color-surface);
+  --color-popover-foreground: var(--color-ink);
+  --color-primary: var(--color-amber);
+  --color-primary-foreground: var(--color-night);
+  --color-secondary: var(--color-surface);
+  --color-secondary-foreground: var(--color-ink);
+  --color-muted-foreground: var(--color-muted);
+  --color-accent: var(--color-surface);
+  --color-accent-foreground: var(--color-ink);
+  --color-destructive: var(--color-error);
+  --color-destructive-foreground: var(--color-night);
+  --color-success: var(--color-success);
+  --color-success-foreground: var(--color-night);
+  --color-border: var(--color-line);
+  --color-input: var(--color-line);
+  --color-ring: var(--color-amber);
+  --color-overlay: rgba(10, 10, 11, 0.72);
+  --color-sidebar: var(--color-surface);
+  --color-sidebar-foreground: var(--color-ink);
+  --color-sidebar-primary: var(--color-amber);
+  --color-sidebar-primary-foreground: var(--color-night);
+  --color-sidebar-accent: var(--color-surface);
+  --color-sidebar-accent-foreground: var(--color-ink);
+  --color-sidebar-border: var(--color-line);
+  --color-sidebar-ring: var(--color-amber);
 }
 
-/* Light — warm paper, deep copper. 60-30-10: bg / secondary / primary (§5.3) */
 :root {
-  --radius: 0.5rem;
-  --background: oklch(0.982 0.004 75);
-  --foreground: oklch(0.26 0.012 65);
-  --card: oklch(0.995 0.002 75);
-  --card-foreground: oklch(0.26 0.012 65);
-  --popover: oklch(0.995 0.002 75);
-  --popover-foreground: oklch(0.26 0.012 65);
-  --primary: oklch(0.46 0.14 45);
-  --primary-foreground: oklch(0.985 0.004 75);
-  --secondary: oklch(0.945 0.008 70);
-  --secondary-foreground: oklch(0.33 0.02 60);
-  --muted: oklch(0.95 0.006 72);
-  --muted-foreground: oklch(0.44 0.016 62);
-  --accent: oklch(0.92 0.025 60);
-  --accent-foreground: oklch(0.36 0.06 50);
-  --destructive: oklch(0.48 0.18 25);
-  --destructive-foreground: oklch(0.985 0.004 75);
-  --success: oklch(0.45 0.11 150);
-  --success-foreground: oklch(0.985 0.005 75);
-  --warning: oklch(0.47 0.1 70);
-  --warning-foreground: oklch(0.985 0.005 75);
-  --terminal: oklch(0.23 0.015 55);
-  --terminal-foreground: oklch(0.88 0.01 70);
-  --border: oklch(0.9 0.008 70);
-  --input: oklch(0.87 0.01 70);
-  --ring: oklch(0.55 0.12 45);
-  --chart-1: oklch(0.55 0.13 45);
-  --chart-2: oklch(0.65 0.1 55);
-  --chart-3: oklch(0.4 0.08 50);
-  --chart-4: oklch(0.75 0.08 60);
-  --chart-5: oklch(0.3 0.06 45);
-  --sidebar: oklch(0.97 0.004 72);
-  --sidebar-foreground: oklch(0.26 0.012 65);
-  --sidebar-primary: oklch(0.46 0.14 45);
-  --sidebar-primary-foreground: oklch(0.985 0.004 75);
-  --sidebar-accent: oklch(0.92 0.025 60);
-  --sidebar-accent-foreground: oklch(0.36 0.06 50);
-  --sidebar-border: oklch(0.9 0.008 70);
-  --sidebar-ring: oklch(0.55 0.12 45);
+  color-scheme: dark;
+  /* per-locale stacks (EN default) */
+  --font-display-stack: var(--font-display-en);
+  --font-body-stack: var(--font-body-en);
 }
 
-/* Dark — transformation, not inversion (§5.2): warm near-black, copper
-   lightened AND desaturated, elevation via surface steps */
-.dark {
-  --background: oklch(0.165 0.005 60);
-  --foreground: oklch(0.92 0.006 70);
-  --card: oklch(0.205 0.006 60);
-  --card-foreground: oklch(0.92 0.006 70);
-  --popover: oklch(0.225 0.006 60);
-  --popover-foreground: oklch(0.92 0.006 70);
-  --primary: oklch(0.76 0.11 55);
-  --primary-foreground: oklch(0.24 0.04 50);
-  --secondary: oklch(0.26 0.008 60);
-  --secondary-foreground: oklch(0.9 0.006 70);
-  --muted: oklch(0.24 0.007 60);
-  --muted-foreground: oklch(0.66 0.012 65);
-  --accent: oklch(0.32 0.03 50);
-  --accent-foreground: oklch(0.9 0.01 60);
-  --destructive: oklch(0.65 0.16 25);
-  --destructive-foreground: oklch(0.16 0.01 40);
-  --success: oklch(0.7 0.12 150);
-  --success-foreground: oklch(0.18 0.04 150);
-  --warning: oklch(0.75 0.09 75);
-  --warning-foreground: oklch(0.22 0.05 75);
-  --terminal: oklch(0.19 0.006 60);
-  --terminal-foreground: oklch(0.87 0.01 70);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 16%);
-  --ring: oklch(0.68 0.1 55);
-  --chart-1: oklch(0.76 0.11 55);
-  --chart-2: oklch(0.68 0.1 65);
-  --chart-3: oklch(0.55 0.08 50);
-  --chart-4: oklch(0.62 0.07 60);
-  --chart-5: oklch(0.45 0.06 45);
-  --sidebar: oklch(0.205 0.006 60);
-  --sidebar-foreground: oklch(0.92 0.006 70);
-  --sidebar-primary: oklch(0.76 0.11 55);
-  --sidebar-primary-foreground: oklch(0.24 0.04 50);
-  --sidebar-accent: oklch(0.32 0.03 50);
-  --sidebar-accent-foreground: oklch(0.9 0.01 60);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.68 0.1 55);
+/* — AR typography contract (§5.3, NEVER-10): mirrored leading, zero tracking — */
+[dir="rtl"] {
+  --font-display-stack: var(--font-display-ar);
+  --font-body-stack: var(--font-body-ar);
+
+  --text-display-xl--line-height: 1.25;
+  --text-h1--line-height: 1.3;
+  --text-h2--line-height: 1.35;
+  --text-h3--line-height: 1.4;
+  --text-body-lg--line-height: 1.8;
+  --text-body--line-height: 1.7;
+  --text-small--line-height: 1.7;
+  --text-micro--line-height: 1.6;
+  --text-micro--letter-spacing: 0; /* AR never gets letter-spacing */
 }
 
 @layer base {
@@ -174,13 +246,12 @@
     @apply border-border outline-ring/50;
   }
   html {
-    color-scheme: light;
-  }
-  html.dark {
     color-scheme: dark;
+    scrollbar-gutter: stable;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-night text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
   }
   h1,
   h2,
@@ -190,97 +261,115 @@
   p {
     text-wrap: pretty;
   }
-  @media (prefers-reduced-motion: no-preference) {
-    html {
-      scroll-behavior: smooth;
-    }
-  }
   ::selection {
-    background: color-mix(in oklab, var(--primary) 24%, transparent);
+    background: rgba(203, 163, 92, 0.28);
+  }
+  /* AR: no justified text, no letter-spacing — body/small leading enforced via tokens */
+  [dir="rtl"] body {
+    letter-spacing: 0;
+  }
+}
+
+@layer components {
+  /* — elevation ladder (§5.4): E1..E4, dithered shadows on near-black — */
+  .elev-1 {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line);
+  }
+  .elev-2 {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.45),
+      0 8px 24px rgba(0, 0, 0, 0.45),
+      inset 0 0 0 1px rgba(242, 239, 232, 0.06);
+  }
+  .elev-3 {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.5),
+      0 8px 24px rgba(0, 0, 0, 0.45),
+      0 16px 48px rgba(0, 0, 0, 0.55),
+      inset 0 0 0 1px rgba(242, 239, 232, 0.06);
+  }
+  .elev-4 {
+    background-color: rgba(20, 20, 23, 0.88);
+    border: 1px solid var(--color-line);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.5),
+      0 8px 24px rgba(0, 0, 0, 0.45),
+      0 16px 48px rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  /* — HUD micro-label (astronomy-app wildcard, §5.5): act numerals + chapter labels — */
+  .hud-label {
+    font-family: var(--font-body-stack);
+    font-size: 0.75rem;
+    line-height: 1.4;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+    text-transform: uppercase;
+  }
+  [dir="rtl"] .hud-label {
+    letter-spacing: 0;
+    text-transform: none; /* no ALL-CAPS for AR (NEVER-10) */
+  }
+
+  /* — hairline rule with HUD register — */
+  .hud-rule {
+    border: 0;
+    border-top: 1px solid var(--color-line);
+  }
+
+  /* — film grain on full-bleed media (2–4%, SVG noise, overlay blend) — */
+  .media-grain {
+    position: relative;
+    isolation: isolate;
+  }
+  .media-grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
   }
 }
 
 @layer utilities {
-  /* Arabic body leading 1.8 / Latin 1.65 (§6.2) */
-  .prose-body {
-    line-height: 1.65;
-  }
-  [dir="rtl"] .prose-body {
-    line-height: 1.8;
-  }
-
-  /* Grain — the #1 anti-slop texture (§7.2): inline feTurbulence, fixed,
-     never animated, sits above the canvas bg and below all content */
-  .grain-layer {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.05;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 180px 180px;
-  }
-  .dark .grain-layer {
-    opacity: 0.07;
-  }
-
-  /* Dot grid — crisp 1px, fades via mask BEFORE the edges (§7.2) */
-  .dot-grid {
-    background-image: radial-gradient(
-      oklch(0.5 0.01 60 / 0.12) 1px,
-      transparent 1px
-    );
-    background-size: 22px 22px;
-    mask-image: radial-gradient(
-      ellipse 85% 75% at 50% 28%,
-      black 25%,
-      transparent 72%
-    );
-  }
-  .dark .dot-grid {
-    background-image: radial-gradient(
-      oklch(0.9 0.01 70 / 0.1) 1px,
-      transparent 1px
-    );
-  }
-
-  /* Thin custom scrollbar for long lists */
+  /* — custom thin scrollbar for long lists (menu sections, date strip) — */
   .scroll-thin {
     scrollbar-width: thin;
-    scrollbar-color: var(--border) transparent;
+    scrollbar-color: var(--color-line) transparent;
   }
   .scroll-thin::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   .scroll-thin::-webkit-scrollbar-thumb {
-    background: var(--border);
+    background: var(--color-line);
     border-radius: 3px;
   }
   .scroll-thin::-webkit-scrollbar-track {
     background: transparent;
   }
 
-  /* Reveal system — transform/opacity ONLY (§7.1), 350ms ease-out-soft,
-     gated on html[data-js] so a JS-disabled render stays fully visible
-     (gate #10), and fully disabled under prefers-reduced-motion */
-  html[data-js] [data-reveal] {
-    opacity: 0;
-    transform: translateY(14px);
-    transition:
-      opacity 350ms var(--ease-out-soft),
-      transform 350ms var(--ease-out-soft);
-    transition-delay: var(--reveal-delay, 0ms);
-  }
-  html[data-js] [data-reveal="in"] {
-    opacity: 1;
-    transform: none;
-  }
+  /* — reduced-motion: designed fallbacks (≤0.3s fades, ≤8px lifts) — */
   @media (prefers-reduced-motion: reduce) {
-    html[data-js] [data-reveal] {
-      opacity: 1;
-      transform: none;
-      transition: none;
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
     }
   }
 }

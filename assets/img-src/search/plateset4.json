@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "query": "single plate cutlery and candle on dark restaurant table moody low key photography",
+  "count": 8,
+  "ranked": true,
+  "captioned_count": 8,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cafc04b8fa9b.jpg",
+      "caption": "Elegant Halloween dinner table with black tableware, gold cutlery, lit candles, pumpkins, place cards reading \"James\" and \"Emma.\"",
+      "source": "Smarty Had A Party!",
+      "original_width": "1536px",
+      "original_height": "1024px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9ff0462807d6.jpg",
+      "caption": "An elegant gothic Halloween table setting with skull candle, lit taper candles, dried flowers, black placemats, cream napkins, and crystal glasses.",
+      "source": "Kim Seybert",
+      "original_width": "1531px",
+      "original_height": "1531px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4c090de8ae33.jpg",
+      "caption": "Moody Halloween still life: velvet pumpkins, black candelabra with smoking candles, dark bowls, gold stars on black background.",
+      "source": "Rockett St George",
+      "original_width": "1080px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cd8147bd2273.jpg",
+      "caption": "An elegant table setting with crystal glasses, gold chargers, white plates, candles, red flowers; text \"MANTEL and TABLE\"; has watermark, not suitable for background.",
+      "source": "Mantel and Table",
+      "original_width": "1200px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7259e5932982.jpg",
+      "caption": "A dark round wooden dining table in a sunlit elegant room with beige walls, vase, rug, and large window; no text or watermarks. Suitable for background image.",
+      "source": "Wayfair",
+      "original_width": "1254px",
+      "original_height": "1254px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e921ab14b90f.jpg",
+      "caption": "Text: \"HOW TO PHOTOGRAPH AND STYLE MOODY FOOD PHOTOGRAPHY.\" Moody flat lay of apples, autumn leaves, berries on rustic wooden table.",
+      "source": "Marissa Makes",
+      "original_width": "6912px",
+      "original_height": "3456px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3e82e7274f22.jpg",
+      "caption": "Romantic table setting with red rose in glass vase, red candle, wine glass, white plate; contains Dreamstime watermarks and text.",
+      "source": "Dreamstime.com",
+      "original_width": "1067px",
+      "original_height": "1690px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/474153a514c5.jpg",
+      "caption": "Cozy styled living room: black vase with dried hydrangeas, lit candle, books on glass coffee table, white built-in shelves, no watermarks.",
+      "source": "The Creek Line House -",
+      "original_width": "1200px",
+      "original_height": "1500px"
+    }
+  ]
+}

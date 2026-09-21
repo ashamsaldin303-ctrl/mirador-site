@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "query": "Damascus Syria panorama at night from Mount Qasioun, glowing city lights across the city",
+  "count": 8,
+  "ranked": true,
+  "captioned_count": 8,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/010cd840dca0.jpg",
+      "caption": "A panoramic nighttime cityscape with scattered glowing lights, containing Dreamstime watermarks and a \"dreamstime.com ID 247865802 © Jasmina\" banner.",
+      "source": "Dreamstime",
+      "original_width": "1600px",
+      "original_height": "635px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8eb4a3a83066.jpg",
+      "caption": "A large beige building illuminated at night, \"No Entry\" signs, decorative street lamps, dramatic cloudy dark sky.",
+      "source": "Visit Damascus Syria",
+      "original_width": "1440px",
+      "original_height": "966px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c13fc03608b4.jpg",
+      "caption": "Aerial night view of a large illuminated roundabout with fountain and traffic, Damascus city skyline. Contains Alamy watermarks and stock photo ID text.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "956px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/98fe56421004.jpg",
+      "caption": "Aerial panoramic cityscape at dusk with sprawling lit buildings under purple sky; contains Dreamstime watermarks.",
+      "source": "Dreamstime",
+      "original_width": "1600px",
+      "original_height": "1030px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/377ff4577b10.jpg",
+      "caption": "A blurry nighttime cityscape with an illuminated cathedral and scattered bokeh city lights.",
+      "source": "Tripadvisor",
+      "original_width": "1200px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3c9a3cd27332.jpg",
+      "caption": "Aerial view of a Middle Eastern city (likely Damascus) with solar panels on rooftops, mosque domes, and mountains. Contains Alamy watermarks and text (alamy, Image ID: 3CMNGFN, www.alamy.com).",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "1065px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/be31a85e5510.jpg",
+      "caption": "Damaged Syrian cityscape at dusk with Arabic and English text \"BOUNDED RATIONALITY — THE PSYCHOLOGY OF THE SYRIAN CRISIS\"; contains text overlay, not suitable for background.",
+      "source": "Syria Comment",
+      "original_width": "1280px",
+      "original_height": "720px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/97863c9247cc.jpg",
+      "caption": "Vintage blue-toned panorama of the Umayyad Mosque in Damascus with dome and minaret, aged photograph. Contains Alamy watermarks (repeated \"alamy\" marks, Image ID: 3EPPM21, www.alamy.com), so not suitable for background image.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "605px"
+    }
+  ]
+}

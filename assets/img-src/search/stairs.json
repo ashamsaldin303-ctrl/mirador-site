@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "dark stairwell with warm light minimal architecture",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3bc8cce2ab47.jpg",
+      "caption": "A blurred woman in black descends illuminated wooden stairs beside a window with dark venetian blinds. Suitable for background image.",
+      "source": "Contemporist",
+      "original_width": "1707px",
+      "original_height": "2560px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9735ad25e2a7.jpg",
+      "caption": "Concrete staircase with black metal handrail, warm glowing oval wall lights, golden sunlight on steps, minimalist architectural scene. Suitable for background image.",
+      "source": "Simple Lighting",
+      "original_width": "1200px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c3f9b9f7c127.jpg",
+      "caption": "Modern minimalist interior featuring illuminated dark staircase with glass railings, cozy sofa, warm lamp lighting, and clean hallway.",
+      "source": "HomeLane",
+      "original_width": "1280px",
+      "original_height": "800px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/85706e07d8a9.jpg",
+      "caption": "Modern staircase with black marble steps, LED edge lighting, and black metal railings in a minimalist white interior; no text, suitable for background image.",
+      "source": "TJ2 Lighting",
+      "original_width": "1108px",
+      "original_height": "1477px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a92b990c1ff4.png",
+      "caption": "Surreal collage of multiple staircases with wooden, concrete, and decorative tiled steps, arched interior, plants, vintage grainy texture.",
+      "source": "Architectural Digest",
+      "original_width": "3840px",
+      "original_height": "2160px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c8516001720a.jpg",
+      "caption": "Overhead view of elegant spiral staircase with brass pendant lights, patterned carpet, wooden banisters, and checkered floor, high clarity, suitable for background image.",
+      "source": "Real Homes",
+      "original_width": "2000px",
+      "original_height": "2400px"
+    }
+  ]
+}

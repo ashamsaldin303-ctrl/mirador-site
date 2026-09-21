@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "sliced ribeye steak on plate dark moody restaurant photography",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ab23d1cf7beb.jpg",
+      "caption": "Sliced grilled steak with salt, broccolini, orange puree, and brown sauce on a white plate; contains Alamy watermarks.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "956px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2cc2b2f35b87.jpg",
+      "caption": "Sliced medium-rare beef steak garnished with spices on wooden board; Alamy watermarks and text present.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "821px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f58b41e575a7.jpg",
+      "caption": "Gourmet steak with roasted vegetables and sauce on white plate, rustic wood background; contains Shutterstock watermark, not suitable.",
+      "source": "Shutterstock",
+      "original_width": "1500px",
+      "original_height": "946px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/59fbbb1fb361.jpg",
+      "caption": "Gourmet steak sandwich with crispy potato squares, truffle shavings, fresh greens, and cocktails on elegant table.",
+      "source": "The Boca Raton Observer",
+      "original_width": "1200px",
+      "original_height": "1800px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/408a28e61853.jpg",
+      "caption": "A juicy medium-rare sliced steak garnished with rosemary, served with golden french fries on a white plate. Contains Dreamstime watermarks and text: \"dreamstime.com\", \"ID 391105570 © Viktor Budyka\".",
+      "source": "Dreamstime.com",
+      "original_width": "1600px",
+      "original_height": "1130px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7a0b9a5258ae.jpg",
+      "caption": "A collage of four restaurant photos: sliced grilled steak, open-fire grill cooking, steak tartare with caviar, and ham with peppers.",
+      "source": "Notorious Foodie | Substack",
+      "original_width": "1080px",
+      "original_height": "1350px"
+    }
+  ]
+}

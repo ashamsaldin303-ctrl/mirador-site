@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "Damascus Syria at night city lights panoramic",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/35ba5ccfecff.jpg",
+      "caption": "Aerial night cityscape of a brightly lit roundabout intersection with traffic, surrounded by buildings; contains Alamy watermarks.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "956px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f5c9ba9e1c8f.jpg",
+      "caption": "Aerial nighttime cityscape with glowing streets and lights; contains Alamy watermarks and text, not suitable for background use.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "956px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/eb4a0b0c750c.jpg",
+      "caption": "Panoramic night cityscape with glowing city lights; contains \"depositphotos\" watermarks, logo, and Image ID 57062680.",
+      "source": "DepositPhotos",
+      "original_width": "1600px",
+      "original_height": "765px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e0c57bed1f08.jpg",
+      "caption": "A bright missile trail arcs across a starry night sky above an illuminated city with a green-domed mosque; high clarity, strong visual impact, suitable for background image",
+      "source": "The Times of Israel",
+      "original_width": "2048px",
+      "original_height": "1365px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/46b93e398a0a.jpg",
+      "caption": "A sprawling nighttime cityscape with glowing golden lights, illuminated buildings, a mosque with minarets, and dark mountains behind.",
+      "source": "Visit Damascus Syria",
+      "original_width": "1280px",
+      "original_height": "720px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/08a7e4137c5f.jpeg",
+      "caption": "Illuminated turquoise courtyard pool at dusk, surrounded by traditional striped-stone architecture with glowing lanterns. No text or watermarks; high visual impact.",
+      "source": "NomadMania",
+      "original_width": "1080px",
+      "original_height": "810px"
+    }
+  ]
+}

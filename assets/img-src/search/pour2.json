@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "sommelier pouring red wine into a glass in a dim restaurant",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/70d6346283a4.jpg",
+      "caption": "A person pours red wine into a glass beside a white wine glass, elegant dining scene, high clarity, suitable for background image",
+      "source": "Wine-n-Gear",
+      "original_width": "1600px",
+      "original_height": "935px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3b87418bcd6b.jpg",
+      "caption": "A glass of red wine and food plates on a table at an evening party, blurred people and string lights in the background. Contains visible watermarks (shutterstock, SOMKID THONGDEE) and text, so not suitable as a background image.",
+      "source": "Shutterstock",
+      "original_width": "1500px",
+      "original_height": "943px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d97df8ebea5e.jpg",
+      "caption": "Red wine being poured from a bottle into a wine glass against a dark background. Contains Alamy watermarks; not suitable for background image.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "821px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8f83742b8daa.jpeg",
+      "caption": "A hand pours red wine into a glass at a dining table with shrimp dishes; blurred woman in background. High-quality, visually striking, no watermark — suitable for background image.",
+      "source": "Lifestyle Asia",
+      "original_width": "2121px",
+      "original_height": "1414px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3b77af508fe7.webp",
+      "caption": "People dining on sushi with chopsticks and champagne glasses at a restaurant table, warm bokeh background, high clarity, no text, suitable for background image.",
+      "source": "vine & bubble",
+      "original_width": "1713px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/55d7b91d84d9.jpg",
+      "caption": "Gourmet roasted meat pieces with herbs and oil sauce on a white plate, wine glasses blurred in background; no text.",
+      "source": "Tripadvisor",
+      "original_width": "1100px",
+      "original_height": "1100px"
+    }
+  ]
+}

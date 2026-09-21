@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "dark chocolate tart with sea salt dark food photography",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 5,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/debdc0c4bed0.jpg",
+      "caption": "A chocolate tart sprinkled with sea salt on a rustic wooden board, with hydrangeas in a vase, forks, and moody lighting. Suitable for background image.",
+      "source": "Stuck in the kitchen",
+      "original_width": "1600px",
+      "original_height": "1068px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b914f19cd94d.jpg",
+      "caption": "",
+      "source": "Occasionally Eggs",
+      "original_width": "800px",
+      "original_height": "1204px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/73a2c90ec28d.jpg",
+      "caption": "Melted chocolate being poured from a pot into a golden tart crust on a wire cooling rack.",
+      "source": "Homestead and Chill",
+      "original_width": "1200px",
+      "original_height": "1600px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f12eb98ef409.jpg",
+      "caption": "A glossy chocolate tart with caramel drizzle and chopped nuts on orange background, one slice removed. High clarity, strong visual impact: suitable for background image",
+      "source": "Tasty Thrifty Timely",
+      "original_width": "1440px",
+      "original_height": "2157px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2e4f4018133c.jpg",
+      "caption": "Rich chocolate tart with raspberry and pistachio topping on a marble cake stand, one slice removed; no text or watermarks. Suitable for background image",
+      "source": "Cravings Journal",
+      "original_width": "1600px",
+      "original_height": "2400px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/10e6a1326f5c.jpg",
+      "caption": "A hand holds a slice of chocolate tart with nut crust and sea salt flakes; no text or watermarks, high clarity.\n\nsuitable for background image",
+      "source": "Clean Food Crush",
+      "original_width": "819px",
+      "original_height": "1024px"
+    }
+  ]
+}

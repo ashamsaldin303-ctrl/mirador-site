@@ -1,0 +1,135 @@
+{
+ "hero": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/fb666693677e.jpg",
+  "caption": "Illuminated Dubai Canal skyline at dusk, glowing skyscrapers reflecting on water, vibrant cityscape, no watermarks or text.",
+  "source": "Expedia",
+  "original_width": "3840px",
+  "original_height": "2160px"
+ },
+ "act1": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ae04764e3a4d.jpg",
+  "caption": "A stunning nighttime aerial view of Hong Kong's illuminated skyline and Victoria Harbour, but the image contains repeated \"Unsplash+\" watermarks throughout, so it is not suitable for background image.",
+  "source": "Unsplash",
+  "original_width": "3000px",
+  "original_height": "4501px"
+ },
+ "act2": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9de6aedd6f97.jpg",
+  "caption": "A chef works beside a large open wood fire in a rustic restaurant kitchen with hanging meats and copper pots.",
+  "source": "Epicurus's List",
+  "original_width": "4000px",
+  "original_height": "3000px"
+ },
+ "act3": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1ff75c9fc4e2.png",
+  "caption": "An elegant dimly lit upscale restaurant interior with candlelit tables, curved mirrors, red carpet, and city views. No text or watermarks. Suitable for background image.",
+  "source": "Eater NY",
+  "original_width": "2132px",
+  "original_height": "1424px"
+ },
+ "story": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a291ee25e65a.jpg",
+  "caption": "A woman reads a book in a cozy caf\u00e9 on a rainy evening, with live musicians, warm lamp, coffee cup. No watermark, high visual impact \u2014 suitable for background image",
+  "source": "Leonardo AI",
+  "original_width": "1376px",
+  "original_height": "768px"
+ },
+ "404": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3bc8cce2ab47.jpg",
+  "caption": "A blurred woman in black descends illuminated wooden stairs beside a window with dark venetian blinds. Suitable for background image.",
+  "source": "Contemporist",
+  "original_width": "1707px",
+  "original_height": "2560px"
+ },
+ "og-en": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/12a3367cb854.jpg",
+  "caption": "Aerial nighttime view of illuminated Chicago skyline with glowing skyscrapers and Lake Michigan at dusk. Suitable for background image.",
+  "source": "www.signatureroom.com",
+  "original_width": "3504px",
+  "original_height": "2336px"
+ },
+ "og-ar": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ec295385746a.jpg",
+  "caption": "Elegant dimly lit restaurant interior with warm pendant lamps, set tables, leather chairs, and greenery. Suitable for background image.",
+  "source": "Future Light",
+  "original_width": "1600px",
+  "original_height": "700px"
+ },
+ "sky1": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0cf764c7dac3.jpg",
+  "caption": "New York City night skyline with 9/11 Tribute in Light beams illuminating cloudy sky above Manhattan. Suitable for background image.",
+  "source": "TIME",
+  "original_width": "3840px",
+  "original_height": "2560px"
+ },
+ "sky2": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/85b4973a2ac6.jpg",
+  "caption": "Long-exposure highway at night showing white and red car light trails, dark city buildings and trees. Suitable for background image",
+  "source": "Unsplash",
+  "original_width": "3000px",
+  "original_height": "2000px"
+ },
+ "fire3": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/14145a47cbc4.jpg",
+  "caption": "",
+  "source": "The Denver Post",
+  "original_width": "5000px",
+  "original_height": "2815px"
+ },
+ "fire4": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/969e4a7dfd3a.jpg",
+  "caption": "A close-up of glowing red-orange embers and charred wood fragments burning against a dark black background.",
+  "source": "Jooinn",
+  "original_width": "5184px",
+  "original_height": "3456px"
+ },
+ "plates5": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cafc04b8fa9b.jpg",
+  "caption": "Elegant Halloween dinner table with black tableware, gold cutlery, lit candles, pumpkins, place cards reading \"James\" and \"Emma.\"",
+  "source": "Smarty Had A Party!",
+  "original_width": "1536px",
+  "original_height": "1024px"
+ },
+ "plates6": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/192369edd69a.jpg",
+  "caption": "Gemini\u5206\u6790\u5f02\u5e38",
+  "source": "The Infatuation",
+  "original_width": "5883px",
+  "original_height": "3922px"
+ },
+ "room7": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5096c89af7f1.jpg",
+  "caption": "Warm sunlight streams through a window, illuminating a fuzzy textured object with lens flare. Suitable for background image.",
+  "source": "Unsplash",
+  "original_width": "3000px",
+  "original_height": "4500px"
+ },
+ "room8": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9735ad25e2a7.jpg",
+  "caption": "Concrete staircase with black metal handrail, warm glowing oval wall lights, golden sunlight on steps, minimalist architectural scene. Suitable for background image.",
+  "source": "Simple Lighting",
+  "original_width": "1200px",
+  "original_height": "1200px"
+ },
+ "sourdough": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3dd8d3f749da.jpg",
+  "caption": "Gemini\u5206\u6790\u5f02\u5e38",
+  "source": "Kristen Shaw Photography",
+  "original_width": "1000px",
+  "original_height": "1500px"
+ },
+ "ribeye": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c3791798116c.jpg",
+  "caption": "A steak dinner with mashed potatoes and red wine on a plate reading \"STOCKYARDS,\" set in a bar.",
+  "source": "Yelp",
+  "original_width": "1000px",
+  "original_height": "1000px"
+ },
+ "tart": {
+  "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/debdc0c4bed0.jpg",
+  "caption": "A chocolate tart sprinkled with sea salt on a rustic wooden board, with hydrangeas in a vase, forks, and moody lighting. Suitable for background image.",
+  "source": "Stuck in the kitchen",
+  "original_width": "1600px",
+  "original_height": "1068px"
+ }
+}

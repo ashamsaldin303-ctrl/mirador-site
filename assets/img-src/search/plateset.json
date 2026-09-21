@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "elegant fine dining place setting on dark table mise en place",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a24daa0bc609.jpg",
+      "caption": "A cozy restaurant table set with two empty wine glasses, forks, knives, folded napkins, and stacked firewood in the background.",
+      "source": "Dreamstime.com",
+      "original_width": "1600px",
+      "original_height": "1157px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5abf251e5bb7.jpg",
+      "caption": "Elegant table setting with white napkins, plates, cutlery, and inverted wine glasses; contains Alamy watermarks.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "956px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/249e470624ec.jpg",
+      "caption": "Elegant fine-dining restaurant interior with white tablecloths, wine glasses, plates, green floral centerpieces, and large windows. No text or watermarks. Suitable for background image.",
+      "source": "EHL Insights",
+      "original_width": "1920px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0798442d7831.jpg",
+      "caption": "The image contains a large amount of text information, so you do not need me to output the text completely. It shows an elegant wedding table setting: a marble charger plate with gold flatware, white napkin, and an ornate gold-bordered menu card listing KLC monogram, Salad, Entree options, and Dessert (wedding cake), finished with a gold tassel.",
+      "source": "Designed with Amore",
+      "original_width": "1920px",
+      "original_height": "1396px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/35abf4adaef7.jpg",
+      "caption": "An illustrated infographic comparing informal and formal table settings with labeled plates, cutlery, glasses, and floral decorations.",
+      "source": "Pinterest",
+      "original_width": "1140px",
+      "original_height": "1740px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6f0d5a24adda.jpg",
+      "caption": "Elegant winter table setting with lit cream candles, black candlesticks, white plates, pinecones, and glassware.",
+      "source": "Robert Welch® Designs",
+      "original_width": "1000px",
+      "original_height": "800px"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "hot glowing embers of a campfire close up in darkness",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0411d9a610db.jpg",
+      "caption": "Close-up of glowing orange campfire flames and embers burning logs against a black background. Contains \"shutterstock\" and \"BB-Pix\" watermarks.",
+      "source": "Shutterstock",
+      "original_width": "1500px",
+      "original_height": "1192px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bd19ca9609f1.jpg",
+      "caption": "Glowing orange burning embers and twigs fill the frame; contains Shutterstock watermarks, logos, and text \"JL_OFF\".",
+      "source": "Shutterstock",
+      "original_width": "1000px",
+      "original_height": "1600px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9aaf5c4fcfba.jpg",
+      "caption": "Vivid orange flames burn glowing logs in a dark fireplace; stock image with Dreamstime watermarks, ID 413368123.",
+      "source": "Dreamstime.com",
+      "original_width": "1600px",
+      "original_height": "1157px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/905be25e0e01.jpg",
+      "caption": "A close-up macro shot of glowing red-hot charcoal embers with cracked ash-covered wood burning intensely.",
+      "source": "Pinterest",
+      "original_width": "720px",
+      "original_height": "1280px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a45616d52777.jpg",
+      "caption": "Vivid burning fire flames and glowing red embers on dark background; contains 123RF watermarks.",
+      "source": "123RF",
+      "original_width": "863px",
+      "original_height": "1300px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a0919b5a792f.jpg",
+      "caption": "A burning log glows with bright orange flames and red embers against darkness. Contains Dreamstime watermarks and ID text, so not suitable for background image.",
+      "source": "Dreamstime.com",
+      "original_width": "1600px",
+      "original_height": "1156px"
+    }
+  ]
+}

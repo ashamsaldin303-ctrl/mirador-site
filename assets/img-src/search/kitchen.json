@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "chef cooking over open flame in dark restaurant kitchen",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 5,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9de6aedd6f97.jpg",
+      "caption": "A chef works beside a large open wood fire in a rustic restaurant kitchen with hanging meats and copper pots.",
+      "source": "Epicurus's List",
+      "original_width": "4000px",
+      "original_height": "3000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3f076fe2716a.jpg",
+      "caption": "A chef flambés food in a wok over a gas stove with dramatic large flames. Contains Alamy watermarks (Image ID: 2GXP795), not suitable for background image.",
+      "source": "Alamy",
+      "original_width": "867px",
+      "original_height": "1390px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/14145a47cbc4.jpg",
+      "caption": "",
+      "source": "The Denver Post",
+      "original_width": "5000px",
+      "original_height": "2815px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4e342101d32b.jpg",
+      "caption": "A chef stir-fries vegetables in a wok with dramatic flames in a dark commercial kitchen, captured with motion blur. Suitable for background image.",
+      "source": "The Atlanta Voice",
+      "original_width": "2048px",
+      "original_height": "1366px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d4c1f982d9c7.jpg",
+      "caption": "A chef in a dark apron pours flaming liquor into a copper pan, with glass dessert cups in the foreground; a red watermark logo appears in the upper left corner.",
+      "source": "the ulterior epicure",
+      "original_width": "779px",
+      "original_height": "1169px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/935b6c73e1f5.jpg",
+      "caption": "A man in a hat stands beside a burning driftwood bonfire on a rocky lakeshore, with mountains and cloudy sky behind.",
+      "source": "CN Traveller",
+      "original_width": "1920px",
+      "original_height": "1080px"
+    }
+  ]
+}

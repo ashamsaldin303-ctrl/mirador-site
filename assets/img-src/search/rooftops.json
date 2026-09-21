@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "rooftops of a city at night with warmly lit windows",
+  "count": 6,
+  "ranked": true,
+  "captioned_count": 6,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cfb326a137fc.jpg",
+      "caption": "A nighttime city skyline with illuminated skyscrapers, waterfront pier, lush green trees, and orange sunset glow; high clarity, no watermark, suitable for background image.",
+      "source": "Yelp",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/26b5da2593a2.jpg",
+      "caption": "A nighttime panoramic cityscape with glowing lights, distant bridge, fog, dark trees and hillside in foreground.",
+      "source": "Yelp",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ef29b59130ac.jpg",
+      "caption": "A vibrant open-air rooftop restaurant with tropical plants, green canopy shades, orange chairs, and diners enjoying meals; high clarity, visually striking — suitable for background image.",
+      "source": "LA Times",
+      "original_width": "1486px",
+      "original_height": "991px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/dde8d4b3d413.jpg",
+      "caption": "Times Square at sunset: crowded crosswalk, glowing billboards (vitaminwater zero, Wonder Woman, T.J. Miller), high visual impact.",
+      "source": "Digital Photography School",
+      "original_width": "1500px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8211dac2cd07.jpg",
+      "caption": "Rooftop swimming pool on modern blue building with white lounge chairs, city skyline and ocean in background. High clarity, strong visual impact, no watermark, suitable for background image.",
+      "source": "Accor - Accor Group",
+      "original_width": "1024px",
+      "original_height": "768px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/95fa9ef40461.jpg",
+      "caption": "A brick apartment building facade with many air conditioning units, windows, vents, and cables under blue sky. Text: \"FAGOR\", \"Inverter\", \"Alarma\". No watermark; suitable for background image.",
+      "source": "CNN",
+      "original_width": "1383px",
+      "original_height": "778px"
+    }
+  ]
+}

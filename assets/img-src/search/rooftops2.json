@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "query": "dense old city rooftops at night with scattered warm lights seen from above",
+  "count": 8,
+  "ranked": true,
+  "captioned_count": 8,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d1d62ab85a12.jpeg",
+      "caption": "A nighttime aerial view from an airplane window showing glowing pink, yellow, and orange city lights illuminating clouds below.",
+      "source": "Reddit",
+      "original_width": "1080px",
+      "original_height": "1440px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2c9f3466aedb.jpg",
+      "caption": "A bustling neon-lit Seoul street at night with Korean signage, crowded sidewalks, and vibrant shop lights. Contains a large amount of text information.",
+      "source": "Quartz",
+      "original_width": "6016px",
+      "original_height": "4000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4b978bb5066d.jpg",
+      "caption": "Vibrant night street scene with colorful Chinese and Thai neon signs glowing above a bustling Chinatown, high visual impact, suitable for background image",
+      "source": "Quartz",
+      "original_width": "1920px",
+      "original_height": "1290px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/48f2d8ce66c5.jpg",
+      "caption": "Night city skyline with illuminated skyscrapers, yachts docked at marina, dramatic clouds. High clarity, no watermark. Suitable for background image",
+      "source": "Miami Skyline Cruises",
+      "original_width": "1920px",
+      "original_height": "1281px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/02f28556decd.jpg",
+      "caption": "A dim rooftop lounge with blue lighting, two women seated, floor-to-ceiling windows overlooking a glowing city skyline at night.",
+      "source": "Yelp",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d018c0b65ffd.jpg",
+      "caption": "Panoramic view of Florence, Italy, featuring the Duomo's dome and Palazzo Vecchio tower, lush greenery foreground, dramatic clouds. No watermarks or text. Suitable for background image.",
+      "source": "The Travel Psychologist",
+      "original_width": "2217px",
+      "original_height": "2560px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1265604de4a5.png",
+      "caption": "Silhouetted figure stands on a rooftop overlooking a neon-lit futuristic cyberpunk city at sunset with flying aircraft.",
+      "source": "SplitShire",
+      "original_width": "720px",
+      "original_height": "1280px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c2cf97329bb6.jpg",
+      "caption": "A traffic light glows yellow beside a red-brick New York building with a rooftop water tower. Contains watermarks (\"shutterstock\", \"Dogora Sun\").",
+      "source": "Shutterstock",
+      "original_width": "1500px",
+      "original_height": "944px"
+    }
+  ]
+}
