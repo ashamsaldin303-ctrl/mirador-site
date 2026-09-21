@@ -173,7 +173,10 @@ async function booking() {
     log(`# slot selected: aria-label="${slotLabel}"`);
     await page.click("form button[type=submit]");
     await page.waitForURL(/\/en\/confirmation\//, { timeout: 60000 });
-    const heading = page.getByText("The table is yours.");
+    // role-scoped: the prod build's route announcer (#__next-route-announcer__)
+    // also carries the title text after client navigation — plain getByText
+    // resolves to 2 elements there (strict mode violation, run-6).
+    const heading = page.getByRole("heading", { name: "The table is yours." });
     await heading.waitFor({ state: "visible", timeout: 20000 });
     const elapsedMs = Date.now() - t0;
     const url = page.url();
