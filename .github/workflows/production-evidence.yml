@@ -53,7 +53,11 @@ jobs:
         run: bun run db:generate
 
       - name: Install Playwright chromium (+ system deps)
-        run: bunx playwright install --with-deps chromium
+        run: |
+          set -eo pipefail
+          sudo apt-get update -qq && sudo apt-get install -y ripgrep
+          rg --version
+          bunx playwright install --with-deps chromium
 
       - name: "Q1: canonical migrate + seed + counts → evidence/prod-run/specs/seed-count.log"
         run: |

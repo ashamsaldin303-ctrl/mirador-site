@@ -4,6 +4,14 @@ set -uo pipefail
 cd "$(dirname "$0")/.."
 FAIL=0
 
+# Integrity guard: a missing rg must NEVER read as a passing gate (silent
+# zero-hit = false PASS). Install ripgrep, or the run fails loudly here.
+if ! command -v rg >/dev/null 2>&1; then
+  echo "GATE RUNNER ERROR: rg (ripgrep) is not installed — gates CANNOT run."
+  echo "This is not a pass. Install ripgrep (e.g. apt-get install -y ripgrep) and re-run."
+  exit 1
+fi
+
 gate () { # name pattern paths...
   local name="$1"; shift
   local pattern="$1"; shift
