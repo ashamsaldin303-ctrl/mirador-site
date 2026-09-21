@@ -1,0 +1,17 @@
+Route (app)
+┌ ○ /_not-found
+├ ƒ /[locale]
+├ ƒ /[locale]/[...rest]
+├ ƒ /[locale]/confirmation/[id]
+├ ƒ /[locale]/contact
+├ ƒ /[locale]/gallery
+├ ƒ /[locale]/menu
+├ ƒ /[locale]/private-dining
+├ ƒ /[locale]/reserve
+├ ƒ /[locale]/story
+├ ƒ /api/availability
+├ ƒ /api/inquiries
+└ ƒ /api/reservations
+
+(Turbopack's Route (app) table carries no size columns — sizes below are computed
+from the client build manifest + gzip -9 of the emitted chunks; wire sizes corroborate.)
