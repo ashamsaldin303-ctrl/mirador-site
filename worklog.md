@@ -1,0 +1,28 @@
+---
+Task ID: 1
+Agent: Z.ai Code (main orchestrator — direct execution; no subagent delegation: the build is one tightly-coupled vertical slice — a single token file + single content contract + single page — where parallel delegation would create inconsistency)
+Task: Read, understand, and SOLVE the uploaded operating manual `upload/full-stack-agent-playground.md` by applying it: build its living demonstration as a bilingual AR/EN + RTL/LTR single-page site that itself complies with every rule it presents.
+
+Work Log:
+- Read the full 558-line manual; produced the §2.3 ACK (goal, pinned stack, scope in/out, token source of truth, verification commands).
+- Decision on "حل الملف" (solve the file): the manual is an operating system for build agents, not a puzzle — the faithful solution is a working artifact that embodies it. Content source = the manual itself (law 3: agents imitate their input — real copy in, real product out; no lorem, no fabricated proof).
+- T0 contracts: rewrote `src/app/globals.css` as the ONE authoritative token file — warm copper brand (oklch 0.46 0.14 45 light / 0.76 0.11 55 dark) on stone-tinted neutrals, full light/dark token pairs, semantic success/warning/terminal triples, text scale tokens, grain (inline feTurbulence, fixed, never animated), dot-grid with pre-edge mask fade, reveal system (transform/opacity only, 350ms, gated on html[data-js] for the JS-disabled gate, dead under prefers-reduced-motion), `.prose-body` Arabic leading 1.8, `.scroll-thin` custom scrollbar.
+- Fonts via next/font only: Space Grotesk (latin, variable) + IBM Plex Sans Arabic (arabic subset, 400/700 — real bold) + IBM Plex Mono (400). Stack resolves Arabic glyphs per-character through the chain.
+- T1: `src/lib/manual-content.ts` — the bilingual content contract (every string from the manual: 7 laws, 6 workflow phases, 4×5 stack laws, 12 gates with real commands, 6 anti-slop pairs, 15 NEVER rules, hero/footer copy).
+- T2: `language-provider.tsx` (SSR `ar/rtl` default matches initial client state — zero hydration mismatch; flips documentElement lang/dir on toggle), `theme-provider.tsx` (next-themes class swap), `reveal.tsx` (IntersectionObserver, once, stagger ≤300ms), `section-heading.tsx` (§-numbered anatomy).
+- T3: `site-header.tsx` (scroll-spy active state + aria-current, 6 links, 44px touch targets, CSS-class theme icon swap — no setState-in-effect, Radix mobile dropdown with dir support), `site-footer.tsx` (mt-auto sticky).
+- T4 vertical slices: hero (no entrance animation on LCP, dot-grid, golden-rule callout with border-s logical accent), laws (editorial numbered list — not card grid), workflow (timeline with logical connectors), stack (Tabs), gates (interactive 12-checkbox verification matrix: counter, aria-live, logical scaleX progress bar — stock Progress rejected for physical translateX RTL breakage, copy-all with copied feedback, reset, ALL GREEN termination contract), anti-slop (NEVER→ALWAYS semantic pairs, RTL-mirrored flow arrows), never (terminal panel, max-h scroll-thin).
+- T5: `page.tsx` (min-h-dvh flex column, skip link, grain layer above canvas below content) + `ASSUMPTIONS.md` (5 logged: metadataBase, no persistence, client-state locale, Western digits, no og:image).
+- Applied the manual to the repo itself: removed `typescript.ignoreBuildErrors` (gate silencer §10.4/§13-6) and re-enabled `reactStrictMode` (§4.2) in `next.config.ts`.
+- Fixed during gates: React-key type error (pair.never.en), banned Arabic letter-spacing on three kickers (gated to ltr:), ESLint set-state-in-effect (replaced mounted pattern with dark: class icon swap), aria-live removed from button.
+
+Verification loop (evidence in /evidence/, screenshots `route--state--width.png`):
+- Cheap gates: `eslint .` zero problems; `tsc --noEmit` zero errors in src/ (pre-existing scaffold errors in examples/ & skills/ are out of scope — logged); dev.log: GET / 200, clean tail.
+- Browser battery (Agent Browser + VLM visual QA): dir/lang flip AR⇄EN verified end-to-end; 4-mode matrix (RTL/LTR × light/dark) screenshotted at 1440; 375 + 768 + full-page captures; no horizontal scroll at 375 (scrollWidth == clientWidth); gate battery interaction: 12/12 → "All gates green — STOP. No gold-plating." + scaleX(1), copy → "Copied", reset → 0/12; tabs switch panels; mobile dropdown opens (6 items) and navigates (#gates top=98 under sticky header); scroll-spy aria-current="true" on active link; keyboard order: skip link (visible on focus) → wordmark → nav; footer flush at document bottom; JS-disabled proxy: removing data-js → 0/28 hidden; console + page errors: zero.
+- VLM QA found ONE real violation (§6.5 hero law: second CTA clipped at 1440×900) → fixed (CTAs moved directly after subhead + padding tightened) → re-measured: ctaBottom 713 < 900 desktop, 641 < 667 mobile (26px margin). A VLM false positive (claimed RTL numbers misaligned) was disproven geometrically (numRight 1227 > txtRight 1198 — number rightmost ✓).
+- Contrast computed at token-definition time (documented in globals.css header): light fg 14.7:1 · muted 7.4:1 · primary 6.8:1 · ring 4.6:1; dark fg 15.2:1 · muted 6.2:1 · primary 9:1 · ring 6.7:1.
+
+Stage Summary:
+- Delivered: single-route bilingual demonstration of the manual, itself compliant with it (re-skinned OKLCH tokens, no default shadcn, no purple/indigo, grain texture, logical properties only, Arabic typography laws, states, a11y floor, reduced-motion, evidence-based delivery).
+- Known gaps: no og:image (A5), pre-existing tsc errors in scaffold examples/skills folders, single-route constraint prevents locale URLs (A3).
+- Termination contract honored: all gates green → stopped (no gold-plating).
