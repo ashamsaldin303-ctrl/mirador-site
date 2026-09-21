@@ -279,4 +279,6 @@ const summary: string[] = [
 ];
 writeFileSync(`${F12_2}/summary.md`, summary.join("\n") + "\n");
 console.log(`build-budgets done → ${F12_2}/ + ${F6_3}/ (first-load fails=${budgetFail}, threeGz=${threeGz}B, motionGz=${motionGz}B)`);
-if (budgetFail > 0 || threeGz > THREE_PACK_BUDGET || motionGz > MOTION_BUDGET) process.exit(1);
+// NOTE: gate FAILs are DATA — they ship verbatim in the files above and are
+// enforced by evidence/tools/verify-battery.sh (the battery's single exit
+// gate); this tool exits 0 so the remaining battery still collects evidence.

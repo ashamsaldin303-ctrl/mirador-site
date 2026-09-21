@@ -116,4 +116,4 @@ for (const f of [...files, ...traces]) {
   copyFileSync(src, join(dir, f));
 }
 console.log(`lighthouse-summary done → ${EVIDENCE_OUT}lighthouse/ (${files.length} LHRs, ${traces.length} traces, gateFail=${gateFail})`);
-if (gateFail > 0) process.exit(1);
+// gate FAILs ship verbatim in medians.md/lcp-element.txt; verify-battery.sh is the exit gate.

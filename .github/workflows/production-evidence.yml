@@ -183,6 +183,10 @@ jobs:
         run: bun evidence/tools/dom-ac-probes.ts
 
       - name: "Q4i: Lighthouse CI (E27) — mobile · 3 runs · medians"
+        # continue-on-error: LHCI's assert exits 1 on threshold failure — the raw
+        # verdicts ship in lhci-run.log + medians.md; verify-battery (final gate)
+        # fails the job after ALL evidence is collected and committed.
+        continue-on-error: true
         run: |
           set -eo pipefail
           export CHROME_PATH="$(ls /home/runner/.cache/ms-playwright/chromium-*/chrome-linux*/chrome 2>/dev/null | head -1)"
@@ -233,9 +237,6 @@ jobs:
           cp /tmp/coldstart/dev.log evidence/prod-run/cold-start/dev.log 2>/dev/null || echo "(clone dev.log absent)" >> evidence/prod-run/cold-start/cold-start.log
           grep -q "GATE F12-3: PASS" evidence/prod-run/cold-start/cold-start.log || exit 1
 
-      - name: "Battery verdict verification (exit-blocking)"
-        run: bash evidence/tools/verify-battery.sh
-
       - name: Capture production server log (raw)
         if: always()
         run: |
@@ -255,6 +256,9 @@ jobs:
           git status --short | head -30
           git commit -m "prod-run evidence battery (prompt-3 Q1–Q4) — actions run ${{ github.run_number }} [surface: prod-run]" || echo "nothing to commit"
           git push
+
+      - name: "Battery verdict verification (FINAL exit gate — fails the job when any verdict reads FAIL)"
+        run: bash evidence/tools/verify-battery.sh
 
       - name: Upload evidence artifact (≥90-day backup)
         if: always()

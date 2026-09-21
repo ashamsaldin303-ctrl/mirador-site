@@ -49,4 +49,4 @@ for (const loc of ["en", "ar"] as const) {
 rows.push(fail === 0 ? `GATE E22: PASS — real 404 semantics + designed §7.9 copy on the production server` : `GATE E22: FAIL — ${fail} failed checks (raw above)`);
 writeFileSync(`${dir}/summary.txt`, rows.join("\n") + "\n");
 console.log(`http-404-grep done → ${EVIDENCE_OUT}http/summary.txt (fails=${fail})`);
-if (fail > 0) process.exit(1);
+// gate FAILs ship verbatim in summary.txt; verify-battery.sh is the exit gate.
