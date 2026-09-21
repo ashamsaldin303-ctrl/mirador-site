@@ -1,5 +1,17 @@
 # AGENTS.md — MIRADOR project DoD & agent notes
 
+## Dual execution surfaces (prompt-3)
+
+- **prod-run** — production evidence originates ONLY on GitHub Actions
+  (`production-evidence` workflow, `workflow_dispatch`-only, `postgres:16`
+  service). Never relabel dev-surface artifacts as production evidence (N21).
+- **dev-run** — the original sandbox dev daemon (port 3000, behind the human
+  preview) is a historical evidence surface; its round-2 output paths stay
+  untouched. The sandbox now runs the CANONICAL PostgreSQL schema against a
+  user-space PostgreSQL 16.14 (`~/pg-runtime/start-pg.sh` — LOCAL, never
+  committed; N22). The committed `prisma/schema.prisma` provider is always
+  `postgresql` — `scripts/judge-audit.sh` asserts it on every run.
+
 ## Definition of done (per task)
 
 1. `bun run typecheck` — 0 errors in `src/` (pre-existing template errors under
