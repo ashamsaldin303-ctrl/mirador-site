@@ -180,3 +180,41 @@ Stage Summary:
 - Repo live at https://github.com/ashamsaldin303-ctrl/mirador-site (private)
 - Full history + all 318 files pushed as-is; remote tracks origin/main
 - Remote URL contains embedded PAT for future pushes from this sandbox
+
+---
+Task ID: prompt2-P1-P3
+Agent: Z.ai Code (main orchestrator — direct execution; subagent pattern unused per prior-round harness failures)
+Task: Prompt-2 evidence run P1–P3 (build BLOCKED paperwork + HTTP/snapshots + full §10.2 battery on :3000 dev daemon)
+
+Work Log:
+- P0 ACK sent with environment declaration + Q1 (ASSUMABLE: platform forbids `bun run build` → battery vs :3000 dev daemon; E2/E3/E8/E9 prod-form BLOCKED-by-policy, documented in /evidence/BLOCKED.md + family BLOCKED.md files).
+- Tooling: playwright@1.63.0 + @axe-core/playwright@4.13.0 installed (browsers pre-existed: chromium-1243 + system libs present; zero downloads).
+- P2: raw curl round-trips (/en /ar → 200; nonexistent → designed §7.9 copy 6/6 in body + noindex, status 200 = known dev-mode Turbopack quirk, B4); 16 rendered snapshots captured; machine grep summary: hreflang ≥3 + wa.me ≥1 → 16/16 PASS (E13).
+- P3b API specs (5): capacity-sequential PASS (12×201 + 13th=409 SLOT_FULL); capacity-race FAILED first (1×201 + 19×500 — SQLite single-writer kills parallel interactive transactions: "Transaction not found" P2028/P2034) → product fix #1 (bounded ≤3 write-conflict retries) → still 3×201 → product fix #2 (in-process single-writer serializeWrite queue, §6.3 body verbatim, row-lock analogue for single-instance v1) → PASS exactly 12 rows + 8×409 + 0 orphans; failure history preserved verbatim in capacity-race.log; ratelimit PASS (6th=429 + Retry-After; isolation via distinct x-forwarded-for IPs per request — limiter stays ACTIVE, boot-guard honored, no daemon restart); dupguard PASS (409 DUPLICATE, 1 row); honeypot PASS (201, 0 rows).
+- P3b browser specs (4): locale-atomic PASS (lang+dir same MutationObserver batch, soft-nav marker survives); webgl-kill PASS (0 canvas + 3 posters; control run with SwiftShader WebGL2: 1 canvas mounts — kill-switch contrast evidenced; probe-selector bug fixed: optimizer URL-encodes paths); booking PASS 1.5s (<90s; PENDING/EN persisted; WhatsApp href encodes name+party+ref); inquiry PASS (role=status + row persisted).
+- P3c screenshots: 48 (F1-5) + 8 forced-colors + 1 RM (F5-3, all 3 act copies present) = 57 PNGs + manifest.
+- REAL DEFECT FOUND via flat AR screenshots: /reserve document scrollWidth 4096 > 375 in BOTH locales (date fieldset flex item min-width:auto sized to min-w-max strip content; LTR hid it, RTL displaced the painted viewport) → F12-6 product fix: min-w-0 on both reserve fieldsets → scrollWidth 360 ≤ 375 both locales; 3 defective captures re-captured with honest corrected manifest annotation (first re-capture attempt mislabeled it as tool timing bug — diagnosis corrected in manifest).
+- P3d axe: 48 runs (8 routes × 2 locales × 3 viewports) → 0 critical + 0 serious + 0 moderate + 0 minor — E10 PASS.
+- P3e keyboard: menu overlay (trap+Esc+restore) PASS; lightbox (arrows+trap+Esc) PASS; reserve errors AR (bilingual + RTL-correct + aria-invalid) PASS; EN pair PASS. Console: 0 errors × 16 pages (F12-5 PASS). scrollWidth: 0 fails × 16 (F12-6 PASS post-fix). 44px targets: all controls ≥44×44; 5 flagged entries = 4× sr-only skip link (139×37 focused) + 1× WCAG-2.5.8 inline-exempt sentence link (F12-7 PASS, analysis appended, raw preserved).
+- dom-ac-probes: F1-1 F3-2 F3-3 F3-4 F3-5 F3-6 F4-1 F4-2 F5-1 F5-2 F5-4 F6-5 F7-3 F8-1 F8-2 F8-6 F9-3 F11-5 F2-5 all PASS; F7-2 dual-profile: mechanism evidenced (loading=lazy on items 3-8, priority pair eager) + deferral engages under emulated 3G (before=7 → after=8); F11-3 state matrix captured via fault injection (reserve loading/error, gallery image-fail); F11-2 copy verified in source (live render not injectable without product change).
+- E9 diagnostic: in-browser LCP element on /en = hero poster IMG (alt "Above the city, a table worth the climb.") — clearly labeled DIAGNOSTIC-DEV-ONLY; F1-4/D-4: 12/12 @font-face font-display: swap + AR first-load CDP network capture + rendered waterfall PNG.
+
+Stage Summary:
+- All runnable §10.2 battery items GREEN on the :3000 dev daemon with raw committed outputs; two REAL product defects found & fixed under frozen checks (SQLite race safety; reserve fieldset overflow); build-gated items (E2/E3/E8/E9 prod-form) BLOCKED-by-policy with resolution paths.
+
+---
+Task ID: prompt2-P4-P7
+Agent: Z.ai Code (main orchestrator)
+Task: Prompt-2 P4–P7 — evidence pack assembly + deviation paperwork + judge access + 65-row matrix
+
+Work Log:
+- Fresh deterministic suite re-run (product code had changed): G1–G7 all PASS; tsc src/ scope 0 errors (examples/skills pre-existing template noise, disclosed); eslint 0 problems; audits all PASS (fonts budget, tokens, copy: 138 parity rows, F10-3 register 40/40); booking + inquiry re-run post-form-change: PASS (2.5s).
+- Fixed evidence-tooling type/lint defects (route URL predicate type; CDP-based font timing; package.json version read) — tools must not degrade the deterministic suite.
+- Remaining named checks: seed-count.log (6/28/8/12/0 + per-section 4–5 ≤7 → F3-1 PASS); menu--soldout--768.png (F3-4); F6-2 disambiguation (canvas mount 0 pre-scroll → 1 post-scroll; dev chunk-registration caveat logged); JSON-LD structural validation (Restaurant name+address OK, Menu hasMenuSection OK → F11-4); F10-1 poster budgets 31.8/56.6/121.7/184.5KB all PASS; F10-3 naive-grep undercount annotated (audit:copy canonical 40/40).
+- P4: /evidence/MATRIX.md — 65 rows, each citing executed-run output paths (N20 honored); 65 per-AC-ID folders with machine-generated POINTER.md (F12-4); REPLAY.md (per-family exact commands + expected shapes + the honest race-log preservation note); MANIFEST.md (single machine, bun 1.3.14, chromium-1243+SwiftShader, no env flags, UTC+3 window); INDEX.md (families → ACs map + in-run fixes table).
+- P5: evidence/gates/commands.md (D-3 adapted gate commands verbatim); docs/deploy-pre.md (D-2: PostgreSQL switch steps + re-run capacity-race + build/budgets + LHCI + 404-status + cold-start as BLOCKING pre-deploy checklist); ASSUMPTIONS.md rows 6–8 (D-5 Prisma 6→7 reversal; dev-daemon evidence target; XFF-based rate isolation) with cap-exceed-by-contract-order disclosure.
+- P6: Commit A 0ad5587 (product fixes + tooling) then Commit B (evidence pack: /evidence/** incl. forced-added *.log artifacts, docs, ASSUMPTIONS, worklog, db at seed baseline) — pushed to ashamsaldin303-ctrl/mirador-site (private; PAT-embedded remote from prior task).
+- Matrix verdict distribution: 57 PASS · 2 PASS* · 3 BLOCKED · 1 PARTIAL · 2 N/A — all BLOCKED/PARTIAL/N/A rows carry their reason + resolution path; no numeric claim anywhere against build-gated thresholds.
+
+Stage Summary:
+- DONE-with-blockers per prompt-2 §10: E1–E16 satisfied to the maximum this platform legally allows; single root cause (production-build prohibition) produces every BLOCKED row; both in-run product defects found by frozen checks were fixed in product code (checks untouched) with full FAIL→PASS journeys preserved verbatim in the raw logs.

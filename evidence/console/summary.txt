@@ -1,0 +1,70 @@
+# console capture — machine-generated 2026-09-21T11:42:06.886Z
+# gate (F12-5): zero console ERRORS on all 8 paths × 2 locales
+# note: dev-mode info/warning noise (HMR, React DevTools hint, THREE deprecation) is recorded raw and NOT counted as errors
+
+## /en/ — messages: 2 total, ERRORS: 0
+  [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+  [log] [HMR] connected
+
+## /en/menu — messages: 2 total, ERRORS: 0
+  [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+  [log] [HMR] connected
+
+## /en/reserve — messages: 2 total, ERRORS: 0
+  [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+  [log] [HMR] connected
+
+## /en/story — messages: 2 total, ERRORS: 0
+  [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+  [log] [HMR] connected
+
+## /en/gallery — messages: 2 total, ERRORS: 0
+  [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+  [log] [HMR] connected
+
+## /en/private-dining — messages: 2 total, ERRORS: 0
+  [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+  [log] [HMR] connected
+
+## /en/contact — messages: 2 total, ERRORS: 0
+  [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+  [log] [HMR] connected
+
+## /en/confirmation/cmuax6xbe001ypxqpcebj2fv2 — messages: 2 total, ERRORS: 0
+  [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+  [log] [HMR] connected
+
+## /ar/ — messages: 2 total, ERRORS: 0
+  [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+  [log] [HMR] connected
+
+## /ar/menu — messages: 2 total, ERRORS: 0
+  [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+  [log] [HMR] connected
+
+## /ar/reserve — messages: 2 total, ERRORS: 0
+  [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+  [log] [HMR] connected
+
+## /ar/story — messages: 2 total, ERRORS: 0
+  [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+  [log] [HMR] connected
+
+## /ar/gallery — messages: 2 total, ERRORS: 0
+  [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+  [log] [HMR] connected
+
+## /ar/private-dining — messages: 2 total, ERRORS: 0
+  [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+  [log] [HMR] connected
+
+## /ar/contact — messages: 2 total, ERRORS: 0
+  [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+  [log] [HMR] connected
+
+## /ar/confirmation/cmuax6xbe001ypxqpcebj2fv2 — messages: 2 total, ERRORS: 0
+  [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+  [log] [HMR] connected
+
+TOTAL console ERRORS across 16 pages: 0
+GATE F12-5: PASS — zero console errors on 8 paths × 2 locales

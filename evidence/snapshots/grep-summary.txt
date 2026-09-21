@@ -1,0 +1,20 @@
+# grep summary — machine-generated 2026-09-21T11:17:12Z
+# counts per snapshot: rel="alternate" links · wa.me/963955000111 occurrences
+# contract: ≥3 alternates AND ≥1 wa.me per snapshot (E13)
+confirmation--ar.html | alternates=3 | wa.me=5 | PASS
+confirmation--en.html | alternates=3 | wa.me=5 | PASS
+contact--ar.html | alternates=3 | wa.me=4 | PASS
+contact--en.html | alternates=3 | wa.me=4 | PASS
+gallery--ar.html | alternates=3 | wa.me=2 | PASS
+gallery--en.html | alternates=3 | wa.me=2 | PASS
+home--ar.html | alternates=3 | wa.me=2 | PASS
+home--en.html | alternates=3 | wa.me=2 | PASS
+menu--ar.html | alternates=3 | wa.me=2 | PASS
+menu--en.html | alternates=3 | wa.me=2 | PASS
+private-dining--ar.html | alternates=3 | wa.me=3 | PASS
+private-dining--en.html | alternates=3 | wa.me=3 | PASS
+reserve--ar.html | alternates=3 | wa.me=2 | PASS
+reserve--en.html | alternates=3 | wa.me=2 | PASS
+story--ar.html | alternates=3 | wa.me=2 | PASS
+story--en.html | alternates=3 | wa.me=2 | PASS
+SUMMARY: 16 PASS / 0 FAIL of 16 snapshots

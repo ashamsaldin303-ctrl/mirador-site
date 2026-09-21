@@ -1,0 +1,9 @@
+# F12-5
+
+- check: Playwright console capture
+- expected: 0 console errors 8 paths × 2 locales
+- actual: 0 errors across 16 pages (raw captures incl. dev noise)
+- verdict: PASS
+- evidence: /evidence/console/summary.txt + console/*.log
+
+(machine-generated from /evidence/MATRIX.md — 2026-09-21T12:09:43.845Z)

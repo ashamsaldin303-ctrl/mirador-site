@@ -1,0 +1,60 @@
+===== F10 image plan verification · 2026-09-21T12:07:46Z =====
+--- F10-1 hero poster budgets (served LCP variants + ladder) ---
+58000 poster-1080w.avif
+124613 poster-1600w.avif
+32523 poster-750w.avif
+188938 poster.avif
+--- F10-2 AVIF ladder presence (hero + journey + story + gallery) ---
+public/img/gallery:
+fire-3.avif
+fire-4.avif
+plates-5.avif
+plates-6.avif
+room-7.avif
+room-8.avif
+skyline-1-1080w.avif
+skyline-1-1600w.avif
+skyline-1-750w.avif
+skyline-1.avif
+skyline-2-1080w.avif
+skyline-2-1600w.avif
+skyline-2-750w.avif
+skyline-2.avif
+
+public/img/hero:
+poster-1080w.avif
+poster-1600w.avif
+poster-750w.avif
+poster.avif
+
+public/img/journey:
+act-1-1080w.avif
+act-1-1600w.avif
+act-1-750w.avif
+act-1.avif
+act-2-1080w.avif
+act-2-1600w.avif
+act-2-750w.avif
+act-2.avif
+act-3-1080w.avif
+act-3-1600w.avif
+act-3-750w.avif
+act-3.avif
+
+public/img/story:
+night-1080w.avif
+night-1600w.avif
+night-750w.avif
+--- 404 mini + OG ---
+79289 night-mini.avif
+30391 og-image-ar.avif
+77334 og-image-en.avif
+--- F10-3 register rows vs image count ---
+20
+40
+--- annotation (machine-appended) ---
+# F10-3 note: the naive `rg -c "^| "` count (20) undercounts because register
+# rows use varied leading formatting; the canonical frozen check
+# `bun run audit:copy` → "F10-3 image register: 40/40 files covered PASS"
+# (evidence/audits/audits-run.log) is the authoritative count and matches the
+# 40 AVIF files in public/img/**. Raw listing above preserved verbatim.

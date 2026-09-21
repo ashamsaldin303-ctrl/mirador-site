@@ -1,0 +1,12 @@
+{
+  "url": "http://localhost:3000/ar",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "generatedAt": "2026-09-21T11:39:14.839Z",
+  "inapplicable": 51,
+  "incomplete": 2,
+  "passes": 38,
+  "violations": []
+}

@@ -1,0 +1,14 @@
+{
+  "label": "DIAGNOSTIC-DEV-ONLY — NOT E9 GATE EVIDENCE (gate requires prod-build Lighthouse trace JSON)",
+  "url": "http://localhost:3000/ar",
+  "viewport": "375x812 (mobile, per gate context)",
+  "generatedAt": "2026-09-21T12:02:21.013Z",
+  "lcp": {
+    "lcpTimeMs": 816,
+    "element": {
+      "tag": "IMG",
+      "src": "/_next/image?url=%2Fimg%2Fhero%2Fposter.avif&w=3840&q=75",
+      "alt": "فوق المدينة، مائدة تستحقّ الصعود."
+    }
+  }
+}

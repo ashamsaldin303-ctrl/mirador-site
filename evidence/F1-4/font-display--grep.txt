@@ -1,0 +1,58 @@
+# F1-4 / D-4 font-display verification — machine-generated 2026-09-21T12:02:21.076Z
+# rule: every @font-face declares font-display (swap; optional allowed for AR display faces)
+@font-face declarations: 12
+font-display declarations: 12 (swap: 12)
+VERDICT: PASS — all 12 faces declare font-display: swap
+
+# raw grep (globals.css):
+15:@font-face {
+16-  font-family: "Fraunces";
+17-  src: url("/fonts/fraunces-var-latin.woff2") format("woff2");
+20-  font-display: swap;
+24:@font-face {
+25-  font-family: "Instrument Sans";
+26-  src: url("/fonts/instrument-sans-var-latin.woff2") format("woff2");
+29-  font-display: swap;
+33:@font-face {
+34-  font-family: "Amiri";
+35-  src: url("/fonts/amiri-400-arabic.woff2") format("woff2");
+38-  font-display: swap;
+41:@font-face {
+42-  font-family: "Amiri";
+43-  src: url("/fonts/amiri-400-latin.woff2") format("woff2");
+46-  font-display: swap;
+49:@font-face {
+50-  font-family: "Amiri";
+51-  src: url("/fonts/amiri-700-arabic.woff2") format("woff2");
+54-  font-display: swap;
+57:@font-face {
+58-  font-family: "Amiri";
+59-  src: url("/fonts/amiri-700-latin.woff2") format("woff2");
+62-  font-display: swap;
+66:@font-face {
+67-  font-family: "IBM Plex Sans Arabic";
+68-  src: url("/fonts/plex-arabic-400-arabic.woff2") format("woff2");
+71-  font-display: swap;
+74:@font-face {
+75-  font-family: "IBM Plex Sans Arabic";
+76-  src: url("/fonts/plex-arabic-400-latin.woff2") format("woff2");
+79-  font-display: swap;
+82:@font-face {
+83-  font-family: "IBM Plex Sans Arabic";
+84-  src: url("/fonts/plex-arabic-500-arabic.woff2") format("woff2");
+87-  font-display: swap;
+90:@font-face {
+91-  font-family: "IBM Plex Sans Arabic";
+92-  src: url("/fonts/plex-arabic-500-latin.woff2") format("woff2");
+95-  font-display: swap;
+98:@font-face {
+99-  font-family: "IBM Plex Sans Arabic";
+100-  src: url("/fonts/plex-arabic-600-arabic.woff2") format("woff2");
+103-  font-display: swap;
+106:@font-face {
+107-  font-family: "IBM Plex Sans Arabic";
+108-  src: url("/fonts/plex-arabic-600-latin.woff2") format("woff2");
+111-  font-display: swap;
+
+# critical weights preloaded per active locale: src/app/[locale]/layout.tsx lines 79-96
+# (AR: amiri-400-arabic + plex-arabic-400-arabic · EN: fraunces-var-latin + instrument-sans-var-latin)

@@ -1,0 +1,28 @@
+===== audit:fonts · 2026-09-21T12:06:19Z =====
+$ bun scripts/audit-fonts.ts
+AR font weight payloads (budget ≤ 60KB per weight):
+  amiri 400         55092 B  53.8 KB  PASS
+  amiri 700         56016 B  54.7 KB  PASS
+  plex-arabic 400   42592 B  41.6 KB  PASS
+  plex-arabic 500   45844 B  44.8 KB  PASS
+  plex-arabic 600   46116 B  45.0 KB  PASS
+exit=0
+
+===== audit:tokens · 2026-09-21T12:06:19Z =====
+  PASS  --duration-signature: 600ms  (§5.4 duration)
+  PASS  background: rgba(203, 163, 92, 0.28);  (§5.2 ::selection)
+  PASS  --text-body--line-height: 1.7;  (§5.3 AR body lh ≥1.7)
+  PASS  --text-small--line-height: 1.7;  (§5.3 AR small lh ≥1.7)
+  PASS  --text-micro--letter-spacing: 0;  (§5.3 AR zero tracking)
+  PASS  tailwind.config.* absent (F2-5)
+exit=0
+
+===== audit:copy · 2026-09-21T12:06:19Z =====
+$ bun scripts/audit-copy.ts
+G1 banned wordlist: 0 hits PASS
+G5 placeholder tokens: 0 hits PASS
+F9-4 menu descriptions (28 dishes): EN over 0 · AR over 0 PASS
+Locale key parity: 138 keys PASS
+F9-5 docs/copy-parity.md: 138 rows PASS
+F10-3 image register: 40/40 files covered PASS
+exit=0

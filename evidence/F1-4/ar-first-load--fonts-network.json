@@ -1,0 +1,61 @@
+{
+  "label": "raw network capture — AR first load, font requests (375 viewport, CDP Network domain)",
+  "generatedAt": "2026-09-21T12:02:52.133Z",
+  "note": "timings from CDP timestamps (monotonic, ms relative to first font request)",
+  "requests": [
+    {
+      "font": "amiri-400-arabic.woff2",
+      "startMs": 0,
+      "durationMs": 35,
+      "bytes": 36390
+    },
+    {
+      "font": "plex-arabic-400-arabic.woff2",
+      "startMs": 1,
+      "durationMs": 70,
+      "bytes": 29726
+    },
+    {
+      "font": "fraunces-var-latin.woff2",
+      "startMs": 110,
+      "durationMs": 221,
+      "bytes": 55254
+    },
+    {
+      "font": "plex-arabic-400-latin.woff2",
+      "startMs": 115,
+      "durationMs": 220,
+      "bytes": 13430
+    },
+    {
+      "font": "plex-arabic-600-arabic.woff2",
+      "startMs": 115,
+      "durationMs": 219,
+      "bytes": 32122
+    },
+    {
+      "font": "plex-arabic-500-arabic.woff2",
+      "startMs": 117,
+      "durationMs": 220,
+      "bytes": 32034
+    },
+    {
+      "font": "amiri-400-latin.woff2",
+      "startMs": 131,
+      "durationMs": 241,
+      "bytes": 19266
+    },
+    {
+      "font": "plex-arabic-600-latin.woff2",
+      "startMs": 140,
+      "durationMs": 234,
+      "bytes": 14558
+    },
+    {
+      "font": "plex-arabic-500-latin.woff2",
+      "startMs": 179,
+      "durationMs": 197,
+      "bytes": 14374
+    }
+  ]
+}

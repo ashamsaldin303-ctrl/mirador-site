@@ -1,0 +1,12 @@
+{
+  "url": "http://localhost:3000/en",
+  "viewport": {
+    "width": 768,
+    "height": 1024
+  },
+  "generatedAt": "2026-09-21T11:38:18.663Z",
+  "inapplicable": 50,
+  "incomplete": 3,
+  "passes": 39,
+  "violations": []
+}

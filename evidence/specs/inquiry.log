@@ -1,0 +1,16 @@
+
+===== inquiry · run 2026-09-21T11:27:05.417Z =====
+# F8 · inquiry happy path — private-dining form → success state + row persisted
+# success status (role=status): "Inquiry received. We reply within one business day — or reach us now on WhatsApp. |  | Reference: cmub5ug7 |  | Reach us now on WhatsApp"
+# reference line: "Reference: cmub5ug7"
+# DB row: {"id":"cmub5ug7j001lpxhdl2qwe2vc","type":"PRIVATE_DINING","name":"Evidence Run","locale":"EN"}
+# VERDICT: PASS — success state rendered, inquiry persisted
+# CLEANUP: deleted 1 inquiries
+
+===== inquiry · run 2026-09-21T12:05:31.550Z =====
+# F8 · inquiry happy path — private-dining form → success state + row persisted
+# success status (role=status): "Inquiry received. We reply within one business day — or reach us now on WhatsApp. |  | Reference: cmub77w1 |  | Reach us now on WhatsApp"
+# reference line: "Reference: cmub77w1"
+# DB row: {"id":"cmub77w1x001npxhd9dqk02yp","type":"PRIVATE_DINING","name":"Evidence Run","locale":"EN"}
+# VERDICT: PASS — success state rendered, inquiry persisted
+# CLEANUP: deleted 1 inquiries

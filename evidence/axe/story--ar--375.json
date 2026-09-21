@@ -1,0 +1,12 @@
+{
+  "url": "http://localhost:3000/ar/story",
+  "viewport": {
+    "width": 375,
+    "height": 812
+  },
+  "generatedAt": "2026-09-21T11:38:08.650Z",
+  "inapplicable": 50,
+  "incomplete": 2,
+  "passes": 39,
+  "violations": []
+}

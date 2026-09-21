@@ -1,0 +1,28 @@
+===== deterministic suite re-run · 2026-09-21T12:04:08Z =====
+--- G1-G7 (scripts/gates.sh verbatim) ---
+GATE G1 wordlist: PASS (0 hits)
+GATE G2 raw color: PASS (0 hits)
+GATE G3 arbitrary: PASS (0 hits)
+GATE G4 ad-hoc radii: PASS (0 hits)
+GATE G5 placeholder: PASS (0 hits)
+GATE G6 2nd runtime: PASS (0 hits)
+GATE G7 transition-all: PASS (0 hits)
+gates-exit=0
+--- tsc --noEmit (src/ scope verdict per build-round convention; raw full output) ---
+evidence/tools/dom-ac-probes.ts(427,50): error TS2339: Property 'url' does not exist on type 'URL'.
+evidence/tools/lcp-and-fonts.ts(89,33): error TS2339: Property 'timing' does not exist on type 'Response'.
+examples/websocket/frontend.tsx(4,20): error TS2307: Cannot find module 'socket.io-client' or its corresponding type declarations.
+examples/websocket/frontend.tsx(7,58): error TS2307: Cannot find module '@/components/ui/card' or its corresponding type declarations.
+examples/websocket/frontend.tsx(8,28): error TS2307: Cannot find module '@/components/ui/scroll-area' or its corresponding type declarations.
+examples/websocket/server.ts(2,24): error TS2307: Cannot find module 'socket.io' or its corresponding type declarations.
+skills/image-edit/scripts/image-edit.ts(10,4): error TS2561: Object literal may only specify known properties, but 'images' does not exist in type 'CreateImageEditBody'. Did you mean to write 'image'?
+skills/stock-analysis-skill/src/analyzer.ts(253,11): error TS2322: Type '({ type: string; image: { type: "base64"; data: string; mediaType: "image/png"; url?: undefined; } | { type: "url"; url: string; data?: undefined; mediaType?: undefined; }; } | { type: string; text: string; })[]' is not assignable to type 'string'.
+tsc-raw-exit=0
+--- eslint . --max-warnings 0 ---
+
+/home/z/my-project/evidence/tools/axe-run.ts
+  34:29  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+✖ 1 problem (1 error, 0 warnings)
+
+eslint-exit=0

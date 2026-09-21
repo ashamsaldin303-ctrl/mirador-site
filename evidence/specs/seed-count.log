@@ -1,0 +1,8 @@
+===== seed count query · 2026-09-21T12:06:33.066Z =====
+MenuSection: 6 (expect 6)
+MenuItem: 28 (expect 28)
+GalleryItem: 8 (expect 8)
+Reservation: 12 (expect 12 seed demo)
+Inquiry: 0 (expect 0)
+sold-out dishes: 1 · signature: 3
+per-section items: to-begin=5, bread-butter=4, from-the-hearth=5, mains=5, sides=4, to-finish=5

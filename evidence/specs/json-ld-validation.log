@@ -1,0 +1,9 @@
+===== JSON-LD structural validation · 2026-09-21T12:07:06.933Z =====
+# validator: structural check of required schema.org properties (offline; official validator needs network service — labeled)
+# Restaurant requires: name, address · Menu requires: name, hasMenu-or-menuSection-in-context · checks @context + @type
+
+## home /en: 1 JSON-LD block(s)
+  @type=Restaurant @context=OK keys=name,description,telephone,email,servesCuisine,priceRange,address,openingHoursSpecification,url → OK (name+address)
+
+## menu /en/menu: 1 JSON-LD block(s)
+  @type=Menu @context=OK keys=name,inLanguage,hasMenuSection → OK

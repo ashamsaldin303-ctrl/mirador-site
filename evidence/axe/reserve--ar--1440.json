@@ -1,0 +1,12 @@
+{
+  "url": "http://localhost:3000/ar/reserve",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "generatedAt": "2026-09-21T11:39:21.308Z",
+  "inapplicable": 45,
+  "incomplete": 2,
+  "passes": 44,
+  "violations": []
+}

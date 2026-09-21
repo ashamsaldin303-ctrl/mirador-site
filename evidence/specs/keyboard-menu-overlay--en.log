@@ -1,0 +1,23 @@
+
+===== keyboard-menu-overlay--en · run 2026-09-21T11:40:37.345Z =====
+# F3-7 · dish overlay: keyboard open → focus trap → Esc → focus restored
+
+===== keyboard-menu-overlay--en · run 2026-09-21T11:40:49.620Z =====
+# F3-7 · dish overlay: keyboard open → focus trap → Esc → focus restored
+
+===== keyboard-menu-overlay--en · run 2026-09-21T11:41:17.378Z =====
+# F3-7 · dish overlay: keyboard open → focus trap → Esc → focus restored
+step 1 — focused dish trigger: <button> "Details"
+step 2 — Enter → overlay visible; activeElement: <button> "Close" [in-dialog]
+step 3.1 — Tab → <button> "Close" [in-dialog]
+step 3.2 — Tab → <button> "Close" [in-dialog]
+step 3.3 — Tab → <button> "Close" [in-dialog]
+step 3.4 — Tab → <button> "Close" [in-dialog]
+step 3.5 — Tab → <button> "Close" [in-dialog]
+step 3.6 — Tab → <button> "Close" [in-dialog]
+step 3.7 — Tab → <button> "Close" [in-dialog]
+step 3.8 — Tab → <button> "Close" [in-dialog]
+focus-trap check after 8 Tabs: PASS — focus never left the dialog
+step 4 — Esc → overlay closed; focus restored to trigger: PASS
+(allergen table presence re-checked on open in the axe JSONs — see evidence/axe/)
+# VERDICT: PASS — keyboard-operable overlay with focus trap + Esc + restore

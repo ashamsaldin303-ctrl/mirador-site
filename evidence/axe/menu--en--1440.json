@@ -1,0 +1,12 @@
+{
+  "url": "http://localhost:3000/en/menu",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "generatedAt": "2026-09-21T11:38:58.580Z",
+  "inapplicable": 49,
+  "incomplete": 2,
+  "passes": 40,
+  "violations": []
+}
