@@ -272,7 +272,11 @@ export function ReserveForm({ locale, strings, days, initialDate }: ReserveFormP
         </p>
       </div>
 
-      <fieldset className="flex flex-col gap-2 border-0 p-0" disabled={submitting}>
+      {/* min-w-0: flex items default to min-width:auto — without it the date
+          fieldset sizes to its min-w-max strip content (≈4K px) and blows out
+          the document scrollWidth at 375 (F12-6). The scroll container inside
+          then scrolls internally as designed. */}
+      <fieldset className="flex min-w-0 flex-col gap-2 border-0 p-0" disabled={submitting}>
         <legend className="hud-label">{strings.date}</legend>
         <DateStrip
           days={days}
@@ -285,7 +289,7 @@ export function ReserveForm({ locale, strings, days, initialDate }: ReserveFormP
       </fieldset>
 
       <fieldset
-        className="flex flex-col gap-2 border-0 p-0"
+        className="flex min-w-0 flex-col gap-2 border-0 p-0"
         disabled={submitting}
         aria-describedby={fieldErrors.slot ? "reserve-slot-error" : undefined}
       >
