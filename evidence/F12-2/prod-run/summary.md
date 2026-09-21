@@ -1,4 +1,4 @@
-# F12-2/prod-run — production build budgets summary (E19) — machine-generated 2026-09-21T13:48:50.321Z
+# F12-2/prod-run — production build budgets summary (E19) — machine-generated 2026-09-21T14:04:11.272Z
 
 ## Route size table (verbatim from build-output.log — raw file: route-size-table.txt)
 ```
@@ -29,7 +29,7 @@ served HTML's initial script set + gzip -9 of the emitted chunks; wire sizes cor
 /en/gallery — files=15 raw=710789B gz=226678B (221.4KB) → FAIL (hard cap exceeded)
 /en/private-dining — files=16 raw=969998B gz=285460B (278.8KB) → FAIL (hard cap exceeded)
 /en/contact — files=14 raw=689866B gz=219363B (214.2KB) → FAIL (hard cap exceeded)
-/en/confirmation/cmubavdns001y42vmrn9c8a4s — files=14 raw=689866B gz=219363B (214.2KB) → FAIL (hard cap exceeded)
+/en/confirmation/cmubbf6yd001y42uh6c0tfzo8 — files=14 raw=689866B gz=219363B (214.2KB) → FAIL (hard cap exceeded)
 /ar/ — files=14 raw=698031B gz=221917B (216.7KB) → FAIL (hard cap exceeded)
 /ar/menu — files=16 raw=740083B gz=237723B (232.2KB) → FAIL (hard cap exceeded)
 /ar/reserve — files=16 raw=975963B gz=287575B (280.8KB) → FAIL (hard cap exceeded)
@@ -37,7 +37,7 @@ served HTML's initial script set + gzip -9 of the emitted chunks; wire sizes cor
 /ar/gallery — files=15 raw=710789B gz=226678B (221.4KB) → FAIL (hard cap exceeded)
 /ar/private-dining — files=16 raw=969998B gz=285460B (278.8KB) → FAIL (hard cap exceeded)
 /ar/contact — files=14 raw=689866B gz=219363B (214.2KB) → FAIL (hard cap exceeded)
-/ar/confirmation/cmubavdns001y42vmrn9c8a4s — files=14 raw=689866B gz=219363B (214.2KB) → FAIL (hard cap exceeded)
+/ar/confirmation/cmubbf6yd001y42uh6c0tfzo8 — files=14 raw=689866B gz=219363B (214.2KB) → FAIL (hard cap exceeded)
 GATE F12-2: FAIL — 16 routes over budget
 
 ## three/fiber/drei lazy pack (raw file: ../F6-3/prod-run/three-lazy-chunk.txt)

@@ -6,3 +6,11 @@ POST #2 ip=10.99.3.2 phone=+9639990003001 (SAME phone+slot) → HTTP 409 {"error
 # post-run DB count query: rows for (phone=+9639990003001, slot) → 1
 # VERDICT: PASS — 201 then 409 DUPLICATE, exactly 1 row
 # CLEANUP: deleted 1 reservations
+
+===== dupguard · run 2026-09-21T14:04:11.931Z =====
+# F4-8 · same phone+slot resubmission → 409 DUPLICATE, no second row
+POST #1 ip=10.99.3.1 phone=+9639990003001 → HTTP 201 {"id":"cmubbggme000o422iyje9wfao","tableNumber":1,"slot":"2026-10-06T15:00:00.000Z","whatsappUrl":"https://wa.me/963955000111?text=Hello%20MIRADOR%20%E2%80%94%20confirming%20my%20reservation%3A%20Evidence%20Run%2C%202%20guests%2C%202026-10-06%20at%2018%3A00%20(ref%20e9wfao)."}
+POST #2 ip=10.99.3.2 phone=+9639990003001 (SAME phone+slot) → HTTP 409 {"error":"DUPLICATE","messageKey":"duplicate"}
+# post-run DB count query: rows for (phone=+9639990003001, slot) → 1
+# VERDICT: PASS — 201 then 409 DUPLICATE, exactly 1 row
+# CLEANUP: deleted 1 reservations

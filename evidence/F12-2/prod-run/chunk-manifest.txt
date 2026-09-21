@@ -1,4 +1,4 @@
-# chunk manifest — every .next/static/chunks JS — machine-generated 2026-09-21T13:48:22.809Z
+# chunk manifest — every .next/static/chunks JS — machine-generated 2026-09-21T14:03:46.369Z
 # markers (minification-safe literals): three · fiber · ScrollTrigger · lenis · Flip
 static/chunks/ff1a16fafef87110.js raw=282B gz=225B refs=0 (lazy — not in any route first-load) markers=[]
 static/chunks/50cfbacdd67775b1.js raw=69674B gz=26891B refs=route-referenced markers=[ScrollTrigger]
