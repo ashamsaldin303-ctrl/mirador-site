@@ -2,9 +2,13 @@
 // Usage: bun evidence/tools/console-probes.ts
 import { chromium } from "playwright";
 import { writeFileSync } from "node:fs";
-import { BASE, EVIDENCE_ROOT } from "./lib";
+import { BASE, EVIDENCE_OUT, outDir, db, seedConfirmationId } from "./lib";
 
-const SEED_CONFIRMATION_ID = "cmuax6xbe001ypxqpcebj2fv2";
+const prisma = db();
+const SEED_CONFIRMATION_ID = await seedConfirmationId(prisma); // fresh per surface (see lib.ts)
+await prisma.$disconnect();
+outDir("console");
+outDir("probes");
 const ROUTES: { name: string; path: string }[] = [
   { name: "home", path: "" },
   { name: "menu", path: "/menu" },
@@ -48,13 +52,13 @@ for (const loc of ["en", "ar"] as const) {
     for (const m of messages) {
       consoleLog.push(`  [${m.type}] ${m.text.replace(/\n/g, " ")}`);
     }
-    writeFileSync(`${EVIDENCE_ROOT}console/${name}--${loc}.log`, consoleLog.slice(consoleLog.lastIndexOf("\n##")).join("\n") + "\n");
+    writeFileSync(`${EVIDENCE_OUT}console/${name}--${loc}.log`, consoleLog.slice(consoleLog.lastIndexOf("\n##")).join("\n") + "\n");
     await context.close();
   }
 }
 consoleLog.push(`\nTOTAL console ERRORS across 16 pages: ${errorCount}`);
 consoleLog.push(errorCount === 0 ? `GATE F12-5: PASS — zero console errors on 8 paths × 2 locales` : `GATE F12-5: FAIL — ${errorCount} errors (raw above)`);
-writeFileSync(`${EVIDENCE_ROOT}console/summary.txt`, consoleLog.join("\n") + "\n");
+writeFileSync(`${EVIDENCE_OUT}console/summary.txt`, consoleLog.join("\n") + "\n");
 
 // ---------- 2) horizontal-scroll probe at 375 (F12-6) ----------
 const scrollLog: string[] = [
@@ -82,7 +86,7 @@ for (const loc of ["en", "ar"] as const) {
   }
 }
 scrollLog.push(scrollFail === 0 ? `GATE F12-6: PASS — no horizontal scroll at 375 on any route × locale` : `GATE F12-6: FAIL — ${scrollFail} routes overflow`);
-writeFileSync(`${EVIDENCE_ROOT}probes/scroll-width--375.log`, scrollLog.join("\n") + "\n");
+writeFileSync(`${EVIDENCE_OUT}probes/scroll-width--375.log`, scrollLog.join("\n") + "\n");
 
 // ---------- 3) interactive target sizes ≥44px (F12-7) ----------
 const targetLog: string[] = [
@@ -155,7 +159,7 @@ await probeTargets("gallery + lightbox (@375)", `${BASE}/en/gallery`, async (pag
 });
 targetLog.push(`\nUNDER-44 total: ${under44}`);
 targetLog.push(under44 === 0 ? `GATE F12-7: PASS — every visible interactive target ≥44×44` : `GATE F12-7: ${under44} targets under 44px (raw list above — effective-size/spacing evaluation recorded verbatim)`);
-writeFileSync(`${EVIDENCE_ROOT}probes/targets-44px.log`, targetLog.join("\n") + "\n");
+writeFileSync(`${EVIDENCE_OUT}probes/targets-44px.log`, targetLog.join("\n") + "\n");
 
 await browser.close();
 console.log(`done — console errors=${errorCount}, scroll fails=${scrollFail}, under44=${under44}`);

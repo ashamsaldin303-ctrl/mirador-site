@@ -1,0 +1,255 @@
+# MIRADOR — production-evidence battery (prompt-3 Q1–Q4 · the sanctioned surface)
+# Manually re-triggerable: workflow_dispatch only (REPLAY.md documents it).
+# Never triggers on push — the evidence commit it makes must not loop the run.
+# Produces the prod-run evidence families under /evidence/ (surface-labeled;
+# the round-2 dev-run set is never touched) and pushes them to main.
+name: production-evidence
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: production-evidence
+  cancel-in-progress: false
+
+jobs:
+  battery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    services:
+      postgres:
+        image: postgres:16 # major pin — recorded in MANIFEST.md + docs/versions.md [pin-at-build]
+        env:
+          POSTGRES_USER: mirador
+          POSTGRES_PASSWORD: mirador
+          POSTGRES_DB: mirador
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U mirador"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: postgresql://mirador:mirador@localhost:5432/mirador
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+      EVIDENCE_BASE_URL: http://localhost:3000
+      EVIDENCE_SURFACE: prod-run
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+
+      - name: Install dependencies (frozen lockfile)
+        run: bun install --frozen-lockfile
+
+      - name: Generate Prisma client (no DB needed)
+        run: bun run db:generate
+
+      - name: Install Playwright chromium (+ system deps)
+        run: bunx playwright install --with-deps chromium
+
+      - name: "Q2-prep: deterministic suite → evidence/prod-run/gates + audits"
+        run: |
+          mkdir -p evidence/prod-run/gates evidence/prod-run/audits
+          bash scripts/gates.sh 2>&1 | tee evidence/prod-run/gates/deterministic-suite.log
+          echo "--- tsc --noEmit (whole repo) ---" >> evidence/prod-run/gates/deterministic-suite.log
+          bunx tsc --noEmit 2>&1 | tee -a evidence/prod-run/gates/deterministic-suite.log
+          echo "--- eslint . --max-warnings 0 ---" >> evidence/prod-run/gates/deterministic-suite.log
+          bunx eslint . --max-warnings 0 2>&1 | tee -a evidence/prod-run/gates/deterministic-suite.log
+          echo "--- audits (fonts · tokens · copy) ---" > evidence/prod-run/audits/audits-run.log
+          bun run audit:fonts 2>&1 | tee -a evidence/prod-run/audits/audits-run.log
+          bun run audit:tokens 2>&1 | tee -a evidence/prod-run/audits/audits-run.log
+          bun run audit:copy 2>&1 | tee -a evidence/prod-run/audits/audits-run.log
+
+      - name: "Q1: canonical migrate + seed + counts → evidence/prod-run/specs/seed-count.log"
+        run: |
+          bun run migrate
+          bun run seed
+          bun -e '
+          const {PrismaClient} = require("@prisma/client");
+          const db = new PrismaClient();
+          const sections = await db.menuSection.count();
+          const items = await db.menuItem.count();
+          const perSection = await db.menuSection.findMany({orderBy:{sortOrder:"asc"},include:{_count:{select:{items:true}}}});
+          const gallery = await db.galleryItem.count();
+          const reservations = await db.reservation.count();
+          const inquiries = await db.inquiry.count();
+          const lines = [
+            "# seed counts on PostgreSQL — machine-generated " + new Date().toISOString(),
+            "# gate (F3-1): 6 sections · 28 dishes (4–5 per section) · 8 gallery · 12 reservations · 0 inquiries",
+            "sections=" + sections, "items=" + items,
+            ...perSection.map(s => `  ${s.slug}: ${s._count.items} items`),
+            "gallery=" + gallery, "reservations=" + reservations, "inquiries=" + inquiries,
+            (sections===6 && items===28 && gallery===8 && reservations===12 && inquiries===0 && perSection.every(s=>s._count.items>=4 && s._count.items<=7))
+              ? "GATE F3-1: PASS — deterministic seed counts identical to the SQLite baseline"
+              : "GATE F3-1: FAIL — counts drifted",
+          ];
+          require("node:fs").mkdirSync("evidence/prod-run/specs", {recursive:true});
+          require("node:fs").writeFileSync("evidence/prod-run/specs/seed-count.log", lines.join("\n") + "\n");
+          console.log(lines.join("\n"));
+          await db.$disconnect();'
+
+      - name: "Q1: production build (B1) → build-output.log"
+        run: bun run build 2>&1 | tee build-output.log
+
+      - name: "Q2: build budgets (E18/E19) → F12-2/prod-run + F6-3/prod-run"
+        run: bun evidence/tools/build-budgets.ts
+
+      - name: "Q1: boot production server + readiness wait"
+        run: |
+          nohup bun run start > /dev/null 2>&1 &
+          echo "production server booting (standalone, port 3000)…"
+          for i in $(seq 1 60); do
+            code=$(curl -s -o /dev/null -w "%{http_code}" -m 5 http://localhost:3000/en || echo 000)
+            if [ "$code" = "200" ]; then echo "ready after ~$((i*2))s: GET /en → 200"; break; fi
+            sleep 2
+          done
+          code=$(curl -s -o /dev/null -w "%{http_code}" -m 10 http://localhost:3000/en)
+          echo "final readiness: GET /en → $code"
+          [ "$code" = "200" ] || { echo "FATAL: production server not ready"; exit 1; }
+
+      - name: "Q3: HTTP semantics (E22) → evidence/prod-run/http/"
+        run: |
+          mkdir -p evidence/prod-run/http
+          cd evidence/prod-run/http
+          curl -is -m 20 "http://localhost:3000/en" > en--200.txt
+          curl -is -m 20 "http://localhost:3000/ar" > ar--200.txt
+          curl -is -m 20 "http://localhost:3000/en/nonexistent-page" > en-nonexistent.txt
+          curl -is -m 20 "http://localhost:3000/ar/nonexistent-page" > ar-nonexistent.txt
+          cd ../../..
+          bun evidence/tools/http-404-grep.ts
+
+      - name: "Q4a: capacity-race FIRST — on PostgreSQL (E21)"
+        run: bun evidence/tools/api-specs.ts capacity-race
+
+      - name: "Q4b: the remaining 8 E2E specs (E23)"
+        run: |
+          bun evidence/tools/api-specs.ts capacity-sequential ratelimit dupguard honeypot
+          bun evidence/tools/browser-specs.ts locale-atomic webgl-kill booking inquiry
+
+      - name: "Q4c: 16 rendered snapshots + grep summary (E13 form)"
+        run: |
+          mkdir -p evidence/prod-run/snapshots
+          CID=$(bun -e 'const{PrismaClient}=require("@prisma/client");const db=new PrismaClient();const r=await db.reservation.findFirst({orderBy:{createdAt:"asc"}});console.log(r.id);await db.$disconnect()')
+          echo "seed confirmation id: $CID"
+          cd evidence/prod-run/snapshots
+          for loc in en ar; do
+            for r in "home:" "menu:menu" "reserve:reserve" "story:story" "gallery:gallery" "private-dining:private-dining" "contact:contact" "confirmation:confirmation/$CID"; do
+              name="${r%%:*}"; path="${r#*:}"
+              curl -s -m 25 -o "$name--$loc.html" "http://localhost:3000/$loc${path:+/$path}"
+            done
+          done
+          { echo "# snapshot grep summary — machine-generated $(date -u +%FT%TZ)";
+            echo "# gate (E13): every snapshot ≥3 rel=alternate hreflang + ≥1 wa.me/963955000111";
+            PASS=0; TOTAL=0
+            for f in *.html; do
+              alt=$(grep -o 'rel="alternate"' "$f" | wc -l); wa=$(grep -o 'wa\.me/963955000111' "$f" | wc -l)
+              TOTAL=$((TOTAL+1)); ok=$([ "$alt" -ge 3 ] && [ "$wa" -ge 1 ] && echo 1 || echo 0); PASS=$((PASS+ok))
+              echo "$f alternates=$alt wa.me=$wa"
+            done
+            echo "SUMMARY: $PASS/$TOTAL PASS"; } > grep-summary.txt
+          cat grep-summary.txt
+          [ "$(grep -c 'SUMMARY: 16/16 PASS' grep-summary.txt)" = "1" ] || { echo "snapshot grep gate failed"; exit 1; }
+
+      - name: "Q4d: console ×16 + probes (E24)"
+        run: bun evidence/tools/console-probes.ts
+
+      - name: "Q4e: axe ×48 (E25)"
+        run: bun evidence/tools/axe-run.ts
+
+      - name: "Q4f: screenshots 57 (E26)"
+        run: bun evidence/tools/screenshots.ts
+
+      - name: "Q4g: keyboard walkthroughs"
+        run: bun evidence/tools/keyboard.ts
+
+      - name: "Q4h: DOM AC probes (state matrix + §9 battery)"
+        run: bun evidence/tools/dom-ac-probes.ts
+
+      - name: "Q4i: Lighthouse CI (E27) — mobile · 3 runs · medians"
+        run: |
+          export CHROME_PATH="$(ls /home/runner/.cache/ms-playwright/chromium-*/chrome-linux*/chrome 2>/dev/null | head -1)"
+          echo "CHROME_PATH resolved: ${CHROME_PATH:-NOT-FOUND}"
+          [ -n "${CHROME_PATH:-}" ] || { echo "FATAL: chromium binary not found"; exit 1; }
+          bunx @lhci/cli@0.15.1 autorun --config=.lighthouserc.json 2>&1 | tee lhci-run.log
+
+      - name: "Q4i: Lighthouse medians + lcpElement (E27/E28) → evidence/prod-run/lighthouse/"
+        run: |
+          mkdir -p evidence/prod-run/lighthouse
+          cp lhci-run.log evidence/prod-run/lighthouse/ 2>/dev/null || true
+          bun evidence/tools/lighthouse-summary.ts
+
+      - name: "Q4j: cold-start handoff (F12-3) — fresh clone + migrate + seed + dev"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p evidence/prod-run/cold-start
+          pkill -f ".next/standalone/server.js" || true
+          sleep 2
+          LOG=$(mktemp)
+          {
+            echo "# cold-start handoff (F12-3) — machine-generated $(date -u +%FT%TZ)"
+            echo "# fresh clone of $GITHUB_REPOSITORY → bun install · migrate · seed · dev → GET /en 200"
+            rm -rf /tmp/coldstart
+            git clone --depth 1 "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" /tmp/coldstart
+            cd /tmp/coldstart
+            echo "clone HEAD: $(git rev-parse HEAD)"
+            bun install --frozen-lockfile
+            bun run db:generate
+            echo 'CREATE DATABASE mirador_coldstart' | bunx prisma db execute --stdin --url postgresql://mirador:mirador@localhost:5432/postgres
+            export DATABASE_URL="postgresql://mirador:mirador@localhost:5432/mirador_coldstart"
+            bun run migrate
+            bun run seed
+            nohup bun run dev > /dev/null 2>&1 &
+            code=000
+            for i in $(seq 1 45); do
+              code=$(curl -s -o /dev/null -w "%{http_code}" -m 5 http://localhost:3000/en || echo 000)
+              [ "$code" = "200" ] && break; sleep 2
+            done
+            echo "cold-start GET /en → $code"
+            curl -s -o /dev/null -w "GET /ar → %{http_code}\n" -m 10 http://localhost:3000/ar
+            pkill -f "next dev" || true
+            if [ "$code" = "200" ]; then echo "GATE F12-3: PASS — fresh clone boots clean, /en 200"; else echo "GATE F12-3: FAIL — /en → $code"; fi
+          } 2>&1 | tee "$LOG"
+          cp "$LOG" evidence/prod-run/cold-start/cold-start.log
+          cp /tmp/coldstart/dev.log evidence/prod-run/cold-start/dev.log 2>/dev/null || echo "(clone dev.log absent)" >> evidence/prod-run/cold-start/cold-start.log
+          grep -q "GATE F12-3: PASS" evidence/prod-run/cold-start/cold-start.log || exit 1
+
+      - name: "Battery verdict verification (exit-blocking)"
+        run: bash evidence/tools/verify-battery.sh
+
+      - name: Capture production server log (raw)
+        if: always()
+        run: |
+          mkdir -p evidence/prod-run
+          cp server.log evidence/prod-run/server.log 2>/dev/null || echo "(server.log absent)" > evidence/prod-run/server.log
+          tail -40 evidence/prod-run/server.log
+
+      - name: "E33: commit + push the prod-run evidence"
+        if: always()
+        run: |
+          git config user.name "mirador-evidence-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -f evidence/prod-run evidence/F12-2/prod-run evidence/F6-3/prod-run
+          git status --short | head -30
+          git commit -m "prod-run evidence battery (prompt-3 Q1–Q4) — actions run ${{ github.run_number }} [surface: prod-run]" || echo "nothing to commit"
+          git push
+
+      - name: Upload evidence artifact (≥90-day backup)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: prod-run-evidence-${{ github.run_number }}
+          retention-days: 90
+          path: |
+            evidence/
+            build-output.log
+            lhci-run.log
+            .lighthouseci/

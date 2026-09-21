@@ -4,9 +4,12 @@
 import { chromium } from "playwright";
 import AxeBuilder from "@axe-core/playwright";
 import { writeFileSync, readFileSync } from "node:fs";
-import { BASE, EVIDENCE_ROOT } from "./lib";
+import { BASE, EVIDENCE_OUT, outDir, db, seedConfirmationId } from "./lib";
 
-const SEED_CONFIRMATION_ID = "cmuax6xbe001ypxqpcebj2fv2";
+const prisma = db();
+const SEED_CONFIRMATION_ID = await seedConfirmationId(prisma); // fresh per surface (see lib.ts)
+await prisma.$disconnect();
+outDir("axe");
 const ROUTES: { name: string; path: string }[] = [
   { name: "home", path: "" },
   { name: "menu", path: "/menu" },
@@ -54,7 +57,7 @@ for (const { width, height } of VIEWPORTS) {
         await page.waitForTimeout(700);
       }
       const results = await new AxeBuilder({ page }).analyze();
-      const file = `${EVIDENCE_ROOT}axe/${name}--${loc}--${width}.json`;
+      const file = `${EVIDENCE_OUT}axe/${name}--${loc}--${width}.json`;
       writeFileSync(
         file,
         JSON.stringify(
@@ -93,5 +96,5 @@ summary.push(
     ? "GATE: PASS — 0 critical + 0 serious across all route × locale × viewport runs"
     : `GATE: FAIL — critical=${critical}, serious=${serious} (see per-run rules above; raw JSONs committed)`,
 );
-writeFileSync(`${EVIDENCE_ROOT}axe/summary.txt`, summary.join("\n") + "\n");
+writeFileSync(`${EVIDENCE_OUT}axe/summary.txt`, summary.join("\n") + "\n");
 console.log(`done: ${runs} axe runs — critical=${critical} serious=${serious}`);

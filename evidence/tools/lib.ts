@@ -1,10 +1,20 @@
-// MIRADOR evidence tools — shared lib (prompt-2 §5 REPLAY-able runners)
+// MIRADOR evidence tools — shared lib (prompt-2 §5 REPLAY-able runners; prompt-3 §5 surface labels)
 // Run: bun evidence/tools/<script>.ts  (bun auto-loads .env → DATABASE_URL)
-import { appendFileSync } from "node:fs";
+// EVIDENCE_SURFACE=prod-run on the CI battery redirects every output family
+// under /evidence/prod-run/<family>/ (one family, one surface — prompt-3 §5);
+// unset = the round-2 dev-run layout, byte-identical to its committed set.
+import { appendFileSync, mkdirSync } from "node:fs";
 import { PrismaClient } from "@prisma/client";
 
 export const BASE = process.env.EVIDENCE_BASE_URL ?? "http://localhost:3000";
 export const EVIDENCE_ROOT = new URL("..", import.meta.url).pathname; // /evidence/
+export const EVIDENCE_SURFACE = process.env.EVIDENCE_SURFACE ?? "";
+export const EVIDENCE_OUT = EVIDENCE_SURFACE ? `${EVIDENCE_ROOT}${EVIDENCE_SURFACE}/` : EVIDENCE_ROOT;
+export function outDir(family: string): string {
+  const dir = `${EVIDENCE_OUT}${family}`;
+  mkdirSync(dir, { recursive: true });
+  return dir;
+}
 export const TEST_PHONE_PREFIX = "+96399900"; // evidence-run test range, cleaned after every spec
 
 export function db(): PrismaClient {
@@ -15,13 +25,23 @@ export function ts(): string {
   return new Date().toISOString();
 }
 
-/** Append-only raw log writer → /evidence/specs/<name>.log */
+/** Append-only raw log writer → <surface>/specs/<name>.log */
 export function specLog(name: string) {
-  const path = `${EVIDENCE_ROOT}specs/${name}.log`;
+  const path = `${outDir("specs")}/${name}.log`;
   appendFileSync(path, `\n===== ${name} · run ${ts()} =====\n`);
   return (s = "") => {
     appendFileSync(path, s + "\n");
   };
+}
+
+/** First seeded reservation id (createdAt asc) — the confirmation-route target
+ *  for screenshot/axe/console sweeps. Round-2 hardcoded the id committed inside
+ *  db/custom.db; a fresh CI seed mints new cuids, so each surface resolves its
+ *  own at runtime (same rule as REPLAY.md §snapshots). */
+export async function seedConfirmationId(prisma: PrismaClient): Promise<string> {
+  const row = await prisma.reservation.findFirst({ orderBy: { createdAt: "asc" } });
+  if (!row) throw new Error("no seeded reservation found — run `bun run seed` first");
+  return row.id;
 }
 
 /** Find a fresh empty slot: Tue–Sun (Damascus), 18:00 local (15:00Z), 0 existing rows. */

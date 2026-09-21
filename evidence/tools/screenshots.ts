@@ -3,9 +3,11 @@
 // Usage: bun evidence/tools/screenshots.ts
 import { chromium } from "playwright";
 import { writeFileSync } from "node:fs";
-import { BASE, EVIDENCE_ROOT } from "./lib";
+import { BASE, EVIDENCE_OUT, outDir, db, seedConfirmationId } from "./lib";
 
-const SEED_CONFIRMATION_ID = "cmuax6xbe001ypxqpcebj2fv2";
+const prisma = db();
+const SEED_CONFIRMATION_ID = await seedConfirmationId(prisma); // fresh per surface (see lib.ts)
+await prisma.$disconnect();
 const ROUTES: { name: string; path: string }[] = [
   { name: "home", path: "" },
   { name: "menu", path: "/menu" },
@@ -47,7 +49,8 @@ async function settle(page: import("playwright").Page, route: string) {
 
 const manifest: string[] = [`# screenshot manifest — machine-generated ${new Date().toISOString()}`];
 
-// 1) default set — /evidence/F1-5/<route>--<locale>--<width>.png
+// 1) default set — <surface>/F1-5/<route>--<locale>--<width>.png
+outDir("F1-5");
 const ctx = await browser.newContext({ viewport: VIEWPORTS[2] });
 for (const { width, height } of VIEWPORTS) {
   const c = await browser.newContext({ viewport: { width, height } });
@@ -57,7 +60,7 @@ for (const { width, height } of VIEWPORTS) {
       await page.goto(`${BASE}/${loc}${path}`, { waitUntil: "domcontentloaded" });
       await settle(page, name);
       if (name === "reserve") await page.waitForTimeout(1200); // pace availability reads
-      const file = `${EVIDENCE_ROOT}F1-5/${name}--${loc}--${width}.png`;
+      const file = `${EVIDENCE_OUT}F1-5/${name}--${loc}--${width}.png`;
       await page.screenshot({ path: file });
       manifest.push(`F1-5/${name}--${loc}--${width}.png`);
     }
@@ -66,7 +69,8 @@ for (const { width, height } of VIEWPORTS) {
 }
 await ctx.close();
 
-// 2) forced-colors — one pass per route (EN, 1440) — /evidence/forced-colors/
+// 2) forced-colors — one pass per route (EN, 1440) — <surface>/forced-colors/
+outDir("forced-colors");
 {
   const c = await browser.newContext({
     viewport: VIEWPORTS[2],
@@ -76,7 +80,7 @@ await ctx.close();
   for (const { name, path } of ROUTES) {
     await page.goto(`${BASE}/en${path}`, { waitUntil: "domcontentloaded" });
     await settle(page, name);
-    const file = `${EVIDENCE_ROOT}forced-colors/${name}--forcedcolors--1440.png`;
+    const file = `${EVIDENCE_OUT}forced-colors/${name}--forcedcolors--1440.png`;
     await page.screenshot({ path: file });
     manifest.push(`forced-colors/${name}--forcedcolors--1440.png`);
   }
@@ -84,13 +88,14 @@ await ctx.close();
 }
 
 // 3) prefers-reduced-motion on home — F5-3 static 3-act layout + copy present
+outDir("F5-3");
 {
   const log: string[] = [`# F5-3 RM emulation — machine-generated ${new Date().toISOString()}`];
   const c = await browser.newContext({ viewport: VIEWPORTS[2], reducedMotion: "reduce" });
   const page = await c.newPage();
   await page.goto(`${BASE}/en`, { waitUntil: "domcontentloaded" });
   await page.waitForTimeout(1500);
-  const file = `${EVIDENCE_ROOT}F5-3/home--rm--1440.png`;
+  const file = `${EVIDENCE_OUT}F5-3/home--rm--1440.png`;
   await page.screenshot({ path: file, fullPage: false });
   manifest.push(`F5-3/home--rm--1440.png`);
   // copy-present assertion (F5-3): all three act copies present in the DOM
@@ -101,10 +106,11 @@ await ctx.close();
   const rmActive = await page.evaluate(() => matchMedia("(prefers-reduced-motion: reduce)").matches);
   log.push(`matchMedia(prefers-reduced-motion: reduce) = ${rmActive}`);
   log.push(`all acts present: ${ACT_COPY.every((s) => body.includes(s)) ? "PASS — static 3-act layout with full copy" : "FAIL"}`);
-  writeFileSync(`${EVIDENCE_ROOT}F5-3/rm-copy-check.log`, log.join("\n") + "\n");
+  writeFileSync(`${EVIDENCE_OUT}F5-3/rm-copy-check.log`, log.join("\n") + "\n");
   await c.close();
 }
 
 await browser.close();
-writeFileSync(`${EVIDENCE_ROOT}screenshots/manifest.txt`, manifest.join("\n") + "\n");
+outDir("screenshots");
+writeFileSync(`${EVIDENCE_OUT}screenshots/manifest.txt`, manifest.join("\n") + "\n");
 console.log(`done: ${manifest.length - 1} screenshots + manifest + RM copy check`);

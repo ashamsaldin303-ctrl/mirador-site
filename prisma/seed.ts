@@ -8,7 +8,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const j = (arr: string[]) => JSON.stringify(arr);
+// (canonical §6.1: allergens/dietTags are native String[] — written as arrays)
 
 type DishSeed = {
   slug: string;
@@ -128,8 +128,8 @@ async function main() {
           nameEn: dish.nameEn, descEn: dish.descEn,
           nameAr: dish.nameAr, descAr: dish.descAr,
           priceUsd: dish.priceUsd,
-          allergens: j(dish.allergens),
-          dietTags: j(dish.dietTags),
+          allergens: dish.allergens,
+          dietTags: dish.dietTags,
           isSignature: dish.isSignature ?? false,
           isSoldOut: dish.isSoldOut ?? false,
           imageUrl: dish.isSignature ? `/img/menu/${dish.slug}.avif` : null,

@@ -13,7 +13,7 @@
 import { chromium } from "playwright";
 import sharp from "sharp";
 import { appendFileSync, readFileSync, writeFileSync } from "node:fs";
-import { BASE, EVIDENCE_ROOT } from "./lib";
+import { BASE, EVIDENCE_OUT } from "./lib";
 
 const browser = await chromium.launch({
   headless: true,
@@ -43,7 +43,7 @@ for (const { width, height } of [
     };
   }, width);
   if (!check.contentOk) throw new Error(`ar/reserve content check failed at ${width}`);
-  const file = `${EVIDENCE_ROOT}F1-5/reserve--ar--${width}.png`;
+  const file = `${EVIDENCE_OUT}F1-5/reserve--ar--${width}.png`;
   await page.screenshot({ path: file });
   const stats = await sharp(file).stats();
   const maxStdev = Math.max(...stats.channels.map((ch) => ch.stdev));
@@ -58,7 +58,7 @@ await browser.close();
 
 // correct the earlier WRONG annotation in the manifest (honesty: the first
 // re-capture attempt mislabeled the defect as a tool timing bug)
-const manifestPath = `${EVIDENCE_ROOT}screenshots/manifest.txt`;
+const manifestPath = `${EVIDENCE_OUT}screenshots/manifest.txt`;
 const manifest = readFileSync(manifestPath, "utf8").replace(
   /# re-capture [^\n]*— reserve--ar--\{375,768,1440\}\.png\n# reason: original sweep settle\(\) silently caught[^\n]*\n/g,
   "",

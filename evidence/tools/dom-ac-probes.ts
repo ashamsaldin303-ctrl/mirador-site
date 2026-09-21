@@ -8,15 +8,15 @@ import { chromium } from "playwright";
 import { readFileSync, existsSync, writeFileSync, mkdirSync } from "node:fs";
 import { PrismaClient } from "@prisma/client";
 import { appendFileSync } from "node:fs";
-import { BASE, EVIDENCE_ROOT } from "./lib";
+import { BASE, EVIDENCE_OUT, outDir, seedConfirmationId } from "./lib";
 import { VENUE } from "../../src/lib/venue";
 
 const prisma = new PrismaClient();
-const log = (s = "") => appendFileSync(`${EVIDENCE_ROOT}specs/dom-ac-probes.log`, s + "\n");
+const log = (s = "") => appendFileSync(`${outDir("specs")}/dom-ac-probes.log`, s + "\n");
 log(`\n===== dom-ac-probes · run ${new Date().toISOString()} =====`);
-mkdirSync(`${EVIDENCE_ROOT}F11/state-matrix`, { recursive: true });
+mkdirSync(`${EVIDENCE_OUT}F11/state-matrix`, { recursive: true });
 
-const SEED_CONFIRMATION_ID = "cmuax6xbe001ypxqpcebj2fv2";
+const SEED_CONFIRMATION_ID = await seedConfirmationId(prisma); // fresh per surface (see lib.ts)
 const ROUTES: { name: string; path: string }[] = [
   { name: "home", path: "" },
   { name: "menu", path: "/menu" },
@@ -57,8 +57,8 @@ log(`\n## F3-2 — dish names in raw SSR HTML (snapshots, no JS)`);
 {
   const names = ["Sourdough", "Dover sole", "MIRADOR ribeye"];
   const arNames = ["خبز حمّض", "سول دوفر", "ريباي ميرادور"];
-  const en = readFileSync(`${EVIDENCE_ROOT}snapshots/menu--en.html`, "utf8");
-  const ar = readFileSync(`${EVIDENCE_ROOT}snapshots/menu--ar.html`, "utf8");
+  const en = readFileSync(`${EVIDENCE_OUT}snapshots/menu--en.html`, "utf8");
+  const ar = readFileSync(`${EVIDENCE_OUT}snapshots/menu--ar.html`, "utf8");
   for (const n of names) log(`EN snapshot contains "${n}": ${en.includes(n) ? "YES" : "NO"}`);
   for (const n of arNames) log(`AR snapshot contains "${n}": ${ar.includes(n) ? "YES" : "NO"}`);
   const ok = [...names, ...arNames].every((n) => (n.match(/[A-Za-z]/) ? en.includes(n) : ar.includes(n)));
@@ -236,8 +236,8 @@ log(`F5-2 VERDICT: ${arMoves ? "PASS — RTL track mirrors (translate sign oppos
 // ---------- F5-4: act copy in raw SSR HTML ----------
 log(`\n## F5-4 — act copy present in raw SSR HTML (grep snapshots)`);
 {
-  const en = readFileSync(`${EVIDENCE_ROOT}snapshots/home--en.html`, "utf8");
-  const ar = readFileSync(`${EVIDENCE_ROOT}snapshots/home--ar.html`, "utf8");
+  const en = readFileSync(`${EVIDENCE_OUT}snapshots/home--en.html`, "utf8");
+  const ar = readFileSync(`${EVIDENCE_OUT}snapshots/home--ar.html`, "utf8");
   const contentEn = JSON.parse(readFileSync("content/en.json", "utf8"));
   const contentAr = JSON.parse(readFileSync("content/ar.json", "utf8"));
   const enActs = [contentEn["acts.act1.copy"], contentEn["acts.act2.copy"], contentEn["acts.act3.copy"]];
@@ -406,7 +406,7 @@ log(`\n## F11-3 — state matrix via network fault injection (no product changes
     });
     await page.goto(`${BASE}/en/reserve`, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(1500);
-    await page.screenshot({ path: `${EVIDENCE_ROOT}F11/state-matrix/reserve--loading--768.png` });
+    await page.screenshot({ path: `${EVIDENCE_OUT}F11/state-matrix/reserve--loading--768.png` });
     log(`reserve--loading--768.png captured (skeleton via 4s delayed availability)`);
     await page.close();
   }
@@ -417,7 +417,7 @@ log(`\n## F11-3 — state matrix via network fault injection (no product changes
     await page.goto(`${BASE}/en/reserve`, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(1500);
     const hasRetry = await page.evaluate(() => !!Array.from(document.querySelectorAll("button")).find((b) => /retry/i.test(b.textContent ?? "")));
-    await page.screenshot({ path: `${EVIDENCE_ROOT}F11/state-matrix/reserve--error--768.png` });
+    await page.screenshot({ path: `${EVIDENCE_OUT}F11/state-matrix/reserve--error--768.png` });
     log(`reserve--error--768.png captured — retry control present: ${hasRetry}`);
     await page.close();
   }
@@ -427,7 +427,7 @@ log(`\n## F11-3 — state matrix via network fault injection (no product changes
     await page.route((u) => decodeURIComponent(u.href).includes("/img/gallery/"), (route) => route.abort());
     await page.goto(`${BASE}/en/gallery`, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(2500);
-    await page.screenshot({ path: `${EVIDENCE_ROOT}F11/state-matrix/gallery--image-fail--768.png` });
+    await page.screenshot({ path: `${EVIDENCE_OUT}F11/state-matrix/gallery--image-fail--768.png` });
     const failCards = await page.evaluate(() => document.body.innerText.split("\n").filter((l) => l.length > 25).length);
     log(`gallery--image-fail--768.png captured (all gallery optimizer requests aborted; caption text lines present: ${failCards})`);
     await page.close();
@@ -449,7 +449,7 @@ log(`\n## F11-2 — global-error §7.9 copy (source grep)`);
 // ---------- F9-3 + F11-5 + F8-5: rendered-HTML greps over the snapshot set ----------
 log(`\n## F9-3 / F11-5 / F8-5 — snapshot greps`);
 {
-  const files = ROUTES.flatMap((r) => ["en", "ar"].map((l) => `${EVIDENCE_ROOT}snapshots/${r.name}--${l}.html`));
+  const files = ROUTES.flatMap((r) => ["en", "ar"].map((l) => `${EVIDENCE_OUT}snapshots/${r.name}--${l}.html`));
   let socialProof = 0;
   for (const f of files) {
     const html = readFileSync(f, "utf8");
@@ -457,8 +457,8 @@ log(`\n## F9-3 / F11-5 / F8-5 — snapshot greps`);
     if (hits) { socialProof += hits.length; log(`${f.split("/").pop()} social-proof words: ${hits.join(",")}`); }
   }
   log(`F9-3 VERDICT: ${socialProof === 0 ? "PASS — zero testimonial/review/press/awards in all 16 rendered pages" : `FAIL — ${socialProof} hits`}`);
-  const enHome = readFileSync(`${EVIDENCE_ROOT}snapshots/home--en.html`, "utf8");
-  const arHome = readFileSync(`${EVIDENCE_ROOT}snapshots/home--ar.html`, "utf8");
+  const enHome = readFileSync(`${EVIDENCE_OUT}snapshots/home--en.html`, "utf8");
+  const arHome = readFileSync(`${EVIDENCE_OUT}snapshots/home--ar.html`, "utf8");
   const og = [
     ["og:title", /property="og:title"/.test(enHome) && /property="og:title"/.test(arHome)],
     ["og:description", /property="og:description"/.test(enHome) && /property="og:description"/.test(arHome)],

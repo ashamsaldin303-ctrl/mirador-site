@@ -3,7 +3,7 @@
 // Rate-limit isolation per parent §8.4: every POST carries a DISTINCT
 // x-forwarded-for IP (the limiter keys per-IP) — the limiter stays ACTIVE
 // (boot-guard honored: dev daemon untouched, E2E_RATE_LIMIT never set).
-import { db, specLog, freshSlot, cleanupTestRows, postJson, validReservation, TEST_PHONE_PREFIX, BASE } from "./lib";
+import { db, specLog, freshSlot, cleanupTestRows, postJson, validReservation, TEST_PHONE_PREFIX, BASE, EVIDENCE_OUT } from "./lib";
 
 const prisma = db();
 
@@ -153,11 +153,13 @@ const specs: Record<string, () => Promise<void>> = {
 
 const arg = process.argv[2] ?? "all";
 const order = ["capacity-sequential", "capacity-race", "ratelimit", "dupguard", "honeypot"];
-const run = arg === "all" ? order : [arg];
+// Q4 order (prompt-3): capacity-race FIRST on the production surface, then the
+// rest — the CLI accepts "all", one name, or a name list.
+const run = arg === "all" ? order : process.argv.slice(2);
 for (const name of run) {
   if (!specs[name]) throw new Error(`unknown spec: ${name}`);
   console.log(`running spec: ${name}`);
   await specs[name]();
 }
 await prisma.$disconnect();
-console.log(`done — logs in /evidence/specs/ (BASE=${BASE})`);
+console.log(`done — logs in ${EVIDENCE_OUT}specs/ (BASE=${BASE})`);

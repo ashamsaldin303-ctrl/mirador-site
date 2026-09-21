@@ -2,7 +2,7 @@
 // Usage: bun evidence/tools/browser-specs.ts <locale-atomic|webgl-kill|booking|inquiry|all>
 import { chromium } from "playwright";
 import { PrismaClient } from "@prisma/client";
-import { db, specLog, cleanupTestRows, EVIDENCE_ROOT, TEST_PHONE_PREFIX, BASE } from "./lib";
+import { db, specLog, cleanupTestRows, EVIDENCE_OUT, TEST_PHONE_PREFIX, BASE } from "./lib";
 
 const prisma: PrismaClient = db();
 
@@ -229,10 +229,11 @@ async function inquiry() {
 const specs: Record<string, () => Promise<void>> = { "locale-atomic": localeAtomic, "webgl-kill": webglKill, booking, inquiry };
 const arg = process.argv[2] ?? "all";
 const order = ["locale-atomic", "webgl-kill", "booking", "inquiry"];
-for (const name of arg === "all" ? order : [arg]) {
+const run = arg === "all" ? order : process.argv.slice(2);
+for (const name of run) {
   if (!specs[name]) throw new Error(`unknown spec: ${name}`);
   console.log(`running spec: ${name}`);
   await specs[name]();
 }
 await prisma.$disconnect();
-console.log(`done — logs in ${EVIDENCE_ROOT}specs/ (BASE=${BASE})`);
+console.log(`done — logs in ${EVIDENCE_OUT}specs/ (BASE=${BASE})`);
