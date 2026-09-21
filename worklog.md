@@ -218,3 +218,20 @@ Work Log:
 
 Stage Summary:
 - DONE-with-blockers per prompt-2 §10: E1–E16 satisfied to the maximum this platform legally allows; single root cause (production-build prohibition) produces every BLOCKED row; both in-run product defects found by frozen checks were fixed in product code (checks untouched) with full FAIL→PASS journeys preserved verbatim in the raw logs.
+
+---
+Task ID: session-continue-sync
+Agent: Z.ai Code (main orchestrator)
+Task: Resume session after context overflow — reconcile local git state with GitHub remote (1 unpushed doc-sync commit) and re-verify the running site
+
+Work Log:
+- Resumed and read full worklog (220 lines) + git state: branch main ahead of origin/main by 1 commit (1dc1c69 — AGENTS.md, ASSUMPTIONS.md, README.md, docs/deploy-pre.md, docs/versions.md, evidence/BLOCKED.md, evidence/REPLAY.md, tool-results/bash_*.txt; auto-checkpoint commit from prior session tail)
+- Checked dev daemon via dev.log tail: all 8 routes × 2 locales serving 200; POST /api/reservations → 201; POST /api/inquiries → 201 — service healthy, no restart needed
+- Staged the untracked tool artifact of this session (tool-results/read_*.txt) alongside worklog continuation
+- Committed and pushed both commits to origin/main (PAT-embedded remote)
+- Verified via GitHub API: remote branch HEAD SHA == local HEAD SHA
+- Browser sanity check on / (agent-browser): home renders, locale switch + booking entry interactive
+
+Stage Summary:
+- Local ↔ remote fully reconciled; zero divergence between /home/z/my-project main and ashamsaldin303-ctrl/mirador-site main
+- Dev daemon confirmed healthy at verification time; no product code changed in this task (docs/evidence sync only)
