@@ -161,3 +161,22 @@ Stage Summary:
 - ALL 8 routable paths × 2 locales live and interactive; the signature journey + kill-switched WebGL work end-to-end; booking funnel verified through the real DB; deterministic battery fully green.
 - Evidence: /evidence/F1 (home LTR+RTL 1440), F3 (menu overlay), F4 (confirmation), F6 (journey scrub + webgl-off), F7 (gallery grid), F11 (404 + AR reserve RTL), F12 (home mobile 375).
 - Remaining for handoff machine: production build + Lighthouse/axe/Playwright batteries (scripts authored, expected outcomes frozen by §9; tooling not installed in sandbox per docs/versions.md).
+
+---
+Task ID: github-push
+Agent: main (Z.ai Code)
+Task: Create a new GitHub repo on the user's account and push the entire project as-is
+
+Work Log:
+- Verified GitHub PAT via GET /user → account: ashamsaldin303-ctrl (token valid)
+- Confirmed local git state: branch main, clean working tree, 318 tracked files, no remote
+- Created private repo via POST /user/repos → ashamsaldin303-ctrl/mirador-site (default branch: main, description from README: MIRADOR — Damascus fine-dining restaurant site)
+- Added remote origin with embedded PAT and pushed: git push -u origin main → new branch main → main, tracking set
+- Verified via API: 3 commits present, git tree SHA 8e904c3 matches local HEAD, 318 blobs remote = 318 local, truncated: false
+- Checked .env (tracked): only DATABASE_URL=file:/home/z/my-project/db/custom.db — no real secrets
+- dev.log, node_modules, .next excluded by .gitignore as standard
+
+Stage Summary:
+- Repo live at https://github.com/ashamsaldin303-ctrl/mirador-site (private)
+- Full history + all 318 files pushed as-is; remote tracks origin/main
+- Remote URL contains embedded PAT for future pushes from this sandbox
