@@ -144,6 +144,57 @@ jobs:
           bun evidence/tools/api-specs.ts capacity-sequential ratelimit dupguard honeypot sec-r5
           bun evidence/tools/browser-specs.ts locale-atomic webgl-kill sheet-z booking inquiry
 
+      - name: "Q4b2: F3-5 filter pair re-shoot + JRN-1 auto-kill emulation (E50/E55)"
+        run: |
+          bun evidence/tools/filter-pair.ts
+          bun evidence/tools/journey-emulation.ts
+
+      - name: "Q4b3: image surface probes (E53/E54) — AVIF served + OG JPEG magic"
+        run: |
+          set -eo pipefail
+          mkdir -p evidence/prod-run/img-surface
+          cd evidence/prod-run/img-surface
+          # E53: a documented ladder request served content-type: image/avif
+          curl -is -m 20 "http://localhost:3000/img/hero/poster-750w.avif?w=640" > ladder-avif.txt
+          grep -i "content-type: image/avif" ladder-avif.txt || { echo "E53 FAIL: ladder rung not image/avif"; exit 1; }
+          # E53: the optimizer route prefers AVIF (Accept carries avif)
+          curl -is -m 30 -H "Accept: image/avif,image/*" "http://localhost:3000/_next/image?url=%2Fimg%2Fgallery%2Ffire-3.avif&w=384&q=75" > optimizer-avif.txt
+          grep -i "content-type: image/avif" optimizer-avif.txt || { echo "E53 FAIL: optimizer not serving image/avif"; exit 1; }
+          # E54: OG images are JPEG — content-type + magic bytes, both locales
+          for loc in en ar; do
+            curl -is -m 20 "http://localhost:3000/img/og/og-image-$loc.jpg" > og-$loc-jpeg.txt
+            grep -i "content-type: image/jpeg" og-$loc-jpeg.txt || { echo "E54 FAIL: og-$loc not image/jpeg"; exit 1; }
+            curl -s -m 20 "http://localhost:3000/img/og/og-image-$loc.jpg" -o og-$loc.jpg
+            printf "og-$loc.jpg magic bytes: " | tee magic-$loc.txt
+            od -An -tx1 -N3 og-$loc.jpg | tr -d ' \n' | tee -a magic-$loc.txt; echo | tee -a magic-$loc.txt
+            grep -q "ffd8ff" magic-$loc.txt || { echo "E54 FAIL: og-$loc magic bytes not JPEG (ffd8ff)"; exit 1; }
+          done
+          echo "E53/E54 PASS — AVIF served on both surfaces; OG pair is JPEG by content-type + magic bytes"
+
+      - name: "Q1b: P-024 route census ○/● from the build output (E65)"
+        run: bun scripts/route-census.ts build-output.log
+
+      - name: "RPL-4: prod-run MANIFEST (E56) — runner OS · pg pin · tool versions"
+        run: |
+          set -eo pipefail
+          mkdir -p evidence/prod-run
+          {
+            echo "# prod-run MANIFEST (RPL-4/E56) — machine-generated $(date -u +%FT%TZ)"
+            echo ""
+            echo "- runner: ${RUNNER_NAME:-unknown} @ ${RUNNER_OS:-unknown} (${IMAGE_OS:-image-os unset})"
+            echo "- postgres service: postgres:16 (major pin — workflow services block)"
+            echo "- DATABASE_URL target: localhost:5432/mirador (service container)"
+            echo "- bun: $(bun --version)"
+            echo "- node: $(node --version)"
+            echo "- prisma CLI: $(bunx prisma --version | head -2 | tr '\n' ' ')"
+            echo "- playwright: $(bunx playwright --version)"
+            echo "- chromium (PLAYWRIGHT): $(ls /home/runner/.cache/ms-playwright/ | tr '\n' ' ')"
+            echo "- lighthouse: @lhci/cli@0.15.1 (pinned in workflow)"
+            echo "- repo HEAD: $(git rev-parse HEAD)"
+            echo "- actions run: ${GITHUB_RUN_NUMBER} (id ${GITHUB_RUN_ID})"
+          } > evidence/prod-run/MANIFEST.md
+          cat evidence/prod-run/MANIFEST.md
+
       - name: "Q4c: 16 rendered snapshots + grep summary (E13 form)"
         run: |
           set -eo pipefail

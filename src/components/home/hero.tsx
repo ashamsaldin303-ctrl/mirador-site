@@ -1,8 +1,8 @@
 // MIRADOR — Home hero (§4.1): full-bleed night-city poster (LCP element),
 // dual-script wordmark lockup, hero line + CTA pair. Server component.
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { LadderImage } from "@/components/ui/ladder-image";
 import { WordmarkLockup } from "@/components/brand/wordmark-lockup";
 import type { Locale } from "@/lib/i18n";
 
@@ -19,7 +19,7 @@ export function Hero({
 }) {
   return (
     <section className="media-grain relative flex min-h-svh flex-col items-center justify-center overflow-hidden">
-      <Image
+      <LadderImage
         src="/img/hero/poster.avif"
         alt={line}
         fill

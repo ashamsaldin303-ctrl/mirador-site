@@ -16,6 +16,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { DURATIONS, EASE_EXPO_OUT, getMotion } from "@/lib/motion";
+import { miradorImageLoader } from "@/lib/image-loader";
 
 const SkylineCanvas = dynamic(() => import("./skyline-canvas"), {
   ssr: false,
@@ -198,7 +199,10 @@ function ActPanel({ act, index, stacked }: { act: Act; index: number; stacked: b
           alt={act.title}
           fill
           sizes="100vw"
-          loading={index === 0 ? "eager" : "lazy"}
+          // R11 minor: act-1 is below-fold — LAZY like its siblings (no eager
+          // pre-LCP fetch on the home route); the hero poster owns priority.
+          loading="lazy"
+          loader={miradorImageLoader}
           className="object-cover"
         />
         <div aria-hidden="true" className="absolute inset-0 bg-night/60" />
@@ -230,6 +234,7 @@ function ActPanel({ act, index, stacked }: { act: Act; index: number; stacked: b
             fill
             sizes="(min-width: 640px) 384px, 288px"
             loading="lazy"
+            loader={miradorImageLoader}
             className="object-cover"
           />
         </div>

@@ -4,7 +4,7 @@
 // (brief-sanctioned §4.4). Line-heights come from the type tokens (AR auto ≥1.7,
 // F8-2) — no leading-* overrides. All copy from content/{en,ar}.json.
 import type { Metadata } from "next";
-import Image from "next/image";
+import { LadderImage } from "@/components/ui/ladder-image";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { getDictionary, type Locale } from "@/lib/i18n";
@@ -68,7 +68,7 @@ export default async function StoryPage({
           {i === 1 &&
             (hasNightImage ? (
               <figure className="media-grain relative h-[60vh] border-y border-line bg-surface">
-                <Image
+                <LadderImage
                   src={NIGHT_IMAGE}
                   alt={dict["story.pullQuote"]}
                   fill

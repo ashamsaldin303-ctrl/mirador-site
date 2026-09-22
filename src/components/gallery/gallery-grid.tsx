@@ -8,6 +8,7 @@ import { useState } from "react";
 import Image from "next/image";
 import type { GalleryItem } from "@prisma/client";
 import type { Locale } from "@/lib/i18n";
+import { isLadderMaster, miradorImageLoader } from "@/lib/image-loader";
 import { Lightbox } from "./lightbox";
 
 export type GalleryStrings = {
@@ -59,6 +60,9 @@ function GalleryTile({ item, index, locale, strings, onOpen }: TileProps) {
             // optimizer assumed 100vw and shipped ~viewport-wide AVIF/WebP to
             // 375px phones (council estimate −378KB wire @375).
             sizes="(min-width: 1024px) calc((min(100vw - 4rem, 80rem) - 3rem) / 3), (min-width: 640px) calc((min(100vw - 3rem, 80rem) - 1.5rem) / 2), calc(100vw - 2rem)"
+            // PRF-3: skyline masters carry the pre-graded AVIF ladder — they
+            // serve rung files directly; every other tile keeps the optimizer.
+            loader={isLadderMaster(item.imageUrl) ? miradorImageLoader : undefined}
             priority={index < 2}
             onError={() => setFailed(true)}
             className="h-auto w-full"

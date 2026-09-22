@@ -119,6 +119,21 @@ await mapLimit(sizes, 3, async ({ src, out, lw, lh, quality, variant }) => {
 
 writeFileSync(join(OUT, "size-report.json"), JSON.stringify(report, null, 1));
 
+// PRF-4 (prompt-4 R6): OG images → JPEG — social crawlers (facebookexternalhit,
+// Twitterbot, WhatsApp preview) do NOT decode AVIF; the OG pair ships JPEG so
+// the preview card actually renders. Chroma 4:4:4 keeps the amber grade clean
+// under chroma-subsampled JPEG. The AVIF masters stay (browser-served surfaces
+// never reference /img/og — only the <meta> crawlers do).
+for (const loc of ["en", "ar"]) {
+  const jpg = `og/og-image-${loc}.jpg`;
+  await sharp(join(OUT, `og/og-image-${loc}.avif`))
+    .jpeg({ quality: 82, mozjpeg: true, chromaSubsampling: "4:4:4" })
+    .toFile(join(OUT, jpg));
+  report[jpg] = statSync(join(OUT, jpg)).size;
+  console.log(`${jpg.padEnd(36)} ${String(report[jpg]).padStart(7)} B  (1200×630, PRF-4)`);
+}
+writeFileSync(join(OUT, "size-report.json"), JSON.stringify(report, null, 1));
+
 // budget check (F10-1): hero 750w/1080w ≤ 60KB; every 1600w/2560w ≤ 250KB
 const fails = [];
 for (const [file, size] of Object.entries(report)) {

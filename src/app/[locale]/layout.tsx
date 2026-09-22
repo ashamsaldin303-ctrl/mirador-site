@@ -40,11 +40,15 @@ export async function generateMetadata({
       siteName: "MIRADOR",
       title: dict["meta.og.title"],
       description: dict["meta.og.description"],
+      // PRF-4 (prompt-4 R6): JPEG — social crawlers (facebookexternalhit /
+      // Twitterbot / WhatsApp preview) do not decode AVIF; the pair ships
+      // 1200×630 JPEG so the preview card renders everywhere.
       images: [
         {
-          url: `/img/og/og-image-${locale}.avif`,
+          url: `/img/og/og-image-${locale}.jpg`,
           width: 1200,
           height: 630,
+          type: "image/jpeg",
           alt: dict["meta.og.title"],
         },
       ],

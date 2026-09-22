@@ -35,6 +35,14 @@ const CSP = [
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  images: {
+    // PRF-3 (prompt-4 R6/P-023): AVIF actually served — the optimizer's
+    // preferred output format for responsive sources (gallery tiles, menu
+    // plates, 404 poster); the pre-graded AVIF ladder masters (hero/journey/
+    // story/skyline) bypass the optimizer via the per-image custom loader
+    // (src/lib/image-loader.ts) and serve rung files directly (E53).
+    formats: ["image/avif"],
+  },
   /* No ignoreBuildErrors / ignoreDuringBuilds — gate silencers are
      review-blocking defects (full-stack-agent-playground §10.4, §13-6). */
   reactStrictMode: true,
