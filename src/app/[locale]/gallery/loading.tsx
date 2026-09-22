@@ -1,4 +1,9 @@
 // MIRADOR — route-level loading surface (brand skeleton rows, §6.6 state matrix).
+// R3 (prompt-4 B-1): relocated from [locale]/loading.tsx into the DB-backed
+// segments (menu · gallery · confirmation) — the [locale]-level Suspense
+// boundary flushed a 200 shell before notFound() could commit the honest 404
+// status through the catch-all. The catch-all now unwraps (no boundary above
+// it); these segments keep their skeletons where streaming actually happens.
 export default function Loading() {
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-6 px-4 py-32 sm:px-6" aria-busy="true" aria-live="polite">

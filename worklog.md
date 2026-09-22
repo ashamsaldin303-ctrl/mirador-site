@@ -270,3 +270,19 @@ Work Log:
 
 Stage Summary:
 - R0 + R2 landed; E34 ACK on record before first code commit; E35 dispatch in flight (run 9); E39/E40 raw artifacts under /evidence/r1/{E39,E40}/ with MANIFEST + REPLAY; exit-gate (E79) re-proves both specs on the Actions prod surface.
+
+---
+Task ID: p4-r3
+Agent: Z.ai Code (main orchestrator)
+Task: prompt-4 R3 · B-1 — the honest 404
+
+Work Log:
+- Root cause confirmed: [locale]/loading.tsx Suspense boundary flushed a 200 shell before the catch-all's generateMetadata-notFound() could commit the status (the metadata trick alone can't win against an earlier flush).
+- Fix chosen: (a) relocate loading.tsx into per-route segments — documented WHY: preserves the localized §7.9 floor (locale layout wraps not-found with correct lang/dir + designed copy + noindex) and keeps skeletons exactly where streaming happens (menu · gallery · confirmation — the three DB-backed segments); the catch-all unwraps with no boundary above it.
+- [locale]/loading.tsx DELETED (git rm); identical skeleton landed at menu/loading.tsx · gallery/loading.tsx · confirmation/[id]/loading.tsx (self-contained per the existing pattern, R3 comment in each).
+- Dev-daemon verification: /en/nonexistent-page → HTTP 404 · /ar/nonexistent-page → HTTP 404 · designed floor-copy renders both locales · noindex present · content routes unaffected (menu/gallery/confirmation ×2 locales 200). The round-2 "dev-mode Turbopack quirk B4" is GONE — the loading boundary was the true root cause in both surfaces.
+- Raw leading pairs captured: evidence/r1/E41/dev-pairs.log (canonical E41 cell = Actions prod run at the exit gate; http/summary.txt E22 regenerates there).
+- typecheck 0 · eslint 0.
+
+Stage Summary:
+- B-1 fixed at the root; honest 404 in dev, prod proof rides the exit-gate dispatch (E41/E79).

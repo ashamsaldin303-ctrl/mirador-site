@@ -1,0 +1,13 @@
+# E41 dev-surface leading pairs (R3 fix landed) — machine-generated 2026-09-22T17:45:19Z
+# canonical cell = Actions prod run (exit gate E79); these are the dev-daemon leading indicators
+
+== GET /en/nonexistent-page ==
+HTTP/1.1 404 Not Found
+== GET /ar/nonexistent-page ==
+HTTP/1.1 404 Not Found
+
+floor-copy + noindex present in body:
+name="robots" content="noindex
+This floor doesn't exist.
+name="robots" content="noindex
+هذا الطابق غير موجود.
