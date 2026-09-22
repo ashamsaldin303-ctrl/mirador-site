@@ -1,6 +1,9 @@
 // MIRADOR — /menu (task route · LCP-first): no hero media, H1 leads, editorial
 // calm. Server-renders all 28 dishes from the DB (F3-2), the interactive
 // island (filters + overlays) hydrates on top with everything visible.
+// P-024 (prompt-4 R9): pinned force-dynamic below — menu SSR is a JUSTIFIED ●
+// in the route census (fresh DB data per request, the contract's own list);
+// without the pin the segment would prerender at build and freeze the menu.
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
@@ -17,6 +20,8 @@ import {
   type MenuSectionDTO,
   type MenuStrings,
 } from "@/components/menu/menu-client";
+
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,

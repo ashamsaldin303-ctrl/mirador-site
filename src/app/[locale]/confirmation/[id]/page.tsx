@@ -19,9 +19,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale: raw, id } = await params;
   const locale: Locale = raw === "ar" ? "ar" : "en";
-  // commit the 404 status BEFORE the streaming shell flushes (F11-1)
-  const reservation = await db.reservation.findUnique({ where: { id }, select: { id: true } });
-  if (!reservation) notFound();
+  // NOTE (P-024/R3): the 404 status is committed by the PAGE's notFound() —
+  // the segment's loading.tsx was removed (it flushed a 200 shell first),
+  // and a notFound() thrown from generateMetadata resolves through the
+  // LAYOUT-level boundary (locale-blind), while the page's throw resolves
+  // through THIS segment's localized boundary.
   return {
     title: getDictionary(locale)["confirm.title"],
     // COP-2 (prompt-4 R5): guest PII surface — noindex + demotion.

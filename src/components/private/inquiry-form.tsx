@@ -1,14 +1,13 @@
 "use client";
 // MIRADOR — Private dining inquiry form (§4.6 · §7.8): name · phone ·
 // preferredDate · partySize (1–60, optional) · message + hidden honeypot
-// ("website"). Client pre-validation uses the SAME wire schema as the API
-// (src/lib/validation.ts → inquirySchema); the server's 400 fields map is
-// translated into the same per-field bilingual inline errors (RTL-correct:
-// each error renders directly under its field). 201 replaces the form with the
-// calm success state: success line + reference (id first 8) + WhatsApp CTA.
+// ("website"). Client pre-validation MIRRORS the API's wire schema (see
+// validateInquiry below — no zod on the wire to the browser); the server's
+// zod parse stays the truth and its 400 fields map renders the same
+// per-field bilingual inline errors (RTL-correct: each error renders directly
+// under its field). 201 replaces the form with the calm success state:
+// success line + reference (id first 8) + WhatsApp CTA.
 import { useId, useState, type FormEvent } from "react";
-import type { ZodIssue } from "zod";
-import { inquirySchema } from "@/lib/validation";
 import type { Locale } from "@/lib/i18n";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -57,15 +56,6 @@ type InquiryPayload = {
   website: string;
 };
 
-// wire field → dictionary error key (client side, from the shared zod schema)
-const FIELD_ERROR_KEY: Record<FieldKey, keyof ErrorStrings> = {
-  name: "invalidName",
-  phone: "invalidPhone",
-  preferredDate: "invalidDate",
-  partySize: "invalidParty",
-  message: "invalidMessage",
-};
-
 // server 400 { fields: { <field>: ["<errorKey>"] } } → the same dictionary keys
 const SERVER_FIELD: Record<string, FieldKey> = {
   name: "name",
@@ -89,22 +79,38 @@ function toIsoDatetime(value: string): string {
   return Number.isNaN(date.getTime()) ? value : date.toISOString();
 }
 
-function issuesToFieldErrors(
-  issues: ZodIssue[],
-  raw: { name: string; phone: string; message: string },
+/** P-024/E43 (prompt-4 R7 ledger finding): the round-1 build shipped the FULL
+ * zod runtime to the browser for five trim/regex checks — /private-dining
+ * first-load measured 232.4KB gz (run-11 raw), OVER the 200KB hard cap.
+ * This is the client-side MIRROR of inquirySchema (§8.2): same fields, same
+ * bounds, same error mapping — zero dependency bytes. The server's zod parse
+ * remains the source of truth; its 400 fields map reuses these keys. */
+const PHONE_RE = /^\+?[0-9][0-9\s-]{6,18}$/;
+
+function validateInquiry(
+  raw: { name: string; phone: string; preferredDate: string; partyRaw: string; message: string },
   errors: ErrorStrings,
 ): FieldErrors {
   const out: FieldErrors = {};
-  for (const issue of issues) {
-    const field = issue.path[0];
-    if (typeof field !== "string") continue;
-    const key = field as FieldKey;
-    if (!(key in FIELD_ERROR_KEY) || out[key]) continue;
-    const isEmpty =
-      (key === "name" && raw.name === "") ||
-      (key === "phone" && raw.phone === "") ||
-      (key === "message" && raw.message === "");
-    out[key] = isEmpty ? errors.required : errors[FIELD_ERROR_KEY[key]];
+  const set = (key: FieldKey, empty: boolean, invalid: keyof ErrorStrings) => {
+    out[key] = empty ? errors.required : errors[invalid];
+  };
+  if (raw.name === "" || raw.name.length < 2 || raw.name.length > 80) {
+    set("name", raw.name === "", "invalidName");
+  }
+  if (raw.phone === "" || !PHONE_RE.test(raw.phone)) {
+    set("phone", raw.phone === "", "invalidPhone");
+  }
+  if (raw.preferredDate !== "") {
+    const iso = toIsoDatetime(raw.preferredDate);
+    if (Number.isNaN(new Date(iso).getTime())) out.preferredDate = errors.invalidDate;
+  }
+  if (raw.partyRaw !== "") {
+    const n = Number(raw.partyRaw);
+    if (!Number.isInteger(n) || n < 1 || n > 60) out.partySize = errors.invalidParty;
+  }
+  if (raw.message === "" || raw.message.length < 10 || raw.message.length > 1000) {
+    set("message", raw.message === "", "invalidMessage");
   }
   return out;
 }
@@ -152,10 +158,15 @@ export function InquiryForm({
       partySize: partyRaw ? Number(partyRaw) : undefined,
     };
 
-    // same wire schema as the API (§8.2) — per-field bilingual errors up front
-    const parsed = inquirySchema.safeParse(payload);
-    if (!parsed.success) {
-      setFieldErrors(issuesToFieldErrors(parsed.error.issues, { name, phone, message }, errors));
+    // client mirror of the wire schema (§8.2) — per-field bilingual errors up
+    // front; the server re-validates with zod (the truth) and maps 400 fields
+    // through SERVER_FIELD/SERVER_ERROR_KEY below.
+    const mirrorErrors = validateInquiry(
+      { name, phone, preferredDate: dateRaw, partyRaw, message },
+      errors,
+    );
+    if (Object.keys(mirrorErrors).length > 0) {
+      setFieldErrors(mirrorErrors);
       return;
     }
     setFieldErrors({});

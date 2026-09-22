@@ -2,10 +2,15 @@
 // Server Component: SSR the 8 GalleryItem rows (sortOrder asc) and hand them to
 // the client masonry grid + lightbox. Captions render per locale (F7-3);
 // images degrade to the designed bilingual caption card when missing (F7-4).
+// P-024 (prompt-4 R9): pinned force-dynamic — gallery SSR is a JUSTIFIED ● in
+// the route census (fresh DB tiles per request); without the pin the segment
+// would prerender at build and freeze the exhibit.
 import type { Metadata } from "next";
 import { db } from "@/lib/db";
 import { getDictionary, type Locale } from "@/lib/i18n";
 import { GalleryGrid } from "@/components/gallery/gallery-grid";
+
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
