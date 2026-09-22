@@ -24,11 +24,13 @@ export function WordmarkLockup({
         : "text-h3";
   return (
     <span className={cn("inline-flex items-baseline gap-2", className)} aria-label={ariaLabel}>
-      <span className={cn("font-display-en leading-none text-ink", en)}>MIRADOR</span>
+      {/* R9 (prompt-4 P-082/P-025): the lockup renders from the WORDMARK faces
+          (tiny exact-glyph subsets) with the full display families as fallback. */}
+      <span className={cn("font-wordmark-en leading-none text-ink", en)}>MIRADOR</span>
       <span aria-hidden="true" className="text-copper leading-none">
         ×
       </span>
-      <span className={cn("font-display-ar leading-none text-ink", ar)}>ميرادور</span>
+      <span className={cn("font-wordmark-ar leading-none text-ink", ar)}>ميرادور</span>
     </span>
   );
 }

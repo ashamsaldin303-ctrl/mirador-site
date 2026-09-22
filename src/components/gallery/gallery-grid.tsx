@@ -53,6 +53,12 @@ function GalleryTile({ item, index, locale, strings, onOpen }: TileProps) {
             alt={`${title} — ${caption}`}
             width={item.width}
             height={item.height}
+            // P-082 (prompt-4 R9): the masonry tile is NEVER viewport-wide —
+            // columns-1 <640px (minus 2rem page padding), 2 cols at sm, 3 cols
+            // at lg inside the max-w-7xl (80rem) container. Without `sizes` the
+            // optimizer assumed 100vw and shipped ~viewport-wide AVIF/WebP to
+            // 375px phones (council estimate −378KB wire @375).
+            sizes="(min-width: 1024px) calc((min(100vw - 4rem, 80rem) - 3rem) / 3), (min-width: 640px) calc((min(100vw - 3rem, 80rem) - 1.5rem) / 2), calc(100vw - 2rem)"
             priority={index < 2}
             onError={() => setFailed(true)}
             className="h-auto w-full"

@@ -79,11 +79,14 @@ export default async function LocaleLayout({
   const fontPreloads =
     locale === "ar"
       ? [
-          { href: "/fonts/amiri-400-arabic.woff2", as: "font" },
+          // R9 (P-082/P-025): preload the WORDMARK face (nav lockup, 6,020B) — the
+          // full Amiri display face arrives via swap for headings. Body stays.
+          { href: "/fonts/amiri-wordmark-arabic.woff2", as: "font" },
           { href: "/fonts/plex-arabic-400-arabic.woff2", as: "font" },
         ]
       : [
-          { href: "/fonts/fraunces-var-latin.woff2", as: "font" },
+          // R9: same rule EN — wordmark subset (7,176B) over the full Fraunces.
+          { href: "/fonts/fraunces-wordmark-latin.woff2", as: "font" },
           { href: "/fonts/instrument-sans-var-latin.woff2", as: "font" },
         ];
 

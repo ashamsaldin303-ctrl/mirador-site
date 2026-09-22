@@ -341,3 +341,20 @@ Work Log:
 
 Stage Summary:
 - The doc-truth layer is closed: every claim quotes its run-11 raw verdict, mechanically enforced in CI. FRM-1 + DES-2 landed (dev-verified). Remaining R6: F3-5 re-shoot · PRF-3 AVIF+loader · PRF-4 OG JPEG · JRN-1 emulation · RPL-4 MANIFEST.
+
+---
+Task ID: p4-r9a
+Agent: Z.ai Code (main orchestrator)
+Task: prompt-4 R9 · P-082/P-025 — gallery sizes + font subsets + wordmark faces (partial: the LCP wire levers)
+
+Work Log:
+- P-082 gallery sizes: the masonry tile Image now declares the real column math — (min-width:1024px) calc((min(100vw−4rem,80rem)−3rem)/3), (min-width:640px) 2-col calc, else calc(100vw−2rem) — the optimizer no longer assumes 100vw and ships viewport-wide images to 375px phones (council estimate −378KB wire @375; canonical before/after = run-11 vs exit-gate network captures, E64).
+- AR-latin corpus extraction: content/ar.json + runtime price/time/ref chars → 46 codepoints (" !#$%&'()*+,-./0123456789:;@Eghilns©«·»×–—'…−).
+- scripts/subset-fonts-r9.sh (reproducible, sources in assets/fonts-src): five AR-latin faces re-subset to the corpus — plex 400/500/600-latin 13,148/14,092/14,276B → 5,612/5,792/5,900B · amiri 400/700-latin 18,984/19,816B → 7,004/7,252B (latin arm 80,316B → 31,560B = −48,756B wire on AR doors).
+- WORDMARK faces: fraunces-wordmark-latin.woff2 7,176B ("MIRADOR", VF axes kept) + amiri-wordmark-arabic.woff2 6,020B ("ميرادور") — narrow unicode-ranges (exact glyphs), new --font-wordmark-en/ar tokens with full-family fallbacks, WordmarkLockup renders from them, layout preloads switched (EN: full-Fraunces 54,972B preload → wordmark 7,176B; AR: amiri-400-arabic 36,108B → wordmark 6,020B; body preloads unchanged). Display headings keep the full families via font-display:swap — LCP element is the hero poster, not text.
+- Font disk: 334,880B baseline → 299,320B (−35,560B; ledger row for E58/E64, exit-gate re-asserted).
+- Verified dev: /en /ar /en/gallery /ar/gallery 200 · document.fonts: Fraunces Wordmark:loaded + Amiri Wordmark:loaded · fonts.check true ×2 · audit:fonts AR weight payloads all PASS (42.1/42.4/34.2/36.7/36.9KB ≤60KB) · typecheck 0 · lint 0 · wordmark screenshots both locales @375 (evidence/r1/E64-dev/).
+- NOT yet done (R9 residuals, next train): P-024 ○/● route census + size-adjust metric-matched fallback CLS kills + the E64 canonical before/after capture (exit gate).
+
+Stage Summary:
+- The two biggest LCP wire levers landed (gallery sizes + corpus/wordmark subsets); disk ledger −35,560B; canonical E64 measurement rides the exit-gate dispatch against run-11's committed BEFORE.
