@@ -1,7 +1,7 @@
-# MIRADOR — CI (prompt-4 R1 · C-2): doc-drift guard on every push.
+# MIRADOR — CI (prompt-4 R1 · C-2): doc-drift guard + R7 fences on every push.
 # N24: no doc claim without its raw artifact — verify-docs fails the job when
 # a doc assertion contradicts the raw state it names. R7's fences (LEDGER /
-# EXCHANGE / GATEBOOK) arm here as they land.
+# GATEBOOK / EXCHANGE) arm here; the wire cells assert on the prod-run surface.
 name: ci
 
 on:
@@ -22,3 +22,35 @@ jobs:
         run: |
           set -eo pipefail
           bun scripts/verify-docs.ts --probe
+
+  ledger:
+    # P-041 (prompt-4 R7 · E57): disk-assertable budget cells on every push —
+    # AR font faces ≤60KB each · font disk ≤ the frozen 334,880B baseline.
+    # The wire cells (16/16 ≤200KB gz · motion ≤62KB · three-pack ≤235KB)
+    # assert from the prod-run raw files on the production-evidence surface.
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+      - name: "E57: LEDGER — font cells (disk)"
+        run: |
+          set -eo pipefail
+          bun scripts/ledger.ts --disk-only
+
+  gatebook:
+    # P-044 (prompt-4 R7 · E59): the ceilings file + R10 checklist, drift-guarded —
+    # an edited ceiling or dropped check fails the job (probe proves the guard fires).
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+      - name: "E59: GATEBOOK — frozen ceilings + checklist, drift guard"
+        run: |
+          set -eo pipefail
+          bun scripts/verify-gatebook.ts --probe

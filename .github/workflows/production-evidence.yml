@@ -124,6 +124,16 @@ jobs:
       - name: "Q2: build budgets (E18/E19) → F12-2/prod-run + F6-3/prod-run"
         run: bun evidence/tools/build-budgets.ts
 
+      - name: "Q2b: R7 fences on the fresh build — LEDGER (E57) + EXCHANGE LEDGER (E58) + GATEBOOK (E59)"
+        run: |
+          set -eo pipefail
+          # P-041: full wire assert against THIS run's fresh tables
+          bun scripts/ledger.ts
+          # P-043: regenerate the exchange ledger from this run's raw files
+          bun scripts/exchange-ledger.ts
+          # P-044: the gatebook drift guard (also armed in ci.yml)
+          bun scripts/verify-gatebook.ts
+
       - name: "Q3: HTTP semantics (E22) → evidence/prod-run/http/"
         run: |
           set -eo pipefail
