@@ -1,0 +1,12 @@
+
+===== sheet-z · run 2026-09-22T18:13:11.148Z =====
+# E39 · mobile sheet computed z-order in the OPEN state at 375px + pointer hit-test + scrim close (both locales)
+en: computed z — scrim 50 · panel 50 · panel pointer-events auto · panel side right
+en: hit-test at first sheet link center {"x":97,"w":239} → elementFromPoint <a> inPanel=true
+en: scrim background (the one token --color-scrim): rgba(10, 10, 11, 0.8)
+en: scrim click (pointer) at (20,400) → sheet closed: PASS
+ar: computed z — scrim 50 · panel 50 · panel pointer-events auto · panel side left
+ar: hit-test at first sheet link center {"x":24,"w":239} → elementFromPoint <a> inPanel=true
+ar: scrim background (the one token --color-scrim): rgba(10, 10, 11, 0.8)
+ar: scrim click (pointer) at (355,400) → sheet closed: PASS
+# VERDICT: PASS — panel z ≥ scrim z in the open state at 375px, sheet links pointer-hittable, scrim closes (EN + AR mirrors)

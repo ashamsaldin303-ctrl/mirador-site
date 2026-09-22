@@ -7,3 +7,12 @@ phone error: "Please use a valid phone number."
 slot error:  "Please choose an available time."
 aria-invalid: name=true phone=true · aria-describedby(name)=reserve-name-error
 # VERDICT: PASS — all three per-field errors bilingual-correct, dir=ltr (RTL-correct), aria-invalid set
+
+===== keyboard-reserve-errors--en · run 2026-09-22T18:19:44.760Z =====
+# F8-3 · empty submit → per-field ENGLISH errors
+html: lang=en dir=ltr (before submit dir=ltr)
+name error:  "Please use a valid name."
+phone error: "Please use a valid phone number."
+slot error:  "Please choose an available time."
+aria-invalid: name=true phone=true · aria-describedby(name)=reserve-name-error
+# VERDICT: PASS — all three per-field errors bilingual-correct, dir=ltr (RTL-correct), aria-invalid set

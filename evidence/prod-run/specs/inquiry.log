@@ -6,3 +6,11 @@
 # DB row: {"id":"cmubbwrct000r424m3zb9s60g","type":"PRIVATE_DINING","name":"Evidence Run","locale":"EN"}
 # VERDICT: PASS — success state rendered, inquiry persisted
 # CLEANUP: deleted 1 inquiries
+
+===== inquiry · run 2026-09-22T18:13:15.312Z =====
+# F8 · inquiry happy path — private-dining form → success state + row persisted
+# success status (role=status): "Inquiry received. We reply within one business day — or reach us now on WhatsApp. |  | Reference: cmuczsm4 |  | Reach us now on WhatsApp"
+# reference line: "Reference: cmuczsm4"
+# DB row: {"id":"cmuczsm44000r2ggpwtgi9vht","type":"PRIVATE_DINING","name":"Evidence Run","locale":"EN"}
+# VERDICT: PASS — success state rendered, inquiry persisted
+# CLEANUP: deleted 1 inquiries

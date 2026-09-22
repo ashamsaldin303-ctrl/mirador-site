@@ -19,3 +19,10 @@ POST ip=10.99.4.1 website=<filled> → HTTP 201 {"id":"cmv87gdt8mzbj8r3oxfkumnfj
 # post-run DB count query: Inquiry rows for phone=+9639990004001 → 0
 # VERDICT: PASS — 201 with zero rows
 # inquiries baseline 0 → after 0 (unchanged)
+
+===== honeypot · run 2026-09-22T18:12:59.416Z =====
+# F8-4 · honeypot-filled inquiry → 201, NO row created (handler fakes 201 per §8.2 ruling)
+POST ip=10.99.4.1 website=<filled> → HTTP 201 {"id":"cmxg4azf3xfpz3jyra1zyuszc8"}
+# post-run DB count query: Inquiry rows for phone=+9639990004001 → 0
+# VERDICT: PASS — 201 with zero rows
+# inquiries baseline 0 → after 0 (unchanged)

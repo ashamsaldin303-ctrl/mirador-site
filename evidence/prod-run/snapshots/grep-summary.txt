@@ -1,4 +1,4 @@
-# snapshot grep summary — machine-generated 2026-09-21T14:16:53Z
+# snapshot grep summary — machine-generated 2026-09-22T18:13:17Z
 # gate (E13): every snapshot ≥3 rel=alternate hreflang + ≥1 wa.me/963955000111
 confirmation--ar.html alternates=3 wa.me=4
 confirmation--en.html alternates=3 wa.me=4

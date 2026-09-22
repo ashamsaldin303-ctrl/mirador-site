@@ -1,3 +1,21 @@
-# lcpElement per run — machine-generated 2026-09-21T14:23:45.319Z
-# raw trace corroboration — hero poster URL occurrences per trace JSON — machine-generated 2026-09-21T14:23:45.319Z
+# lcpElement per run — machine-generated 2026-09-22T18:22:39.753Z
+/en lhr-1790101310206.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-display text-h1 text-ink">
+   → poster <img>: CHECK MANUALLY
+/en lhr-1790101297364.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-display text-h1 text-ink">
+   → poster <img>: CHECK MANUALLY
+/en lhr-1790101322447.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-display text-h1 text-ink">
+   → poster <img>: CHECK MANUALLY
+/ar lhr-1790101359297.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-display text-h1 text-ink">
+   → poster <img>: CHECK MANUALLY
+/ar lhr-1790101334717.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-display text-h1 text-ink">
+   → poster <img>: CHECK MANUALLY
+/ar lhr-1790101346990.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-display text-h1 text-ink">
+   → poster <img>: CHECK MANUALLY
+# raw trace corroboration — hero poster URL occurrences per trace JSON — machine-generated 2026-09-22T18:22:39.753Z
+localhost_2026-09-22_18-22-30-0.trace.json (5.0MB) — poster URL occurrences: 35
+localhost_2026-09-22_18-22-05-0.trace.json (5.0MB) — poster URL occurrences: 25
+localhost_2026-09-22_18-21-53-0.trace.json (4.5MB) — poster URL occurrences: 15
+localhost_2026-09-22_18-22-17-0.trace.json (5.0MB) — poster URL occurrences: 25
+localhost_2026-09-22_18-21-27-0.trace.json (4.8MB) — poster URL occurrences: 15
+localhost_2026-09-22_18-21-41-0.trace.json (4.5MB) — poster URL occurrences: 15
 GATE E28: see lcpElement rows above — the LCP candidate on both locales must be the hero poster <img>

@@ -1,8 +1,8 @@
-# cold-start handoff (F12-3) — machine-generated 2026-09-21T14:23:47Z
+# cold-start handoff (F12-3) — machine-generated 2026-09-22T18:22:41Z
 # fresh clone of ashamsaldin303-ctrl/mirador-site → bun install · migrate · seed · dev → GET /en 200
 Cloning into '/tmp/coldstart'...
-clone HEAD: 49a4df51d67a7ea42e4b8abf4e21531b49ddc55d
-[0.05ms] ".env"
+clone HEAD: 2c66d480d327b490bc869c11091d7260c2ab75f9
+[0.03ms] ".env"
 bun install v1.3.14 (0d9b296a)
 
 + @axe-core/playwright@4.13.0
@@ -88,7 +88,7 @@ bun install v1.3.14 (0d9b296a)
 + zod@4.3.5
 + zustand@5.0.10
 
-879 packages installed [3.17s]
+879 packages installed [3.30s]
 $ prisma generate
 warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).
 For more information, see: https://pris.ly/prisma-config
@@ -106,11 +106,11 @@ Prisma schema loaded from prisma/schema.prisma
 │    npm i @prisma/client@latest                          │
 └─────────────────────────────────────────────────────────┘
 
-✔ Generated Prisma Client (v6.19.2) to ./node_modules/@prisma/client in 158ms
+✔ Generated Prisma Client (v6.19.2) to ./node_modules/@prisma/client in 74ms
 
 Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
 
-Tip: Interested in query caching in just a few lines of code? Try Accelerate today! https://pris.ly/tip-3-accelerate
+Tip: Need your database queries to be 1000x faster? Accelerate offers you that and more: https://pris.ly/tip-2-accelerate
 
 warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).
 For more information, see: https://pris.ly/prisma-config

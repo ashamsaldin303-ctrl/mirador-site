@@ -91,3 +91,34 @@ POST ip=10.99.1.20 phone=+9639990002219 → HTTP 409 {"error":"SLOT_FULL","messa
 # orphan check: rows with test phones NOT in target slot → 0
 # VERDICT: PASS — exactly 12 rows + 8 × 409 + 0 orphans
 # CLEANUP: deleted 12 reservations → total now 12 (seed baseline 12)
+
+===== capacity-race · run 2026-09-22T18:12:58.931Z =====
+# F4-4 · 20 PARALLEL POSTs to ONE fresh empty slot → exactly 12 rows + 8 × 409 + 0 orphans
+# baseline reservations=12
+# fresh slot chosen: 2026-10-06T15:00:00.000Z
+# 20 parallel POSTs fired via Promise.all — wall time 145ms
+POST ip=10.99.1.1 phone=+9639990002200 → HTTP 409 {"error":"SLOT_FULL","messageKey":"slotFull"}
+POST ip=10.99.1.2 phone=+9639990002201 → HTTP 409 {"error":"SLOT_FULL","messageKey":"slotFull"}
+POST ip=10.99.1.3 phone=+9639990002202 → HTTP 409 {"error":"SLOT_FULL","messageKey":"slotFull"}
+POST ip=10.99.1.4 phone=+9639990002203 → HTTP 409 {"error":"SLOT_FULL","messageKey":"slotFull"}
+POST ip=10.99.1.5 phone=+9639990002204 → HTTP 409 {"error":"SLOT_FULL","messageKey":"slotFull"}
+POST ip=10.99.1.6 phone=+9639990002205 → HTTP 409 {"error":"SLOT_FULL","messageKey":"slotFull"}
+POST ip=10.99.1.7 phone=+9639990002206 → HTTP 409 {"error":"SLOT_FULL","messageKey":"slotFull"}
+POST ip=10.99.1.8 phone=+9639990002207 → HTTP 201 {"id":"cmuczs96f000b2ggpp8jpkwfq","tableNumber":12,"slot":"2026-10-06T15:00:00.000Z","whatsappUrl":"https://wa.me/963955000111?text=Hello%20MIRADOR%20%E2%80%94%20confirming%20my%20reservation%3A%20Evidence%20Run%2C%202%20guests%2C%202026-10-06%20at%2018%3A00%20(ref%20jpkwfq)."}
+POST ip=10.99.1.9 phone=+9639990002208 → HTTP 201 {"id":"cmuczs96d000a2ggp1gf9yh53","tableNumber":11,"slot":"2026-10-06T15:00:00.000Z","whatsappUrl":"https://wa.me/963955000111?text=Hello%20MIRADOR%20%E2%80%94%20confirming%20my%20reservation%3A%20Evidence%20Run%2C%202%20guests%2C%202026-10-06%20at%2018%3A00%20(ref%20f9yh53)."}
+POST ip=10.99.1.10 phone=+9639990002209 → HTTP 201 {"id":"cmuczs96a00092ggps8kw6owp","tableNumber":10,"slot":"2026-10-06T15:00:00.000Z","whatsappUrl":"https://wa.me/963955000111?text=Hello%20MIRADOR%20%E2%80%94%20confirming%20my%20reservation%3A%20Evidence%20Run%2C%202%20guests%2C%202026-10-06%20at%2018%3A00%20(ref%20kw6owp)."}
+POST ip=10.99.1.11 phone=+9639990002210 → HTTP 201 {"id":"cmuczs96800082ggp52t7tmjw","tableNumber":9,"slot":"2026-10-06T15:00:00.000Z","whatsappUrl":"https://wa.me/963955000111?text=Hello%20MIRADOR%20%E2%80%94%20confirming%20my%20reservation%3A%20Evidence%20Run%2C%202%20guests%2C%202026-10-06%20at%2018%3A00%20(ref%20t7tmjw)."}
+POST ip=10.99.1.12 phone=+9639990002211 → HTTP 201 {"id":"cmuczs96400072ggpaljqt6f8","tableNumber":8,"slot":"2026-10-06T15:00:00.000Z","whatsappUrl":"https://wa.me/963955000111?text=Hello%20MIRADOR%20%E2%80%94%20confirming%20my%20reservation%3A%20Evidence%20Run%2C%202%20guests%2C%202026-10-06%20at%2018%3A00%20(ref%20jqt6f8)."}
+POST ip=10.99.1.13 phone=+9639990002212 → HTTP 201 {"id":"cmuczs96100062ggpsrbw7cit","tableNumber":7,"slot":"2026-10-06T15:00:00.000Z","whatsappUrl":"https://wa.me/963955000111?text=Hello%20MIRADOR%20%E2%80%94%20confirming%20my%20reservation%3A%20Evidence%20Run%2C%202%20guests%2C%202026-10-06%20at%2018%3A00%20(ref%20bw7cit)."}
+POST ip=10.99.1.14 phone=+9639990002213 → HTTP 201 {"id":"cmuczs95z00052ggpk2io3cus","tableNumber":6,"slot":"2026-10-06T15:00:00.000Z","whatsappUrl":"https://wa.me/963955000111?text=Hello%20MIRADOR%20%E2%80%94%20confirming%20my%20reservation%3A%20Evidence%20Run%2C%202%20guests%2C%202026-10-06%20at%2018%3A00%20(ref%20io3cus)."}
+POST ip=10.99.1.15 phone=+9639990002214 → HTTP 201 {"id":"cmuczs95w00042ggpvtzsir03","tableNumber":5,"slot":"2026-10-06T15:00:00.000Z","whatsappUrl":"https://wa.me/963955000111?text=Hello%20MIRADOR%20%E2%80%94%20confirming%20my%20reservation%3A%20Evidence%20Run%2C%202%20guests%2C%202026-10-06%20at%2018%3A00%20(ref%20zsir03)."}
+POST ip=10.99.1.16 phone=+9639990002215 → HTTP 201 {"id":"cmuczs95t00032ggp5x8pg4ck","tableNumber":4,"slot":"2026-10-06T15:00:00.000Z","whatsappUrl":"https://wa.me/963955000111?text=Hello%20MIRADOR%20%E2%80%94%20confirming%20my%20reservation%3A%20Evidence%20Run%2C%202%20guests%2C%202026-10-06%20at%2018%3A00%20(ref%208pg4ck)."}
+POST ip=10.99.1.17 phone=+9639990002216 → HTTP 201 {"id":"cmuczs95q00022ggphywenpxs","tableNumber":3,"slot":"2026-10-06T15:00:00.000Z","whatsappUrl":"https://wa.me/963955000111?text=Hello%20MIRADOR%20%E2%80%94%20confirming%20my%20reservation%3A%20Evidence%20Run%2C%202%20guests%2C%202026-10-06%20at%2018%3A00%20(ref%20wenpxs)."}
+POST ip=10.99.1.18 phone=+9639990002217 → HTTP 201 {"id":"cmuczs95m00012ggpcs2dyagg","tableNumber":2,"slot":"2026-10-06T15:00:00.000Z","whatsappUrl":"https://wa.me/963955000111?text=Hello%20MIRADOR%20%E2%80%94%20confirming%20my%20reservation%3A%20Evidence%20Run%2C%202%20guests%2C%202026-10-06%20at%2018%3A00%20(ref%202dyagg)."}
+POST ip=10.99.1.19 phone=+9639990002218 → HTTP 201 {"id":"cmuczs95c00002ggp68vay42k","tableNumber":1,"slot":"2026-10-06T15:00:00.000Z","whatsappUrl":"https://wa.me/963955000111?text=Hello%20MIRADOR%20%E2%80%94%20confirming%20my%20reservation%3A%20Evidence%20Run%2C%202%20guests%2C%202026-10-06%20at%2018%3A00%20(ref%20vay42k)."}
+POST ip=10.99.1.20 phone=+9639990002219 → HTTP 409 {"error":"SLOT_FULL","messageKey":"slotFull"}
+# post-run DB count query: SELECT COUNT(*) FROM Reservation WHERE slot=2026-10-06T15:00:00.000Z → 12
+# post-run DB count query: total reservations → 24 (baseline 12 + 12 test rows)
+# orphan check: rows with test phones NOT in target slot → 0
+# VERDICT: PASS — exactly 12 rows + 8 × 409 + 0 orphans
+# CLEANUP: deleted 12 reservations → total now 12 (seed baseline 12)
