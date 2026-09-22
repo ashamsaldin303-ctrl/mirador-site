@@ -35,7 +35,9 @@ jobs:
           --health-retries 5
     env:
       DATABASE_URL: postgresql://mirador:mirador@localhost:5432/mirador
-      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+      # PLACEHOLDER policy (prompt-4 §9 / R0): canonical/hreflang/OG/JSON-LD render
+      # against this origin — never claimed deployed; swap = one env var at deployment.
+      NEXT_PUBLIC_SITE_URL: https://mirador.example
       EVIDENCE_BASE_URL: http://localhost:3000
       EVIDENCE_SURFACE: prod-run
 
