@@ -1,25 +1,33 @@
-# BLOCKED — E8 · E9 — Lighthouse CI (prod-build form) (P1)
+# BLOCKED → EXECUTED — E8 · E9 — Lighthouse CI (prod-build form)
 
-## Condition
+## Status (re-synced 2026-09-22 · prompt-4 R1, run 11) — GATE E27: FAIL
+
+The round-1/2 policy block is RESOLVED: the `production-evidence` workflow
+(Actions, the sanctioned surface) builds production and runs Lighthouse CI on
+every dispatch. The instrument is live: **6 LHR reports + 6 raw trace JSONs
+per run** (3 mobile runs × /en + /ar), medians in
+`evidence/prod-run/lighthouse/medians.md`.
+
+Current raw verdict — **GATE E27: FAIL** (run 11, with prompt-4 R2/R3/R4 in
+the build):
+
+- /en median: performance=90 · LCP=3515ms · CLS=0.0532 · TBT=77ms
+  → score PASS · LCP FAIL · CLS PASS · TBT PASS
+- /ar median: performance=86 · LCP=3980ms · CLS=0.0043 · TBT=86ms
+  → score FAIL · LCP FAIL · CLS PASS · TBT PASS
+
+The remaining gap is LCP (poster + font wire on mobile) — owned by Release-1's
+R9 (gallery `sizes`, font subsets −31KB EN / −100KB AR, wordmark + digits
+subsets). Thresholds are frozen (≥90 · LCP ≤2.5s · CLS ≤0.1 · TBT ≤300ms) and
+never bend.
+
+## History (round 1/2 — the policy block, superseded)
+
 E8/E9 gates are defined on "Lighthouse CI (mobile, **prod build**, 3 runs,
-median)" — parent §10.2 / Appendix A. Production builds are prohibited by the
-platform in this container (see /evidence/F12-2/BLOCKED.md), so the gate-form
-Lighthouse run is BLOCKED-by-policy here.
+median)" — parent §10.2 / Appendix A. Production builds were prohibited by the
+platform in the round-2 container (see /evidence/F12-2/BLOCKED.md), so the
+gate-form run was BLOCKED-by-policy there; dev-mode numbers were categorically
+NOT submitted as gate evidence. Resolved by the round-3 Actions surface.
 
-- Perf score ≥90 · LCP ≤2.5s · CLS ≤0.1 · TBT ≤300ms (E8): **BLOCKED** — no
-  prod build exists to measure; dev-mode numbers are categorically not the
-  contracted metric and are NOT submitted as gate evidence.
-- LCP element = hero poster `<img>` on /en + /ar (E9): gate-form (committed
-  Lighthouse trace JSON `lcpElement`) **BLOCKED**; a clearly-labeled
-  in-browser PerformanceObserver LCP-element capture is attached as
-  diagnostic corroboration where produced (see /evidence/lighthouse/).
-
-## Resolution path
-On a build-capable machine: `bun run build && bun run start` (port ≠ dev
-daemon), then `lhci autorun` per /evidence/REPLAY.md §lighthouse — 3 mobile
-runs on /en and /ar, median committed with raw traces.
-
-## What ships from this environment instead
-- /evidence/lighthouse/ — any diagnostic captures, each file header-labeled
-  `DIAGNOSTIC-DEV-ONLY — NOT E8/E9 GATE EVIDENCE`.
-- No numeric claim against the E8 thresholds is made anywhere in this pack.
+- LCP element = hero poster `<img>` on /en + /ar (E9): lcpElement rows ship in
+  `evidence/prod-run/lighthouse/lcp-element.txt` beside the medians.

@@ -15,6 +15,12 @@ export function DishList({
   strings: MenuStrings;
   filters: readonly DietTag[];
 }) {
+  // FRM-1 (prompt-4 R6, NEVER-8): a filter that empties this section renders
+  // NOTHING — no stub heading over an empty list. Sold-out rows are state, not
+  // filters — they stay (dimmed) inside surviving sections.
+  const visibleItems = section.items.filter((item) => matchesFilters(item, filters));
+  if (visibleItems.length === 0) return null;
+
   return (
     <section
       id={section.slug}
@@ -29,12 +35,12 @@ export function DishList({
       </h2>
       <hr className="hud-rule mt-6" />
       <ul className="mt-2">
-        {section.items.map((item) => (
+        {visibleItems.map((item) => (
           <DishRow
             key={item.slug}
             item={item}
             strings={strings}
-            hidden={!matchesFilters(item, filters)}
+            hidden={false}
           />
         ))}
       </ul>

@@ -324,3 +324,20 @@ Work Log:
 
 Stage Summary:
 - R5 landed and dev-verified end-to-end; canonical prod proof (E44 ×16 zero-localhost snapshots, E45 noindex dump, E46 header table, E47/E48 raw pairs) rides the exit-gate dispatch. versions.md tsconfig row closes at E49/E80 per the doc-truth round.
+
+---
+Task ID: p4-r1-r6a
+Agent: Z.ai Code (main orchestrator)
+Task: prompt-4 R1 (C-2 doc-truth layer, post run-11 raw) + R6 first items (FRM-1 · DES-2)
+
+Work Log:
+- RUN 11 (ed9758d + R5 rebased): E33 evidence commit LANDED (644d174 — the rebase + SIGPIPE fixes work). Raw verdicts: E22 PASS (R3's honest 404 on the Actions production server — BLK-R3-1 RESOLVED) · E27 FAIL honestly (EN 90/3515ms LCP / AR 86/3980ms — LCP gap owned by R9) · first-load 170.3–180.9KB gz 16/16 (motion family out of every route's first load post-P-022) · sheet-z + mobile-sheet specs ran green on prod.
+- R1 DOC-TRUTH: BLOCKED.md B2 CLOSED→"EXECUTED — GATE E27: FAIL" (quotes run-11 medians) · B4 PARTIALLY-CLOSED→"CLOSED — GATE E22: PASS" · BLK-R3-1 marked RESOLVED by R3 (option a) · BLK-R3-2 re-scoped to the Release-1 hard-200KB gate · evidence/lighthouse/BLOCKED.md rewritten from the stale round-1 policy-block narrative to the EXECUTED/GATE E27: FAIL state · docs/deploy-pre.md §3 "EXECUTED + EVIDENCED"→"EXECUTED; GATE E27: FAIL" + §4 →"GATE E22: PASS" (both citing raw + verify-docs enforcement) · versions.md tsconfig row now TRUE via R5 (E49).
+- R1 TOOLING: scripts/verify-docs.ts — 7 checks (A1/A2/A3 E27↔three docs · B1/B2 E22↔two docs · C1 versions.md↔tsconfig · PROBE-1 vacuity guard: a synthetic contradicting claim MUST fire); raw verdicts extracted from medians.md/summary.txt/tsconfig.json at runtime — the guard is state-agnostic (drift fails whenever doc≠raw). Before-correction run: FAIL 5/7 (the drift, honestly recorded); after: PASS 7/7.
+- R1 CI: .github/workflows/ci.yml — job verify-docs (push + dispatch) runs verify-docs --probe.
+- E37/E38 artifacts: evidence/r1/E37-E38/doc-truth.md (before/after quotes + check logic + green run + wiring proof).
+- R6 · FRM-1: DishList returns null when a filter empties the section (NEVER-8: no stub headings); DishRow's hidden prop retired (rows unmount — Flip enter/leave semantics unchanged); SectionNav receives only sections with visible items (no dead sticky links). E51 proof at the exit gate.
+- R6 · DES-2: footer's two leading-relaxed (hardcoded 1.625) removed — the [dir=rtl] token leading (1.7) now governs; verified computed 1.7 ×4 footer text blocks on /ar.
+
+Stage Summary:
+- The doc-truth layer is closed: every claim quotes its run-11 raw verdict, mechanically enforced in CI. FRM-1 + DES-2 landed (dev-verified). Remaining R6: F3-5 re-shoot · PRF-3 AVIF+loader · PRF-4 OG JPEG · JRN-1 emulation · RPL-4 MANIFEST.

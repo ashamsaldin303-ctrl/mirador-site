@@ -142,7 +142,11 @@ export function MenuClient({
   return (
     <div>
       <SectionNav
-        items={sections.map(({ slug, title }) => ({ slug, title }))}
+        // FRM-1 (prompt-4 R6): sections emptied by the active filter drop out
+        // of the nav too — a sticky link to an unmounted anchor is a dead link.
+        items={sections
+          .filter((section) => section.items.some((item) => matchesFilters(item, filters)))
+          .map(({ slug, title }) => ({ slug, title }))}
         label={strings.sectionsLabel}
       />
       <DietFilterBar

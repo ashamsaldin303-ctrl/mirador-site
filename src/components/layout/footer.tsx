@@ -26,14 +26,14 @@ export function Footer({ locale, strings }: { locale: Locale; strings: FooterStr
 
         <div>
           <h2 className="hud-label mb-4">{strings.addressLabel}</h2>
-          <address className="text-body text-muted not-italic leading-relaxed">
+          <address className="text-body text-muted not-italic">
             {dir === "ar" ? VENUE.addressAr : VENUE.addressEn}
           </address>
         </div>
 
         <div>
           <h2 className="hud-label mb-4">{strings.hoursLabel}</h2>
-          <p className="text-body text-muted leading-relaxed">
+          <p className="text-body text-muted">
             {dir === "ar" ? VENUE.hoursAr : VENUE.hoursEn}
           </p>
         </div>

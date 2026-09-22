@@ -60,20 +60,26 @@ is done and evidenced on the sanctioned surface (GitHub Actions ·
 5. `bun run start` (standalone, port 3000) boots and serves — readiness +
    raw `evidence/prod-run/server.log`.
 
-## §3 Lighthouse CI on the production build (B3) — EXECUTED + EVIDENCED
+## §3 Lighthouse CI on the production build (B3) — EXECUTED; GATE E27: FAIL (re-synced 2026-09-22, run 11)
 
 `bunx @lhci/cli@0.15.1 autorun --config=.lighthouserc.json` (mobile emulation ·
-3 runs · `/en` + `/ar`): reports + raw traces +
-`evidence/prod-run/lighthouse/medians.md` + `lcp-element.txt`. See that file
-for the medians vs the frozen thresholds (≥90 · LCP ≤2.5s · CLS ≤0.1 ·
-TBT ≤300ms) and the lcpElement proof (hero poster `<img>` + raw-trace
-corroboration).
+3 runs · `/en` + `/ar`): 6 LHR reports + 6 raw traces +
+`evidence/prod-run/lighthouse/medians.md` + `lcp-element.txt`. Current raw
+verdict — **GATE E27: FAIL**: /en 90/3515ms-LCP/0.053-CLS/77ms-TBT ·
+/ar 86/3980ms/0.0043/86ms against the frozen thresholds (≥90 · LCP ≤2.5s ·
+CLS ≤0.1 · TBT ≤300ms). The LCP gap is Release-1 R9's wire/font work
+(gallery `sizes`, font subsets); lcpElement = hero poster `<img>` + raw-trace
+corroboration. Doc-truth: this section is enforced against the raw by
+`scripts/verify-docs.ts` (CI job `ci/verify-docs`).
 
-## §4 404 status commit (B4) — **EXECUTED + EVIDENCED**
+## §4 404 status commit (B4) — **EXECUTED — GATE E22: PASS** (re-synced 2026-09-22, run 11)
 
 Production server round-trips: `evidence/prod-run/http/` — `/en` `/ar` → 200;
 `/en/nonexistent-page` `/ar/nonexistent-page` → **HTTP 404** + the six §7.9
-designed copy strings + noindex (`http/summary.txt`, GATE E22).
+designed copy strings + noindex (`http/summary.txt`, **GATE E22: PASS**).
+(Round-3's BLK-R3-1 — 200-not-404 via the loading-boundary flush — resolved by
+prompt-4 R3: the boundary relocated into the DB-backed segments, the catch-all
+unwraps.)
 
 ## §5 Cold-start handoff (F12-3) — EXECUTED + EVIDENCED
 
