@@ -327,7 +327,7 @@ export function ReserveForm({ locale, strings, days, initialDate }: ReserveFormP
         <button
           type="submit"
           disabled={submitting}
-          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-amber px-8 font-sans text-small font-semibold text-night transition-colors duration-base hover:bg-amber/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber/50 disabled:pointer-events-none disabled:opacity-60"
+          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-amber px-8 font-sans text-small font-semibold text-night transition-colors duration-base hover:bg-amber/90  disabled:pointer-events-none disabled:opacity-60"
         >
           {submitting ? (
             <>

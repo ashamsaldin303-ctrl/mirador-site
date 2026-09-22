@@ -73,7 +73,7 @@ export function Lightbox({
         <DialogOverlay className="z-40 bg-scrim" />
         <DialogPrimitive.Content
           onKeyDown={onKeyDown}
-          className="fixed inset-0 z-40 flex flex-col bg-night outline-none duration-200 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0"
+          className="fixed inset-0 z-40 flex flex-col bg-night duration-200 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0"
         >
           <div className="flex items-center gap-4 border-b border-line px-4 py-3 sm:px-6">
             <DialogTitle className="min-w-0 flex-1 truncate font-display text-h3 text-ink">
@@ -84,7 +84,7 @@ export function Lightbox({
             </p>
             <DialogPrimitive.Close
               aria-label={strings.close}
-              className="inline-flex size-11 shrink-0 items-center justify-center rounded-full text-ink transition-colors duration-200 outline-none hover:text-amber focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex size-11 shrink-0 items-center justify-center rounded-full text-ink transition-colors duration-200 outline-none hover:text-amber "
             >
               <X className="size-6" strokeWidth={1.5} aria-hidden />
             </DialogPrimitive.Close>
@@ -128,7 +128,7 @@ export function Lightbox({
             type="button"
             onClick={() => go(-1)}
             aria-label={strings.prev}
-            className="absolute start-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-night/80 text-ink transition-colors duration-200 outline-none hover:border-amber focus-visible:ring-2 focus-visible:ring-ring"
+            className="absolute start-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-night/80 text-ink transition-colors duration-200 outline-none hover:border-amber "
           >
             <ChevronLeft className="size-6 rtl:-scale-x-100" strokeWidth={1.5} aria-hidden />
           </button>
@@ -136,7 +136,7 @@ export function Lightbox({
             type="button"
             onClick={() => go(1)}
             aria-label={strings.next}
-            className="absolute end-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-night/80 text-ink transition-colors duration-200 outline-none hover:border-amber focus-visible:ring-2 focus-visible:ring-ring"
+            className="absolute end-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-night/80 text-ink transition-colors duration-200 outline-none hover:border-amber "
           >
             <ChevronRight className="size-6 rtl:-scale-x-100" strokeWidth={1.5} aria-hidden />
           </button>

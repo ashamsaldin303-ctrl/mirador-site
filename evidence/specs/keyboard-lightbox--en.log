@@ -73,3 +73,18 @@ step 4.6 — Tab → <button> "Close" [in-dialog]
 focus-trap check: PASS
 step 5 — Esc → lightbox closed
 # VERDICT: PASS — arrows navigate, focus trapped, Esc closes
+
+===== keyboard-lightbox--en · run 2026-09-22T18:46:07.680Z =====
+# F7-1 · lightbox: keyboard open → arrows navigate → focus trap → Esc
+step 1 — Enter on gallery item → lightbox open; activeElement: <button> "Close" [in-dialog]
+step 2 — counter before: "1 of 8"
+step 3 — ArrowRight → counter after: "2 of 8"
+step 4.1 — Tab → <button> "Previous image" [in-dialog]
+step 4.2 — Tab → <button> "Next image" [in-dialog]
+step 4.3 — Tab → <button> "Close" [in-dialog]
+step 4.4 — Tab → <button> "Previous image" [in-dialog]
+step 4.5 — Tab → <button> "Next image" [in-dialog]
+step 4.6 — Tab → <button> "Close" [in-dialog]
+focus-trap check: PASS
+step 5 — Esc → lightbox closed
+# VERDICT: PASS — arrows navigate, focus trapped, Esc closes

@@ -66,7 +66,7 @@ export function DateStrip({ days, selected, onSelect, locale, closedMondayLabel,
               }}
               className={cn(
                 "flex min-h-11 w-16 shrink-0 flex-col items-center gap-1 border-b px-2 pb-2 pt-2 transition-colors duration-fast",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber/50",
+                "",
                 isSelected ? "border-amber text-ink" : "border-transparent text-muted",
                 !isSelected && !monday && "hover:bg-surface hover:text-ink",
                 monday && "opacity-50",

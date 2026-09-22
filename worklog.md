@@ -358,3 +358,20 @@ Work Log:
 
 Stage Summary:
 - The two biggest LCP wire levers landed (gallery sizes + corpus/wordmark subsets); disk ledger −35,560B; canonical E64 measurement rides the exit-gate dispatch against run-11's committed BEFORE.
+
+---
+Task ID: p4-r8
+Agent: Z.ai Code (main orchestrator)
+Task: prompt-4 R8 · P-075/P-084/P-079 — THE HOUSE EDGES (the BEZEL) + THE NIGHT'S OWN HANDS + THE FIGURE REGISTER + tab-lamp SPEC-ONLY
+
+Work Log:
+- P-075 THE BEZEL: ONE site-wide :focus-visible — outline 2px solid var(--color-amber) + outline-offset 2px (globals.css @layer base). Invariant 8.42:1 verified by WCAG arithmetic (amber #CBA35C on night #0A0A0B). ALL bespoke focus treatments RETIRED (the washes and invisible sites): lightbox ×4 · time-grid ×2 · reserve submit ×1 · summary ×1 · date-strip ×1 · party-stepper ×2 · dialog/sheet closes ×2 · ui/button ×2 · ui/input ×2 · ui/textarea ×2 · ui/toggle ×1 — grep after: focus-visible:ring|focus:ring-|focus-visible:outline-none|focus:outline-hidden = 0 hits in src/. Computed proof (keyboard Tab walk, post-transition reads): every focused element = 2px solid rgb(203,163,92), offset 2px; caret = rgb(203,163,92) on #reserve-name. HONEST NOTE: the first probe read outline-color MID-TRANSITION on transition-carrying elements (TW4 transition-colors includes outline-color) — oklab/α artifacts; committed probe waits 450ms.
+- P-075 edge set: ONE ::selection amber 28% (input's selection:bg-primary override removed) · amber caret (inputs/textarea/select) · underline-offset-8 grep ×4 · hairline law documented (1px state / 2px fact — bezel comment) · filter pills ride the bezel.
+- P-084 THE NIGHT'S OWN HANDS: tap-flash death (-webkit-tap-highlight-color transparent on html) · WebKit autofill night (text-fill ink · 1000px surface inset · amber caret · background transition freeze) · end-4 corners (R2) · overscroll-behavior contain on .scroll-thin strips · tabular sweep (party-stepper value · diet-filter live count · time-grid time+remaining joins PriceTag).
+- P-079 THE FIGURE REGISTER: scripts/figure-register.py GENERATES docs/figure-register.md from the live @theme tokens (clamp resolved at 375/768/1440; LH EN→AR per role; usage map) — tokens=table by construction, drift regenerates (N25 kin).
+- TAB-LAMP: docs/spec/tab-lamp.md — the pixel table SPEC-ONLY (implementation = arrival release, N26).
+- E60–E62 artifacts: evidence/r1/E60-E62/{house-edges.md, bezel-probe.ts}.
+- Regressions post-R8: booking PASS · sheet-z PASS · webgl-kill PASS · keyboard ×6 PASS · typecheck 0 · lint 0.
+
+Stage Summary:
+- The release's namesake landed: the bezel owns focus site-wide (8.42:1), the night's own hands govern touch/autofill/scroll/digits, the figure register is generated-not-authored, the tab-lamp spec is in the drawer. Prod proof + axe re-run ride the exit gate.

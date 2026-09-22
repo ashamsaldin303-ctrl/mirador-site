@@ -64,7 +64,7 @@ export function TimeGrid({
         <button
           type="button"
           onClick={onRetry}
-          className="inline-flex min-h-11 items-center rounded-sm border border-line px-4 text-small text-ink transition-colors duration-base hover:border-amber hover:text-amber focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber/50"
+          className="inline-flex min-h-11 items-center rounded-sm border border-line px-4 text-small text-ink transition-colors duration-base hover:border-amber hover:text-amber "
         >
           {retryLabel}
         </button>
@@ -90,17 +90,17 @@ export function TimeGrid({
             onClick={() => onSelect(time)}
             className={cn(
               "flex min-h-11 flex-col items-center justify-center gap-1 rounded-sm border px-2 py-3 transition-colors duration-fast",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber/50",
+              "",
               isSelected && "border-amber bg-amber/10 text-amber",
               !isSelected && !soldOut && "border-line text-ink hover:border-amber/60 hover:text-amber",
               soldOut && "cursor-not-allowed border-line text-muted opacity-60",
             )}
           >
-            <span className="text-body">{time}</span>
+            <span className="text-body tabular-nums">{time}</span>
             {soldOut ? (
               <span className="text-micro text-error">{soldOutLabel}</span>
             ) : (
-              <span className="text-micro text-muted">
+              <span className="text-micro tabular-nums text-muted">
                 {remaining} {tablesRemainingLabel}
               </span>
             )}

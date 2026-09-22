@@ -58,7 +58,7 @@ export function WhatsAppConfirm({ href, label, className }: WhatsAppConfirmProps
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "inline-flex min-h-11 w-full items-center justify-center rounded-full bg-amber px-8 font-sans text-small font-semibold text-night transition-colors duration-base hover:bg-amber/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber/50 sm:w-auto",
+        "inline-flex min-h-11 w-full items-center justify-center rounded-full bg-amber px-8 font-sans text-small font-semibold text-night transition-colors duration-base hover:bg-amber/90  sm:w-auto",
         className,
       )}
     >

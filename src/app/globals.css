@@ -274,10 +274,41 @@
   html {
     color-scheme: dark;
     scrollbar-gutter: stable;
+    /* P-084 (prompt-4 R8): tap-flash death — the night never flashes white
+       under a finger; feedback comes from the bezel + brightness hovers. */
+    -webkit-tap-highlight-color: transparent;
   }
   body {
     @apply bg-night text-ink font-sans antialiased;
     text-rendering: optimizeLegibility;
+  }
+  /* ————————————————————————————————————————————————————————————
+     P-075 · THE BEZEL (prompt-4 R8): ONE site-wide focus ring — 2px amber
+     #CBA35C outline + 2px night offset. Invariant 8.42:1 against #0A0A0B
+     (CVD-safe: protan 7.83 / deutan 8.77). 2px = fact (focus IS a fact);
+     1px stays state (hairlines). Every bespoke ring/wash treatment is
+     retired — components carry NO focus classes; the bezel owns them.
+     ———————————————————————————————————————————————————————————— */
+  :focus-visible {
+    outline: 2px solid var(--color-amber);
+    outline-offset: 2px;
+  }
+  /* P-084 · the amber caret — the user's insertion point is city light */
+  input,
+  textarea,
+  select {
+    caret-color: var(--color-amber);
+  }
+  /* P-084 · WebKit autofill = night's own hands — NEVER the UA's blue/yellow
+     fill: surface-night inset shadow + ivory text + amber caret. */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--color-ink);
+    -webkit-box-shadow: 0 0 0 1000px var(--color-surface) inset;
+    caret-color: var(--color-amber);
+    transition: background-color 9999s ease-out;
   }
   h1,
   h2,
@@ -372,6 +403,9 @@
 @layer utilities {
   /* — custom thin scrollbar for long lists (menu sections, date strip) — */
   .scroll-thin {
+    /* P-084 (prompt-4 R8): a contained scroll chain — inner strips never
+       hand scroll/overscroll to the document (the page owns its own bounce). */
+    overscroll-behavior: contain;
     scrollbar-width: thin;
     scrollbar-color: var(--color-line) transparent;
   }

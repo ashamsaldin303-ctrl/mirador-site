@@ -74,3 +74,22 @@ step 5 — Enter → URL http://localhost:3000/en/menu · sheet closed: PASS
 step 6 — reopen → Esc → sheet closed: PASS
 step 7 — reopen → scrim click (pointer) at (20,400) → sheet closed: PASS
 # VERDICT: PASS — keyboard-operable mobile sheet: trap, navigate, Esc, scrim
+
+===== keyboard-mobile-sheet--en · run 2026-09-22T18:46:13.029Z =====
+# E39 · mobile nav sheet (EN · side=right · LTR) — open → trap → navigate → Esc/scrim close
+step 1 — focused menu trigger: <button> "Open menu"
+step 2 — Enter → sheet open; activeElement: <button> "Close" [in-dialog]
+step 3.1 — Tab → <a> "Home" [in-dialog]
+step 3.2 — Tab → <a> "Menu" [in-dialog]
+step 3.3 — Tab → <a> "Story" [in-dialog]
+step 3.4 — Tab → <a> "Gallery" [in-dialog]
+step 3.5 — Tab → <a> "Private Dining" [in-dialog]
+step 3.6 — Tab → <a> "Contact" [in-dialog]
+step 3.7 — Tab → <a> "العربية" [in-dialog]
+step 3.8 — Tab → <a> "Reserve a table" [in-dialog]
+focus-trap check after 8 Tabs: PASS — focus never left the sheet
+step 4 — focused sheet link: <a> "Menu" [in-dialog]
+step 5 — Enter → URL http://localhost:3000/en/menu · sheet closed: PASS
+step 6 — reopen → Esc → sheet closed: PASS
+step 7 — reopen → scrim click (pointer) at (20,400) → sheet closed: PASS
+# VERDICT: PASS — keyboard-operable mobile sheet: trap, navigate, Esc, scrim

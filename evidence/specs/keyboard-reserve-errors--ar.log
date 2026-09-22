@@ -37,3 +37,12 @@ phone error: "يرجى إدخال رقم هاتف صحيح."
 slot error:  "يرجى اختيار وقت متاح."
 aria-invalid: name=true phone=true · aria-describedby(name)=reserve-name-error
 # VERDICT: PASS — all three per-field errors bilingual-correct, dir=rtl (RTL-correct), aria-invalid set
+
+===== keyboard-reserve-errors--ar · run 2026-09-22T18:46:25.982Z =====
+# F8-3 · empty submit → per-field ARABIC (RTL-correct) errors
+html: lang=ar dir=rtl (before submit dir=rtl)
+name error:  "يرجى إدخال اسم صحيح."
+phone error: "يرجى إدخال رقم هاتف صحيح."
+slot error:  "يرجى اختيار وقت متاح."
+aria-invalid: name=true phone=true · aria-describedby(name)=reserve-name-error
+# VERDICT: PASS — all three per-field errors bilingual-correct, dir=rtl (RTL-correct), aria-invalid set
