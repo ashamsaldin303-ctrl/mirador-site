@@ -235,3 +235,22 @@ Work Log:
 Stage Summary:
 - Local ↔ remote fully reconciled; zero divergence between /home/z/my-project main and ashamsaldin303-ctrl/mirador-site main
 - Dev daemon confirmed healthy at verification time; no product code changed in this task (docs/evidence sync only)
+
+---
+Task ID: p4-open
+Agent: Z.ai Code (main orchestrator — direct execution; the contract's R-trains are one tightly-coupled vertical slice over shared token/CI files)
+Task: prompt-4 RELEASE-1 "THE HOUSE EDGES" session open — environment rebuild after container recreation + ACK-first protocol (E34) + R0 instruments (E35/E36)
+
+Work Log:
+- Read upload/prompt-4-release1-house-edges.md (158 lines, ACs E34–E81, R0–R13, N24–N26 new).
+- ENVIRONMENT REBUILD (container recreated ~17:16, uptime 5min at open): local user-space PostgreSQL (~/pg-runtime, never committed per N22) was destroyed → rebuilt from the pgserver pip wheel (PostgreSQL 16.2, trust auth, user mirador, db mirador, port 5432) + recreated ~/pg-runtime/start-pg.sh (LOCAL only).
+- Git reconcile: harness checkpoint f415c5a (template sqlite .env + 755 modes) reset to origin/main = 1441ed9 (canonical postgres .env).
+- migrate + seed on local PG: 6 sections / 28 items / 8 gallery / 12 reservations — matches F3-1 gate.
+- REAL DEFECT found+fixed (disclosed in ACK 6.2): committed .env value QUOTED → Prisma CLI P1012 (Actions unaffected — job env overrides; local migrate/seed broken). Fix: unquote (R0 commit). Second env defect: harness session injects DATABASE_URL=file:...custom.db into every shell → poisoned dev daemon's Prisma client at init → scripts/dev-daemon.py now loads project .env (quotes stripped, .env wins over injected env) before exec.
+- Dev daemon restarted: /en /ar /en/menu /ar/menu /en/reserve all 200; availability API returns real slot data (seeded 19:00 full slot → remaining:0).
+- Anchor verification battery (for ACK item 6): lighthouserc chromeFlags string line 8 ✅ · nav.tsx:122 z-30 vs sheet.tsx:39 z-50 ✅ · loading.tsx + [...rest] ✅ · 71 deps, radix 27/4 ✅ · fonts Fraunces/Instrument Sans/Amiri/Plex ✅ · font disk = 334,880B exactly ✅ · medians.md NO RUNS FOUND—FAIL ✅ · http/summary.txt E22 FAIL ×2 ✅ · Actions runs 4–8 conclusion=failure while BLOCKED.md claims CLOSED ✅.
+- E34 ACK posted: evidence/r1/E34-ACK.md (contradictions: sealed-basis docs absent → re-derive honestly; anchor drift + env rebuild disclosed; CSS 2.97KB reading; E43 expectation note; versions.md tsconfig claim confirmed false). THIS COMMIT = the ACK commit, before any Release-1 code change.
+
+Stage Summary:
+- Environment fully restored (PG 16.2 local, dev daemon healthy on real data, git = 1441ed9 canonical).
+- ACK on record before first code commit (E34 satisfied pending judge read).
