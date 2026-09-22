@@ -1,0 +1,43 @@
+# E40 · greps — physical corners / scrim token / tempo scale (prompt-4 R2) — machine-generated 2026-09-22T17:42:26Z
+
+## 1. physical corners in sheet/dialog (expect 0 hits)
+$ rg -n "right-4|left-4" src/components/ui/sheet.tsx src/components/ui/dialog.tsx
+(0 hits) PASS
+
+## 2. logical corners present (end-4)
+$ rg -n "end-4" src/components/ui/sheet.tsx src/components/ui/dialog.tsx
+src/components/ui/sheet.tsx:75:        <SheetPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-secondary absolute top-4 end-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none">
+src/components/ui/dialog.tsx:72:            className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 end-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+
+## 3. ONE scrim token — definition count in globals.css (expect 1)
+$ rg -n "color-scrim" src/app/globals.css
+118:  --color-scrim: #0A0A0BCC;  /* THE one modal scrim (R2 unifier: sheet · dialog · lightbox) — night @ 80% alpha; hex+alpha form so Tailwind 4 emits the bg-scrim utility (color-mix+var() values are not statically parseable) */
+
+## 3b. scrim usages across components (expect exactly 3: sheet · dialog · lightbox)
+$ rg -n "bg-scrim" src/
+src/components/gallery/lightbox.tsx:73:        <DialogOverlay className="z-40 bg-scrim" />
+src/app/globals.css:118:  --color-scrim: #0A0A0BCC;  /* THE one modal scrim (R2 unifier: sheet · dialog · lightbox) — night @ 80% alpha; hex+alpha form so Tailwind 4 emits the bg-scrim utility (color-mix+var() values are not statically parseable) */
+src/components/ui/dialog.tsx:41:        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:duration-fast data-[state=open]:duration-base fixed inset-0 z-50 bg-scrim",
+src/components/ui/sheet.tsx:39:        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:duration-fast data-[state=open]:duration-base fixed inset-0 z-50 bg-scrim",
+
+## 3c. stale scrim treatments (expect 0 hits)
+$ rg -n "bg-black/|bg-night/90" src/components/
+src/components/menu/section-nav.tsx:88:          ? "border-b border-line bg-night/90 backdrop-blur-md"
+
+## 4. tempo values on the frozen 100/200ms scale (duration tokens only; expect no numeric duration- strays in sheet/dialog)
+$ rg -n "duration-\\d+" src/components/ui/sheet.tsx src/components/ui/dialog.tsx
+(0 numeric-duration hits) PASS
+
+$ rg -n "duration-fast|duration-base" src/components/ui/sheet.tsx src/components/ui/dialog.tsx
+src/components/ui/sheet.tsx:39:        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:duration-fast data-[state=open]:duration-base fixed inset-0 z-50 bg-scrim",
+src/components/ui/sheet.tsx:61:          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col gap-4 shadow-lg transition ease-in-out data-[state=closed]:duration-fast data-[state=open]:duration-base",
+src/components/ui/dialog.tsx:41:        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:duration-fast data-[state=open]:duration-base fixed inset-0 z-50 bg-scrim",
+src/components/ui/dialog.tsx:63:          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-base sm:max-w-lg",
+
+## 3c annotation (honest scope note)
+The single `bg-night/90` hit above is `menu/section-nav.tsx:88` — the STICKY MENU SECTION BAR's
+surface (a `position: sticky` nav strip with backdrop-blur), NOT a modal scrim/overlay element.
+R2's unification scope is "the three scrim treatments" = the three MODAL overlays (sheet ·
+dialog · lightbox), all now `bg-scrim` from the ONE token. Restyling the sticky bar would be
+an out-of-roster change (N26) — left untouched, disclosed here.
+# VERDICT: PASS — 0 physical corners in sheet/dialog (end-4 logical) · 1 scrim token, 3 modal usages, 0 stale modal scrims · sheet/dialog tempo = duration-fast/duration-base (100/200ms frozen scale), 0 numeric strays

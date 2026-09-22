@@ -119,7 +119,7 @@ export function Nav({ locale, strings }: { locale: Locale; strings: NavStrings }
             </SheetTrigger>
             <SheetContent
               side={locale === "ar" ? "left" : "right"}
-              className="z-30 w-72 border-line bg-night p-6"
+              className="w-72 border-line bg-night p-6"
             >
               <SheetTitle className="sr-only">{strings.closeMenu}</SheetTitle>
               <div className="flex flex-col gap-1 pt-8">

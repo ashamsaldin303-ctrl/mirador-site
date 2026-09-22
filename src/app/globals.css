@@ -115,6 +115,7 @@
 @theme {
   /* — color roles — night over the city (FROZEN §5.2, WCAG-computed on #0A0A0B) — */
   --color-night: #0A0A0B;   /* page base — the sky */
+  --color-scrim: #0A0A0BCC;  /* THE one modal scrim (R2 unifier: sheet · dialog · lightbox) — night @ 80% alpha; hex+alpha form so Tailwind 4 emits the bg-scrim utility (color-mix+var() values are not statically parseable) */
   --color-surface: #141417; /* raised surface */
   --color-line: #26262B;    /* hairline / divider */
   --color-ink: #F2EFE8;     /* primary text — ivory · 17.2:1 AAA */

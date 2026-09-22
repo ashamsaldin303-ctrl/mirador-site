@@ -138,9 +138,72 @@ async function reserveErrors(locale: "en" | "ar") {
   await page.close();
 }
 
+/** E39 (prompt-4 R2) — mobile nav sheet walkthrough at 375px (<1024px):
+ * keyboard open → focus trap → navigate (route change from inside the sheet) →
+ * Esc close → reopen → scrim (pointer) close. Both locales (panel side mirrors). */
+async function mobileSheet(locale: "en" | "ar") {
+  const log = specLog(`keyboard-mobile-sheet--${locale}`);
+  const ar = locale === "ar";
+  log(`# E39 · mobile nav sheet (${ar ? "AR · side=left · RTL" : "EN · side=right · LTR"}) — open → trap → navigate → Esc/scrim close`);
+  const page = await (await browser.newContext({ viewport: { width: 375, height: 812 } })).newPage();
+  await page.goto(`${BASE}/${locale}`, { waitUntil: "domcontentloaded" });
+  await page
+    .waitForFunction(() => typeof (window as unknown as { next?: unknown }).next !== "undefined", { timeout: 20000 })
+    .catch(() => {});
+  const triggerSel = `button[aria-label="${ar ? "افتح القائمة" : "Open menu"}"]`;
+  const trigger = page.locator(triggerSel);
+  await trigger.waitFor({ state: "visible", timeout: 15000 });
+  await trigger.focus();
+  log(`step 1 — focused menu trigger: ${await activeDesc(page)}`);
+  await page.keyboard.press("Enter");
+  const panel = page.locator('[data-slot="sheet-content"]');
+  await panel.waitFor({ state: "visible", timeout: 10000 });
+  log(`step 2 — Enter → sheet open; activeElement: ${await activeDesc(page)}`);
+  for (let i = 1; i <= 8; i++) {
+    await page.keyboard.press("Tab");
+    await page.waitForTimeout(80);
+    log(`step 3.${i} — Tab → ${await activeDesc(page)}`);
+  }
+  const trapped = await page.evaluate(() => {
+    const d = document.querySelector('[data-slot="sheet-content"]');
+    const a = document.activeElement;
+    return !!d && !!a && !!d.contains(a);
+  });
+  log(`focus-trap check after 8 Tabs: ${trapped ? "PASS — focus never left the sheet" : "FAIL — focus escaped"}`);
+  const menuLink = panel.locator('a[href$="/menu"]');
+  await menuLink.focus();
+  log(`step 4 — focused sheet link: ${await activeDesc(page)}`);
+  await page.keyboard.press("Enter");
+  await page.waitForURL(/\/menu$/, { timeout: 20000 }).catch(() => {});
+  await page.waitForTimeout(500); // sheet exit animation (100ms) + unmount
+  const navigated = /\/menu$/.test(new URL(page.url()).pathname);
+  const closedAfterNav = (await panel.count()) === 0;
+  log(`step 5 — Enter → URL ${page.url()} · sheet closed: ${navigated && closedAfterNav ? "PASS" : `FAIL (navigated=${navigated} closed=${closedAfterNav})`}`);
+  await page.goBack();
+  await page.waitForTimeout(600);
+  await page.click(triggerSel);
+  await panel.waitFor({ state: "visible", timeout: 10000 });
+  await page.keyboard.press("Escape");
+  await page.waitForTimeout(400);
+  const escClosed = (await panel.count()) === 0;
+  log(`step 6 — reopen → Esc → sheet closed: ${escClosed ? "PASS" : "FAIL"}`);
+  await page.click(triggerSel);
+  await panel.waitFor({ state: "visible", timeout: 10000 });
+  const scrimX = ar ? 355 : 20;
+  await page.mouse.click(scrimX, 400);
+  await page.waitForTimeout(400);
+  const scrimClosed = (await panel.count()) === 0;
+  log(`step 7 — reopen → scrim click (pointer) at (${scrimX},400) → sheet closed: ${scrimClosed ? "PASS" : "FAIL"}`);
+  const verdict = trapped && navigated && closedAfterNav && escClosed && scrimClosed;
+  log(`# VERDICT: ${verdict ? "PASS — keyboard-operable mobile sheet: trap, navigate, Esc, scrim" : "FAIL"}`);
+  await page.close();
+}
+
 await menuOverlay();
 await lightbox();
+await mobileSheet("en");
+await mobileSheet("ar");
 await reserveErrors("ar");
 await reserveErrors("en");
 await browser.close();
-console.log("done — 4 keyboard walkthrough logs in /evidence/specs/");
+console.log("done — 6 keyboard walkthrough logs in /evidence/specs/");

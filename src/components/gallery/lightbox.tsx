@@ -70,7 +70,7 @@ export function Lightbox({
       }}
     >
       <DialogPrimitive.Portal>
-        <DialogOverlay className="z-40 bg-night/90" />
+        <DialogOverlay className="z-40 bg-scrim" />
         <DialogPrimitive.Content
           onKeyDown={onKeyDown}
           className="fixed inset-0 z-40 flex flex-col bg-night outline-none duration-200 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0"

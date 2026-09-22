@@ -142,7 +142,7 @@ jobs:
       - name: "Q4b: the remaining 8 E2E specs (E23)"
         run: |
           bun evidence/tools/api-specs.ts capacity-sequential ratelimit dupguard honeypot
-          bun evidence/tools/browser-specs.ts locale-atomic webgl-kill booking inquiry
+          bun evidence/tools/browser-specs.ts locale-atomic webgl-kill sheet-z booking inquiry
 
       - name: "Q4c: 16 rendered snapshots + grep summary (E13 form)"
         run: |

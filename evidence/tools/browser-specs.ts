@@ -241,9 +241,70 @@ async function inquiry() {
   }
 }
 
-const specs: Record<string, () => Promise<void>> = { "locale-atomic": localeAtomic, "webgl-kill": webglKill, booking, inquiry };
+/** E39 (prompt-4 R2) — mobile sheet z-order + pointer interactivity, OPEN state at <1024px.
+ * Root cause fixed this round: nav's SheetContent carried z-30, demoting the panel
+ * BELOW its own z-50 scrim — scrim painted above the menu and pointer nav was broken
+ * under 1024px. Correct stack: scrim+panel above page, panel above scrim (later DOM
+ * sibling at equal z), sheet links actually hittable, scrim click closes. */
+async function sheetZ() {
+  const log = specLog("sheet-z");
+  log(`# E39 · mobile sheet computed z-order in the OPEN state at 375px + pointer hit-test + scrim close (both locales)`);
+  const browser = await chromium.launch({ headless: true, args: ["--no-sandbox"] });
+  try {
+    let allPass = true;
+    for (const locale of ["en", "ar"] as const) {
+      const ar = locale === "ar";
+      const context = await browser.newContext({ viewport: { width: 375, height: 812 } });
+      const page = await context.newPage();
+      await gotoHydrated(page, `${BASE}/${locale}`);
+      await page.click(`button[aria-label="${ar ? "افتح القائمة" : "Open menu"}"]`);
+      const panel = page.locator('[data-slot="sheet-content"]');
+      await panel.waitFor({ state: "visible", timeout: 10000 });
+      await page.waitForTimeout(400); // let the 200ms slide-in settle before measuring
+      const z = await page.evaluate(() => {
+        const overlay = document.querySelector('[data-slot="sheet-overlay"]');
+        const content = document.querySelector('[data-slot="sheet-content"]');
+        const link = content?.querySelector("a");
+        const r = link?.getBoundingClientRect();
+        const cx = r ? r.left + r.width / 2 : -1;
+        const cy = r ? r.top + r.height / 2 : -1;
+        const hit = cx >= 0 ? document.elementFromPoint(cx, cy) : null;
+        const o = overlay ? getComputedStyle(overlay) : null;
+        const c = content ? getComputedStyle(content) : null;
+        const side = !c ? "?" : c.left === "0px" ? "left" : c.right === "0px" ? "right" : "?";
+        return {
+          overlayZ: o?.zIndex ?? "(none)",
+          contentZ: c?.zIndex ?? "(none)",
+          contentPE: c?.pointerEvents ?? "(none)",
+          hitTag: hit ? hit.tagName.toLowerCase() : "(none)",
+          hitInPanel: !!(hit && content?.contains(hit)),
+          linkRect: r ? { x: Math.round(r.x), w: Math.round(r.width) } : null,
+          scrimBg: o?.backgroundColor ?? "(none)",
+          panelSide: side,
+        };
+      });
+      log(`${locale}: computed z — scrim ${z.overlayZ} · panel ${z.contentZ} · panel pointer-events ${z.contentPE} · panel side ${z.panelSide}`);
+      log(`${locale}: hit-test at first sheet link center ${JSON.stringify(z.linkRect)} → elementFromPoint <${z.hitTag}> inPanel=${z.hitInPanel}`);
+      log(`${locale}: scrim background (the one token --color-scrim): ${z.scrimBg}`);
+      // scrim (pointer) close — click the overlay region AWAY from the panel
+      const scrimX = ar ? 355 : 20; // EN panel hugs right → scrim at left edge; AR mirrored
+      await page.mouse.click(scrimX, 400);
+      await page.waitForTimeout(400);
+      const closedByScrim = (await panel.count()) === 0 || (await panel.isHidden());
+      log(`${locale}: scrim click (pointer) at (${scrimX},400) → sheet closed: ${closedByScrim ? "PASS" : "FAIL"}`);
+      const pass = Number(z.contentZ) >= Number(z.overlayZ) && z.hitInPanel && closedByScrim;
+      if (!pass) allPass = false;
+      await context.close();
+    }
+    log(`# VERDICT: ${allPass ? "PASS — panel z ≥ scrim z in the open state at 375px, sheet links pointer-hittable, scrim closes (EN + AR mirrors)" : "FAIL"}`);
+  } finally {
+    await browser.close();
+  }
+}
+
+const specs: Record<string, () => Promise<void>> = { "locale-atomic": localeAtomic, "webgl-kill": webglKill, "sheet-z": sheetZ, booking, inquiry };
 const arg = process.argv[2] ?? "all";
-const order = ["locale-atomic", "webgl-kill", "booking", "inquiry"];
+const order = ["locale-atomic", "webgl-kill", "sheet-z", "booking", "inquiry"];
 const run = arg === "all" ? order : process.argv.slice(2);
 for (const name of run) {
   if (!specs[name]) throw new Error(`unknown spec: ${name}`);

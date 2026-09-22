@@ -254,3 +254,19 @@ Work Log:
 Stage Summary:
 - Environment fully restored (PG 16.2 local, dev daemon healthy on real data, git = 1441ed9 canonical).
 - ACK on record before first code commit (E34 satisfied pending judge read).
+
+---
+Task ID: p4-r0-r2
+Agent: Z.ai Code (main orchestrator)
+Task: prompt-4 R0 (instruments + E35 dispatch) + R2 (C-3 mobile surface: z-order fix + battery walkthrough + logical corners + tempo + one scrim token)
+
+Work Log:
+- R0: .lighthouserc.json chromeFlags STRING → ARRAY ["--no-sandbox","--disable-dev-shm-usage"] (--disable-gpu deleted — C-1, root cause of LHCI "No usable sandbox!" crash in runs 4–8 raw logs) · NEXT_PUBLIC_SITE_URL=https://mirador.example (PLACEHOLDER §9) in workflow env + .env.example · .env unquoted (Prisma CLI P1012 local fix) · ACK committed FIRST as its own commit (ae3d65d parent) · workflow dispatched once: Actions run 9, id 35761641388, https://github.com/ashamsaldin303-ctrl/mirador-site/actions/runs/35761641388 (head ae3d65d) — instrument proof; medians may honestly FAIL this early.
+- R2 product: nav.tsx:122 z-30 override REMOVED (panel demoted below its own z-50 scrim — pointer nav broken <1024px; panel now rides sheet z-50, above scrim by DOM order) · sheet.tsx: bg-black/50 → bg-scrim, duration-300/500 strays → duration-fast/duration-base (100/200ms frozen scale), close-button top-4 right-4 → top-4 end-4 (logical corner) · dialog.tsx: same trio (bg-scrim, duration-base, end-4) · lightbox.tsx: z-40 bg-night/90 → z-40 bg-scrim · globals.css: ONE token --color-scrim #0A0A0BCC (night @ 80%).
+- R2 battery: browser-specs.ts new spec `sheet-z` (computed z-order + pointer hit-test + scrim-close at 375px, EN+AR mirrors) registered + wired into workflow Q4b · keyboard.ts new mobileSheet walkthrough ×2 locales (open → 8×Tab trap → Menu-link navigate → Esc → scrim click) — battery now 6 keyboard walkthroughs.
+- IN-RUN DEFECT found & fixed (verbatim in sheet-z.log run 1): color-mix(in oklab, var(--color-night) 80%, transparent) is not statically parseable by Tailwind 4 → bg-scrim utility NOT emitted → scrim rgba(0,0,0,0) transparent. Fixed: 8-digit hex #0A0A0BCC → rgba(10,10,11,0.8) computed. AR hit-test also needed a 400ms settle (200ms slide-in mid-flight measured x=-214).
+- E39 dev-surface run: sheet-z PASS (scrim z=50 · panel z=50 · pointer-events auto · hit <a> inPanel · closes ×2 locales) · keyboard mobile-sheet PASS ×2. E40 greps: 0 physical corners in sheet/dialog · 1 scrim token (3 modal usages) · tempo = tokens only (0 numeric strays) · section-nav bg-night/90 disclosed as sticky-bar surface, NOT a modal scrim (out of N26 scope to restyle).
+- typecheck 0 errors · eslint 0 problems (post-R2).
+
+Stage Summary:
+- R0 + R2 landed; E34 ACK on record before first code commit; E35 dispatch in flight (run 9); E39/E40 raw artifacts under /evidence/r1/{E39,E40}/ with MANIFEST + REPLAY; exit-gate (E79) re-proves both specs on the Actions prod surface.
