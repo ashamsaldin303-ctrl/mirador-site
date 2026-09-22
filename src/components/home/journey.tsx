@@ -15,11 +15,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { DURATIONS, EASE_EXPO_OUT } from "@/lib/motion";
-
-gsap.registerPlugin(ScrollTrigger);
+import { DURATIONS, EASE_EXPO_OUT, getMotion } from "@/lib/motion";
 
 const SkylineCanvas = dynamic(() => import("./skyline-canvas"), {
   ssr: false,
@@ -97,45 +93,56 @@ export function Journey({
     const rtl = document.documentElement.dir === "rtl";
     const dirSign = rtl ? 1 : -1;
 
-    const ctx = gsap.context(() => {
-      const tween = gsap.to(track, {
-        x: () => dirSign * window.innerWidth * 2,
-        ease: "none",
-        scrollTrigger: {
-          trigger: stage,
-          start: "top top",
-          end: "+=200%", // stage (100vh) pinned for 200vh → total 300vh
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            progressRef.current = self.progress;
-            invalidateRef.current?.();
-          },
-        },
-      });
-      // per-act content reveal, timed to the horizontal container animation
-      gsap.utils.toArray<HTMLElement>("[data-act-content]").forEach((el) => {
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 24 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: DURATIONS.slow,
-            ease: EASE_EXPO_OUT,
-            scrollTrigger: {
-              trigger: el,
-              containerAnimation: tween,
-              start: "left 70%",
-              toggleActions: "play none none reverse",
+    // P-022: the gsap family arrives through the getMotion() singleton —
+    // in-effect, never top-level. Everything below builds only once it lands.
+    let disposed = false;
+    let revert: (() => void) | null = null;
+    void getMotion().then(({ gsap }) => {
+      if (disposed || !stageRef.current || !trackRef.current || !sectionRef.current) return;
+      const ctx = gsap.context(() => {
+        const tween = gsap.to(trackRef.current!, {
+          x: () => dirSign * window.innerWidth * 2,
+          ease: "none",
+          scrollTrigger: {
+            trigger: stageRef.current!,
+            start: "top top",
+            end: "+=200%", // stage (100vh) pinned for 200vh → total 300vh
+            pin: true,
+            scrub: 1,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              progressRef.current = self.progress;
+              invalidateRef.current?.();
             },
           },
-        );
-      });
-    }, section);
-    return () => ctx.revert();
+        });
+        // per-act content reveal, timed to the horizontal container animation
+        gsap.utils.toArray<HTMLElement>("[data-act-content]").forEach((el) => {
+          gsap.fromTo(
+            el,
+            { opacity: 0, y: 24 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: DURATIONS.slow,
+              ease: EASE_EXPO_OUT,
+              scrollTrigger: {
+                trigger: el,
+                containerAnimation: tween,
+                start: "left 70%",
+                toggleActions: "play none none reverse",
+              },
+            },
+          );
+        });
+      }, sectionRef.current!);
+      revert = () => ctx.revert();
+    });
+    return () => {
+      disposed = true;
+      revert?.();
+    };
   }, [horizontal]);
 
   return (

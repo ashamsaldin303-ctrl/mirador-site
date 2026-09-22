@@ -7,7 +7,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
 import { dateStrip, isBookableDay, slotInstant } from "@/lib/slots";
-import { ReserveForm } from "@/components/reserve/reserve-form";
+// P-022 (prompt-4 R4): intent-hydrated split — this boundary SSRs the form
+// shell; the ReserveForm motor imports on first interaction (see the component).
+import { ReserveFormLazy as ReserveForm } from "@/components/reserve/reserve-form-lazy";
 
 export const dynamic = "force-dynamic";
 

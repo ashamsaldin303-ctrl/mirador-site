@@ -47,6 +47,9 @@ for (const { width, height } of VIEWPORTS) {
     for (const { name, path } of ROUTES) {
       await page.goto(`${BASE}/${loc}${path}`, { waitUntil: "domcontentloaded" });
       if (name === "reserve") {
+        // P-022 (prompt-4 R4): intent-hydrated form — first pointerdown mounts the
+        // motor, THEN wait for the live grid (axe scans the full form surface).
+        await page.locator('[role="group"][aria-busy="true"]').click().catch(() => {});
         await page
           .locator('button[aria-label*="tables"], button[aria-label*="طاولات"]')
           .first()

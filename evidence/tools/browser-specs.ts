@@ -156,6 +156,12 @@ async function booking() {
   try {
     const t0 = Date.now();
     await gotoHydrated(page, `${BASE}/en/reserve`);
+    // P-022 (prompt-4 R4): the reserve form is intent-hydrated — the shell SSRs,
+    // the motor (real form island) imports on first interaction. Mirror a real
+    // user: tap the form region, then wait for the fields to mount.
+    await page.locator('[role="group"][aria-busy="true"]').click();
+    await page.locator("#reserve-name").waitFor({ state: "visible", timeout: 20000 });
+    log(`# intent-hydration: form motor mounted on first pointerdown (P-022)`);
     await page.fill("#reserve-name", "Evidence Run");
     await page.fill("#reserve-phone", "+963 999 00901");
     // live availability: first ENABLED slot button (aria-label like "18:00 — N tables")

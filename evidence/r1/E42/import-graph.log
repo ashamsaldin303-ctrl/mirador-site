@@ -1,0 +1,35 @@
+# E42 · import-graph proof — motion family statically imported in 0/16 routes (prompt-4 R4 / P-022) — machine-generated 2026-09-22T18:09:45Z
+
+## 1. route-level static imports of the motion family (expect 0 hits)
+```
+$ rg -n "^import .* from \"(gsap|gsap/|lenis|three|@react-three)" src/app/
+(0 hits) — 0/16 routes statically import the motion family
+```
+
+## 2. who statically imports the family at all (expect ONLY the lazy chunk itself)
+```
+$ rg -n "^import .* from \"(gsap|gsap/|lenis|three|@react-three)" src/ --glob "!**/skyline-canvas.tsx"
+(0 hits outside skyline-canvas — the THREE lazy chunk mounts via dynamic(ssr:false) in journey.tsx)
+```
+
+## 3. layout-level first-load chain (smooth-scroll wraps every route — now lazy)
+```
+$ rg -n "^import" src/components/layout/smooth-scroll.tsx
+7:import { useEffect } from "react";
+8:import { getMotion } from "@/lib/motion";
+```
+
+## 4. the lazy-import sites (in-function, never top-level)
+```
+$ rg -n "import\(\"(gsap|gsap/|lenis)\"\)|getMotion\(\)" src/lib/motion.ts src/components/layout/smooth-scroll.tsx src/components/home/journey.tsx src/components/menu/menu-client.tsx src/components/reserve/reserve-form-lazy.tsx | head -12
+src/components/home/journey.tsx:96:    // P-022: the gsap family arrives through the getMotion() singleton —
+src/components/home/journey.tsx:100:    void getMotion().then(({ gsap }) => {
+src/components/menu/menu-client.tsx:6:// P-022 (prompt-4 R4): gsap+Flip arrive via the getMotion() singleton — the
+src/components/menu/menu-client.tsx:81:    void getMotion().then((motion) => {
+src/lib/motion.ts:34:  gsap: typeof import("gsap")["default"];
+src/lib/motion.ts:41:export function getMotion(): Promise<Motion> {
+src/lib/motion.ts:45:        import("gsap"),
+src/components/layout/smooth-scroll.tsx:3:// P-022 (prompt-4 R4): the motion family loads ONLY through getMotion()
+src/components/layout/smooth-scroll.tsx:14:    let lenis: import("lenis").default | null = null;
+src/components/layout/smooth-scroll.tsx:19:      const [motion, lenisModule] = await Promise.all([getMotion(), import("lenis")]);
+```

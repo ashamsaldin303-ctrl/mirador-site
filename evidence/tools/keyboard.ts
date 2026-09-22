@@ -104,6 +104,10 @@ async function reserveErrors(locale: "en" | "ar") {
   log(`# F8-3 · empty submit → per-field ${ar ? "ARABIC (RTL-correct)" : "ENGLISH"} errors`);
   const page = await (await browser.newContext({ viewport: { width: 375, height: 812 } })).newPage();
   await page.goto(`${BASE}/${locale}/reserve`, { waitUntil: "domcontentloaded" });
+  // P-022 (prompt-4 R4): intent-hydrated form — trigger the motor with a first
+  // pointerdown on the shell region, then wait for the real form to mount.
+  await page.locator('[role="group"][aria-busy="true"]').click();
+  await page.locator("form button[type=submit]").waitFor({ state: "visible", timeout: 20000 });
   await page.locator('button[aria-label*="tables"], button[aria-label*="طاولات"]').first().waitFor({ state: "visible", timeout: 30000 }).catch(() => {});
   const dirBefore = await page.evaluate(() => document.documentElement.dir);
   await page.click("form button[type=submit]");

@@ -36,8 +36,12 @@ const browser = await chromium.launch({
 });
 
 async function settle(page: import("playwright").Page, route: string) {
-  // reserve needs the live availability grid before capture (never the skeleton)
+  // reserve needs the live availability grid before capture (never the skeleton).
+  // P-022 (prompt-4 R4): the form is intent-hydrated — trigger the motor with a
+  // first pointerdown, then wait for the grid (captures the settled form state;
+  // the shell state is evidenced separately in the P-022 state-matrix probes).
   if (route === "reserve") {
+    await page.locator('[role="group"][aria-busy="true"]').click().catch(() => {});
     await page
       .locator('button[aria-label*="tables"], button[aria-label*="طاولات"]')
       .first()

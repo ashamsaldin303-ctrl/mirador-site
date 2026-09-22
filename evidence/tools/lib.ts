@@ -3,8 +3,29 @@
 // EVIDENCE_SURFACE=prod-run on the CI battery redirects every output family
 // under /evidence/prod-run/<family>/ (one family, one surface — prompt-3 §5);
 // unset = the round-2 dev-run layout, byte-identical to its committed set.
-import { appendFileSync, mkdirSync } from "node:fs";
+import { appendFileSync, mkdirSync, readFileSync } from "node:fs";
 import { PrismaClient } from "@prisma/client";
+
+// Deterministic DATABASE_URL for every battery tool (prompt-4 R4 lesson): the
+// sandbox session injects its own template DATABASE_URL (SQLite) into every
+// shell, and bun's .env auto-load does NOT override existing env vars — a tool
+// would construct the PostgreSQL client against a file: URL and crash at init.
+// The project .env wins here; on Actions the workflow env already equals the
+// file, so this is a no-op. Same rule as scripts/dev-daemon.py.
+try {
+  const envText = readFileSync(new URL("../../.env", import.meta.url), "utf8");
+  for (const line of envText.split("\n")) {
+    const trimmed = line.trim();
+    if (trimmed.startsWith("DATABASE_URL=")) {
+      process.env.DATABASE_URL = trimmed
+        .slice("DATABASE_URL=".length)
+        .trim()
+        .replace(/^["']|["']$/g, "");
+    }
+  }
+} catch {
+  /* no .env beside the repo root — use the process env as-is (CI sets it) */
+}
 
 export const BASE = process.env.EVIDENCE_BASE_URL ?? "http://localhost:3000";
 export const EVIDENCE_ROOT = new URL("..", import.meta.url).pathname; // /evidence/

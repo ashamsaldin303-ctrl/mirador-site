@@ -122,11 +122,20 @@ log(`\n## F3-5 — diet filter aria-live announcement`);
   await page.close();
 }
 
+
+/** P-022 (prompt-4 R4): the reserve form is intent-hydrated — the shell SSRs and
+ * the motor (the real form island) imports on first interaction. Every reserve
+ * probe mirrors the user: one pointerdown on the shell region mounts the form. */
+async function intentHydrateReserve(page: import("playwright").Page) {
+  await page.locator('[role="group"][aria-busy="true"]').click().catch(() => {});
+}
+
 // ---------- F4-1: reserve control census ----------
 log(`\n## F4-1 — reserve: exactly 3 input fields + 1 slot picker`);
 {
   const page = await (await browser.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
   await page.goto(`${BASE}/en/reserve`, { waitUntil: "domcontentloaded" });
+  await intentHydrateReserve(page);
   await page.locator('button[aria-label*="tables"]').first().waitFor({ state: "visible", timeout: 30000 }).catch(() => {});
   const census = await page.evaluate(() => {
     const form = document.querySelector("form");
@@ -156,6 +165,7 @@ log(`\n## F4-2 — live availability + sold-out disabled rendering`);
   const availReqs: string[] = [];
   page.on("request", (r) => { if (r.url().includes("/api/availability")) availReqs.push(r.url()); });
   await page.goto(`${BASE}/en/reserve`, { waitUntil: "domcontentloaded" });
+  await intentHydrateReserve(page);
   await page.locator('button[aria-label*="tables"]').first().waitFor({ state: "visible", timeout: 30000 }).catch(() => {});
   log(`availability network calls observed: ${availReqs.length} (${availReqs[0]?.split("?")[1] ?? ""}…)`);
   if (full) {
@@ -405,6 +415,7 @@ log(`\n## F11-3 — state matrix via network fault injection (no product changes
       await route.continue();
     });
     await page.goto(`${BASE}/en/reserve`, { waitUntil: "domcontentloaded" });
+    await intentHydrateReserve(page);
     await page.waitForTimeout(1500);
     await page.screenshot({ path: `${EVIDENCE_OUT}F11/state-matrix/reserve--loading--768.png` });
     log(`reserve--loading--768.png captured (skeleton via 4s delayed availability)`);
@@ -415,6 +426,7 @@ log(`\n## F11-3 — state matrix via network fault injection (no product changes
     const page = await (await browser.newContext({ viewport: { width: 768, height: 1024 } })).newPage();
     await page.route("**/api/availability**", (route) => route.abort());
     await page.goto(`${BASE}/en/reserve`, { waitUntil: "domcontentloaded" });
+    await intentHydrateReserve(page);
     await page.waitForTimeout(1500);
     const hasRetry = await page.evaluate(() => !!Array.from(document.querySelectorAll("button")).find((b) => /retry/i.test(b.textContent ?? "")));
     await page.screenshot({ path: `${EVIDENCE_OUT}F11/state-matrix/reserve--error--768.png` });
@@ -453,7 +465,10 @@ log(`\n## F9-3 / F11-5 / F8-5 — snapshot greps`);
   let socialProof = 0;
   for (const f of files) {
     const html = readFileSync(f, "utf8");
-    const hits = html.match(/testimonial|press|awards|reviews?\b/gi);
+    // \b-bounded (prompt-4 fix): the bare /press/gi regex false-positived on
+    // "suppressHydrationWarning" inside the Flight payload — 146 phantom hits
+    // in run-8's raw logs. The audit means CONTENT words, word-bounded.
+    const hits = html.match(/\btestimonials?\b|\bpress\b|\bawards?\b|\breviews?\b/gi);
     if (hits) { socialProof += hits.length; log(`${f.split("/").pop()} social-proof words: ${hits.join(",")}`); }
   }
   log(`F9-3 VERDICT: ${socialProof === 0 ? "PASS — zero testimonial/review/press/awards in all 16 rendered pages" : `FAIL — ${socialProof} hits`}`);

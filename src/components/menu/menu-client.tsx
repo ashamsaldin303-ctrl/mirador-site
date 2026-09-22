@@ -3,16 +3,16 @@
 // visible rows with gsap Flip (DURATIONS.slow · EASE_EXPO_OUT), and renders the
 // section nav + filter bar + every dish list. Initial state = no filters →
 // all 28 dishes SSR in the raw HTML (F3-2) and hydrate in place.
+// P-022 (prompt-4 R4): gsap+Flip arrive via the getMotion() singleton — the
+// module loads in-effect (motionRef); the FIRST filter click in the rare
+// pre-load window simply snaps rows (identical to the reduced-motion fallback)
+// — every click after the family lands captures and plays the Flip.
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { Flip } from "gsap/Flip";
-import { DURATIONS, EASE_EXPO_OUT, prefersReducedMotion } from "@/lib/motion";
+import { DURATIONS, EASE_EXPO_OUT, getMotion, prefersReducedMotion, type Motion } from "@/lib/motion";
 import { DIET_TAGS, type Allergen, type DietTag } from "@/lib/menu";
 import { SectionNav } from "./section-nav";
 import { DietFilterBar } from "./diet-filter-bar";
 import { DishList } from "./dish-list";
-
-gsap.registerPlugin(Flip);
 
 // SSR-safe layout effect (useLayoutEffect warns during server render)
 const useIsomorphicLayoutEffect =
@@ -69,8 +69,22 @@ export function MenuClient({
   strings: MenuStrings;
 }) {
   const [filters, setFilters] = useState<DietTag[]>([]);
-  const flipStateRef = useRef<Flip.FlipState | null>(null);
+  // FlipState derived from the singleton's own getState signature (type-level only)
+  const flipStateRef = useRef<ReturnType<Motion["Flip"]["getState"]> | null>(null);
+  const motionRef = useRef<Motion | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
+
+  // P-022: load the motion family in-effect (never top-level) — Flip captures
+  // become available from the first interaction AFTER this resolves.
+  useEffect(() => {
+    let disposed = false;
+    void getMotion().then((motion) => {
+      if (!disposed) motionRef.current = motion;
+    });
+    return () => {
+      disposed = true;
+    };
+  }, []);
 
   const visibleCount = sections.reduce(
     (sum, section) =>
@@ -79,10 +93,12 @@ export function MenuClient({
   );
 
   const toggleFilter = (tag: DietTag) => {
-    // capture the FLIP "First" state BEFORE the DOM mutates
+    const motion = motionRef.current;
+    // capture the FLIP "First" state BEFORE the DOM mutates — only when the
+    // family has landed; otherwise the layout effect snaps (RM-equivalent).
     const root = listRef.current;
-    if (root) {
-      flipStateRef.current = Flip.getState(
+    if (motion && root) {
+      flipStateRef.current = motion.Flip.getState(
         root.querySelectorAll("[data-dish-row]"),
       );
     }
@@ -93,9 +109,11 @@ export function MenuClient({
 
   useIsomorphicLayoutEffect(() => {
     const state = flipStateRef.current;
-    if (!state) return;
+    const motion = motionRef.current;
+    if (!state || !motion) return;
     flipStateRef.current = null;
     if (prefersReducedMotion()) return; // static fallback — rows snap, all content present
+    const { Flip, gsap } = motion;
     Flip.from(state, {
       duration: DURATIONS.slow,
       ease: EASE_EXPO_OUT,

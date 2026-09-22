@@ -286,3 +286,22 @@ Work Log:
 
 Stage Summary:
 - B-1 fixed at the root; honest 404 in dev, prod proof rides the exit-gate dispatch (E41/E79).
+
+---
+Task ID: p4-r4
+Agent: Z.ai Code (main orchestrator)
+Task: prompt-4 R4 · P-022 — the budget unlock (motion lazy-mount + intent-hydrated reserve split) + R0 instrument iterations (runs 9/10 lessons)
+
+Work Log:
+- RUN 9 (E35 dispatch #1, ae3d65d): all steps green through Q4i, but Lighthouse STILL crashed "No usable sandbox" — ROOT CAUSE found by reading @lhci/cli@0.15.1 source: node-runner.js reads collect.settings.chromeFlags as a STRING and comma-joins ARRAYS into one malformed switch ("--no-sandbox,--disable-dev-shm-usage --headless=new") → chrome ignores it. The contract's prescribed ARRAY form is defective for LHCI 0.15.x (disclosed; the space-separated STRING is the working form). Also: E33's evidence commit was LOST — bot push non-FF rejected (concurrent R2 push).
+- INSTRUMENT FIX 2: chromeFlags → "--no-sandbox --disable-dev-shm-usage" (string, --disable-gpu deleted) + E33 hardened with fetch+rebase before push.
+- RUN 10 (dispatch #2, 0ffcf3b): **THE INSTRUMENT IS PROVEN** — 6 LHR reports + 6 trace JSONs, medians computed (en 88/3807ms-LCP/0.053-CLS/68ms-TBT · ar 81/4642ms/0.0043/50ms → honest threshold FAILs, pre-P-022 state). E33 failed AGAIN with a new root cause: `git status --short | head -30` SIGPIPEs (exit 141) under pipefail when >30 files changed (run 10 touched 48+ evidence files) — step died BEFORE commit. INSTRUMENT FIX 3: status written to a file, head reads the file (no pipe). Run-10 evidence preserved in artifact prod-run-evidence-10 (downloaded + medians quoted in this log).
+- P-022 product: getMotion() singleton in src/lib/motion.ts (gsap+ScrollTrigger+Flip, ONE lazy chunk, plugins registered once, in-effect await only) · smooth-scroll.tsx (layout-level leak) → getMotion()+lazy lenis · journey.tsx scrub → in-effect getMotion().then with disposed/revert · menu-client.tsx → motionRef pattern (Flip First-capture stays synchronous once loaded; pre-load window snaps = RM-equivalent fallback) · reserve-form-lazy.tsx intent-hydrated split (shell = labelled busy group + aria-hidden skeleton; motor imports on pointerdown/keydown/focusin/touchstart) · reserve/page.tsx wired to the boundary.
+- Battery adaptations (user-mirroring, assertions unchanged): booking + reserveErrors + axe-run + screenshots + dom-ac-probes (F4-1/F4-2/F11-3×2) all trigger intent on /reserve first.
+- TOOLING FIX (evidence lib): harness session injects template sqlite DATABASE_URL into every shell; bun .env auto-load does NOT override process env → battery tools crashed at Prisma init (booking run 17:57 crash + leftover row → next run hit the 409 dupguard — the guard works). lib.ts now parses project .env deterministically (no-op on Actions). Leftover test rows manually cleaned once.
+- PROBE FIX (F9-3): bare /press/gi false-positived on "suppressHydrationWarning" in the Flight payload — 146 phantom hits present in run-8 raw logs (pre-existing FAIL). Word-bounded regex now; remaining honest hits = 2 ("Please review the highlighted fields." — the validation-verb copy, deferred to R11's P-081 term ledger as a real copy decision).
+- Dev-surface verification: booking PASS 3.0s (intent-hydration + full funnel + DB row + WhatsApp encodes) · webgl-kill PASS (control canvas mounts with lazy gsap) · locale-atomic PASS · keyboard ×6 PASS (incl. mobile sheets) · dom-ac-probes: F4-1/F4-2/F3-5/F11-3 PASS (F9-3 FAIL 2 hits, honest, R11). typecheck 0 · eslint 0.
+- E42 artifacts: evidence/r1/E42/{import-graph.log, MANIFEST.md} — 0/16 routes statically import the family; 0 static imports outside the THREE lazy chunk; singleton/split code quoted; canonical build-manifest side cited from the run carrying R4.
+
+Stage Summary:
+- P-022 landed: motion family + lenis out of every route's first-load; reserve motor behind intent. Instrument (C-1) PROVEN on Actions with 6 real Lighthouse runs; E33 hardened twice (rebase, SIGPIPE). Next: commit R4 + workflow fix → dispatch run 11 to land the evidence with R4 in the build.

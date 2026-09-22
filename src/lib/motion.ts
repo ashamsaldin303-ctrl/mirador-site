@@ -22,3 +22,38 @@ export function prefersReducedMotion(): boolean {
   if (typeof window === "undefined") return false;
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
+
+// ————————————————————————————————————————————————————————————————
+// P-022 (prompt-4 R4) — THE motion loader. The gsap family (core + ScrollTrigger
+// + Flip) loads ONLY through this singleton, always via in-effect `await` /
+// `.then()` — NEVER a top-level import in any route or component. One lazy
+// chunk for the whole family; plugins registered exactly once.
+// ————————————————————————————————————————————————————————————————
+
+export type Motion = {
+  gsap: typeof import("gsap")["default"];
+  ScrollTrigger: typeof import("gsap/ScrollTrigger")["ScrollTrigger"];
+  Flip: typeof import("gsap/Flip")["Flip"];
+};
+
+let motionPromise: Promise<Motion> | null = null;
+
+export function getMotion(): Promise<Motion> {
+  if (!motionPromise) {
+    motionPromise = (async () => {
+      const [gsapModule, scrollTriggerModule, flipModule] = await Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+        import("gsap/Flip"),
+      ]);
+      const gsap = gsapModule.default;
+      gsap.registerPlugin(scrollTriggerModule.ScrollTrigger, flipModule.Flip);
+      return {
+        gsap,
+        ScrollTrigger: scrollTriggerModule.ScrollTrigger,
+        Flip: flipModule.Flip,
+      };
+    })();
+  }
+  return motionPromise;
+}

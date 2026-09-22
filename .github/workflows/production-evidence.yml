@@ -255,7 +255,8 @@ jobs:
           mkdir -p evidence/F12-2/prod-run evidence/F6-3/prod-run
           git add -f evidence/prod-run 2>/dev/null || true
           git add -f evidence/F12-2/prod-run evidence/F6-3/prod-run 2>/dev/null || true
-          git status --short | head -30
+          git status --short > /tmp/git-status.txt || true # no pipe: `| head` SIGPIPEs (141) under pipefail when >30 files changed (run-10 lesson)
+          head -30 /tmp/git-status.txt
           git commit -m "prod-run evidence battery (prompt-3 Q1–Q4) — actions run ${{ github.run_number }} [surface: prod-run]" || echo "nothing to commit"
           # Run-9 lesson: main can move during a battery (concurrent R-train pushes) —
           # rebase the evidence commit before pushing instead of losing it to non-FF.
