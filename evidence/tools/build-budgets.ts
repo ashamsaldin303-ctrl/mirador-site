@@ -76,10 +76,10 @@ async function firstLoadSet(url: string): Promise<string[]> {
   const html = await (await fetch(`${BASE}${url}`)).text();
   const srcs = new Set<string>();
   for (const m of html.matchAll(/<script\b[^>]*\bsrc="(\/[^"]+\.js)"[^>]*>/g)) {
-    if (!/nomodule/i.test(m[0])) srcs.add(m[1]);
+    if (m[1] && !/nomodule/i.test(m[0])) srcs.add(m[1]);
   }
   for (const m of html.matchAll(/<link\b[^>]*\b(?:preload|modulepreload)\b[^>]*\bhref="(\/[^"]+\.js)"[^>]*>/g)) {
-    srcs.add(m[1]);
+    if (m[1]) srcs.add(m[1]);
   }
   return [...srcs];
 }

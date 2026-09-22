@@ -141,7 +141,7 @@ jobs:
 
       - name: "Q4b: the remaining 8 E2E specs (E23)"
         run: |
-          bun evidence/tools/api-specs.ts capacity-sequential ratelimit dupguard honeypot
+          bun evidence/tools/api-specs.ts capacity-sequential ratelimit dupguard honeypot sec-r5
           bun evidence/tools/browser-specs.ts locale-atomic webgl-kill sheet-z booking inquiry
 
       - name: "Q4c: 16 rendered snapshots + grep summary (E13 form)"
@@ -222,6 +222,9 @@ jobs:
             bun run db:generate
             echo 'CREATE DATABASE mirador_coldstart' | bunx prisma db execute --stdin --url postgresql://mirador:mirador@localhost:5432/postgres
             export DATABASE_URL="postgresql://mirador:mirador@localhost:5432/mirador_coldstart"
+            # COP-1 (prompt-4 R5): the fresh clone has no .env — the deploy guard
+            # fails any next command without NEXT_PUBLIC_SITE_URL. PLACEHOLDER origin.
+            export NEXT_PUBLIC_SITE_URL="https://mirador.example"
             bun run migrate
             bun run seed
             nohup bun run dev > /dev/null 2>&1 &

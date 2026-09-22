@@ -180,7 +180,8 @@ export function InquiryForm({
         let mapped = false;
         for (const [field, keys] of Object.entries(body.fields ?? {})) {
           const fieldKey = SERVER_FIELD[field];
-          const errorKey = SERVER_ERROR_KEY[keys[0]];
+          const first = keys[0]; // noUncheckedIndexedAccess: index access is string | undefined
+          const errorKey = first ? SERVER_ERROR_KEY[first] : undefined;
           if (!fieldKey || !errorKey) continue;
           mapped = true;
           if (!next[fieldKey]) next[fieldKey] = errors[errorKey];

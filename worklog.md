@@ -305,3 +305,22 @@ Work Log:
 
 Stage Summary:
 - P-022 landed: motion family + lenis out of every route's first-load; reserve motor behind intent. Instrument (C-1) PROVEN on Actions with 6 real Lighthouse runs; E33 hardened twice (rebase, SIGPIPE). Next: commit R4 + workflow fix → dispatch run 11 to land the evidence with R4 in the build.
+
+---
+Task ID: p4-r5
+Agent: Z.ai Code (main orchestrator)
+Task: prompt-4 R5 · Majors — SEO / security / data integrity (COP-1/2 · SEC-1/2/4 · BKG-1 · ARC/K-1)
+
+Work Log:
+- COP-1: next.config.ts deploy guard — build/dev FAIL when NEXT_PUBLIC_SITE_URL unset (throws [COP-1]…; verified: env -u + delete → exact guard message) · canonical/hreflang/OG/JSON-LD already render via siteUrl() (metadataBase) · cold-start step now exports NEXT_PUBLIC_SITE_URL=https://mirador.example (fresh clone lacks .env — guard would kill dev boot).
+- COP-2: confirmation/[id] generateMetadata → robots {index:false, follow:false} + self-canonical ONLY (per-id hreflang alternates REMOVED — every reservation id was indexable in both locales). Verified rendered: noindex,nofollow meta + canonical + 0 hreflang.
+- SEC-1: CSP (default-src 'self'; script/style unsafe-inline — Next Flight inline bootstrap + React style attrs, nonce migration documented as deploy-pre follow-up; frame-ancestors 'none') · X-Frame-Options DENY · Referrer-Policy strict-origin-when-cross-origin · X-Content-Type-Options nosniff — all four verified live on dev; poweredByHeader:false (X-Powered-By absent).
+- SEC-2: 8KB body cap on BOTH POST routes (declared content-length pre-check + actual read check) → 413 PAYLOAD_TOO_LARGE (raw pair captured).
+- SEC-4: rate-limit bucket Map bounded — RATE_LIMIT_MAX_BUCKETS=10_000 exported, evict() drops expired-then-oldest; bucketCount() for the spec.
+- BKG-1: slotRejection gains "off-grid" — Damascus-local time must be one of the 10 SLOT_TIMES (05:00/17:30/23:00 crafted instants that passed the 30-min-UTC-grid zod now 400; closed-Monday control 400; 0 rows persisted).
+- ARC/K-1: tsconfig noUncheckedIndexedAccess:true added, noImplicitAny:false REMOVED — 9 surfaced errors fixed honestly (slots destructure-defaults; reserve initialDate ?? chain; inquiry-form keys[0] guard; 4 evidence-tool fixes incl. http-404 mustKeys loud-crash on missing content keys). typecheck 0 · eslint 0.
+- E47/E48 battery: new api-spec `sec-r5` (413 raw pair · 4 crafted off-grid/Monday pairs + 0-rows DB assert · 10,500-IP synthetic fill → buckets=10,000=cap) — wired into workflow Q4b. Dev run: VERDICT PASS.
+- IN-RUN DEFECT fixed in the spec itself (before any green run): Date.UTC month-index off-by-one in the crafted-slot table — caught in review, month-1 applied, no phantom PASS in the log.
+
+Stage Summary:
+- R5 landed and dev-verified end-to-end; canonical prod proof (E44 ×16 zero-localhost snapshots, E45 noindex dump, E46 header table, E47/E48 raw pairs) rides the exit-gate dispatch. versions.md tsconfig row closes at E49/E80 per the doc-truth round.

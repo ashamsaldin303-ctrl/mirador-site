@@ -85,9 +85,21 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // SEC-2 (prompt-4 R5): request body-size cap — a valid reservation payload is
+  // <1KB; 8KB is a generous ceiling. Oversized (declared OR actual) → 413.
+  const MAX_BODY_BYTES = 8192;
+  const declared = Number(req.headers.get("content-length") ?? "0");
+  if (Number.isFinite(declared) && declared > MAX_BODY_BYTES) {
+    return NextResponse.json({ error: "PAYLOAD_TOO_LARGE" }, { status: 413 });
+  }
+
   let body: unknown;
   try {
-    body = await req.json();
+    const raw = await req.text();
+    if (raw.length > MAX_BODY_BYTES) {
+      return NextResponse.json({ error: "PAYLOAD_TOO_LARGE" }, { status: 413 });
+    }
+    body = JSON.parse(raw);
   } catch {
     return NextResponse.json(validationBody([{ path: [] }]), { status: 400 });
   }

@@ -10,6 +10,33 @@ type Window = { hits: number[] };
 
 const buckets = new Map<string, Window>();
 
+// SEC-4 (prompt-4 R5): bounded bucket map — a per-IP Map grows unboundedly
+// under address-space scanning; this cap keeps resident memory O(1). Declared
+// here so the CI limiter-bound spec can assert against the SAME constant.
+export const RATE_LIMIT_MAX_BUCKETS = 10_000;
+
+/** Map size (the limiter-bound spec asserts size ≤ RATE_LIMIT_MAX_BUCKETS). */
+export function bucketCount(): number {
+  return buckets.size;
+}
+
+/** SEC-4 eviction: prefer dropping fully-expired windows, then oldest-inserted
+ * (Map preserves insertion order) until the cap is honored. */
+function evict(now: number): void {
+  if (buckets.size <= RATE_LIMIT_MAX_BUCKETS) return;
+  const windowMs = 60_000;
+  for (const [key, w] of buckets) {
+    if (buckets.size <= RATE_LIMIT_MAX_BUCKETS) break;
+    if (w.hits.length === 0 || w.hits.every((t) => now - t >= windowMs)) {
+      buckets.delete(key);
+    }
+  }
+  for (const key of buckets.keys()) {
+    if (buckets.size <= RATE_LIMIT_MAX_BUCKETS) break;
+    buckets.delete(key);
+  }
+}
+
 const MAX_HITS = {
   write: 5, // 6th POST within 60s → 429
   read: 30, // availability
@@ -36,6 +63,7 @@ function check(kind: "write" | "read", key: string): RateResult {
   }
   // slide: keep only hits inside the last 60s
   w.hits = w.hits.filter((t) => now - t < windowMs);
+  evict(now);
   if (w.hits.length >= maxHits) {
     const oldest = w.hits[0] ?? now;
     const retryAfter = Math.max(1, Math.ceil((oldest + windowMs - now) / 1000));

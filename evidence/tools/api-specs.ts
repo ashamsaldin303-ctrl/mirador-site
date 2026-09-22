@@ -143,12 +143,100 @@ async function honeypot() {
   log(`# inquiries baseline ${before.inquiries} → after ${await prisma.inquiry.count()} (unchanged)`);
 }
 
+/** E47/E48 (prompt-4 R5) — SEC-2 body cap · SEC-4 limiter bound · BKG-1 slot grid. */
+async function secR5() {
+  const log = specLog("sec-r5");
+  log(`# E47 · SEC-2: oversized POST body → 413 (raw request/response pair)`);
+  // SEC-2: declared content-length over the 8KB cap → 413 without reading
+  const bigPayload = JSON.stringify({
+    name: "x".repeat(9000),
+    phone: "+96399900432",
+    partySize: 2,
+    slot: new Date(Date.now() + 14 * 86400_000).toISOString(),
+    locale: "en",
+  });
+  const big = await postJson("/api/reservations", bigPayload, "10.99.5.1");
+  log(`POST /api/reservations (9KB body, ip=10.99.5.1) → HTTP ${big.status} ${big.body.slice(0, 120)}`);
+  log(`Content-Length declared: ${Buffer.byteLength(bigPayload)}B (> 8192B cap)`);
+  const oversizedPass = big.status === 413;
+
+  log(`# E48 · BKG-1: only 18:00–22:30 Damascus (UTC+3) service instants persist`);
+  // Crafted off-service instants that PASS the 30-min-UTC-grid zod refine but are
+  // NOT in SLOT_TIMES: 05:00 Damascus (02:00 UTC) and 17:30 Damascus (14:30 UTC),
+  // on a bookable (non-Monday) future day. Plus a closed-Monday control.
+  const damascusOffset = 3 * 3600_000;
+  const nextBookable = (() => {
+    for (let ahead = 2; ahead < 30; ahead++) {
+      const day = new Date(Date.now() + ahead * 86400_000 + damascusOffset);
+      if (day.getUTCDay() !== 1) return day.toISOString().slice(0, 10);
+    }
+    return new Date(Date.now() + 2 * 86400_000).toISOString().slice(0, 10);
+  })();
+  const nextMonday = (() => {
+    for (let ahead = 2; ahead < 30; ahead++) {
+      const day = new Date(Date.now() + ahead * 86400_000 + damascusOffset);
+      if (day.getUTCDay() === 1) return day.toISOString().slice(0, 10);
+    }
+    return "";
+  })();
+  const crafted: { label: string; damascusTime: string; date: string }[] = [
+    { label: "05:00 Damascus (pre-service)", damascusTime: "05:00", date: nextBookable },
+    { label: "17:30 Damascus (pre-service, on 30-min grid)", damascusTime: "17:30", date: nextBookable },
+    { label: "23:00 Damascus (post-service, on 30-min grid)", damascusTime: "23:00", date: nextBookable },
+    { label: "closed Monday control (19:00 Damascus — valid time, closed day)", damascusTime: "19:00", date: nextMonday },
+  ];
+  let offGridPass = true;
+  for (const c of crafted) {
+    // Date.UTC months are 0-based: "2026-10-05" → October 5 via month-1
+    const [yy = 1970, mm = 1, dd = 1] = nextBookableOrDate(c.date).split("-").map(Number);
+    const [h = 0, m = 0] = c.damascusTime.split(":").map(Number);
+    const slot = new Date(Date.UTC(yy, mm - 1, dd, h, m) - damascusOffset);
+    const payload = {
+      name: "BKG-1 OffGrid Probe",
+      phone: `${TEST_PHONE_PREFIX}05001`,
+      partySize: 2,
+      slot: slot.toISOString(),
+      locale: "en",
+    };
+    const r = await postJson("/api/reservations", payload, "10.99.5.2");
+    log(`POST slot=${slot.toISOString()} (${c.label}, ${c.date}) → HTTP ${r.status} ${r.body.slice(0, 90)}`);
+    if (r.status !== 400) offGridPass = false;
+  }
+  const persisted = await prisma.reservation.count({ where: { phone: { startsWith: `${TEST_PHONE_PREFIX}05` } } });
+  log(`# DB rows persisted for the BKG-1 probe phone family: ${persisted} (expect 0)`);
+  if (persisted !== 0) offGridPass = false;
+
+  log(`# E47 · SEC-4: rate-limiter bucket Map bound (synthetic fill ≤ declared cap)`);
+  const { bucketCount, RATE_LIMIT_MAX_BUCKETS, limitRead } = await import("../../src/lib/rate-limit");
+  const before = bucketCount();
+  for (let i = 0; i < RATE_LIMIT_MAX_BUCKETS + 500; i++) {
+    limitRead(`10.77.${Math.floor(i / 250)}.${i % 250}`);
+  }
+  const after = bucketCount();
+  log(`synthetic fill: ${RATE_LIMIT_MAX_BUCKETS + 500} distinct IPs through limitRead → buckets ${before} → ${after} (cap ${RATE_LIMIT_MAX_BUCKETS})`);
+  log(`# in-module evict() keeps Map size ≤ the declared cap; the cap constant is imported from src/lib/rate-limit.ts (single source)`);
+  const boundPass = after <= RATE_LIMIT_MAX_BUCKETS;
+
+  const verdict = oversizedPass && offGridPass && boundPass
+    ? "PASS — SEC-2 413 · SEC-4 bounded map · BKG-1 off-service instants rejected with zero rows"
+    : `FAIL — oversized=${oversizedPass} offGrid=${offGridPass} bound=${boundPass}`;
+  log(`# VERDICT: ${verdict}`);
+  const cleaned = await cleanupTestRows(prisma);
+  log(`# CLEANUP: deleted ${cleaned.reservations} reservations (phones ${TEST_PHONE_PREFIX}*)`);
+}
+
+/** date-string normalizer for the crafted-slot table above (Monday control may be ""). */
+function nextBookableOrDate(date: string): string {
+  return date || new Date(Date.now() + 2 * 86400_000).toISOString().slice(0, 10);
+}
+
 const specs: Record<string, () => Promise<void>> = {
   "capacity-sequential": capacitySequential,
   "capacity-race": capacityRace,
   ratelimit,
   dupguard,
   honeypot,
+  "sec-r5": secR5,
 };
 
 const arg = process.argv[2] ?? "all";

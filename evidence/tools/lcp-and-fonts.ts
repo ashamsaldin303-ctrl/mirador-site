@@ -85,7 +85,7 @@ writeFileSync(`${EVIDENCE_ROOT}F1-4/font-display--grep.txt`, summary);
   await cdp.send("Network.enable");
   const reqs = new Map<string, { url: string; sent: number; receive?: number; done?: number; bytes?: number }>();
   cdp.on("Network.requestWillBeSent", (e: { requestId: string; request: { url: string }; timestamp: number }) => {
-    if (e.request.url.includes("/fonts/")) reqs.set(e.requestId, { url: e.request.url.split("/fonts/")[1], sent: e.timestamp });
+    if (e.request.url.includes("/fonts/")) reqs.set(e.requestId, { url: e.request.url.split("/fonts/")[1] ?? e.request.url, sent: e.timestamp });
   });
   cdp.on("Network.responseReceived", (e: { requestId: string; timestamp: number }) => {
     const r = reqs.get(e.requestId);

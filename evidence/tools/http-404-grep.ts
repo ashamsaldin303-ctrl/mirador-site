@@ -9,9 +9,18 @@ import { outDir, EVIDENCE_OUT } from "./lib";
 const dir = `${outDir("http")}`;
 const en = JSON.parse(readFileSync("content/en.json", "utf8")) as Record<string, string>;
 const ar = JSON.parse(readFileSync("content/ar.json", "utf8")) as Record<string, string>;
+// noUncheckedIndexedAccess: a missing content key must CRASH this tool loudly,
+// never silently shrink the §7.9 copy gate.
+function mustKeys(dict: Record<string, string>, keys: string[]): string[] {
+  return keys.map((k) => {
+    const v = dict[k];
+    if (typeof v !== "string") throw new Error(`content key missing: ${k}`);
+    return v;
+  });
+}
 const copy = {
-  en: [en["meta.404.title"], en["meta.404.sub"], en["meta.404.cta"]],
-  ar: [ar["meta.404.title"], ar["meta.404.sub"], ar["meta.404.cta"]],
+  en: mustKeys(en, ["meta.404.title", "meta.404.sub", "meta.404.cta"]),
+  ar: mustKeys(ar, ["meta.404.title", "meta.404.sub", "meta.404.cta"]),
 };
 
 const rows: string[] = [
@@ -37,7 +46,7 @@ for (const loc of ["en", "ar"] as const) {
   const is404 = body.startsWith(`HTTP/1.1 404`) || body.split("\n")[0]?.includes(" 404 ");
   rows.push(`GET /${loc}/nonexistent-page → status ${is404 ? "404 PASS" : `${body.split("\n")[0]} — NOT 404 FAIL`}`);
   if (!is404) fail++;
-  for (const s of copy[loc]) {
+  for (const s of copy[loc] ?? []) {
     const present = body.includes(s);
     rows.push(`  copy: ${JSON.stringify(s)} → ${present ? "present PASS" : "MISSING FAIL"}`);
     if (!present) fail++;

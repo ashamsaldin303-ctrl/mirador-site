@@ -6,7 +6,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
-import { dateStrip, isBookableDay, slotInstant } from "@/lib/slots";
+import { damascusToday, dateStrip, isBookableDay, slotInstant } from "@/lib/slots";
 // P-022 (prompt-4 R4): intent-hydrated split — this boundary SSRs the form
 // shell; the ReserveForm motor imports on first interaction (see the component).
 import { ReserveFormLazy as ReserveForm } from "@/components/reserve/reserve-form-lazy";
@@ -44,7 +44,10 @@ export default async function ReservePage({
   const dict = getDictionary(locale);
 
   const days = dateStrip(60);
-  const initialDate = days.find((d) => isBookableDay(slotInstant(d, "00:00"))) ?? days[0];
+  // dateStrip(60) is non-empty by construction; the final ?? closes the
+  // noUncheckedIndexedAccess chain (never taken in practice).
+  const initialDate =
+    days.find((d) => isBookableDay(slotInstant(d, "00:00"))) ?? days[0] ?? damascusToday();
 
   return (
     <section className="mx-auto w-full max-w-xl px-4 pb-24 pt-32 sm:px-6">

@@ -24,13 +24,13 @@ export async function generateMetadata({
   if (!reservation) notFound();
   return {
     title: getDictionary(locale)["confirm.title"],
+    // COP-2 (prompt-4 R5): guest PII surface — noindex + demotion.
+    // Self-canonical ONLY; NO per-id hreflang alternates (each confirmation id
+    // is a single-guest artifact, not a locale-parallel page — per-id alternates
+    // made every reservation id indexable in both locales).
+    robots: { index: false, follow: false },
     alternates: {
       canonical: `/${locale}/confirmation/${id}`,
-      languages: {
-        en: `/en/confirmation/${id}`,
-        ar: `/ar/confirmation/${id}`,
-        "x-default": `/en/confirmation/${id}`,
-      },
     },
   };
 }
