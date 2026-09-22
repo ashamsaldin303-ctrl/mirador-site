@@ -5,7 +5,7 @@
       "numberOfRuns": 3,
       "settings": {
         "saveAssets": true,
-        "chromeFlags": ["--no-sandbox", "--disable-dev-shm-usage"]
+        "chromeFlags": "--no-sandbox --disable-dev-shm-usage"
       }
     },
     "assert": {

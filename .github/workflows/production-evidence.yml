@@ -257,6 +257,10 @@ jobs:
           git add -f evidence/F12-2/prod-run evidence/F6-3/prod-run 2>/dev/null || true
           git status --short | head -30
           git commit -m "prod-run evidence battery (prompt-3 Q1–Q4) — actions run ${{ github.run_number }} [surface: prod-run]" || echo "nothing to commit"
+          # Run-9 lesson: main can move during a battery (concurrent R-train pushes) —
+          # rebase the evidence commit before pushing instead of losing it to non-FF.
+          git fetch origin main
+          git rebase origin/main || { echo "rebase failed — force-push safety net skipped"; exit 1; }
           git push
 
       - name: "Battery verdict verification (FINAL exit gate — fails the job when any verdict reads FAIL)"
