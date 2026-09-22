@@ -375,3 +375,26 @@ Work Log:
 
 Stage Summary:
 - The release's namesake landed: the bezel owns focus site-wide (8.42:1), the night's own hands govern touch/autofill/scroll/digits, the figure register is generated-not-authored, the tab-lamp spec is in the drawer. Prod proof + axe re-run ride the exit gate.
+
+---
+Task ID: p5-recovery
+Agent: Z.ai Code (main orchestrator)
+Task: Session "أكمل" — full environment recovery after a second container recreation (the dev daemon was dead at open; PG destroyed; template leftovers re-materialized)
+
+Work Log:
+- Read worklog + git state: local HEAD = origin/main = 401991f (R8 tip) — zero divergence; but 864 files mode-flipped 644→755 and 63 untracked leftovers restored by the harness snapshot.
+- Dev daemon dead: .zscripts/dev.log showed db:push failing with P1012 ("URL must start with postgresql://") — the harness-injected DATABASE_URL=file:...custom.db (template SQLite) poisoning prisma CLI, and ~/pg-runtime (user-space PostgreSQL) destroyed by the container recreation.
+- pgserver wheel unavailable in the new container; reinstalled from PyPI into /home/z/.venv with python3.12 (system pip is 3.13-bound and pgserver publishes ≤3.12 wheels) — PostgreSQL 16.2 binaries restored.
+- Rebuilt ~/pg-runtime (LOCAL only, N22): initdb --auth=trust, pg_ctl on TCP localhost:5432 + socket dir ~/pg-runtime, role mirador/mirador SUPERUSER, db mirador; recreated start-pg.sh (idempotent, LOCAL only, never committed).
+- prisma migrate deploy failed on the SQLite-era leftover folder 20260921072332_init (untracked local restoral; git tracks ONLY pg_init — verified against Actions run-11 job log: "1 migration found, applying 20260921125931_pg_init"). Deleted the leftover folder; dropped+recreated db; migrate + seed green: 6 sections / 28 items / 8 gallery / 12 reservations (F3-1 gate).
+- Template leftovers deleted (63 untracked): src/app/page.tsx + layout.tsx + api/route.ts (would shadow the proxy redirect and duplicate the root layout), src/app/[locale]/loading.tsx (would re-break R3's honest 404), src/components/site/, 50 untracked ui components (tracked set = 8), src/hooks/, src/lib/manual-content.ts, tailwind.config.ts, 13 root-level evidence PNGs (round-1 era).
+- Mode churn neutralized: git config core.fileMode false (local config; content was already HEAD-identical). .zscripts/dev.pid restored to tracked empty state.
+- Dev daemon restarted via scripts/dev-daemon.py (double-fork, project .env wins over injected env).
+- Verification battery: / → 307 → /en · 7 routes × 2 locales = 200 ×14 · /{en,ar}/nonexistent-page = 404 (R3 fix intact after leftover deletion) · GET /api/availability?date=2026-09-30 = 200 (real slot data) · POST /api/reservations = 201 (table 1 + wa.me URL; Damascus 18:30 → UTC 15:30 verified in DB) · POST /api/inquiries = 201 · confirmation/[id] = 200 · typecheck 0 · eslint 0.
+- Agent-browser golden path (AR): intent-hydrated reserve shell → click → motor loads (name/phone inputs + party stepper + 60-day date strip with Mondays disabled "مغلق يوم الاثنين" + live time grid "18:00 — 12 طاولات") → submit → /ar/confirmation/<id> "الطاولة لك." with WhatsApp link; 0 console errors.
+- Responsive: 375px no horizontal overflow; footer docH 4318 = footerBottom 4318 (gap 0 — natural push, no overlay).
+- Test rows cleaned (back to 12 reservations / 0 inquiries). Evidence: evidence/session-continue2/{ar-home-1440,ar-confirmation-1440,en-home-375}.png.
+- GitHub API: ci.yml runs 1–3 (R1/R9a/R8 pushes) all success; production-evidence runs 9–11 remain the honest-failure record per BLOCKED.md.
+
+Stage Summary:
+- Environment fully recovered to the R8-tip state: PG 16.2 local (start-pg.sh idempotent), dev daemon healthy on real seeded data, working tree clean (2 session artifacts to commit), zero code changes needed — the release surface (401991f) is intact and re-verified end-to-end.
