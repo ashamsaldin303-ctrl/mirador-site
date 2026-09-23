@@ -125,7 +125,7 @@ export default async function LocaleLayout({
       <script
         dangerouslySetInnerHTML={{
           __html:
-            "(function(){var d=document.getElementById('fonts-deferred');d.addEventListener('load',function(){d.media='all'});if(d.sheet)d.media='all';})();",
+            "(function(){var d=document.getElementById('fonts-deferred');if(d){d.addEventListener('load',function(){d.media='all'});if(d.sheet)d.media='all';}})();",
         }}
       />
       <body className="min-h-dvh bg-night font-sans text-ink">
