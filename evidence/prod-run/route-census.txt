@@ -1,4 +1,4 @@
-# P-024 route census — machine-generated from .next/prerender-manifest.json + /tmp/build-local.log
+# P-024 route census — machine-generated from .next/prerender-manifest.json + build-output.log
 # ○ = prerendered static (manifest.routes) · ● = generateStaticParams on-demand fallback (manifest.dynamicRoutes) · ƒ = dynamic per request (build tree)
 # run-15 lesson: the console Route (app) tree marks fallback parents ● with symbol-less prerendered children — the manifest is the machine truth.
 

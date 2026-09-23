@@ -1,8 +1,8 @@
 
-===== inquiry · run 2026-09-23T02:12:33.062Z =====
+===== inquiry · run 2026-09-23T02:15:31.893Z =====
 # F8 · inquiry happy path — private-dining form → success state + row persisted
-# success status (role=status): ""
-# reference line: "Reference: cmudgwzq"
-# DB row: {"id":"cmudgwzqb000r42k3x9i4ztie","type":"PRIVATE_DINING","name":"Evidence Run","locale":"EN"}
-# VERDICT: FAIL — statusText="" row=true
+# success status (role=status): "Inquiry received. We reply within one business day — or reach us now on WhatsApp. |  | Reference: cmudh0to |  | Reach us now on WhatsApp |  | Opens WhatsApp — an external app."
+# reference line: "Reference: cmudh0to"
+# DB row: {"id":"cmudh0to5000r2gd09olhy1qz","type":"PRIVATE_DINING","name":"Evidence Run","locale":"EN"}
+# VERDICT: PASS — success state rendered, inquiry persisted
 # CLEANUP: deleted 1 inquiries
