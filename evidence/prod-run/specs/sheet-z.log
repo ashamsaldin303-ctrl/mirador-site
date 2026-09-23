@@ -1,5 +1,5 @@
 
-===== sheet-z · run 2026-09-23T05:43:53.098Z =====
+===== sheet-z · run 2026-09-23T17:00:21.876Z =====
 # E39 · mobile sheet computed z-order in the OPEN state at 375px + pointer hit-test + scrim close (both locales)
 en: computed z — scrim 50 · panel 50 · panel pointer-events auto · panel side right
 en: hit-test at first sheet link center {"x":97,"w":239} → elementFromPoint <a> inPanel=true

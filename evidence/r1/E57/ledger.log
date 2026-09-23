@@ -1,4 +1,4 @@
-# P-041 LEDGER — machine-generated 2026-09-23T05:43:40.240Z
+# P-041 LEDGER — machine-generated 2026-09-23T17:00:09.012Z
 ## Font cells (disk-assertable — run on every push)
 [PASS] amiri 400 payload 43112B ≤ 60KB (42.1KB)
 [PASS] amiri 700 payload 43452B ≤ 60KB (42.4KB)
@@ -15,7 +15,7 @@
   /en/gallery — files=13 raw=586833B gz=179765B (175.6KB) → FAIL (soft budget exceeded — under hard cap)
   /en/private-dining — files=13 raw=572439B gz=174591B (170.5KB) → FAIL (soft budget exceeded — under hard cap)
   /en/contact — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
-  /en/confirmation/cmudof9jf001y427awcegblat — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
+  /en/confirmation/cmuecl6cr001y425krp879i6v — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
   /ar/ — files=13 raw=588048B gz=180258B (176.0KB) → FAIL (soft budget exceeded — under hard cap)
   /ar/menu — files=13 raw=591857B gz=181419B (177.2KB) → FAIL (soft budget exceeded — under hard cap)
   /ar/reserve — files=13 raw=567614B gz=173077B (169.0KB) → FAIL (soft budget exceeded — under hard cap)
@@ -23,7 +23,7 @@
   /ar/gallery — files=13 raw=586833B gz=179765B (175.6KB) → FAIL (soft budget exceeded — under hard cap)
   /ar/private-dining — files=13 raw=572439B gz=174591B (170.5KB) → FAIL (soft budget exceeded — under hard cap)
   /ar/contact — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
-  /ar/confirmation/cmudof9jf001y427awcegblat — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
+  /ar/confirmation/cmuecl6cr001y425krp879i6v — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
 [PASS] route table covers 16/16 (found 16)
 [PASS] first-load ≤200KB gz hard gate: 0 breaches (max 177.2KB)
   static/chunks/cf825f9323e59b35.js raw=42984B gz=17376B refs=0 (lazy — not in any route first-load) markers=[ScrollTrigger]

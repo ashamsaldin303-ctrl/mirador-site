@@ -1,8 +1,8 @@
 
-===== readers--confirmation--en · run 2026-09-23T05:45:00.478Z =====
-# P-042/E75 · the three readers · confirmation · EN · 2026-09-23T05:45:00.478Z
+===== readers--confirmation--en · run 2026-09-23T17:01:29.208Z =====
+# P-042/E75 · the three readers · confirmation · EN · 2026-09-23T17:01:29.208Z
 Hands: 8 tab stops · 8 with the bezel → PASS
 Ears: h1=1 main=true footer=true live-regions=1 title="The table is yours. — MIRADOR" → PASS
 Ears/axe: critical violations=0 → PASS
-Calm: h1="The table is yours." · animated elements=0 · body=19770 chars → PASS
+Calm: h1="The table is yours." · animated elements=0 · body=19784 chars → PASS
 VERDICT: PASS

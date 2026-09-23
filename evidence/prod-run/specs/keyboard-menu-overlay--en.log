@@ -1,5 +1,5 @@
 
-===== keyboard-menu-overlay--en · run 2026-09-23T05:51:30.569Z =====
+===== keyboard-menu-overlay--en · run 2026-09-23T17:07:59.510Z =====
 # F3-7 · dish overlay: keyboard open → focus trap → Esc → focus restored
 step 1 — focused dish trigger: <button> "Details"
 step 2 — Enter → overlay visible; activeElement: <button> "Close" [in-dialog]
