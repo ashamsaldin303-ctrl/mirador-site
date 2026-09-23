@@ -169,8 +169,8 @@
    font-display:swap shifts ~zero layout. size-adjust matches x-height. — */
 @font-face { font-family: "Fraunces Fallback"; src: local("Arial"); font-weight: 400 600; font-style: normal; size-adjust: 92.95%; ascent-override: 105.22%; descent-override: 27.43%; }
 @font-face { font-family: "Instrument Sans Fallback"; src: local("Arial"); font-weight: 400 600; font-style: normal; size-adjust: 98.35%; ascent-override: 98.63%; descent-override: 25.42%; }
-@font-face { font-family: "Amiri Fallback"; src: local("Arial"), local("Geeza Pro"), local("Noto Sans Arabic"); font-weight: 400 700; font-style: normal; size-adjust: 83.50%; ascent-override: 134.61%; descent-override: 75.93%; }
-@font-face { font-family: "IBM Plex Sans Arabic Fallback"; src: local("Arial"), local("Geeza Pro"), local("Noto Sans Arabic"); font-weight: 400 600; font-style: normal; size-adjust: 99.51%; ascent-override: 109.04%; descent-override: 41.71%; }
+@font-face { font-family: "Amiri Fallback"; src: local("DejaVu Sans"), local("Noto Sans Arabic"), local("Geeza Pro"), local("Arial"); font-weight: 400 700; font-style: normal; size-adjust: 76.80%; ascent-override: 146.35%; descent-override: 82.55%; }
+@font-face { font-family: "IBM Plex Sans Arabic Fallback"; src: local("DejaVu Sans"), local("Noto Sans Arabic"), local("Geeza Pro"), local("Arial"); font-weight: 400 600; font-style: normal; size-adjust: 94.35%; ascent-override: 114.99%; descent-override: 43.98%; }
 
 @theme {
   /* — color roles — night over the city (FROZEN §5.2, WCAG-computed on #0A0A0B) — */
@@ -204,9 +204,15 @@
   --font-body-ar: "IBM Plex Sans Arabic", "IBM Plex Sans Arabic Fallback", sans-serif;
   /* R9 (prompt-4 P-082/P-025): the wordmark faces — the nav lockup renders
      EXACTLY these glyphs; the tiny preloads take the lockup off the critical
-     path on every door (full families still serve display headings, swap). */
-  --font-wordmark-en: "Fraunces Wordmark", "Fraunces", serif;
-  --font-wordmark-ar: "Amiri Wordmark", "Amiri", serif;
+     path on every door (full families still serve display headings, swap).
+     R13/E79 (run-20 lesson): the metric-matched FALLBACK sits between the
+     wordmark subset and the full family — without it the lockup's inline box
+     rides the LOCAL serif's metrics during load and every swap re-lays the
+     hero column, repainting the H1 LATE (the LCP tail: shift-watch showed
+     the H1's geometry changing at 1478ms + 2187ms on the wordmark/full-face
+     swaps — the last one waits on the 55KB CSS-discovered full family). */
+  --font-wordmark-en: "Fraunces Wordmark", "Fraunces Fallback", "Fraunces", serif;
+  --font-wordmark-ar: "Amiri Wordmark", "Amiri Fallback", "Amiri", serif;
   /* R13/E79: the hero faces — the home H1's exact line, subset from the SAME
      display families and preloaded (the LCP close; see @font-face above) */
   --font-hero-en: "Fraunces Hero", "Fraunces", "Fraunces Fallback", serif;
