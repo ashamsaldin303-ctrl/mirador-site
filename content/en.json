@@ -87,7 +87,7 @@
   "errors.slotFull": "That time is fully booked tonight.",
   "errors.duplicate": "You already hold a reservation at this time.",
   "errors.rateLimited": "Too many requests — please wait a moment.",
-  "errors.validation": "Please review the highlighted fields.",
+  "errors.validation": "Check the highlighted fields.",
   "errors.network": "Something failed on our side. Try again — the city is still there.",
   "private.h1": "Private Dining",
   "private.offerTitle": "One room. Twelve seats. A private skyline.",

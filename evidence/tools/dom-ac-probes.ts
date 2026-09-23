@@ -12,6 +12,11 @@ import { BASE, EVIDENCE_OUT, outDir, seedConfirmationId } from "./lib";
 import { VENUE } from "../../src/lib/venue";
 
 const prisma = new PrismaClient();
+// Prod-run surface: truncate the appended history — one verdict set per run
+// (verify-battery scans this tree; a stale FAIL from a prior run would poison
+// the exit gate — run-14 lesson, same fix as lib.ts specLog). Dev keeps
+// its failure→fix history.
+if (process.env.EVIDENCE_SURFACE) writeFileSync(`${EVIDENCE_OUT}specs/dom-ac-probes.log`, "");
 const log = (s = "") => appendFileSync(`${outDir("specs")}/dom-ac-probes.log`, s + "\n");
 log(`\n===== dom-ac-probes · run ${new Date().toISOString()} =====`);
 mkdirSync(`${EVIDENCE_OUT}F11/state-matrix`, { recursive: true });
@@ -112,7 +117,9 @@ log(`\n## F3-5 — diet filter aria-live announcement`);
   await page.goto(`${BASE}/en/menu`, { waitUntil: "domcontentloaded" });
   await page.waitForTimeout(1200);
   const before = await page.evaluate(() => document.querySelectorAll("li[data-dish-row]").length);
-  const live = page.locator('[aria-live="polite"]');
+  // run-14 lesson: [aria-live="polite"] matches TWO regions now (the P-028
+  // route announcer is first in DOM) — read the menu's own count via its hook.
+  const live = page.locator("[data-dish-count]");
   await page.getByRole("button", { name: /vegan/i }).click();
   await page.waitForTimeout(900);
   const liveText = (await live.innerText()).trim();

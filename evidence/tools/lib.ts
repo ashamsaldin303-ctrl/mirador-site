@@ -3,7 +3,7 @@
 // EVIDENCE_SURFACE=prod-run on the CI battery redirects every output family
 // under /evidence/prod-run/<family>/ (one family, one surface — prompt-3 §5);
 // unset = the round-2 dev-run layout, byte-identical to its committed set.
-import { appendFileSync, mkdirSync, readFileSync } from "node:fs";
+import { appendFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { PrismaClient } from "@prisma/client";
 
 // Deterministic DATABASE_URL for every battery tool (prompt-4 R4 lesson): the
@@ -49,6 +49,12 @@ export function ts(): string {
 /** Append-only raw log writer → <surface>/specs/<name>.log */
 export function specLog(name: string) {
   const path = `${outDir("specs")}/${name}.log`;
+  // Prod-run surface: ONE verdict set per run. The dev surface keeps its
+  // appended failure→fix history by design (verify-battery does not scan it),
+  // but the prod-run tree IS the exit gate's scan target — a stale FAIL
+  // verdict from a prior run would poison every future gate (run-14 lesson:
+  // the filter-pair aria-live FAIL). Truncate on the prod surface only.
+  if (EVIDENCE_SURFACE) writeFileSync(path, "");
   appendFileSync(path, `\n===== ${name} · run ${ts()} =====\n`);
   return (s = "") => {
     appendFileSync(path, s + "\n");

@@ -66,6 +66,10 @@ async function lightbox() {
   log(`# F7-1 · lightbox: keyboard open → arrows navigate → focus trap → Esc`);
   const page = await (await browser.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
   await page.goto(`${BASE}/en/gallery`, { waitUntil: "domcontentloaded" });
+  // hydration settle — matches menuOverlay's convention: Enter on an
+  // un-hydrated tile is a no-op (run-15 dev lesson: the lightbox walkthrough
+  // raced hydration on a fresh gallery load and timed out on a green dialog).
+  await page.waitForTimeout(1200);
   const first = page.locator("main button").first();
   await first.waitFor({ state: "visible", timeout: 15000 });
   await first.focus();
@@ -130,8 +134,9 @@ async function reserveErrors(locale: "en" | "ar") {
   log(`phone error: "${res.phone}"`);
   log(`slot error:  "${res.slot}"`);
   log(`aria-invalid: name=${res.nameInvalid} phone=${res.phoneInvalid} · aria-describedby(name)=${res.described}`);
+  // R11 (P-081) purged «يرجى» — the AR expectations ride the direct imperatives
   const expect = ar
-    ? { name: "يرجى إدخال اسم صحيح.", phone: "يرجى إدخال رقم هاتف صحيح.", slot: "يرجى اختيار وقت متاح.", dir: "rtl" }
+    ? { name: "أدخل اسماً صحيحاً.", phone: "أدخل رقم هاتف صحيحاً.", slot: "اختر وقتاً متاحاً.", dir: "rtl" }
     : { name: "Please use a valid name.", phone: "Please use a valid phone number.", slot: "Please choose an available time.", dir: "ltr" };
   const rtlCorrect = !ar || res.dir === "rtl";
   const verdict =

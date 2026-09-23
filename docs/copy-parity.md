@@ -2,7 +2,7 @@
 
 Every §7 UI string (plus structural labels disclosed in worklog) as an AR/EN
 pair — generated from `content/en.json` + `content/ar.json` by `pnpm audit:copy`
-(138 rows).
+(158 rows).
 
 | key | EN | AR |
 |---|---|---|
@@ -34,18 +34,19 @@ pair — generated from `content/en.json` + `content/ar.json` by `pnpm audit:cop
 | contact.hoursLabel | Hours | أوقات العمل |
 | contact.phoneLabel | Phone | الهاتف |
 | contact.whatsappCta | Message us on WhatsApp | راسلنا عبر واتساب |
+| contact.whatsappNote | Opens WhatsApp — an external app. | يفتح واتساب — تطبيق خارجي. |
 | errors.duplicate | You already hold a reservation at this time. | لديك حجز في هذا الوقت مسبقاً. |
-| errors.invalid_date | Please choose a valid date. | يرجى اختيار تاريخ صحيح. |
-| errors.invalid_message | Please write a few words (10–1000 characters). | يرجى كتابة بضع كلمات (10–1000 حرف). |
-| errors.invalid_name | Please use a valid name. | يرجى إدخال اسم صحيح. |
-| errors.invalid_party | Please choose a party size from 1 to 12. | يرجى اختيار عدد ضيوف بين 1 و 12. |
-| errors.invalid_phone | Please use a valid phone number. | يرجى إدخال رقم هاتف صحيح. |
-| errors.invalid_slot | Please choose an available time. | يرجى اختيار وقت متاح. |
+| errors.invalid_date | Please choose a valid date. | اختر تاريخاً صحيحاً. |
+| errors.invalid_message | Please write a few words (10–1000 characters). | اكتب بضع كلمات (10–1000 حرف). |
+| errors.invalid_name | Please use a valid name. | أدخل اسماً صحيحاً. |
+| errors.invalid_party | Please choose a party size from 1 to 12. | اختر عدد ضيوف بين 1 و 12. |
+| errors.invalid_phone | Please use a valid phone number. | أدخل رقم هاتف صحيحاً. |
+| errors.invalid_slot | Please choose an available time. | اختر وقتاً متاحاً. |
 | errors.network | Something failed on our side. Try again — the city is still there. | خطأ من جهتنا. أعد المحاولة — المدينة ما تزال هناك. |
-| errors.rateLimited | Too many requests — please wait a moment. | طلبات كثيرة — انتظر لحظة من فضلك. |
-| errors.required | Please fill in this field. | يرجى تعبئة هذا الحقل. |
+| errors.rateLimited | Too many requests — please wait a moment. | طلبات كثيرة — انتظر لحظة. |
+| errors.required | Please fill in this field. | أكمل هذا الحقل. |
 | errors.slotFull | That time is fully booked tonight. | هذا الوقت محجوز بالكامل لهذه الليلة. |
-| errors.validation | Please review the highlighted fields. | يرجى مراجعة الحقول المحددة. |
+| errors.validation | Check the highlighted fields. | تحقّق من الحقول المحددة. |
 | footer.addressLabel | Address | العنوان |
 | footer.hoursLabel | Hours | أوقات العمل |
 | footer.legal | © 2026 MIRADOR — Damascus | © 2026 ميرادور — دمشق |
@@ -76,8 +77,13 @@ pair — generated from `content/en.json` + `content/ar.json` by `pnpm audit:cop
 | menu.allergen.gluten | Gluten | غلوتين |
 | menu.allergen.nuts | Nuts | مكسرات |
 | menu.allergen.shellfish | Shellfish | محار |
+| menu.filter.countFew | dishes | أطباق |
+| menu.filter.countMany | dishes | طبقاً |
+| menu.filter.countOne | dish | طبق |
+| menu.filter.countOther | dishes | طبق |
 | menu.filter.countPlural | dishes | أطباق |
 | menu.filter.countSingular | dish | طبق |
+| menu.filter.countTwo | dishes | طبقان |
 | menu.filter.gf | Gluten-free | بلا غلوتين |
 | menu.filter.openDish | Details | التفاصيل |
 | menu.filter.pescatarian | Pescatarian | نباتي مع السمك |
@@ -96,7 +102,19 @@ pair — generated from `content/en.json` + `content/ar.json` by `pnpm audit:cop
 | meta.error.reload | Reload | أعد التحميل |
 | meta.error.sub | Something failed on our side. Reload — the city is still there. | خطأ من جهتنا. أعد التحميل — المدينة ما تزال هناك. |
 | meta.error.title | The lights flickered. | ارتجّ الضوء لحظة. |
+| meta.og.contact.desc | Find us on Abu Rummaneh Street, six floors up. | تجدنا في شارع أبو رمانة، في الطابق السادس. |
+| meta.og.contact.title | Contact — MIRADOR | اتصل بنا — ميرادور |
 | meta.og.description | Above the city, a table worth the climb. | فوق المدينة، مائدة تستحقّ الصعود. |
+| meta.og.gallery.desc | Eight frames from a night above Damascus. | ثماني لقطات من ليلة فوق دمشق. |
+| meta.og.gallery.title | The Gallery — MIRADOR | المعرض — ميرادور |
+| meta.og.menu.desc | Twenty-eight dishes across six acts — fire, grain, and the city's amber. | ثمانية وعشرون طبقاً في ستة فصول — نار وحبوب وضوء المدينة. |
+| meta.og.menu.title | The Menu — MIRADOR | القائمة — ميرادور |
+| meta.og.private.desc | One room, one chef, your own night. | غرفة واحدة، طبّاخ واحد، وليلتك الخاصة. |
+| meta.og.private.title | Private Dining — MIRADOR | الطاولة الخاصة — ميرادور |
+| meta.og.reserve.desc | Dinner 18:00–22:30, Tuesday to Sunday. Twelve tables a night. | عشاء من 18:00 إلى 22:30، الثلاثاء إلى الأحد. اثنتا عشرة طاولة كل ليلة. |
+| meta.og.reserve.title | Reserve a Table — MIRADOR | احجز طاولتك — ميرادور |
+| meta.og.story.desc | Why MIRADOR climbs six floors. | لماذا يصعد ميرادور ستة طوابق. |
+| meta.og.story.title | The Story — MIRADOR | الحكاية — ميرادور |
 | meta.og.title | MIRADOR — Damascus | ميرادور — دمشق |
 | nav.closeMenu | Close menu | أغلق القائمة |
 | nav.contact | Contact | اتصل بنا |
@@ -112,6 +130,7 @@ pair — generated from `content/en.json` + `content/ar.json` by `pnpm audit:cop
 | private.h1 | Private Dining | الطاولة الخاصة |
 | private.offerBody | The west end of the dining room detaches into a private table for twelve, with its own service and a standing menu from $65 per guest. For buyouts, tastings, and quiet celebrations, tell us the date — we will tell you what the kitchen can do. | تنفصل نهاية القاعة الغربية إلى مائدة خاصة لاثني عشر، بخدمة خاصة وقائمة ثابتة من 65$ للضيف. للحوازات الكاملة وجلسات التذوق والاحتفالات الهادئة، أخبرنا بالتاريخ — ونخبرك بما يستطيع المطبخ. |
 | private.offerTitle | One room. Twelve seats. A private skyline. | قاعة. اثنا عشر مقعداً. إطلالة خاصة. |
+| private.partyHint | Optional — 1 to 60 guests. | اختياري — من 1 إلى 60 ضيفاً. |
 | private.success | Inquiry received. We reply within one business day — or reach us now on WhatsApp. | وصل استفسارك. نرد خلال يوم عمل واحد — أو تواصل معنا الآن عبر واتساب. |
 | private.successReference | Reference | المرجع |
 | private.whatsappCta | Reach us now on WhatsApp | تواصل معنا الآن عبر واتساب |
@@ -127,6 +146,7 @@ pair — generated from `content/en.json` + `content/ar.json` by `pnpm audit:cop
 | reserve.partyUnit | guests | ضيوف |
 | reserve.phone | Phone | الهاتف |
 | reserve.retry | Try again | أعد المحاولة |
+| reserve.slotPast | Past | انتهى |
 | reserve.slotSoldOut | Sold out | نفدت |
 | reserve.submit | Reserve a table | احجز طاولتك |
 | reserve.submitting | Reserving… | جارٍ الحجز… |

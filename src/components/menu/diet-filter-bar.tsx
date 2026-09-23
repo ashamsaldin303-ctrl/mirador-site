@@ -54,7 +54,7 @@ export function DietFilterBar({
           {labels[tag]}
         </Toggle>
       ))}
-      <p aria-live="polite" className="ms-auto text-small tabular-nums text-muted">
+      <p aria-live="polite" data-dish-count className="ms-auto text-small tabular-nums text-muted">
         {count} {unit}
       </p>
     </div>

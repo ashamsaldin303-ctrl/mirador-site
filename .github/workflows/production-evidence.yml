@@ -345,6 +345,12 @@ jobs:
           mkdir -p evidence/F12-2/prod-run evidence/F6-3/prod-run
           git add -f evidence/prod-run 2>/dev/null || true
           git add -f evidence/F12-2/prod-run evidence/F6-3/prod-run 2>/dev/null || true
+          # Run-14 lesson: the battery regenerates tracked docs (Q2b exchange
+          # ledger, Q2-prep copy parity) and raw r1 logs (E57/E59) — leaving
+          # them unstaged poisons the pre-push rebase ("unstaged changes").
+          # They ARE this run's evidence: stage them with the rest.
+          git add -f docs/exchange-ledger.md docs/copy-parity.md 2>/dev/null || true
+          git add -f evidence/r1/E57/ledger.log evidence/r1/E59/gatebook-check.log 2>/dev/null || true
           git status --short > /tmp/git-status.txt || true # no pipe: `| head` SIGPIPEs (141) under pipefail when >30 files changed (run-10 lesson)
           head -30 /tmp/git-status.txt
           git commit -m "prod-run evidence battery (prompt-3 Q1–Q4) — actions run ${{ github.run_number }} [surface: prod-run]" || echo "nothing to commit"

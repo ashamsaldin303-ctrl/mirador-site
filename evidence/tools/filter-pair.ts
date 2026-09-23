@@ -3,6 +3,11 @@
 // md5 — the "filtered" shot never applied the filter). This spec captures the
 // unfiltered and vegan-filtered states in ONE run: row counts 28 → 4, the
 // aria-live announcement, and screenshots whose md5s MUST differ.
+// Run-14 lesson: the P-028 route announcer is also [aria-live="polite"] and
+// sits FIRST in the DOM (layout precedes content) — a bare [aria-live] .first()
+// read the announcer's empty region and failed E50 on a green menu. The menu's
+// count region is targeted by its dedicated data-dish-count hook instead
+// (same convention as [data-dish-row]).
 // Usage: bun evidence/tools/filter-pair.ts
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
@@ -28,7 +33,8 @@ async function filterPair(locale: "en" | "ar") {
       .waitForFunction(() => typeof (window as unknown as { next?: unknown }).next !== "undefined", { timeout: 20000 })
       .catch(() => {});
 
-    const live = () => page.locator('[aria-live="polite"]').first();
+    // the menu's OWN live region — NOT the route announcer (run-14 lesson)
+    const live = () => page.locator("[data-dish-count]");
 
     // — BEFORE: no filter → all 28 rows, live region announces the full count —
     await page.waitForSelector("[data-dish-row]");
