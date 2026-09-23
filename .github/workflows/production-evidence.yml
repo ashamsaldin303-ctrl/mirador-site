@@ -368,6 +368,11 @@ jobs:
           # They ARE this run's evidence: stage them with the rest.
           git add -f docs/exchange-ledger.md docs/copy-parity.md 2>/dev/null || true
           git add -f evidence/r1/E57/ledger.log evidence/r1/E59/gatebook-check.log 2>/dev/null || true
+          # P5/R1 (E83 · J-3 class, one level deeper): the three audit raws the
+          # Q2c/Q2b steps regenerate on every dispatch — unstaged, their cited
+          # paths died with the runner and the MATRIX self-check caught the
+          # drift. Staged from now on so the citations stay live.
+          git add -f evidence/r1/E66/audit-idioms.log evidence/r1/E76/audit-motion.log evidence/r1/E78/audit-twins.log 2>/dev/null || true
           git status --short > /tmp/git-status.txt || true # no pipe: `| head` SIGPIPEs (141) under pipefail when >30 files changed (run-10 lesson)
           head -30 /tmp/git-status.txt
           git commit -m "prod-run evidence battery (prompt-3 Q1–Q4) — actions run ${{ github.run_number }} [surface: prod-run]" || echo "nothing to commit"

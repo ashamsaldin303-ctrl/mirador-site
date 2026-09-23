@@ -4,6 +4,6 @@
 - expected: NEVER-8
 - actual: empty sections unmount (FRM-1) + nav filtered
 - verdict: PASS
-- evidence: /evidence/F3-5/menu--{en,ar}--filtered-vegan--1440.png
+- evidence: /evidence/prod-run/F3-5/menu--{en,ar}--filtered-vegan--1440.png
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T06:00:29.007Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T16:47:36.247Z)

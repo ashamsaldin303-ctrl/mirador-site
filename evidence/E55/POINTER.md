@@ -4,6 +4,6 @@
 - expected: fps trace + poster-swap frame
 - actual: vsync-shimmed starver: ~17fps sustained → monitor trips → canvas unmounts → poster; control 62fps survives
 - verdict: PASS
-- evidence: /evidence/specs/journey-emulation--{control-60fps,starved-under-30fps}.log + JRN-1/
+- evidence: /evidence/prod-run/specs/journey-emulation--{control-60fps,starved-under-30fps}.log + JRN-1/
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T06:00:29.007Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T16:47:36.247Z)

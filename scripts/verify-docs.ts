@@ -38,6 +38,56 @@ const nia = tsconfig.compilerOptions?.noUncheckedIndexedAccess === true;
 if (!e27) throw new Error(`${MEDIANS} carries no "GATE E27:" verdict line — cannot verify docs against it`);
 if (!e22) throw new Error(`${HTTP} carries no "GATE E22:" verdict line — cannot verify docs against it`);
 
+// — P5/R1 (E83 · J-1 antibody): the E79 verdict text must quote the raw ——————
+// medians' FAILING CELLS verbatim. Parse the lantern block's locale lines; for
+// each FAIL locale and each false gate key, the DONE's (and close-out's, once
+// it exists) E79 row must carry the token exactly as the raw writes it:
+// "LCP=<ms>ms" for a false lcp cell · "performance=<score>" for a false score
+// cell. Understating the failing surface (the J-1 defect: dropping the AR
+// score cell) fails this check. State-agnostic: when the raw changes, the docs
+// must re-sync or the check fires. NOTE: the devtools block (R4/E86, when
+// present) is RECORDED-NOT-GATE and is written without this line shape, so it
+// can never satisfy or poison this parser.
+type LocLine = { loc: string; score: string; lcp: string; cells: Record<string, boolean> };
+const LOCRE = /\/(en|ar) \(median of \d+ runs\) — performance=(\d+) · LCP=(\d+)ms · CLS=[\d.]+ · TBT=\d+ms → (PASS|FAIL) (\{[^}]*\})/g;
+const locLines: LocLine[] = [];
+for (const m of mediansRaw.matchAll(LOCRE)) {
+  const cells = JSON.parse(m[5] ?? "{}") as Record<string, boolean>;
+  locLines.push({ loc: m[1] ?? "", score: m[2] ?? "", lcp: m[3] ?? "", cells });
+}
+if (locLines.length === 0) throw new Error(`${MEDIANS} carries no lantern locale-median lines — cannot verify the E79 cells against it`);
+
+function failingTokens(): string[] {
+  const toks: string[] = [];
+  for (const line of locLines.filter((entry) => Object.values(entry.cells).some((v) => !v))) {
+    if (line.cells.lcp === false) toks.push(`LCP=${line.lcp}ms`);
+    if (line.cells.score === false) toks.push(`performance=${line.score}`);
+  }
+  return toks;
+}
+
+function e79RowOf(docPath: string): string | null {
+  if (!existsSync(docPath)) return null; // close-out.md binds once it exists (R6)
+  const lines = read(docPath).split("\n");
+  const row = lines.find((l) => /^\|\s*\*{0,2}E79\b/.test(l));
+  return row ?? "(no E79 row found)";
+}
+
+const E79_DOCS = ["evidence/r1/DONE.md", "evidence/r1/close-out.md"];
+const required = failingTokens();
+for (const [i, doc] of E79_DOCS.entries()) {
+  const row = e79RowOf(doc);
+  if (row === null) continue;
+  const missing = required.filter((t) => !row.includes(t));
+  check(
+    `D${i + 1}`,
+    missing.length === 0,
+    missing.length === 0
+      ? `${doc}'s E79 row quotes every failing cell of the raw medians verbatim (${required.join(" · ") || "no failing cells"})`
+      : `${doc}'s E79 row does NOT quote the raw failing cells: missing ${missing.join(", ")} (raw requires: ${required.join(" · ")}) — the J-1 understatement class`,
+  );
+}
+
 // — comparators (shared with --probe) —————————————————————————
 function docQuotesGate(docText: string, gate: string, verdict: string): boolean {
   return docText.includes(`${gate}: ${verdict}`);
@@ -90,6 +140,18 @@ if (PROBE) {
   check("PROBE-1", firesBad && passesGood, firesBad && passesGood
     ? `probe: a contradicting claim (GATE E27: ${e27 === "PASS" ? "FAIL" : "PASS"}) IS caught; the true one passes`
     : "probe FAILED — the comparator did not fire on a contradicting claim (vacuous check!)");
+  // PROBE-2 (P5/R1 · the J-1 antibody's own vacuity guard): a synthetic E79 row
+  // that drops the first required failing cell MUST fire the D-check comparator.
+  if (required.length > 0) {
+    const dropped = required[0] ?? "";
+    const syntheticRow = `| E79 | FAIL | … ${required.slice(1).join(" · ") || "(all other cells quoted)"} … |`;
+    const fires = !syntheticRow.includes(dropped);
+    check("PROBE-2", fires, fires
+      ? `probe: a synthetic E79 row dropping "${dropped}" IS caught by the D-checks (the J-1 understatement class fires)`
+      : "probe FAILED — the D-check comparator did not fire on a dropped failing cell (vacuous check!)");
+  } else {
+    check("PROBE-2", true, "probe: no failing cells in the current raw (E27 green state) — the D-checks are vacuously true by design; the comparator is proven by construction above");
+  }
 }
 
 // — report ——————————————————————————————————————————————————————
@@ -99,7 +161,7 @@ for (const r of results) {
 }
 console.log(
   failed.length === 0
-    ? `verify-docs: PASS — ${results.length} checks green (raw: E27=${e27} · E22=${e22} · noUncheckedIndexedAccess=${nia})`
+    ? `verify-docs: PASS — ${results.length} checks green (raw: E27=${e27} · E22=${e22} · noUncheckedIndexedAccess=${nia}${required.length ? ` · E79 failing cells required: ${required.join(" · ")}` : " · E79: no failing cells"})`
     : `verify-docs: FAIL — ${failed.length}/${results.length} checks drifted`,
 );
 process.exit(failed.length === 0 ? 0 : 1);

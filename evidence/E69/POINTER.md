@@ -4,6 +4,6 @@
 - expected: all sites in envelope
 - actual: global RM block + motion-safe primitives + M-6 gates at every GSAP site; Calm reader ×8 green
 - verdict: PASS
-- evidence: /evidence/specs/readers--*.log
+- evidence: /evidence/prod-run/specs/readers--*.log
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T06:00:29.007Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T16:47:36.247Z)

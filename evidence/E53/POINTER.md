@@ -4,6 +4,6 @@
 - expected: content-type: image/avif documented
 - actual: ladder rung + optimizer route both image/avif (PRF-3: images.formats + per-image ladder loader)
 - verdict: PASS
-- evidence: /evidence/prod-run/img-surface/ladder-avif.txt + optimizer-avif.txt
+- evidence: /evidence/prod-run/img-surface/ladder-avif.txt + prod-run/img-surface/optimizer-avif.txt
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T06:00:29.007Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T16:47:36.247Z)

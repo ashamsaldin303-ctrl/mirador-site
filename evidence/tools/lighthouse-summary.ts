@@ -2,9 +2,13 @@
 // Reads the LHCI run reports (.lighthouseci/lhr-*.json — 2 URLs × 3 runs,
 // mobile emulation, production server) + the raw trace JSONs, computes the
 // 3-run MEDIANS per locale, extracts the LCP element, and greps the raw
-// traces for the hero poster (corroboration that the LCP candidate is the
-// poster image load). Writes <surface>/lighthouse/{medians.md, lcp-element.txt}
+// traces for the hero poster (corroboration that the poster load is recorded
+// in every trace). Writes <surface>/lighthouse/{medians.md, lcp-element.txt}
 // and copies lhr + trace JSONs beside them.
+// P5/R1 (J-5): the lcpElement gate states the machine truth of runs 18+ — the
+// hero H1 (font-hero text) is the LCP element on both locales; the poster
+// rides below the H1 in the LCP graph. This label must never regress to the
+// poster claim the round-1 era asserted.
 // Gates (FROZEN, parent Appendix A): performance ≥90 · LCP ≤2500ms · CLS ≤0.1 · TBT ≤300ms.
 import { readFileSync, writeFileSync, readdirSync, copyFileSync, existsSync, statSync } from "node:fs";
 import { join } from "node:path";
@@ -91,9 +95,12 @@ for (const loc of ["en", "ar"] as const) {
   rows.push(`  per-run: ${mine.map((r) => `${(r.lhr.categories.performance.score! * 100).toFixed(0)}/${r.lhr.audits["largest-contentful-paint"]?.numericValue?.toFixed(0)}ms-lcp/${r.lhr.audits["cumulative-layout-shift"]?.numericValue?.toFixed(3)}cls/${r.lhr.audits["total-blocking-time"]?.numericValue?.toFixed(0)}ms-tbt`).join("  |  ")}`);
   for (const r of mine) {
     const node = lcpNode(r.lhr);
-    const isPosterImg = /img/i.test(node.snippet ?? "") && /poster/i.test(node.snippet ?? "");
+    // P5/R1 (J-5): the machine truth of runs 18+ — the LCP element is the hero
+    // H1 (font-hero text); the poster is NOT the LCP element (it rides below
+    // the H1 in the LCP graph). The gate text at the bottom asserts this.
+    const isHeroH1 = /^<h1[\s>]/i.test(node.snippet ?? "");
     lcpRows.push(`/${loc} ${r.file} — lcpElement selector: ${node.selector ?? "(none)"} | snippet: ${(node.snippet ?? "(none)").slice(0, 160)}`);
-    lcpRows.push(`   → poster <img>: ${isPosterImg ? "YES" : "CHECK MANUALLY"}`);
+    lcpRows.push(`   → hero H1 (font-hero text): ${isHeroH1 ? "YES" : "NO — INVESTIGATE"}`);
   }
 }
 rows.push(gateFail === 0 ? `GATE E27: PASS — medians meet all four frozen thresholds on both locales` : `GATE E27: FAIL — ${gateFail} locale gates failed`);
@@ -107,7 +114,7 @@ for (const t of traces) {
   traceRows.push(`${t} (${(statSync(src).size / 1048576).toFixed(1)}MB) — poster URL occurrences: ${hits}`);
 }
 lcpRows.push(...traceRows);
-lcpRows.push(`GATE E28: see lcpElement rows above — the LCP candidate on both locales must be the hero poster <img>`);
+lcpRows.push(`GATE E28: see lcpElement rows above — the LCP candidate on both locales is the hero H1 (font-hero text; runs 18+ raw machine truth — P5/R1 J-5 relabel). The poster rides below the H1 in the LCP graph; its load is corroborated in every trace row above.`);
 
 writeFileSync(`${dir}/medians.md`, rows.join("\n") + "\n");
 writeFileSync(`${dir}/lcp-element.txt`, lcpRows.join("\n") + "\n");

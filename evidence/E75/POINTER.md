@@ -4,6 +4,6 @@
 - expected: Hands/Ears/Calm green
 - actual: 8/8 PASS (Tab-bezel walks, h1/landmarks/axe, RM emulation static content)
 - verdict: PASS
-- evidence: /evidence/specs/readers--*.log
+- evidence: /evidence/prod-run/specs/readers--*.log
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T06:00:29.007Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T16:47:36.247Z)

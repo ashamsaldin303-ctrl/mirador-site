@@ -7,34 +7,34 @@
 
 > DONE = E34–E81 all PASS with regenerated raw evidence + the E79 exit-gate run green + the ACK on record. When every gate passes — **STOP**. A failing threshold is reported as FAIL with diagnosis — never polished, never relabeled, never re-surfaced.
 
-**E34–E78, E80, E81: PASS (raw evidence committed). E79: FAIL — one honest threshold miss (the E27 Lighthouse LCP medians), diagnosed below. The contract's DONE definition is therefore NOT met; this report is the honest close of the round per §8/N16/N24 — every number regenerates from the run's raw artifacts.**
+**E34–E78, E80, E81: PASS (raw evidence committed). E79: FAIL — three failing cells per the raw gates (/en LCP=3340ms · /ar LCP=3904ms · /ar performance=87 score:false), diagnosed below. The contract's DONE definition is therefore NOT met; this report is the honest close of the round per §8/N16/N24 — every number regenerates from the run's raw artifacts.**
 
 ## Per-AC table (E34–E81)
 
 | AC | Verdict | Evidence (raw path) |
 |---|---|---|
 | E34 ACK before first code | PASS | `r1/E34-ACK.md` |
-| E35 chromeFlags + dispatch artifacts | PASS | `prod-run/lighthouse/` (runs 9–25 raw; instrument green every dispatch) |
-| E36 SITE_URL + guard | PASS | workflow YAML + `.env.example` |
+| E35 chromeFlags + dispatch artifacts | PASS | `prod-run/lighthouse/` (48 simulate-method LHRs committed across 8 timestamped batches — runs 11, 18–25 by median-value anchors; instrument live on every dispatch) |
+| E36 SITE_URL + guard | PASS | `.github/workflows/production-evidence.yml` + `.env.example` (PLACEHOLDER origin; COP-1 enforces) |
 | E37 doc-truth corrections | PASS | `r1/E37-E38/doc-truth.md` |
 | E38 verify-docs CI-wired | PASS | `r1/E37-E38/doc-truth.md` + ci.yml (green on HEAD) |
 | E39 sheet z-order + walkthrough | PASS | `specs/sheet-z.log` + `specs/keyboard-mobile-sheet--{en,ar}.log` |
 | E40 corner/scrim/tempo greps | PASS | `r1/E40/` |
 | E41 honest 404 ×2 locales | PASS | `prod-run/http/` + `r1/E41/dev-pairs.log` |
 | E42 motion family 0/16 static | PASS | `r1/E42/import-graph.log` |
-| E43 16/16 ≤200KB gz | PASS | `F12-2/prod-run/first-load-js-gz.txt` (run 25 fresh: max 181.4KB) |
+| E43 16/16 ≤200KB gz | PASS | `F12-2/prod-run/first-load-js-gz.txt` (run 25 fresh: max 177.2KB — KiB display, 181,419B, the raw table's own units) |
 | E44 ×16 zero-localhost snapshots | PASS | `prod-run/snapshots/` |
 | E45 confirmation demoted | PASS | `prod-run/snapshots/grep-summary.txt` (COP-2-confirmation=2/2: 0 alternates + self-canonical + noindex) |
-| E46 four security headers | PASS | `http/headers-table.txt` |
+| E46 four security headers | PASS | `prod-run/http/{en,ar}--200.txt` — the raw curl -is dumps of both locales carry CSP/XFO/RP/XCTO (no X-Powered-By) + `prod-run/http/summary.txt` |
 | E47 413 + bounded limiter | PASS | `specs/sec-r5.log` |
 | E48 off-grid + closed-day → 400 | PASS | `specs/sec-r5.log` |
 | E49 tsconfig + typecheck | PASS | tsconfig.json + `gates/deterministic-suite.log` |
-| E50 filter pair RE-SHOT | PASS | `specs/filter-pair--{en,ar}.log` + `F3-5/` (prod re-shot runs 15+) |
-| E51 zero stub headings | PASS | `F3-5/menu--{en,ar}--filtered-vegan--1440.png` |
+| E50 filter pair RE-SHOT | PASS | `prod-run/specs/filter-pair--{en,ar}.log` + `prod-run/F3-5/` (prod re-shot runs 15+) |
+| E51 zero stub headings | PASS | `prod-run/F3-5/menu--{en,ar}--filtered-vegan--1440.png` |
 | E52 AR footer leading ≥1.7 | PASS | `r1/E64-dev/` |
-| E53 AVIF served + loader | PASS | `prod-run/img-surface/ladder-avif.txt` + `optimizer-avif.txt` |
-| E54 OG JPEG magic | PASS | `prod-run/img-surface/og-{en,ar}-jpeg.txt` + `magic-{en,ar}.txt` |
-| E55 JRN-1 auto-kill emulation | PASS | `specs/journey-emulation--{control-60fps,starved-under-30fps}.log` + `JRN-1/` |
+| E53 AVIF served + loader | PASS | `prod-run/img-surface/ladder-avif.txt` + `prod-run/img-surface/optimizer-avif.txt` |
+| E54 OG JPEG magic | PASS | `prod-run/img-surface/og-{en,ar}-jpeg.txt` + `prod-run/img-surface/magic-{en,ar}.txt` |
+| E55 JRN-1 auto-kill emulation | PASS | `prod-run/specs/journey-emulation--{control-60fps,starved-under-30fps}.log` + `JRN-1/` |
 | E56 prod-run MANIFEST | PASS | `prod-run/MANIFEST.md` |
 | E57 LEDGER job | PASS | `r1/E57/ledger.log` (disk 334,200B ≤ 334,880B) |
 | E58 EXCHANGE LEDGER ΣΔ≤0 | PASS | `docs/exchange-ledger.md` (fonts −35,560B + hero subsets documented) |
@@ -43,22 +43,22 @@
 | E61 P-075 edge set | PASS | `r1/E60-E62/` + `docs/spec/tab-lamp.md` (SPEC-ONLY, N26) |
 | E62 P-084 night's hands | PASS | `r1/E60-E62/house-edges.md` |
 | E63 FIGURE REGISTER | PASS | `docs/figure-register.md` (generated from @theme) |
-| E64 gallery wire + subsets + ledger | PASS | `r1/E64-dev/` + `prod-run/network-firstload.txt` |
+| E64 gallery wire + subsets + ledger | PASS | `r1/E64-dev/` + `F12-2/prod-run/network-firstload.txt` |
 | E65 route census ○/● | PASS | `prod-run/route-census.txt` (prerender-manifest machine truth: 8/8 ○ + 5/5 justified ƒ + 4/4 ● fallbacks) |
 | E66 Button API + audit:idioms | PASS | `r1/E66/audit-idioms.log` (A1–A12) |
 | E67 settle/draw/breathe | PASS | `docs/idiom-contracts.md` |
 | E68 EASE_OUT_SOFT = 0 + keyframes ≤7 | PASS | `r1/E76/audit-motion.log` |
-| E69 RM audit (all sites) | PASS | `specs/readers--*.log` (Calm ×8) |
-| E70 handrail + announcer | PASS | `specs/route-announcer--{en,ar}.log` |
+| E69 RM audit (all sites) | PASS | `prod-run/specs/readers--*.log` (Calm ×8) |
+| E70 handrail + announcer | PASS | `prod-run/specs/route-announcer--{en,ar}.log` |
 | E71 «يرجى» = 0 + drift kills | PASS | `prod-run/snapshots/grep-summary.txt` (يرجى-rendered=0) |
 | E72 dead-code receipt | PASS | package.json (71→20 deps) + git log ee82a23 |
 | E73 content-Minors table | PASS | content/{en,ar}.json + git log ee82a23 |
-| E74 plumbing-Minors | PASS | sitemap.xml + `git ls-files` (six hygiene paths gone) |
-| E75 readers ×4 routes ×2 locales | PASS | `specs/readers--*.log` (8/8) |
+| E74 plumbing-Minors | PASS | src/app/sitemap.ts (the generated sitemap.xml's source; prod 200 re-captured at the exit re-dispatch) + `git ls-files` (six hygiene paths gone) |
+| E75 readers ×4 routes ×2 locales | PASS | `prod-run/specs/readers--*.log` (8/8) |
 | E76 audit:motion M-2/3/4/6 | PASS | `r1/E76/audit-motion.log` |
 | E77 counters + zero RUM | PASS | `prod-run/house/counters.json` |
 | E78 audit:twins | PASS | `r1/E78/audit-twins.log` |
-| **E79 THE EXIT GATE** | **FAIL** | `prod-run/lighthouse/medians.md` — perf 92/87 · CLS 0.0195/0.0000 · TBT 72/90ms all PASS; **LCP medians EN 3340ms · AR 3904ms vs ≤2500ms — the single failing threshold.** Every other exit-gate component green in the same dispatch: 16/16 budgets, axe 0/0, honest 404, race guard, 0 spinners, six organs, ΣΔ≤0 ledger |
+| **E79 THE EXIT GATE** | **FAIL** | `prod-run/lighthouse/medians.md` — CLS 0.0195/0.0000 · TBT 72/90ms all PASS; **THREE failing cells per the raw gates: /en LCP=3340ms (lcp:false) · /ar LCP=3904ms (lcp:false) · /ar performance=87 (score:false, below the ≥90 gate — the LCP weight drives the AR score down; EN performance=92 passes).** Every other exit-gate component green in the same dispatch: 16/16 budgets, axe 0/0, honest 404, race guard, 0 spinners, six organs, ΣΔ≤0 ledger |
 | E80 MATRIX from runs | PASS | `evidence/MATRIX.md` (machine-regenerated; 113 rows, every row cites raw) |
 | E81 DONE report | PASS | this file |
 

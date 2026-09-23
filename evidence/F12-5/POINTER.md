@@ -4,6 +4,6 @@
 - expected: 0 console errors 8 paths × 2 locales
 - actual: 0 errors across 16 pages (raw captures incl. dev noise)
 - verdict: PASS
-- evidence: /evidence/console/summary.txt + console/*.log
+- evidence: /evidence/prod-run/console/summary.txt + prod-run/console/*.log
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T06:00:29.007Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T16:47:36.247Z)
