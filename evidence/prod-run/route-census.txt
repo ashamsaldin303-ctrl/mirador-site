@@ -1,26 +1,64 @@
-# P-024 route census — machine-generated from build-output.log
-# ○ = prerendered static · ●/ƒ = dynamic (server-rendered per request)
-# Turbopack emits ƒ for dynamic routes in the Route (app) table.
+# P-024 route census — machine-generated from .next/prerender-manifest.json + /tmp/build-local.log
+# ○ = prerendered static (manifest.routes) · ● = generateStaticParams on-demand fallback (manifest.dynamicRoutes) · ƒ = dynamic per request (build tree)
+# run-15 lesson: the console Route (app) tree marks fallback parents ● with symbol-less prerendered children — the manifest is the machine truth.
 
-## ○ static (prerendered)
-  (none parsed)
+## ○ static (prerendered at build — from prerender-manifest.json)
+  ○ /_global-error
+  ○ /_not-found
+  ○ /ar/contact
+  ○ /en/contact
+  ○ /ar
+  ○ /en
+  ○ /ar/private-dining
+  ○ /en/private-dining
+  ○ /ar/story
+  ○ /en/story
+  ○ /sitemap.xml
 
-## ●/ƒ dynamic — each justified (P-024)
-  (none parsed)
+## ● on-demand fallback (generateStaticParams — unknown params only)
+  ● /[locale]/contact
+  ● /[locale]
+  ● /[locale]/private-dining
+  ● /[locale]/story
+
+## ƒ dynamic — each justified (P-024)
+  ƒ /[locale]/[...rest]
+  ƒ /[locale]/confirmation/[id]
+  ƒ /[locale]/gallery
+  ƒ /[locale]/menu
+  ƒ /[locale]/reserve
+  ƒ /api/availability
+  ƒ /api/house
+  ƒ /api/inquiries
+  ƒ /api/reservations
 
 ## justification table
-  /[locale]/[...rest] → the honest-404 catch-all (R3/B-1): every unmatched URL, localized floor + HTTP 404
-  /[locale]/menu → menu SSR — 28 dishes + JSON-LD rendered fresh from PostgreSQL (F3-2, pinned)
-  /[locale]/gallery → gallery SSR — 8 tiles + intrinsics from PostgreSQL (pinned)
-  /[locale]/reserve → reserve SSR — 60-day Damascus date strip computed per request (server clock)
-  /[locale]/confirmation/[id] → per-id dynamic lookup — force-dynamic (COP-2 noindex)
+  ƒ /[locale]/[...rest] → the honest-404 catch-all (R3/B-1): every unmatched URL, localized floor + HTTP 404
+  ƒ /[locale]/menu → menu SSR — 28 dishes + JSON-LD rendered fresh from PostgreSQL (F3-2, pinned)
+  ƒ /[locale]/gallery → gallery SSR — 8 tiles + intrinsics from PostgreSQL (pinned)
+  ƒ /[locale]/reserve → reserve SSR — 60-day Damascus date strip computed per request (server clock)
+  ƒ /[locale]/confirmation/[id] → per-id dynamic lookup — force-dynamic (COP-2 noindex)
+  ● /[locale] → generateStaticParams fallback (en/ar prerendered): unknown locale → STATIC EN-default floor + 404
+  ● /[locale]/contact → generateStaticParams fallback (en/ar prerendered): unknown locale → STATIC EN-default floor + 404
+  ● /[locale]/private-dining → generateStaticParams fallback (en/ar prerendered): unknown locale → STATIC EN-default floor + 404
+  ● /[locale]/story → generateStaticParams fallback (en/ar prerendered): unknown locale → STATIC EN-default floor + 404
 
-[FAIL] no route rows parsed from the build output — table format changed?
-[FAIL] ○ /en prerendered
-[FAIL] ○ /ar prerendered
-[FAIL] ○ /en/story prerendered
-[FAIL] ○ /ar/story prerendered
-[FAIL] ○ /en/contact prerendered
-[FAIL] ○ /ar/contact prerendered
-[FAIL] ○ /en/private-dining prerendered
-[FAIL] ○ /ar/private-dining prerendered
+[PASS] ○ /en prerendered (manifest.routes)
+[PASS] ○ /ar prerendered (manifest.routes)
+[PASS] ○ /en/story prerendered (manifest.routes)
+[PASS] ○ /ar/story prerendered (manifest.routes)
+[PASS] ○ /en/contact prerendered (manifest.routes)
+[PASS] ○ /ar/contact prerendered (manifest.routes)
+[PASS] ○ /en/private-dining prerendered (manifest.routes)
+[PASS] ○ /ar/private-dining prerendered (manifest.routes)
+[PASS] prerendered HTML artifacts present under .next/server/app (×8)
+[PASS] ƒ /[locale]/[...rest] justified
+[PASS] ƒ /[locale]/confirmation/[id] justified
+[PASS] ƒ /[locale]/gallery justified
+[PASS] ƒ /[locale]/menu justified
+[PASS] ƒ /[locale]/reserve justified
+[PASS] ● /[locale]/contact is a known generateStaticParams fallback
+[PASS] ● /[locale] is a known generateStaticParams fallback
+[PASS] ● /[locale]/private-dining is a known generateStaticParams fallback
+[PASS] ● /[locale]/story is a known generateStaticParams fallback
+[PASS] fallback set = the 4 locale-leaf segments (found 4)
