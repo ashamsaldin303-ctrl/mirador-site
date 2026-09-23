@@ -1,7 +1,7 @@
-# cold-start handoff (F12-3) — machine-generated 2026-09-23T04:55:44Z
+# cold-start handoff (F12-3) — machine-generated 2026-09-23T05:17:24Z
 # fresh clone of ashamsaldin303-ctrl/mirador-site → bun install · migrate · seed · dev → GET /en 200
 Cloning into '/tmp/coldstart'...
-clone HEAD: e757b15b578979cd2d37098644ed8aecd2533aa9
+clone HEAD: a46db3f89bfd74c535c476a336f814459970bd77
 bun install v1.3.14 (0d9b296a)
 
 + @axe-core/playwright@4.13.0
@@ -36,7 +36,7 @@ bun install v1.3.14 (0d9b296a)
 + three@0.186.0
 + zod@4.3.5
 
-448 packages installed [2.69s]
+448 packages installed [2.72s]
 $ prisma generate
 warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).
 For more information, see: https://pris.ly/prisma-config
@@ -53,11 +53,11 @@ Prisma schema loaded from prisma/schema.prisma
 │    npm i @prisma/client@latest                          │
 └─────────────────────────────────────────────────────────┘
 
-✔ Generated Prisma Client (v6.19.2) to ./node_modules/@prisma/client in 72ms
+✔ Generated Prisma Client (v6.19.2) to ./node_modules/@prisma/client in 69ms
 
 Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
 
-Tip: Want to turn off tips and other hints? https://pris.ly/tip-4-nohints
+Tip: Need your database queries to be 1000x faster? Accelerate offers you that and more: https://pris.ly/tip-2-accelerate
 
 warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).
 For more information, see: https://pris.ly/prisma-config

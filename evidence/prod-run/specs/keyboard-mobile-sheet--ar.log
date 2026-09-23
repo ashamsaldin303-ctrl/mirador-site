@@ -1,5 +1,5 @@
 
-===== keyboard-mobile-sheet--ar · run 2026-09-23T04:52:45.559Z =====
+===== keyboard-mobile-sheet--ar · run 2026-09-23T05:14:24.631Z =====
 # E39 · mobile nav sheet (AR · side=left · RTL) — open → trap → navigate → Esc/scrim close
 step 1 — focused menu trigger: <button> "افتح القائمة"
 step 2 — Enter → sheet open; activeElement: <button> "Close" [in-dialog]

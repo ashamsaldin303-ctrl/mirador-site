@@ -1,7 +1,7 @@
 
-===== locale-atomic · run 2026-09-23T04:44:48.615Z =====
+===== locale-atomic · run 2026-09-23T05:06:27.657Z =====
 # F1-3 · locale switch = atomic dir+lang flip in ONE frame, no full navigation
-# mutation records (verbatim): [{"attribute":"lang","oldValue":"en","batch":1,"t":531.8},{"attribute":"dir","oldValue":"ltr","batch":1,"t":531.8},{"attribute":"lang","oldValue":null,"batch":1,"t":531.8},{"attribute":"dir","oldValue":null,"batch":1,"t":531.8}]
+# mutation records (verbatim): [{"attribute":"lang","oldValue":"en","batch":1,"t":496.5},{"attribute":"dir","oldValue":"ltr","batch":1,"t":496.5},{"attribute":"lang","oldValue":null,"batch":1,"t":496.5},{"attribute":"dir","oldValue":null,"batch":1,"t":496.5}]
 # html after: lang=ar dir=rtl url=http://localhost:3000/ar
 # soft-nav marker survived full-navigation wipe: YES (no full navigation)
 # performance navigation entries: 1 (1 = soft nav only)
