@@ -1,22 +1,22 @@
-# interactive target probe — machine-generated 2026-09-22T18:16:35.296Z
+# interactive target probe — machine-generated 2026-09-23T02:39:38.205Z
 # gate (F12-7): effective size ≥44×44 (WCAG floor 24×24 recorded for context)
 # scope per contract: nav · filters · forms · lightbox (visible targets only)
 
 ## nav (home @375 + @1440) (@375, 11 visible targets)
   <a> "Skip to content" — 1×1px → UNDER 44 (below WCAG floor)
-  <a> "MIRADOR" — 131×44px → ≥44
+  <a> "MIRADOR" — 130×44px → ≥44
   <a> "العربية" — 63×44px → ≥44
   <button> "Open menu" — 44×44px → ≥44
-  <a> "Reserve a table" — 174×44px → ≥44
-  <a> "The menu" — 67×44px → ≥44
-  <a> "Reserve a table" — 174×44px → ≥44
-  <a> "The menu" — 67×44px → ≥44
+  <a> "Reserve a table" — 185×44px → ≥44
+  <a> "The menu" — 83×44px → ≥44
+  <a> "Reserve a table" — 185×44px → ≥44
+  <a> "The menu" — 83×44px → ≥44
   <a> "+963 11 341 7700" — 124×44px → ≥44
   <a> "Message us on WhatsApp" — 192×44px → ≥44
   <a> "reservations@miradordamascus" — 275×44px → ≥44
 
 ## nav desktop (header @1440, 9 targets)
-  <a> "MIRADOR" — 131×44px → ≥44
+  <a> "MIRADOR" — 130×44px → ≥44
   <a> "Home" — 69×44px → ≥44
   <a> "Menu" — 66×44px → ≥44
   <a> "Story" — 65×44px → ≥44
@@ -24,11 +24,11 @@
   <a> "Private Dining" — 130×44px → ≥44
   <a> "Contact" — 85×44px → ≥44
   <a> "العربية" — 63×44px → ≥44
-  <a> "Reserve a table" — 158×44px → ≥44
+  <a> "Reserve a table" — 169×44px → ≥44
 
 ## menu filters (@375) (@375, 45 visible targets)
   <a> "Skip to content" — 1×1px → UNDER 44 (below WCAG floor)
-  <a> "MIRADOR" — 131×44px → ≥44
+  <a> "MIRADOR" — 130×44px → ≥44
   <a> "العربية" — 63×44px → ≥44
   <button> "Open menu" — 44×44px → ≥44
   <a> "To Begin" — 89×44px → ≥44
@@ -41,41 +41,41 @@
   <button> "Vegan" — 77×44px → ≥44
   <button> "Gluten-free" — 112×44px → ≥44
   <button> "Pescatarian" — 113×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
-  <button> "Details" — 80×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
+  <button> "Details" — 86×44px → ≥44
   <a> "+963 11 341 7700" — 124×44px → ≥44
   <a> "Message us on WhatsApp" — 192×44px → ≥44
   <a> "reservations@miradordamascus" — 275×44px → ≥44
 
 ## reserve form (@375) (@375, 7 visible targets)
   <a> "Skip to content" — 1×1px → UNDER 44 (below WCAG floor)
-  <a> "MIRADOR" — 131×44px → ≥44
+  <a> "MIRADOR" — 130×44px → ≥44
   <a> "العربية" — 63×44px → ≥44
   <button> "Open menu" — 44×44px → ≥44
   <a> "+963 11 341 7700" — 124×44px → ≥44
@@ -84,7 +84,7 @@
 
 ## gallery + lightbox (@375) (@375, 18 visible targets)
   <a> "Skip to content" — 1×1px → UNDER 44 (below WCAG floor)
-  <a> "MIRADOR" — 131×44px → ≥44
+  <a> "MIRADOR" — 130×44px → ≥44
   <a> "العربية" — 63×44px → ≥44
   <button> "Open menu" — 44×44px → ≥44
   <button> "The City, Switched On" — 328×185px → ≥44

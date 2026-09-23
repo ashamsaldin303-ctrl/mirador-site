@@ -1,21 +1,21 @@
-# lcpElement per run — machine-generated 2026-09-22T18:22:39.753Z
-/en lhr-1790101310206.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-display text-h1 text-ink">
+# lcpElement per run — machine-generated 2026-09-23T02:45:38.383Z
+/en lhr-1790131476328.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-display text-h1 text-ink">
    → poster <img>: CHECK MANUALLY
-/en lhr-1790101297364.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-display text-h1 text-ink">
+/en lhr-1790131501321.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-display text-h1 text-ink">
    → poster <img>: CHECK MANUALLY
-/en lhr-1790101322447.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-display text-h1 text-ink">
+/en lhr-1790131489111.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-display text-h1 text-ink">
    → poster <img>: CHECK MANUALLY
-/ar lhr-1790101359297.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-display text-h1 text-ink">
+/ar lhr-1790131525746.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-display text-h1 text-ink">
    → poster <img>: CHECK MANUALLY
-/ar lhr-1790101334717.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-display text-h1 text-ink">
+/ar lhr-1790131513544.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-display text-h1 text-ink">
    → poster <img>: CHECK MANUALLY
-/ar lhr-1790101346990.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-display text-h1 text-ink">
+/ar lhr-1790131537971.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-display text-h1 text-ink">
    → poster <img>: CHECK MANUALLY
-# raw trace corroboration — hero poster URL occurrences per trace JSON — machine-generated 2026-09-22T18:22:39.753Z
-localhost_2026-09-22_18-22-30-0.trace.json (5.0MB) — poster URL occurrences: 35
-localhost_2026-09-22_18-22-05-0.trace.json (5.0MB) — poster URL occurrences: 25
-localhost_2026-09-22_18-21-53-0.trace.json (4.5MB) — poster URL occurrences: 15
-localhost_2026-09-22_18-22-17-0.trace.json (5.0MB) — poster URL occurrences: 25
-localhost_2026-09-22_18-21-27-0.trace.json (4.8MB) — poster URL occurrences: 15
-localhost_2026-09-22_18-21-41-0.trace.json (4.5MB) — poster URL occurrences: 15
+# raw trace corroboration — hero poster URL occurrences per trace JSON — machine-generated 2026-09-23T02:45:38.383Z
+localhost_2026-09-23_02-44-39-0.trace.json (4.8MB) — poster URL occurrences: 16
+localhost_2026-09-23_02-45-28-0.trace.json (5.1MB) — poster URL occurrences: 26
+localhost_2026-09-23_02-44-27-0.trace.json (4.7MB) — poster URL occurrences: 16
+localhost_2026-09-23_02-44-52-0.trace.json (4.8MB) — poster URL occurrences: 16
+localhost_2026-09-23_02-45-16-0.trace.json (5.2MB) — poster URL occurrences: 26
+localhost_2026-09-23_02-45-04-0.trace.json (5.2MB) — poster URL occurrences: 26
 GATE E28: see lcpElement rows above — the LCP candidate on both locales must be the hero poster <img>

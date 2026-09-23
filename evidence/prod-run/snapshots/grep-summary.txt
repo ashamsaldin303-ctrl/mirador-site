@@ -1,3 +1,23 @@
-# snapshot grep summary — machine-generated 2026-09-23T02:16:51Z
-# gate (E13): every snapshot ≥3 rel=alternate hreflang + ≥1 wa.me/963955000111
+# snapshot grep summary — machine-generated 2026-09-23T02:36:20Z
+# gate (E13): every CONTENT snapshot ≥3 rel=alternate hreflang + ≥1 wa.me/963955000111
+# gate (E45/COP-2): confirmation snapshots — self-canonical + noindex + ZERO per-id alternates
 # gate (E71): «يرجى» rendered count = 0 across all snapshots (the term-ledger purge)
+# run-17 lesson: zero-match greps exit 1 — (grep || true) | wc -l, or the gate that
+# proves the يرجى purge kills the run the moment the purge WORKS (pipefail).
+confirmation--ar.html COP-2: alternates=0 canonical=1 noindex=2 wa.me=4 يرجى=0
+confirmation--en.html COP-2: alternates=0 canonical=1 noindex=2 wa.me=4 يرجى=0
+contact--ar.html alternates=3 wa.me=4 يرجى=0
+contact--en.html alternates=3 wa.me=4 يرجى=0
+gallery--ar.html alternates=3 wa.me=2 يرجى=0
+gallery--en.html alternates=3 wa.me=2 يرجى=0
+home--ar.html alternates=3 wa.me=2 يرجى=0
+home--en.html alternates=3 wa.me=2 يرجى=0
+menu--ar.html alternates=3 wa.me=2 يرجى=0
+menu--en.html alternates=3 wa.me=2 يرجى=0
+private-dining--ar.html alternates=3 wa.me=3 يرجى=0
+private-dining--en.html alternates=3 wa.me=3 يرجى=0
+reserve--ar.html alternates=3 wa.me=2 يرجى=0
+reserve--en.html alternates=3 wa.me=2 يرجى=0
+story--ar.html alternates=3 wa.me=2 يرجى=0
+story--en.html alternates=3 wa.me=2 يرجى=0
+SUMMARY: 16/16 PASS · COP-2-confirmation=2/2 · يرجى-rendered=0

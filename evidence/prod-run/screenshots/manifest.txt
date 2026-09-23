@@ -1,4 +1,4 @@
-# screenshot manifest — machine-generated 2026-09-22T18:18:29.948Z
+# screenshot manifest — machine-generated 2026-09-23T02:41:32.006Z
 F1-5/home--en--375.png
 F1-5/menu--en--375.png
 F1-5/reserve--en--375.png

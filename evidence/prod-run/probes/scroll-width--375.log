@@ -1,4 +1,4 @@
-# scrollWidth probe @375 — machine-generated 2026-09-22T18:15:08.919Z
+# scrollWidth probe @375 — machine-generated 2026-09-23T02:38:12.146Z
 # gate (F12-6): scrollWidth ≤ clientWidth on every route × locale
 /en/ — scrollWidth=360 clientWidth=375 → OK
 /en/menu — scrollWidth=360 clientWidth=375 → OK
@@ -7,7 +7,7 @@
 /en/gallery — scrollWidth=360 clientWidth=375 → OK
 /en/private-dining — scrollWidth=360 clientWidth=375 → OK
 /en/contact — scrollWidth=360 clientWidth=375 → OK
-/en/confirmation/cmuczqzms001y2g64va6gu2yb — scrollWidth=360 clientWidth=375 → OK
+/en/confirmation/cmudhoa6d001y425a0du6l215 — scrollWidth=360 clientWidth=375 → OK
 /ar/ — scrollWidth=360 clientWidth=375 → OK
 /ar/menu — scrollWidth=360 clientWidth=375 → OK
 /ar/reserve — scrollWidth=360 clientWidth=375 → OK
@@ -15,5 +15,5 @@
 /ar/gallery — scrollWidth=360 clientWidth=375 → OK
 /ar/private-dining — scrollWidth=360 clientWidth=375 → OK
 /ar/contact — scrollWidth=360 clientWidth=375 → OK
-/ar/confirmation/cmuczqzms001y2g64va6gu2yb — scrollWidth=360 clientWidth=375 → OK
+/ar/confirmation/cmudhoa6d001y425a0du6l215 — scrollWidth=360 clientWidth=375 → OK
 GATE F12-6: PASS — no horizontal scroll at 375 on any route × locale

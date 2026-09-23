@@ -1,18 +1,9 @@
 
-===== keyboard-reserve-errors--ar · run 2026-09-21T14:20:38.627Z =====
+===== keyboard-reserve-errors--ar · run 2026-09-23T02:42:44.737Z =====
 # F8-3 · empty submit → per-field ARABIC (RTL-correct) errors
 html: lang=ar dir=rtl (before submit dir=rtl)
-name error:  "يرجى إدخال اسم صحيح."
-phone error: "يرجى إدخال رقم هاتف صحيح."
-slot error:  "يرجى اختيار وقت متاح."
-aria-invalid: name=true phone=true · aria-describedby(name)=reserve-name-error
-# VERDICT: PASS — all three per-field errors bilingual-correct, dir=rtl (RTL-correct), aria-invalid set
-
-===== keyboard-reserve-errors--ar · run 2026-09-22T18:19:43.601Z =====
-# F8-3 · empty submit → per-field ARABIC (RTL-correct) errors
-html: lang=ar dir=rtl (before submit dir=rtl)
-name error:  "يرجى إدخال اسم صحيح."
-phone error: "يرجى إدخال رقم هاتف صحيح."
-slot error:  "يرجى اختيار وقت متاح."
+name error:  "أدخل اسماً صحيحاً."
+phone error: "أدخل رقم هاتف صحيحاً."
+slot error:  "اختر وقتاً متاحاً."
 aria-invalid: name=true phone=true · aria-describedby(name)=reserve-name-error
 # VERDICT: PASS — all three per-field errors bilingual-correct, dir=rtl (RTL-correct), aria-invalid set

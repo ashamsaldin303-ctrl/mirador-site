@@ -1,5 +1,5 @@
 
-===== keyboard-mobile-sheet--en · run 2026-09-22T18:19:36.333Z =====
+===== keyboard-mobile-sheet--en · run 2026-09-23T02:42:37.424Z =====
 # E39 · mobile nav sheet (EN · side=right · LTR) — open → trap → navigate → Esc/scrim close
 step 1 — focused menu trigger: <button> "Open menu"
 step 2 — Enter → sheet open; activeElement: <button> "Close" [in-dialog]
@@ -15,5 +15,5 @@ focus-trap check after 8 Tabs: PASS — focus never left the sheet
 step 4 — focused sheet link: <a> "Menu" [in-dialog]
 step 5 — Enter → URL http://localhost:3000/en/menu · sheet closed: PASS
 step 6 — reopen → Esc → sheet closed: PASS
-step 7 — reopen → scrim click (pointer) at (20,400) → sheet closed: PASS
-# VERDICT: PASS — keyboard-operable mobile sheet: trap, navigate, Esc, scrim
+step 7 — reopen → scrim click (pointer) at (20,400) → sheet closed: FAIL
+# VERDICT: FAIL
