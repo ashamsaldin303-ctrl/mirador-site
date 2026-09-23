@@ -28,7 +28,7 @@ const CEILINGS: [string, RegExp, string][] = [
   ["motion family 62", /≤62KB gz/, "≤62KB gz"],
   ["three-pack 235", /≤235KB gz/, "≤235KB gz"],
   ["combined rental 297", /≤297KB/, "≤297KB"],
-  ["CSS +3KB", /\+3KB total/, "+3KB total"],
+  ["CSS +3KB→+5.5KB (signed amendment)", /\+3KB → \*\*\+5\.5KB total\*\* \(human-signed amendment 2026-09-23, Option B/, "+3KB → **+5.5KB total** (human-signed amendment 2026-09-23, Option B — N29's one lawful path; record: docs/css-ceiling-decision.md)"],
   ["fonts 60KB + 334,880B", /AR faces ≤60KB each · disk 334,880B/, "AR faces ≤60KB each · disk 334,880B"],
   ["ΣΔ≤0", /\*\*ΣΔ≤0 per release\*\*/, "**ΣΔ≤0 per release**"],
   ["zero RUM", /zero RUM\/beacons\/SDK/, "zero RUM/beacons/SDK"],

@@ -13,7 +13,7 @@ entries exist — **a breach (edited ceiling, dropped check) fails the job.**
 | Motion family (lazy) | ≤62KB gz | 58.85KB pinned |
 | Three-pack (lazy) | ≤235KB gz | 231.9KB, headroom 3.1KB |
 | Combined rental | ≤297KB | 291.15KB |
-| CSS additions | +3KB total | ≈2.97KB subscribed, 0.03KB slack |
+| CSS additions | +3KB → **+5.5KB total** (human-signed amendment 2026-09-23, Option B — N29's one lawful path; record: `docs/css-ceiling-decision.md`) | ≈2.97KB subscribed at amendment; prompt-6 R9's CSS-cell instrument measures the round's Δ (round headroom ≈2.53KB) |
 | Fonts | AR faces ≤60KB each · disk 334,880B | subsets: −31KB EN / −100KB AR |
 | Net bytes | **ΣΔ≤0 per release** | the 7-cell Exchange Ledger |
 | Visitor measurement | zero RUM/beacons/SDK | grep-verified |
