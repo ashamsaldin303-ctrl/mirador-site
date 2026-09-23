@@ -1,4 +1,4 @@
-# F12-2/prod-run — production build budgets summary (E19) — machine-generated 2026-09-23T02:00:31.203Z
+# F12-2/prod-run — production build budgets summary (E19) — machine-generated 2026-09-23T02:12:15.963Z
 
 ## Route size table (verbatim from build-output.log — raw file: route-size-table.txt)
 ```
@@ -39,7 +39,7 @@ served HTML's initial script set + gzip -9 of the emitted chunks; wire sizes cor
 /en/gallery — files=13 raw=586809B gz=179760B (175.5KB) → FAIL (soft budget exceeded — under hard cap)
 /en/private-dining — files=13 raw=572389B gz=174577B (170.5KB) → FAIL (soft budget exceeded — under hard cap)
 /en/contact — files=12 raw=565291B gz=172174B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
-/en/confirmation/cmudgg8bp001y4277al5fzeyk — files=12 raw=565291B gz=172174B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
+/en/confirmation/cmudgvd9u001y42abbnbhmdz5 — files=12 raw=565291B gz=172174B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
 /ar/ — files=13 raw=588024B gz=180253B (176.0KB) → FAIL (soft budget exceeded — under hard cap)
 /ar/menu — files=13 raw=591833B gz=181414B (177.2KB) → FAIL (soft budget exceeded — under hard cap)
 /ar/reserve — files=13 raw=567590B gz=173072B (169.0KB) → FAIL (soft budget exceeded — under hard cap)
@@ -47,7 +47,7 @@ served HTML's initial script set + gzip -9 of the emitted chunks; wire sizes cor
 /ar/gallery — files=13 raw=586809B gz=179760B (175.5KB) → FAIL (soft budget exceeded — under hard cap)
 /ar/private-dining — files=13 raw=572389B gz=174577B (170.5KB) → FAIL (soft budget exceeded — under hard cap)
 /ar/contact — files=12 raw=565291B gz=172174B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
-/ar/confirmation/cmudgg8bp001y4277al5fzeyk — files=12 raw=565291B gz=172174B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
+/ar/confirmation/cmudgvd9u001y42abbnbhmdz5 — files=12 raw=565291B gz=172174B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
 GATE F12-2: FAIL — 16 routes over budget
 
 ## three/fiber/drei lazy pack (raw file: ../F6-3/prod-run/three-lazy-chunk.txt)

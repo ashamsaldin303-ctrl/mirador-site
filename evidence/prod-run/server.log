@@ -3,7 +3,7 @@
 - Network:       http://0.0.0.0:3000
 
 ✓ Starting...
-✓ Ready in 81ms
+✓ Ready in 77ms
 prisma:error 
 Invalid `prisma.reservation.create()` invocation:
 
