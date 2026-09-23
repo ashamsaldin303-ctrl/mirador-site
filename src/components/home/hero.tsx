@@ -34,7 +34,9 @@ export function Hero({
       />
       <div className="relative z-10 flex flex-col items-center gap-8 px-4 py-24 text-center sm:gap-10">
         <WordmarkLockup size="xl" />
-        <h1 className="max-w-4xl font-display text-h1 text-ink">{line}</h1>
+        {/* R13/E79: font-hero rides the PRELOADED hero-line subset (the LCP
+            close — the full display family still serves every other heading) */}
+        <h1 className="max-w-4xl font-hero text-h1 text-ink">{line}</h1>
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
           <Button variant="cta" size="full" asChild>
             <Link href={`/${locale}/reserve`}>{cta}</Link>

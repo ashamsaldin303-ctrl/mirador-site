@@ -1,11 +1,11 @@
-# P-041 LEDGER — machine-generated 2026-09-23T02:34:43.510Z
+# P-041 LEDGER — machine-generated 2026-09-23T03:36:07.934Z
 ## Font cells (disk-assertable — run on every push)
 [PASS] amiri 400 payload 43112B ≤ 60KB (42.1KB)
 [PASS] amiri 700 payload 43452B ≤ 60KB (42.4KB)
 [PASS] plex-arabic 400 payload 35056B ≤ 60KB (34.2KB)
 [PASS] plex-arabic 500 payload 37544B ≤ 60KB (36.7KB)
 [PASS] plex-arabic 600 payload 37740B ≤ 60KB (36.9KB)
-[PASS] font disk 299320B ≤ frozen baseline 334,880B (Δ -35560B)
+[PASS] font disk 334200B ≤ frozen baseline 334,880B (Δ -680B)
 
 ## Wire cells (from the prod-run raw files — asserted on the Actions surface)
   /en/ — files=13 raw=588024B gz=180253B (176.0KB) → FAIL (soft budget exceeded — under hard cap)

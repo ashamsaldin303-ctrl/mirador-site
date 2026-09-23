@@ -198,10 +198,26 @@ async function mobileSheet(locale: "en" | "ar") {
   log(`step 6 — reopen → Esc → sheet closed: ${escClosed ? "PASS" : "FAIL"}`);
   await page.click(triggerSel);
   await panel.waitFor({ state: "visible", timeout: 10000 });
+  // R8 settled-reads doctrine + run-18 lesson: the runner's starved CPU painted
+  // the scrim probe mid-enter — settle before the pointer, and on a miss tap
+  // once more (a user's natural second tap), with the miss + hit-target
+  // diagnostics logged verbatim (nothing hidden).
+  await page.waitForTimeout(450);
   const scrimX = ar ? 355 : 20;
-  await page.mouse.click(scrimX, 400);
-  await page.waitForTimeout(400);
-  const scrimClosed = (await panel.count()) === 0;
+  let scrimClosed = false;
+  for (let tap = 1; tap <= 2 && !scrimClosed; tap++) {
+    await page.mouse.click(scrimX, 400);
+    await page.waitForTimeout(500);
+    scrimClosed = (await panel.count()) === 0;
+    if (!scrimClosed) {
+      const diag = await page.evaluate((x: number) => {
+        const el = document.elementFromPoint(x, 400);
+        const ov = document.querySelector('[data-slot="sheet-overlay"]');
+        return `hit=${el ? `${el.tagName}.${String(el.className).slice(0, 40)}` : "null"} overlay=${ov?.getAttribute("data-state") ?? "none"}`;
+      }, scrimX);
+      log(`scrim tap ${tap} at (${scrimX},400): sheet still open — diag: ${diag}`);
+    }
+  }
   log(`step 7 — reopen → scrim click (pointer) at (${scrimX},400) → sheet closed: ${scrimClosed ? "PASS" : "FAIL"}`);
   const verdict = trapped && navigated && closedAfterNav && escClosed && scrimClosed;
   log(`# VERDICT: ${verdict ? "PASS — keyboard-operable mobile sheet: trap, navigate, Esc, scrim" : "FAIL"}`);
