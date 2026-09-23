@@ -8,6 +8,7 @@ import { clientIp, limitWrite } from "@/lib/rate-limit";
 import { damascusDate, damascusTime, slotRejection } from "@/lib/slots";
 import { TABLES } from "@/lib/venue";
 import { waHref, confirmationMessage } from "@/lib/whatsapp";
+import { house } from "@/lib/counters";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -79,6 +80,7 @@ function validationBody(issues: { path: (string | number | symbol)[] }[]): {
 export async function POST(req: NextRequest) {
   const rl = limitWrite(clientIp(req.headers));
   if (!rl.ok) {
+    house.rateRejection(); // P-086
     return NextResponse.json(
       { error: "RATE_LIMITED", retryAfter: rl.retryAfter },
       { status: 429, headers: { "Retry-After": String(rl.retryAfter), "X-RateLimit-Remaining": "0" } },
@@ -163,6 +165,7 @@ export async function POST(req: NextRequest) {
 
     const date = damascusDate(reservation.slot);
     const time = damascusTime(reservation.slot);
+    house.bookingCreated(); // P-086: the house counts its own bookings (no visitors, no PII)
     const whatsappUrl = waHref(
       confirmationMessage(locale, {
         name,
@@ -184,11 +187,13 @@ export async function POST(req: NextRequest) {
     );
   } catch (e) {
     if (e instanceof SlotFullError) {
+      house.capacityRejection(); // P-086: the house counts its own rejections
       return NextResponse.json({ error: "SLOT_FULL", messageKey: "slotFull" }, { status: 409 });
     }
     if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2002") {
       const target = (e.meta?.target as string[] | undefined) ?? [];
       // P2002 on [slot,tableNumber] → 409 SLOT_FULL · on [phone,slot] → 409 DUPLICATE
+      house.capacityRejection(); // P-086
       if (target.includes("phone")) {
         return NextResponse.json({ error: "DUPLICATE", messageKey: "duplicate" }, { status: 409 });
       }

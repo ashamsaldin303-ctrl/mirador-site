@@ -6,6 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { inquirySchema, normalizePhone, toDbLocale } from "@/lib/validation";
 import { clientIp, limitWrite } from "@/lib/rate-limit";
+import { house } from "@/lib/counters";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -43,6 +44,7 @@ function fakeId(): string {
 export async function POST(req: NextRequest) {
   const rl = limitWrite(clientIp(req.headers));
   if (!rl.ok) {
+    house.rateRejection(); // P-086
     return NextResponse.json(
       { error: "RATE_LIMITED", retryAfter: rl.retryAfter },
       { status: 429, headers: { "Retry-After": String(rl.retryAfter), "X-RateLimit-Remaining": "0" } },
@@ -95,6 +97,7 @@ export async function POST(req: NextRequest) {
         locale: toDbLocale(locale),
       },
     });
+    house.inquiryCreated(); // P-086: the house counts its own inquiries
     return NextResponse.json(
       { id: inquiry.id },
       { status: 201, headers: { "X-RateLimit-Remaining": String(rl.remaining) } },

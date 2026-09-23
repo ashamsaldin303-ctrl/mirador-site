@@ -164,6 +164,21 @@ jobs:
           bun evidence/tools/filter-pair.ts
           bun evidence/tools/journey-emulation.ts
 
+      - name: "Q4b4: the readers suite (E75) — Hands/Ears/Calm ×4 routes ×2 locales"
+        run: bun evidence/tools/readers.ts
+
+      - name: "Q4b5: kitchen counters live (E77) — the house counts its own events"
+        run: |
+          set -eo pipefail
+          mkdir -p evidence/prod-run/house
+          # the battery above created bookings/inquiries (and the race created 409s) —
+          # the counters must show them; ZERO RUM is enforced by audit:motion (E76)
+          curl -s -m 10 http://localhost:3000/api/house -o evidence/prod-run/house/counters.json
+          cat evidence/prod-run/house/counters.json
+          BOOKINGS=$(bun -e 'const j=await Bun.file("evidence/prod-run/house/counters.json").json();console.log(j.house["bookings.created"])')
+          [ "${BOOKINGS:-0}" -ge 1 ] || { echo "E77 FAIL: bookings counter did not move"; exit 1; }
+          echo "E77 PASS — kitchen counters live (bookings=${BOOKINGS}, no RUM)"
+
       - name: "Q4b3: image surface probes (E53/E54) — AVIF served + OG JPEG magic"
         run: |
           set -eo pipefail
