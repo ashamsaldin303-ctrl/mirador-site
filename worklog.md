@@ -491,3 +491,18 @@ Work Log:
 
 Stage Summary:
 - The recovered surface = the prompt-5 close-out truth: E82–E88 PASS with committed raws, E79 carried honestly (Option A standing, three failing cells: run-28 EN LCP 3361ms · AR LCP 3911ms · AR perf 86), devtools recorded beside (1639/1640ms, N27), decision form unsigned. Environment fully operational for preview (PG 16.2 seeded, daemon healthy on 3000). Prompt-6 could not start: its file is absent from the server — re-delivery needed.
+
+---
+Task ID: p6-delivery-retry
+Agent: Z.ai Code (main orchestrator)
+Task: Second prompt-6 delivery attempt — result: FAILED again (file never landed)
+
+Work Log:
+- User re-sent "prompt 6" with file_name "Pasted Content_1790199968730.txt" (gateway metadata states it saved to /home/z/my-project/upload/).
+- Checked the stated path immediately: NOT present. Waited 20s → 45s → re-checked: never materialized.
+- Full-filesystem search (find / for *1790199968730* and any *Pasted* newer than the last upload): zero hits. /tmp/my-project/upload/ equally stale. No recently-modified files anywhere user-writable.
+- Second consecutive failure with a DIFFERENT filename (first: 1790190055984.txt) — the paste-attachment pipeline is systematically broken for this session, not a one-off.
+- Per the honesty laws (no fabricated contracts, no invented scope): zero prompt-6 work attempted. State remains at the p5 §8 STOP. The reliable path for the next delivery is the contract TEXT pasted directly into the message body.
+
+Stage Summary:
+- Prompt-6 remains undelivered on the server side. The recovered surface (c44a8a1, ci #36 green) stands ready; the moment the contract text arrives in-band, execution begins (ACK first per protocol).
