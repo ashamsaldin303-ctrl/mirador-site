@@ -1,6 +1,6 @@
 
-===== filter-pair--ar · run 2026-09-23T17:20:53.476Z =====
-# F3-5/E50 · menu filter pair RE-SHOT · AR · 2026-09-23T17:20:53.476Z
+===== filter-pair--ar · run 2026-09-23T17:43:05.244Z =====
+# F3-5/E50 · menu filter pair RE-SHOT · AR · 2026-09-23T17:43:05.244Z
 before: 28 rows · aria-live "28 طبقاً" · md5 dbb4c4b2a236d61bed180443e01a62b0
 after : 4 rows · aria-pressed true · aria-live "4 أطباق" · md5 03e3c761969782d876c016ad1bfd3045
 pair  : md5s differ = true

@@ -1,5 +1,5 @@
 
-===== keyboard-lightbox--en · run 2026-09-23T17:28:24.189Z =====
+===== keyboard-lightbox--en · run 2026-09-23T17:50:40.423Z =====
 # F7-1 · lightbox: keyboard open → arrows navigate → focus trap → Esc
 step 1 — Enter on gallery item → lightbox open; activeElement: <button> "Close" [in-dialog]
 step 2 — counter before: "1 of 8"

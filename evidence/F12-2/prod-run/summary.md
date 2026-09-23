@@ -1,4 +1,4 @@
-# F12-2/prod-run — production build budgets summary (E19) — machine-generated 2026-09-23T17:20:33.104Z
+# F12-2/prod-run — production build budgets summary (E19) — machine-generated 2026-09-23T17:42:44.792Z
 
 ## Route size table (verbatim from build-output.log — raw file: route-size-table.txt)
 ```
@@ -39,7 +39,7 @@ served HTML's initial script set + gzip -9 of the emitted chunks; wire sizes cor
 /en/gallery — files=13 raw=586833B gz=179765B (175.6KB) → FAIL (soft budget exceeded — under hard cap)
 /en/private-dining — files=13 raw=572439B gz=174591B (170.5KB) → FAIL (soft budget exceeded — under hard cap)
 /en/contact — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
-/en/confirmation/cmuedbgqt001y4275e441iqbx — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
+/en/confirmation/cmuee3yf3001y2g534004125a — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
 /ar/ — files=13 raw=588048B gz=180258B (176.0KB) → FAIL (soft budget exceeded — under hard cap)
 /ar/menu — files=13 raw=591857B gz=181419B (177.2KB) → FAIL (soft budget exceeded — under hard cap)
 /ar/reserve — files=13 raw=567614B gz=173077B (169.0KB) → FAIL (soft budget exceeded — under hard cap)
@@ -47,7 +47,7 @@ served HTML's initial script set + gzip -9 of the emitted chunks; wire sizes cor
 /ar/gallery — files=13 raw=586833B gz=179765B (175.6KB) → FAIL (soft budget exceeded — under hard cap)
 /ar/private-dining — files=13 raw=572439B gz=174591B (170.5KB) → FAIL (soft budget exceeded — under hard cap)
 /ar/contact — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
-/ar/confirmation/cmuedbgqt001y4275e441iqbx — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
+/ar/confirmation/cmuee3yf3001y2g534004125a — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
 GATE F12-2: FAIL — 16 routes over budget
 
 ## three/fiber/drei lazy pack (raw file: ../F6-3/prod-run/three-lazy-chunk.txt)
@@ -62,20 +62,20 @@ motion stack total: gz=11692B (11.4KB)
 GATE motion: PASS — 11.4KB gz ≤90KB
 
 ## Network corroboration (raw file: network-firstload.txt)
-/en/ — scripts=18 wireJS=256219B (250.2KB)
-/en/menu — scripts=19 wireJS=265784B (259.6KB)
-/en/reserve — scripts=19 wireJS=257417B (251.4KB)
-/en/story — scripts=19 wireJS=262250B (256.1KB)
-/en/gallery — scripts=19 wireJS=264124B (257.9KB)
-/en/private-dining — scripts=19 wireJS=258933B (252.9KB)
-/en/contact — scripts=18 wireJS=256219B (250.2KB)
-/ar/ — scripts=18 wireJS=256219B (250.2KB)
-/ar/menu — scripts=19 wireJS=265784B (259.6KB)
-/ar/reserve — scripts=19 wireJS=257417B (251.4KB)
-/ar/story — scripts=19 wireJS=262250B (256.1KB)
-/ar/gallery — scripts=19 wireJS=264124B (257.9KB)
-/ar/private-dining — scripts=19 wireJS=258933B (252.9KB)
-/ar/contact — scripts=18 wireJS=256219B (250.2KB)
+/en/ — scripts=18 wireJS=257275B (251.2KB)
+/en/menu — scripts=19 wireJS=266840B (260.6KB)
+/en/reserve — scripts=19 wireJS=258473B (252.4KB)
+/en/story — scripts=19 wireJS=263306B (257.1KB)
+/en/gallery — scripts=19 wireJS=265180B (259.0KB)
+/en/private-dining — scripts=19 wireJS=259989B (253.9KB)
+/en/contact — scripts=18 wireJS=257275B (251.2KB)
+/ar/ — scripts=18 wireJS=257275B (251.2KB)
+/ar/menu — scripts=19 wireJS=266840B (260.6KB)
+/ar/reserve — scripts=19 wireJS=258473B (252.4KB)
+/ar/story — scripts=19 wireJS=263306B (257.1KB)
+/ar/gallery — scripts=19 wireJS=265180B (259.0KB)
+/ar/private-dining — scripts=19 wireJS=259989B (253.9KB)
+/ar/contact — scripts=18 wireJS=257275B (251.2KB)
 lazy JS loaded after journey scroll: e6e5a7e72d1d5089.js wire=238278B
 lazy wire total: 238278B
 

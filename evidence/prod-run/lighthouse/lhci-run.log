@@ -25,24 +25,18 @@ Checking assertions against 2 URL(s), 6 total run(s)
        https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/
 
         expected: <=[32m2500[0m
-           found: [31m3273.0761249999996[0m
-      [2mall values: 3535.4622249999998, 3521.74775, 3273.0761249999996[0m
+           found: [31m3201.2086499999996[0m
+      [2mall values: 3360.6019249999995, 3201.2086499999996, 3533.286325[0m
 
-2 result(s) for [1mhttp://localhost:3000/ar[0m :
-
-  [31m✘[0m  [1mcategories[0m.performance failure for [1mminScore[0m assertion
-        expected: >=[32m0.9[0m
-           found: [31m0.86[0m
-      [2mall values: 0.84, 0.86, 0.85[0m
-
+1 result(s) for [1mhttp://localhost:3000/ar[0m :
 
   [31m✘[0m  [1mlargest-contentful-paint[0m failure for [1mmaxNumericValue[0m assertion
        Largest Contentful Paint
        https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/
 
         expected: <=[32m2500[0m
-           found: [31m4048.0425000000005[0m
-      [2mall values: 4081.2742499999995, 4056.011225, 4048.0425000000005[0m
+           found: [31m3179.6268[0m
+      [2mall values: 3933.4439999999995, 3179.6268, 3910.9992[0m
 
 Assertion failed. Exiting with status code 1.
 
