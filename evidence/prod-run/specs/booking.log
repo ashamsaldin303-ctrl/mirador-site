@@ -1,14 +1,14 @@
 
-===== booking · run 2026-09-23T17:43:00.468Z =====
+===== booking · run 2026-09-23T23:04:34.296Z =====
 # F4-5/F4-6 · booking happy path — measured end-to-end, <90s contract
 # intent-hydration: form motor mounted on first pointerdown (P-022)
-# slot selected: aria-label="21:00 — 12 tables"
-# confirmation URL: http://localhost:3000/en/confirmation/cmuee5kjf000q2ggafiex0i2h
+# slot selected: aria-label="18:00 — 12 tables"
+# confirmation URL: http://localhost:3000/en/confirmation/cmuepn3qb000q42g1elntui64
 # heading visible: "The table is yours."
-# whatsapp href (raw): https://wa.me/963955000111?text=Hello%20MIRADOR%20%E2%80%94%20confirming%20my%20reservation%3A%20Evidence%20Run%2C%202%20guests%2C%202026-09-23%20at%2021%3A00%20(ref%20ex0i2h).
-# whatsapp href (decoded): https://wa.me/963955000111?text=Hello MIRADOR — confirming my reservation: Evidence Run, 2 guests, 2026-09-23 at 21:00 (ref ex0i2h).
+# whatsapp href (raw): https://wa.me/963955000111?text=Hello%20MIRADOR%20%E2%80%94%20confirming%20my%20reservation%3A%20Evidence%20Run%2C%202%20guests%2C%202026-09-24%20at%2018%3A00%20(ref%20ntui64).
+# whatsapp href (decoded): https://wa.me/963955000111?text=Hello MIRADOR — confirming my reservation: Evidence Run, 2 guests, 2026-09-24 at 18:00 (ref ntui64).
 # F4-6 encode check: name=true party=true ref=true waNumber=true
-# BOOKING_DURATION_MS=663 (0.7s) — contract <90s
-# DB row (F4-5): {"id":"cmuee5kjf000q2ggafiex0i2h","name":"Evidence Run","phone":"+96399900901","partySize":2,"slot":"2026-09-23T18:00:00.000Z","status":"PENDING","locale":"EN","tableNumber":1}
+# BOOKING_DURATION_MS=637 (0.6s) — contract <90s
+# DB row (F4-5): {"id":"cmuepn3qb000q42g1elntui64","name":"Evidence Run","phone":"+96399900901","partySize":2,"slot":"2026-09-24T15:00:00.000Z","status":"PENDING","locale":"EN","tableNumber":1}
 # VERDICT: PASS — booked, persisted PENDING/EN, WhatsApp encodes name+party+ref, under 90s
 # CLEANUP: deleted 1 reservations (phones +96399900*)

@@ -1,5 +1,5 @@
 Resolving dependencies
-Resolved, downloaded and extracted [1038]
+Resolved, downloaded and extracted [1036]
 Saved lockfile
 ✅  .lighthouseci/ directory writable
 ✅  Configuration file found
@@ -25,18 +25,24 @@ Checking assertions against 2 URL(s), 6 total run(s)
        https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/
 
         expected: <=[32m2500[0m
-           found: [31m3201.2086499999996[0m
-      [2mall values: 3360.6019249999995, 3201.2086499999996, 3533.286325[0m
+           found: [31m3264.5614[0m
+      [2mall values: 3264.5614, 3334.7695749999993, 3519.31495[0m
 
-1 result(s) for [1mhttp://localhost:3000/ar[0m :
+2 result(s) for [1mhttp://localhost:3000/ar[0m :
+
+  [31m✘[0m  [1mcategories[0m.performance failure for [1mminScore[0m assertion
+        expected: >=[32m0.9[0m
+           found: [31m0.87[0m
+      [2mall values: 0.87, 0.86, 0.87[0m
+
 
   [31m✘[0m  [1mlargest-contentful-paint[0m failure for [1mmaxNumericValue[0m assertion
        Largest Contentful Paint
        https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/
 
         expected: <=[32m2500[0m
-           found: [31m3179.6268[0m
-      [2mall values: 3933.4439999999995, 3179.6268, 3910.9992[0m
+           found: [31m3880.4492[0m
+      [2mall values: 3910.012199999999, 3932.1982000000007, 3880.4492[0m
 
 Assertion failed. Exiting with status code 1.
 

@@ -1,5 +1,5 @@
 
-===== keyboard-reserve-errors--en · run 2026-09-23T17:50:53.698Z =====
+===== keyboard-reserve-errors--en · run 2026-09-23T23:12:23.782Z =====
 # F8-3 · empty submit → per-field ENGLISH errors
 html: lang=en dir=ltr (before submit dir=ltr)
 name error:  "Please use a valid name."

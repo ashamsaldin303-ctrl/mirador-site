@@ -1,5 +1,5 @@
 
-===== ratelimit · run 2026-09-23T17:42:45.691Z =====
+===== ratelimit · run 2026-09-23T23:04:19.600Z =====
 # F4-7 · 6th POST within sliding 60s from ONE IP → 429 + Retry-After (§8.4: shared POST bucket, limiter ACTIVE)
 POST #1 ip=10.99.2.1 → HTTP 400 | Retry-After: - | X-RateLimit-Remaining: 4 | body {"error":"VALIDATION","fields":{"phone":["invalid_phone"],"form":["required"]}}
 POST #2 ip=10.99.2.1 → HTTP 400 | Retry-After: - | X-RateLimit-Remaining: 3 | body {"error":"VALIDATION","fields":{"phone":["invalid_phone"],"form":["required"]}}

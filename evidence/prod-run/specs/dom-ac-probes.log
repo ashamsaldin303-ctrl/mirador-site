@@ -1,5 +1,5 @@
 
-===== dom-ac-probes · run 2026-09-23T17:50:55.148Z =====
+===== dom-ac-probes · run 2026-09-23T23:12:25.211Z =====
 
 ## F1-1 — html lang/dir per route × locale (live probe)
 /en/ lang=en dir=ltr → OK
@@ -9,7 +9,7 @@
 /en/gallery lang=en dir=ltr → OK
 /en/private-dining lang=en dir=ltr → OK
 /en/contact lang=en dir=ltr → OK
-/en/confirmation/cmuee3yf3001y2g534004125a lang=en dir=ltr → OK
+/en/confirmation/cmuepli9z001y426esmuwve36 lang=en dir=ltr → OK
 /ar/ lang=ar dir=rtl → OK
 /ar/menu lang=ar dir=rtl → OK
 /ar/reserve lang=ar dir=rtl → OK
@@ -17,7 +17,7 @@
 /ar/gallery lang=ar dir=rtl → OK
 /ar/private-dining lang=ar dir=rtl → OK
 /ar/contact lang=ar dir=rtl → OK
-/ar/confirmation/cmuee3yf3001y2g534004125a lang=ar dir=rtl → OK
+/ar/confirmation/cmuepli9z001y426esmuwve36 lang=ar dir=rtl → OK
 F1-1 VERDICT: PASS — 16/16 correct lang+dir
 
 ## F3-2 — dish names in raw SSR HTML (snapshots, no JS)
@@ -47,15 +47,14 @@ census: {"textInputs":1,"telInputs":1,"steppers":1,"stepperButtons":62,"dateStri
 F4-1 VERDICT: PASS — exactly 3 input fields (name, phone, party stepper) + slot picker
 
 ## F4-2 — live availability + sold-out disabled rendering
-seeded slot occupancy: 2026-09-30T16:00=12
-availability network calls observed: 1 (date=2026-09-23…)
-GET /api/availability?date=2026-09-30 → slots with remaining=0: 19:00
-after selecting 2026-09-30: disabled slot buttons=1 labels=["19:00Sold out"]
-F4-2 VERDICT: PASS — live availability loads; remaining:0 renders disabled with sold-out label
+seeded slot occupancy: 2026-10-01T16:00=12
+availability network calls observed: 1 (date=2026-09-24…)
+GET /api/availability?date=2026-10-01 → slots with remaining=0: 19:00
+F4-2 VERDICT: INCONCLUSIVE — could not click target date (recorder note; API-level zeroing verified above)
 
 ## F5-1 / F5-2 — journey horizontal scrub + RTL mirrored track
-/en track transforms @0/+900/+1800 scroll: ["matrix(1, 0, 0, 1, 0, 0)","matrix(1, 0, 0, 1, -468.973, 0)","matrix(1, 0, 0, 1, -1755.15, 0)"]
-/ar track transforms @0/+900/+1800 scroll: ["matrix(1, 0, 0, 1, 0, 0)","matrix(1, 0, 0, 1, 1125.22, 0)","matrix(1, 0, 0, 1, 2420.7, 0)"]
+/en track transforms @0/+900/+1800 scroll: ["matrix(1, 0, 0, 1, 0, 0)","matrix(1, 0, 0, 1, -468.87, 0)","matrix(1, 0, 0, 1, -1759.9, 0)"]
+/ar track transforms @0/+900/+1800 scroll: ["matrix(1, 0, 0, 1, 0, 0)","matrix(1, 0, 0, 1, 1125.45, 0)","matrix(1, 0, 0, 1, 2420.66, 0)"]
 F5-1 VERDICT: PASS — track translates under pinned scrub
 F5-2 VERDICT: PASS — RTL track mirrors (translate sign opposite LTR)
 
@@ -76,7 +75,7 @@ F5-4 VERDICT: PASS — all three acts in raw SSR HTML both locales
 /en/gallery canvases=0 → OK
 /en/private-dining canvases=0 → OK
 /en/contact canvases=0 → OK
-/en/confirmation/cmuee3yf3001y2g534004125a canvases=0 → OK
+/en/confirmation/cmuepli9z001y426esmuwve36 canvases=0 → OK
 /ar/ canvases=1 → OK
 /ar/menu canvases=0 → OK
 /ar/reserve canvases=0 → OK
@@ -84,7 +83,7 @@ F5-4 VERDICT: PASS — all three acts in raw SSR HTML both locales
 /ar/gallery canvases=0 → OK
 /ar/private-dining canvases=0 → OK
 /ar/contact canvases=0 → OK
-/ar/confirmation/cmuee3yf3001y2g534004125a canvases=0 → OK
+/ar/confirmation/cmuepli9z001y426esmuwve36 canvases=0 → OK
 F6-5 VERDICT: PASS - no route ever exceeds one canvas
 
 ## F7-2 — below-fold gallery images not fetched before scroll (@375, BOTH network profiles)

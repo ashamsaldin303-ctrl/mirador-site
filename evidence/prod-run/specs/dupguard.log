@@ -1,7 +1,7 @@
 
-===== dupguard · run 2026-09-23T17:42:45.718Z =====
+===== dupguard · run 2026-09-23T23:04:19.625Z =====
 # F4-8 · same phone+slot resubmission → 409 DUPLICATE, no second row
-POST #1 ip=10.99.3.1 phone=+9639990003001 → HTTP 201 {"id":"cmuee58m3000o2gga166ty17w","tableNumber":1,"slot":"2026-10-07T15:00:00.000Z","whatsappUrl":"https://wa.me/963955000111?text=Hello%20MIRADOR%20%E2%80%94%20confirming%20my%20reservation%3A%20Evidence%20Run%2C%202%20guests%2C%202026-10-07%20at%2018%3A00%20(ref%206ty17w)."}
+POST #1 ip=10.99.3.1 phone=+9639990003001 → HTTP 201 {"id":"cmuepmrvx000o42g14r71wbjf","tableNumber":1,"slot":"2026-10-08T15:00:00.000Z","whatsappUrl":"https://wa.me/963955000111?text=Hello%20MIRADOR%20%E2%80%94%20confirming%20my%20reservation%3A%20Evidence%20Run%2C%202%20guests%2C%202026-10-08%20at%2018%3A00%20(ref%2071wbjf)."}
 POST #2 ip=10.99.3.2 phone=+9639990003001 (SAME phone+slot) → HTTP 409 {"error":"DUPLICATE","messageKey":"duplicate"}
 # post-run DB count query: rows for (phone=+9639990003001, slot) → 1
 # VERDICT: PASS — 201 then 409 DUPLICATE, exactly 1 row

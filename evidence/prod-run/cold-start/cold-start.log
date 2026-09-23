@@ -1,8 +1,8 @@
-# cold-start handoff (F12-3) — machine-generated 2026-09-23T17:56:38Z
+# cold-start handoff (F12-3) — machine-generated 2026-09-23T23:18:09Z
 # fresh clone of ashamsaldin303-ctrl/mirador-site → bun install · migrate · seed · dev → GET /en 200
 Cloning into '/tmp/coldstart'...
-Updating files:  68% (724/1055)Updating files:  69% (728/1055)Updating files:  70% (739/1055)Updating files:  71% (750/1055)Updating files:  72% (760/1055)Updating files:  73% (771/1055)Updating files:  74% (781/1055)Updating files:  75% (792/1055)Updating files:  76% (802/1055)Updating files:  77% (813/1055)Updating files:  78% (823/1055)Updating files:  79% (834/1055)Updating files:  80% (844/1055)Updating files:  81% (855/1055)Updating files:  82% (866/1055)Updating files:  83% (876/1055)Updating files:  84% (887/1055)Updating files:  85% (897/1055)Updating files:  86% (908/1055)Updating files:  87% (918/1055)Updating files:  88% (929/1055)Updating files:  89% (939/1055)Updating files:  90% (950/1055)Updating files:  91% (961/1055)Updating files:  92% (971/1055)Updating files:  93% (982/1055)Updating files:  94% (992/1055)Updating files:  95% (1003/1055)Updating files:  96% (1013/1055)Updating files:  97% (1024/1055)Updating files:  98% (1034/1055)Updating files:  99% (1045/1055)Updating files: 100% (1055/1055)Updating files: 100% (1055/1055), done.
-clone HEAD: 915161ac73b0ff44f52dfbc8210875977ace5fdc
+Updating files:  67% (728/1086)Updating files:  68% (739/1086)Updating files:  69% (750/1086)Updating files:  70% (761/1086)Updating files:  71% (772/1086)Updating files:  72% (782/1086)Updating files:  73% (793/1086)Updating files:  74% (804/1086)Updating files:  75% (815/1086)Updating files:  76% (826/1086)Updating files:  77% (837/1086)Updating files:  78% (848/1086)Updating files:  79% (858/1086)Updating files:  80% (869/1086)Updating files:  81% (880/1086)Updating files:  82% (891/1086)Updating files:  83% (902/1086)Updating files:  84% (913/1086)Updating files:  85% (924/1086)Updating files:  86% (934/1086)Updating files:  87% (945/1086)Updating files:  88% (956/1086)Updating files:  89% (967/1086)Updating files:  90% (978/1086)Updating files:  91% (989/1086)Updating files:  92% (1000/1086)Updating files:  93% (1010/1086)Updating files:  94% (1021/1086)Updating files:  95% (1032/1086)Updating files:  96% (1043/1086)Updating files:  97% (1054/1086)Updating files:  98% (1065/1086)Updating files:  99% (1076/1086)Updating files: 100% (1086/1086)Updating files: 100% (1086/1086), done.
+clone HEAD: c5aa1abfa06bce2898dcb3a8f4ae04ff4e649ea0
 bun install v1.3.14 (0d9b296a)
 
 + @axe-core/playwright@4.13.0
@@ -37,7 +37,7 @@ bun install v1.3.14 (0d9b296a)
 + three@0.186.0
 + zod@4.3.5
 
-448 packages installed [2.86s]
+448 packages installed [2.74s]
 $ prisma generate
 warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).
 For more information, see: https://pris.ly/prisma-config
@@ -54,11 +54,11 @@ Prisma schema loaded from prisma/schema.prisma
 │    npm i @prisma/client@latest                          │
 └─────────────────────────────────────────────────────────┘
 
-✔ Generated Prisma Client (v6.19.2) to ./node_modules/@prisma/client in 76ms
+✔ Generated Prisma Client (v6.19.2) to ./node_modules/@prisma/client in 68ms
 
 Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
 
-Tip: Need your database queries to be 1000x faster? Accelerate offers you that and more: https://pris.ly/tip-2-accelerate
+Tip: Interested in query caching in just a few lines of code? Try Accelerate today! https://pris.ly/tip-3-accelerate
 
 warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).
 For more information, see: https://pris.ly/prisma-config
@@ -88,7 +88,7 @@ For more information, see: https://pris.ly/prisma-config
 
 Running seed command `bun prisma/seed.ts` ...
 [seed] done: {"sections":6,"items":28,"signature":3,"soldOut":1,"gallery":8,"reservations":12}
-[seed] demo slot (12/12 tables full): 2026-09-30T16:00:00.000Z — Damascus local 2026-09-30 19:00
+[seed] demo slot (12/12 tables full): 2026-10-01T16:00:00.000Z — Damascus local 2026-10-01 19:00
 
 🌱  The seed command has been executed.
 cold-start GET /en → 200
