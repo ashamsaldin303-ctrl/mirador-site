@@ -117,6 +117,10 @@ export default async function LocaleLayout({
           devices — the sheet loads well before React hydrates). CSP: the
           inline script rides script-src 'unsafe-inline' — the documented
           Next Flight bootstrap allowance. */}
+      {/* eslint-disable-next-line @next/next/no-css-tags -- the deferred-font
+          pattern REQUIRES a manual link: the media print→all flip (parse-time
+          inline script below) is impossible with imported CSS, and imported
+          CSS would be render-blocking — the whole point (R13/E79 run-23). */}
       <link id="fonts-deferred" rel="stylesheet" href="/fonts-deferred.css" media="print" />
       <script
         dangerouslySetInnerHTML={{
