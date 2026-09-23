@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/prod-run/F3-5/menu--{en,ar}--filtered-vegan--1440.png
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T18:01:42.272Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T23:45:07.451Z)

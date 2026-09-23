@@ -2,13 +2,21 @@
 // MIRADOR — Gallery masonry grid (§4.5): CSS columns (16:9 + 4:5 mix from the
 // DB intrinsics). Below-fold items stay lazy (default loading=lazy; only the
 // first 2 are priority). Hover = film grain + amber hairline. Click/Enter opens
-// the lightbox. Missing images degrade to the designed bilingual caption card
-// (F7-4) — never an empty box.
+// the lightbox (via THE WINDOW, P-094). Missing images degrade to the designed
+// bilingual caption card (F7-4) — never an empty box.
+// P-099 (prompt-6 R5 · E95): THE OBSERVATION DECK — the gallery hangs at
+// staggered altitudes: each frame's column offset derives at render from its
+// index-within-collection (deterministic, SSR-stable, NO schema change — the
+// §3 ruling). Each frame is a window; the captions carry the authored
+// bilingual sighting locution (floors pinned to the six-floor spine,
+// content/{en,ar}.json · docs/copy-parity.md). DOM order = visual order —
+// CSS offsets only, zero `order` tricks (the tab walk is the DOM walk).
 import { useState } from "react";
 import Image from "next/image";
 import type { GalleryItem } from "@prisma/client";
 import type { Locale } from "@/lib/i18n";
 import { isLadderMaster, miradorImageLoader } from "@/lib/image-loader";
+import { cn } from "@/lib/utils";
 import { Lightbox } from "./lightbox";
 
 export type GalleryStrings = {
@@ -17,7 +25,19 @@ export type GalleryStrings = {
   next: string;
   close: string;
   imageFail: string;
+  floorTag: string;
+  sightings: Record<number, string>;
 };
+
+/** The deck's altitude offsets — existing spacing utilities keyed off the
+ * index-within-collection (the three-step cycle: 0 / 2rem / 4rem). The
+ * offsets are CSS-only (margin-top within the column flow — never overlap,
+ * never reorder); the ledger itemizes them as the stagger utilities. */
+const DECK_STAGGER = ["mt-0", "mt-8", "mt-16"] as const;
+
+/** The deck's floors — the authored sighting locution's own spine (Floor
+ * 1–6 only, per the contract). Index-keyed, ride beside the sightings. */
+const DECK_FLOORS = [6, 6, 2, 2, 5, 5, 4, 6] as const;
 
 type TileProps = {
   item: GalleryItem;
@@ -31,9 +51,15 @@ function GalleryTile({ item, index, locale, strings, onOpen }: TileProps) {
   const [failed, setFailed] = useState(false);
   const title = locale === "ar" ? item.titleAr : item.titleEn;
   const caption = locale === "ar" ? item.captionAr : item.captionEn;
+  // the sighting + its floor derive from the index-within-collection
+  // (deterministic, SSR-stable; the query orders by sortOrder asc)
+  const sighting = strings.sightings[index];
+  const floor = DECK_FLOORS[index] ?? 6;
 
   return (
-    <figure className="mb-6 break-inside-avoid">
+    <figure
+      className={cn("mb-6 break-inside-avoid", DECK_STAGGER[index % 3] ?? "mt-0")}
+    >
       <button
         type="button"
         onClick={() => onOpen(index)}
@@ -70,8 +96,20 @@ function GalleryTile({ item, index, locale, strings, onOpen }: TileProps) {
         )}
       </button>
       <figcaption className="pt-4">
+        {/* the window's floor tag — the sighting locution's floor, pinned to
+            the six-floor spine (Western digits, the locked numeral policy) */}
+        {sighting && (
+          <p className="hud-label text-amber">
+            {strings.floorTag} {floor}
+          </p>
+        )}
         <p className="font-display text-h3 text-ink">{title}</p>
         <p className="mt-1 text-small text-muted">{caption}</p>
+        {sighting && (
+          <p className="mt-3 border-s border-line ps-3 text-small text-muted">
+            {sighting}
+          </p>
+        )}
       </figcaption>
     </figure>
   );

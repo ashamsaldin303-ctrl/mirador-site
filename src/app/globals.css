@@ -164,6 +164,12 @@
   --color-error: #C96F5A;   /* form errors + sold-out · 5.6:1 AA */
   --color-success: #7FA974; /* confirmation · 7.4:1 AA */
 
+  /* P-038/P-094 (prompt-6 R1 · E91): THE HORIZON DATUM — 18% from the bottom,
+     the journey's own ground line. ONE property; every consumer renders the
+     datum from it (the journey's skyline ground · the window's hairline).
+     The sole literal in src dies with it (kill-or-replace). */
+  --horizon: 18%;
+
   /* — spacing: 4px base — generates the ONLY permitted spacing scale 4..128 — */
   --spacing: 0.25rem;
 
@@ -412,7 +418,9 @@
     border-top: 1px solid var(--color-line);
   }
 
-  /* — film grain on full-bleed media (2–4%, SVG noise, overlay blend) — */
+  /* — film grain on full-bleed media (2–4%, SVG noise, overlay blend) —
+     P-097 (prompt-6 R6): the grain's opacity is a custom property so the
+     night buckets can thin/thicken it (dusk clearer · late deeper). — */
   .media-grain {
     position: relative;
     isolation: isolate;
@@ -423,11 +431,104 @@
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    opacity: 0.04;
+    opacity: var(--grain-opacity, 0.04);
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 160px 160px;
+    transition: opacity 200ms var(--ease-out-expo);
   }
+}
+
+/* ————————————————————————————————————————————————————————
+   P-094 (prompt-6 R2 · E92) · THE WINDOW — one overlay geometry. Every
+   entrance is the same window onto the same night: the GRADED scrim
+   (deeper at the edges, clearer toward the horizon — night #0A0A0B with
+   graded alpha, the one scrim all three surfaces share) + the horizon
+   hairline at the datum (rendered with utilities inside the primitive) +
+   one close affordance at end-4 (the close law). Entrance = the existing
+   settle verb (the descent through the window — no new keyframe); exit =
+   the 100ms fade (the closed-state tempo). The sheet's mobile slide is
+   the REGISTERED exception (idiom-contracts.md) — it inherits the scrim
+   grading + the close law, never the slide's retirement.
+   ———————————————————————————————————————————————————————— */
+.window-scrim {
+  /* night with graded alpha — the token's value, the window's depth curve */
+  background: linear-gradient(
+    to top,
+    rgb(10 10 11 / 0.97) 0%,
+    rgb(10 10 11 / var(--window-scrim-view, 0.58)) var(--horizon),
+    rgb(10 10 11 / 0.97) 100%
+  );
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-slot="at-the-window"][data-state="open"] .window-arrive {
+    /* the descent: the pane's content arrives through the window — the
+       existing settle verb (600ms vertical arrival), gated motion-safe;
+       the global RM block is the second net (RM = static, present) */
+    animation: settle 600ms var(--ease-out-expo) both;
+  }
+}
+
+/* ————————————————————————————————————————————————————————
+   P-097 (prompt-6 R6 · E96) · THE CITY'S CLOCK — html[data-night] buckets,
+   set once at hydration from the local hour (or the ?night= override — an
+   axis DISTINCT from P-067's ?d= kept-night date: hour-of-day vs date,
+   both registered in twins.md): dusk 18:00–20:00 · full 20:00–23:00 ·
+   late 23:00–18:00. COLOR-ONLY custom-property swaps — the surface lift ·
+   the grain opacity (above) · the window scrim's view depth — plus the
+   skyline canvas's resting-density constant (one per bucket, wired in the
+   canvas). SSR renders full night (the :root defaults); the hydration
+   bucket shift is color-only, ≤200ms crossfade (twins.md discloses it).
+   The hour NEVER leaves the device (zero-RUM law). Contrast: every token
+   pair keeps its AAA/AA class per bucket (the R9 receipt files the
+   arithmetic: ink 16.4–17.2:1 · muted 7.3–8.1:1 · amber 7.9–8.7:1 on the
+   bucket surfaces).
+   ———————————————————————————————————————————————————————— */
+html[data-night="dusk"] {
+  --color-surface: #15151A;      /* the surface lifts toward the last light */
+  --grain-opacity: 0.032;        /* the grain thins — the air is clearer */
+  --window-scrim-view: 0.5;      /* more of the city shows through the glass */
+}
+html[data-night="late"] {
+  --color-surface: #121215;      /* the surface sinks into the small hours */
+  --grain-opacity: 0.052;        /* the grain thickens — the night deepens */
+  --window-scrim-view: 0.66;     /* the glass frosts toward morning */
+}
+html[data-night="dusk"] body,
+html[data-night="late"] body,
+html[data-night="dusk"] .elev-1,
+html[data-night="late"] .elev-1,
+html[data-night="dusk"] .elev-3,
+html[data-night="late"] .elev-3,
+html[data-night="dusk"] .elev-4,
+html[data-night="late"] .elev-4 {
+  /* the hydration bucket shift is color-only — the ≤200ms crossfade */
+  transition: background-color 200ms var(--ease-out-expo);
+}
+
+/* ————————————————————————————————————————————————————————
+   P-101 (prompt-6 R8 · E98) · THE UNBUILT FLOOR — the 404's punchline: the
+   floor dial stuck between plates. Two stacked numerals in the DEFERRED
+   display face (the full families arrive via the print-media flip — zero
+   new font bytes), overflow clip, a STATIC half-offset — a stuck dial
+   does not move; that is the joke. aria-hidden stack; the H1 copy
+   unchanged; zero motion (grep-clean).
+   ———————————————————————————————————————————————————————— */
+.floor-dial {
+  display: flex;
+  flex-direction: column;
+  height: 4.5rem;   /* the door-line window: half a numeral tall */
+  overflow: clip;   /* the plates clip the stuck dial */
+}
+.floor-dial > span {
+  display: block;
+  font-family: var(--font-display-stack); /* the deferred display face */
+  font-size: 9rem;
+  line-height: 1;
+  color: var(--color-amber);
+}
+.floor-dial > span + span {
+  margin-top: -4.5rem; /* the STATIC half-offset — stuck between plates */
 }
 
 /* ————————————————————————————————————————————————————————

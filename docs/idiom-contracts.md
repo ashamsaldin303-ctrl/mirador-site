@@ -34,13 +34,27 @@ scrub, menu Flip) · **Lenis owns scroll-feel only** (the smooth-scroll layer).
 
 | Primitive | Contract | Usage sites |
 |---|---|---|
-| `settle` | vertical arrival ≤600ms expo-out, 8px lift + fade, direction-neutral | confirmation header · not-found floor content |
-| `draw` | hairline draw 200ms center-out (scale — RTL-free; 1px = state) | confirmation `hud-rule` |
+| `settle` | vertical arrival ≤600ms expo-out, 8px lift + fade, direction-neutral | confirmation header · not-found floor content · **THE WINDOW's pane arrival (P-094 — the descent; gated `[data-state=open] .window-arrive`, motion-safe)** |
+| `draw` | hairline draw 200ms center-out (scale — RTL-free; 1px = state) | confirmation `hud-rule` · **the floor plates' base hairline (P-095 — plate reveal, mount-time)** |
 | `breathe` | light breathe: opacity 1↔0.55 @2.4s — the busy state, NEVER a spinner (M-2) | reserve submit busy (`motion-safe:breathe` + `aria-busy`) |
 
 Every primitive mounts behind `motion-safe:` (reduced-motion twin by
 construction: static, content fully present); the global RM block
 (`transition-duration: 0.01ms`) is the second net.
+
+### The overlay entrance law (P-094, prompt-6 R2 · E92)
+
+**ONE geometry: `<AtTheWindow>` is the only overlay entrance** — the graded
+night scrim (`.window-scrim`) + the horizon hairline at `--horizon` + one
+close affordance at `end-4` (the close law: size-11, localized sr-only label)
++ the content slot. Entrance = the `settle` descent (600ms); exit = the 100ms
+fade (`duration-fast`). **THE REGISTERED EXCEPTION: the mobile sheet keeps its
+slide ergonomics** (`sheet.tsx` — the nav's mobile menu; it inherits the
+scrim grading + the close law, never the slide's retirement). The grep gate:
+ad-hoc `data-[state=open]:animate-*` entrance families exist ONLY inside
+`at-the-window.tsx` + `sheet.tsx` (the registered exception). The dead
+`ui/dialog.tsx` (DialogContent with zero importers, and the whole file
+post-migration) is DELETED — the window is the one Radix Dialog composition.
 
 ### Conductor inventory (M-4's reference)
 
@@ -60,3 +74,15 @@ The one curve: `EASE_EXPO_OUT = "expo.out"` (gsap) — its CSS twin is
 `--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1)` (globals.css @theme).
 Keyframes census (authored, globals.css): `settle` · `draw` · `breathe` = 3 ≤ 7
 (tw-animate-css's built-in fade/zoom/slide keyframes are library, not authored).
+
+## P-094 · THE WINDOW (prompt-6 R2 · E92) — the overlay idiom register
+
+| Surface | Entrance | Exit | Scrim | Close |
+|---|---|---|---|---|
+| `<AtTheWindow>` (dish overlay · lightbox) | settle descent 600ms (motion-safe, `[data-state=open] .window-arrive`) | fade `duration-fast` 100ms | `.window-scrim` — the graded night + the horizon hairline at `--horizon` | ONE affordance at `end-4`, size-11, localized sr-only |
+| the mobile sheet (**the registered exception**) | the slide (its own ergonomics — kept) | slide-out `duration-fast` | `.window-scrim` — inherited grading | the close law — inherited (size-11 `end-4`, localized label via `closeLabel`) |
+
+The a11y contract rides Radix Dialog unchanged on every surface: focus trap ·
+Esc · `aria-modal` · described content (Title + Description per dialog). The
+dead `ui/dialog.tsx` is deleted — the harvest documented in the Exchange
+Ledger's round table (Appendix B's law: the measurements are the law).

@@ -25,7 +25,7 @@ components. Route folders own their components; shared shells live under
 | SectionNav | `src/components/menu/section-nav.tsx` | sticky z-10, 6 anchors, scroll-spy |
 | DietFilterBar | `src/components/menu/diet-filter-bar.tsx` | 4 filters · gsap Flip · aria-live count |
 | DishList/DishRow | `src/components/menu/dish-list.tsx` `dish-row.tsx` | SSR rows · sold-out disabled |
-| DishOverlay | `src/components/menu/dish-overlay.tsx` | Dialog z-40 · allergen table role=table · Esc/focus-trap |
+| DishOverlay | `src/components/menu/dish-overlay.tsx` | composes AtTheWindow (P-094) — the plate at the window: portrait master staged on the lower third, allergen table role=table as the view notes · Esc/focus-trap |
 | PriceTag | `src/components/menu/price-tag.tsx` | dual price §7.5 rule |
 | AllergenChips | `src/components/menu/allergen-chips.tsx` | hairline pills |
 
@@ -38,8 +38,8 @@ components. Route folders own their components; shared shells live under
 
 ## Brand pages (§4.4–§4.7)
 | Chapter + PullQuote | `src/components/../story/page.tsx` (inline) | HUD + H2 + max-w-[34rem] bodies |
-| MasonryGrid | `src/components/gallery/gallery-grid.tsx` | CSS columns · lazy · fail cards |
-| Lightbox | `src/components/gallery/lightbox.tsx` | Dialog z-40 · arrows/Esc · RTL-mirrored keys · counter |
+| MasonryGrid | `src/components/gallery/gallery-grid.tsx` | CSS columns · lazy · fail cards · P-099 the observation deck (staggered altitudes by collection index + the bilingual sighting locution) |
+| Lightbox | `src/components/gallery/lightbox.tsx` | composes AtTheWindow (P-094) — full-bleed night view · arrows/Esc · RTL-mirrored keys · counter |
 | InquiryForm | `src/components/private/inquiry-form.tsx` | honeypot · per-field bilingual errors · success + reference |
 | HoursTable / AddressBlock | `src/components/../contact/page.tsx` (inline) | venue.ts verbatim (F8-6) |
 
@@ -52,3 +52,14 @@ components. Route folders own their components; shared shells live under
 Stack notes: gsap (core+ScrollTrigger+Flip) owns all motion; Lenis smooth
 scroll; three + @react-three/fiber in ONE lazy chunk (drei installed, not
 imported); zod schemas in `src/lib/validation.ts`.
+
+## prompt-6 · THE SIGNATURE FLOORS additions (P-094..P-101)
+
+| Component | File | Notes |
+|---|---|---|
+| AtTheWindow (+Title/Description) | `src/components/ui/at-the-window.tsx` | P-094 THE WINDOW — the one overlay geometry: graded night scrim + horizon hairline at `--horizon` + close law at end-4 + settle descent / 100ms fade; Radix Dialog underneath (focus trap · Esc · aria-modal · described content). The dead `ui/dialog.tsx` DELETED (zero importers post-migration — the harvest rides the Exchange Ledger) |
+| NightClock | `src/components/layout/night-clock.tsx` | P-097 the city's clock — html[data-night] set once at hydration (dusk/full/late; ?night= override); color-only; zero storage/network |
+| FloorPlate (in DishList) | `src/components/menu/dish-list.tsx` | P-095 — the floor numeral (aria-hidden, deferred display face, Western digits) beside the H2 + the draw verb on the base hairline; the nav re-keyed (section-nav.tsx carries the floor per anchor) |
+| The deck stagger (in GalleryGrid) | `src/components/gallery/gallery-grid.tsx` | P-099 — altitude offsets from the collection index (mt-0/8/16 cycle, CSS-only, DOM order = visual order) + the sighting captions (floors 1–6, content/{en,ar}.json) |
+| The room's light (in TimeGrid) | `src/components/reserve/time-grid.tsx` | P-098 — the static scarcity channel keyed off `remaining` (border-line · border-line/70 · border-amber + the amber count numeral); aria-labels unchanged |
+| The unbuilt floor dial (in NotFoundFloor) | `src/components/brand/not-found-floor.tsx` | P-101 — two stacked numerals (5/6) in the deferred display face, overflow clip, static half-offset; aria-hidden; zero motion |

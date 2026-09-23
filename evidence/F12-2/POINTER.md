@@ -6,4 +6,4 @@
 - verdict: PASS*
 - evidence: /evidence/F12-2/prod-run/first-load-js-gz.txt
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T18:01:42.271Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T23:45:07.451Z)

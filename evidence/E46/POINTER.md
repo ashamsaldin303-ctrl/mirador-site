@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/prod-run/http/{en,ar}--200.txt + prod-run/http/summary.txt
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T18:01:42.272Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T23:45:07.451Z)

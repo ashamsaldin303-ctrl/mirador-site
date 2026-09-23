@@ -1,0 +1,9 @@
+# CSS-CELL receipt (P6/R9 · E99) — machine-generated 2026-09-23T23:34:25.077Z
+# scope: the compiled route CSS emitted by the production build (.next/static/css/**), gz per file + total.
+# ceiling: +5.5KB TOTAL additions (cumulative ≈2.97KB standing subscription + this round's Δ; round headroom ≈2662B) — human-signed Option B, 2026-09-23 (was +3KB; N29).
+# surface: actions run 30 · repo HEAD recorded by the dispatch's MANIFEST
+chunks/1c1cb05b67be2851.css raw=65559B gz=12387B
+total-gz=12387B
+baseline-gz=(pending — the baseline receipt lands before the first product commit)
+delta=(pending baseline)
+GATE CSS-CELL: BASELINE — total 12387B recorded (the baseline receipt lands before the first product commit)

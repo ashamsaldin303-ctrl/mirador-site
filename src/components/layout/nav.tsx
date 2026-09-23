@@ -123,6 +123,7 @@ export function Nav({ locale, strings }: { locale: Locale; strings: NavStrings }
             </SheetTrigger>
             <SheetContent
               side={locale === "ar" ? "left" : "right"}
+              closeLabel={strings.closeMenu}
               className="w-72 border-line bg-night p-6"
             >
               <SheetTitle className="sr-only">{strings.closeMenu}</SheetTitle>

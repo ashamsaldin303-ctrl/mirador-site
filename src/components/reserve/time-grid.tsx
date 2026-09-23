@@ -5,6 +5,13 @@
 // remaining 0 → disabled with the sold-out label (error token is designated
 // "form errors + sold-out" in §5.2); selected slot amber. aria-label composed
 // with reserve.tablesRemaining ("18:00 — 3 tables" / «18:00 — 3 طاولات»).
+// P-098 (prompt-6 R7 · E97): THE ROOM'S LIGHT — the pre-attentive STATIC
+// channel keyed off `remaining` (already in the slot DTO — zero API change):
+// 4+ = the steady hairline (the base border) · 2–3 = the hairline at 70%
+// (border-line/70) · 1 = the hairline at full amber (border-amber) + the
+// count numeral in amber — the strongest static signal, NO loop, NO breathe
+// rider (the stillness census is sacred). The text count STAYS (the
+// redundant-encoding law); the aria-label format is UNCHANGED verbatim.
 import { SLOT_TIMES } from "@/lib/slots";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
@@ -80,6 +87,8 @@ export function TimeGrid({
         const ended = past === true; // R11: «انتهى» — the night moved on (≠ sold out)
         const soldOut = !ended && remaining <= 0;
         const isSelected = selected === time;
+        const lastTable = !ended && !soldOut && remaining === 1; // P-098: the room's last table
+        const thinning = !ended && !soldOut && !lastTable && remaining <= 3; // P-098: 2–3 left
         const stateLabel = ended ? pastLabel : soldOut ? soldOutLabel : null;
         const ariaLabel = stateLabel
           ? `${time} — ${stateLabel}`
@@ -97,6 +106,12 @@ export function TimeGrid({
               "",
               isSelected && "border-amber bg-amber/10 text-amber",
               !isSelected && !soldOut && !ended && "border-line text-ink hover:border-amber/60 hover:text-amber",
+              // P-098: the room's light — direction-agnostic utility classes
+              // keyed off `remaining`, ordered AFTER the base branch so the
+              // scarcity hairlines win the merge; the steady state rides
+              // the base border above (4+ remaining)
+              thinning && "border-line/70",
+              lastTable && "border-amber",
               (soldOut || ended) && "cursor-not-allowed border-line text-muted opacity-60",
             )}
           >
@@ -106,7 +121,12 @@ export function TimeGrid({
             ) : soldOut ? (
               <span className="text-micro text-error">{soldOutLabel}</span>
             ) : (
-              <span className="text-micro tabular-nums text-muted">
+              <span
+                className={cn(
+                  "text-micro tabular-nums text-muted",
+                  lastTable && "text-amber", // P-098: the count numeral in amber at the last table
+                )}
+              >
                 {remaining} {tablesRemainingLabel}
               </span>
             )}

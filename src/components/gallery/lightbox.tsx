@@ -1,16 +1,21 @@
 "use client";
-// MIRADOR — Gallery lightbox (§4.5, F7-1): fullscreen dark dialog on the
-// shadcn/Radix Dialog primitives at the z-40 rung (§5.4 z-ladder — both the
-// overlay and the content are pulled down from the default z-50).
-// Keyboard: Esc closes, ArrowLeft/ArrowRight navigate — mirrored in RTL, where
-// ArrowLeft means next. Focus trap + initial focus are provided by Radix.
-// Missing images degrade to the bilingual caption card (F7-4).
+// MIRADOR — Gallery lightbox (§4.5, F7-1): fullscreen night view, entered
+// via THE WINDOW (P-094, prompt-6 R2 · E92) — the bespoke fade entrance
+// died with the migration; the window's settle descent + 100ms fade own
+// the tempo, and the one close affordance (end-4, the close law) replaced
+// the header's own close. Keyboard: Esc closes, ArrowLeft/ArrowRight
+// navigate — mirrored in RTL, where ArrowLeft means next. Focus trap +
+// initial focus from Radix. Missing images degrade to the bilingual
+// caption card (F7-4).
 import { useState, type KeyboardEvent } from "react";
-import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import type { GalleryItem } from "@prisma/client";
-import { Dialog, DialogOverlay, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  AtTheWindow,
+  AtTheWindowTitle,
+  AtTheWindowDescription,
+} from "@/components/ui/at-the-window";
 import type { Locale } from "@/lib/i18n";
 import type { GalleryStrings } from "./gallery-grid";
 
@@ -63,85 +68,77 @@ export function Lightbox({
   };
 
   return (
-    <Dialog
+    <AtTheWindow
       open={open}
       onOpenChange={(next) => {
         if (!next) onClose();
       }}
+      onKeyDown={onKeyDown}
+      closeLabel={strings.close}
+      contentClassName="bg-night"
     >
-      <DialogPrimitive.Portal>
-        <DialogOverlay className="z-40 bg-scrim" />
-        <DialogPrimitive.Content
-          onKeyDown={onKeyDown}
-          className="fixed inset-0 z-40 flex flex-col bg-night duration-200 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0"
-        >
-          <div className="flex items-center gap-4 border-b border-line px-4 py-3 sm:px-6">
-            <DialogTitle className="min-w-0 flex-1 truncate font-display text-h3 text-ink">
-              {title}
-            </DialogTitle>
-            <p className="shrink-0 text-small text-muted">
-              {index + 1} {strings.counter} {total}
-            </p>
-            <DialogPrimitive.Close
-              aria-label={strings.close}
-              className="inline-flex size-11 shrink-0 items-center justify-center rounded-full text-ink transition-colors duration-200 outline-none hover:text-amber "
-            >
-              <X className="size-6" strokeWidth={1.5} aria-hidden />
-            </DialogPrimitive.Close>
-          </div>
+      {/* the night view fills the window — the header, the view, the caption */}
+      <div className="flex flex-1 flex-col">
+        <div className="flex items-center gap-4 border-b border-line px-4 py-3 pe-20 sm:px-6">
+          <AtTheWindowTitle className="min-w-0 flex-1 truncate font-display text-h3 text-ink">
+            {title}
+          </AtTheWindowTitle>
+          <p className="shrink-0 text-small text-muted">
+            {index + 1} {strings.counter} {total}
+          </p>
+        </div>
 
-          <div className="relative flex flex-1 items-center justify-center overflow-hidden p-4 sm:p-8">
-            {imageFailed ? (
-              <div className="w-full max-w-lg border border-line bg-surface p-8 text-center">
-                <p className="text-small text-muted">{strings.imageFail}</p>
-                <p className="mt-4 font-display text-h3 text-ink">{title}</p>
-                <p className="mt-2 text-small text-muted">{caption}</p>
-              </div>
-            ) : (
-              <div className="media-grain relative h-full w-full">
-                <Image
-                  src={item.imageUrl}
-                  alt={`${title} — ${caption}`}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 1200px"
-                  onError={() =>
-                    setFailed((prev) => {
-                      if (prev.has(index)) return prev;
-                      const next = new Set(prev);
-                      next.add(index);
-                      return next;
-                    })
-                  }
-                  className="object-contain"
-                />
-              </div>
-            )}
-          </div>
+        <div className="relative flex flex-1 items-center justify-center overflow-hidden p-4 sm:p-8">
+          {imageFailed ? (
+            <div className="w-full max-w-lg border border-line bg-surface p-8 text-center">
+              <p className="text-small text-muted">{strings.imageFail}</p>
+              <p className="mt-4 font-display text-h3 text-ink">{title}</p>
+              <p className="mt-2 text-small text-muted">{caption}</p>
+            </div>
+          ) : (
+            <div className="media-grain relative h-full w-full">
+              <Image
+                src={item.imageUrl}
+                alt={`${title} — ${caption}`}
+                fill
+                sizes="(max-width: 1024px) 100vw, 1200px"
+                onError={() =>
+                  setFailed((prev) => {
+                    if (prev.has(index)) return prev;
+                    const next = new Set(prev);
+                    next.add(index);
+                    return next;
+                  })
+                }
+                className="object-contain"
+              />
+            </div>
+          )}
+        </div>
 
-          <div className="border-t border-line px-4 py-4 text-center sm:px-6">
-            <DialogDescription className="text-small text-muted">
-              {caption}
-            </DialogDescription>
-          </div>
+        <div className="border-t border-line px-4 py-4 text-center sm:px-6">
+          <AtTheWindowDescription className="text-small text-muted">
+            {caption}
+          </AtTheWindowDescription>
+        </div>
+      </div>
 
-          <button
-            type="button"
-            onClick={() => go(-1)}
-            aria-label={strings.prev}
-            className="absolute start-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-night/80 text-ink transition-colors duration-200 outline-none hover:border-amber "
-          >
-            <ChevronLeft className="size-6 rtl:-scale-x-100" strokeWidth={1.5} aria-hidden />
-          </button>
-          <button
-            type="button"
-            onClick={() => go(1)}
-            aria-label={strings.next}
-            className="absolute end-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-night/80 text-ink transition-colors duration-200 outline-none hover:border-amber "
-          >
-            <ChevronRight className="size-6 rtl:-scale-x-100" strokeWidth={1.5} aria-hidden />
-          </button>
-        </DialogPrimitive.Content>
-      </DialogPrimitive.Portal>
-    </Dialog>
+      <button
+        type="button"
+        onClick={() => go(-1)}
+        aria-label={strings.prev}
+        className="absolute start-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-night/80 text-ink transition-colors duration-200 outline-none hover:border-amber "
+      >
+        <ChevronLeft className="size-6 rtl:-scale-x-100" strokeWidth={1.5} aria-hidden />
+      </button>
+      <button
+        type="button"
+        onClick={() => go(1)}
+        aria-label={strings.next}
+        className="absolute end-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-night/80 text-ink transition-colors duration-200 outline-none hover:border-amber "
+      >
+        <ChevronRight className="size-6 rtl:-scale-x-100" strokeWidth={1.5} aria-hidden />
+      </button>
+    </AtTheWindow>
   );
 }

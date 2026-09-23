@@ -10,6 +10,17 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 const MAX_PARTICLES = 6000;
 
+// P-097 (prompt-6 R6 · E96): THE CITY'S CLOCK — one resting-density constant
+// per night bucket (the canvas mounts post-hydration, so the bucket is on
+// <html> by then; color-only, the canvas never re-renders on bucket change).
+// dusk: the city still lit · full: the canonical skyline · late: the small
+// hours thin the windows still burning.
+const NIGHT_REST_DENSITY: Record<string, number> = {
+  dusk: 1.15,
+  full: 1,
+  late: 0.8,
+};
+
 function cssColor(varName: string, fallback: string): THREE.Color {
   let raw = "";
   if (typeof window !== "undefined") {
@@ -41,6 +52,11 @@ function Skyline({
   const introRef = useRef(0);
   const densityRef = useRef(0.25);
   const { invalidate } = useThree();
+  // the clock's bucket, read at mount — the resting-density constant per
+  // bucket (the drawRange clamps at MAX_PARTICLES: dusk's lift tops out at
+  // the full skyline, never beyond)
+  const restDensity =
+    NIGHT_REST_DENSITY[document.documentElement.dataset.night ?? "full"] ?? 1;
 
   const { geometry, fogColor } = useMemo(() => {
     const positions = new Float32Array(MAX_PARTICLES * 3);
@@ -117,8 +133,9 @@ function Skyline({
 
   useFrame((state) => {
     const p = progressRef.current;
-    // act-based density: 25% → 60% → 100% (density builds act-by-act)
-    const target = p < 1 / 3 ? 0.25 : p < 2 / 3 ? 0.6 : 1;
+    // act-based density: 25% → 60% → 100% (density builds act-by-act),
+    // scaled by the night bucket's resting constant (P-097)
+    const target = restDensity * (p < 1 / 3 ? 0.25 : p < 2 / 3 ? 0.6 : 1);
     // smooth toward target (intro builds from 0 on mount)
     introRef.current = Math.min(1, introRef.current + 0.02);
     densityRef.current += (target - densityRef.current) * 0.08;

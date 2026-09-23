@@ -168,8 +168,10 @@ export function Journey({
               }}
             />
           </div>
-          {/* horizon hairline grounding the skyline */}
-          <div aria-hidden="true" className="absolute inset-x-0 bottom-[18%] z-[1] border-t border-line/60" />
+          {/* horizon hairline grounding the skyline — P-038/P-094 (prompt-6
+              R1 · E91): the datum renders from --horizon (the sole source;
+              the hardcoded literal died with the migration) */}
+          <div aria-hidden="true" className="absolute inset-x-0 bottom-(--horizon) z-[1] border-t border-line/60" />
           <div ref={trackRef} className="absolute inset-0 z-10 flex w-[300vw]">
             {acts.map((act, i) => (
               <ActPanel key={act.numeral} act={act} index={i} stacked={false} />

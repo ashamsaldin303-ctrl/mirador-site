@@ -1,0 +1,20 @@
+# M-1 loop-family census (P6/R9 · E99) — MANUAL receipt 2026-09-23T23:40:04Z
+# gate: loop families = 2 today — ZERO NEW this round (P-098 static by amendment; the clock is color-only; the dial is static)
+# (audit:motion implements M-2/M-3/M-4/M-6 only — M-1 does not exist yet; the census is this raw grep)
+
+$ rg -n 'infinite' src/ (the authored loop — breathe)
+src/app/globals.css:560:  animation: breathe 2.4s ease-in-out infinite;
+
+$ rg -n 'animate-pulse' src/ (the library loop — the reserve shell skeleton)
+src/components/reserve/reserve-form-lazy.tsx:69:            <div className={`${row.height} animate-pulse rounded-xs border border-line bg-surface`} />
+src/components/reserve/reserve-form-lazy.tsx:75:            <div className="size-11 animate-pulse rounded-full border border-line bg-surface" />
+src/components/reserve/reserve-form-lazy.tsx:76:            <div className="h-4 w-10 animate-pulse rounded-sm bg-surface" />
+src/components/reserve/reserve-form-lazy.tsx:77:            <div className="size-11 animate-pulse rounded-full border border-line bg-surface" />
+
+families: 2 — (1) the authored breathe loop (globals.css, infinite, the busy state — M-2's spinner replacement) · (2) the library animate-pulse (tw-animate-css, the reserve-form intent shell's skeleton) — ZERO new loops added this round (grep: no animation added to time-grid; the dial carries zero motion; the clock is color-only custom properties)
+
+$ rg -n 'animation' src/components/reserve/time-grid.tsx (expect: zero at-rest motion on /reserve's grid)
+(0 hits — the room's light is STATIC)
+
+$ rg -n 'animation|transition' src/components/brand/not-found-floor.tsx (the dial zone)
+(0 hits in the dial component — motion-safe:settle is the content block's pre-existing arrival, not the dial's)

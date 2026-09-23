@@ -7,7 +7,7 @@ import type { MouseEvent as ReactMouseEvent } from "react";
 import { cn } from "@/lib/utils";
 import { prefersReducedMotion } from "@/lib/motion";
 
-export type SectionNavItem = { slug: string; title: string };
+export type SectionNavItem = { slug: string; title: string; floor: number };
 
 const HEADER_PX = 64; // fixed header height (h-16)
 
@@ -90,7 +90,7 @@ export function SectionNav({
       )}
     >
       <div className="scroll-thin flex items-center gap-1 overflow-x-auto">
-        {items.map(({ slug, title }) => (
+        {items.map(({ slug, title, floor }) => (
           <a
             key={slug}
             href={`#${slug}`}
@@ -102,6 +102,15 @@ export function SectionNav({
                 "text-ink underline decoration-amber decoration-1 underline-offset-8",
             )}
           >
+            {/* P-095 (prompt-6 R4 · E94): the nav re-keyed to floor numerals —
+                the amber numeral (aria-hidden decoration, Western digits)
+                keys each anchor beside its title */}
+            <span
+              aria-hidden="true"
+              className="me-2 font-display tabular-nums text-amber"
+            >
+              {floor}
+            </span>
             {title}
           </a>
         ))}

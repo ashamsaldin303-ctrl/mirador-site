@@ -1,0 +1,15 @@
+# M-5 authored-keyframes census (P6/R9 · E99) — MANUAL grep receipt 2026-09-23T23:39:52Z
+# gate: authored keyframes in globals.css = 3 today · cap 7 — ZERO NEW this round
+# (audit:motion implements M-2/M-3/M-4/M-6 only — M-5 does not exist yet; the census is this raw grep)
+
+$ rg -n '@keyframes' src/app/globals.css
+563:@keyframes settle {
+567:@keyframes draw {
+571:@keyframes breathe {
+
+count: 3 authored keyframes (settle/draw/breathe — the pre-round three, zero new: the window's entrance reuses settle; the exit rides tw-animate-css's library fade)
+
+$ rg -n '@keyframes|animate-spin' src/ --glob '*.css'
+src/app/globals.css:563:@keyframes settle {
+src/app/globals.css:567:@keyframes draw {
+src/app/globals.css:571:@keyframes breathe {

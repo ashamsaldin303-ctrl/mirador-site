@@ -1,5 +1,10 @@
 // MIRADOR — one menu section: bilingual title, hairline, dish rows.
-// The section element is the anchor target for the sticky section nav
+// P-095 (prompt-6 R4 · E94): THE FLOOR PLATE — the section header keys to
+// the building's floor: the numeral (Western digits — the locked numeral
+// policy; aria-hidden decoration) in the DEFERRED display face BESIDE the
+// existing title, the hairline at the plate's base drawing on reveal
+// (the draw verb, 200ms — mount-time, SSR-only, zero client JS). The
+// section element is the anchor target for the sticky section nav
 // (scroll-mt-32 clears the fixed header + stuck bar).
 import type { DietTag } from "@/lib/menu";
 import type { MenuSectionDTO, MenuStrings } from "./menu-client";
@@ -8,10 +13,12 @@ import { DishRow } from "./dish-row";
 
 export function DishList({
   section,
+  floor,
   strings,
   filters,
 }: {
   section: MenuSectionDTO;
+  floor: number;
   strings: MenuStrings;
   filters: readonly DietTag[];
 }) {
@@ -27,13 +34,24 @@ export function DishList({
       aria-labelledby={`${section.slug}-title`}
       className="scroll-mt-32 py-24"
     >
-      <h2
-        id={`${section.slug}-title`}
-        className="font-display text-h2 text-ink"
-      >
-        {section.title}
-      </h2>
-      <hr className="hud-rule mt-6" />
+      <div className="flex items-baseline gap-4">
+        {/* the floor numeral — decoration (aria-hidden): the H2 remains the
+            section's accessible title; the numeral rides the deferred face */}
+        <span
+          aria-hidden="true"
+          className="font-display text-h3 tabular-nums text-amber"
+        >
+          {floor}
+        </span>
+        <h2
+          id={`${section.slug}-title`}
+          className="font-display text-h2 text-ink"
+        >
+          {section.title}
+        </h2>
+      </div>
+      {/* the hairline at the plate's base — the draw verb on plate reveal */}
+      <hr className="hud-rule motion-safe:draw mt-6" />
       <ul className="mt-2">
         {visibleItems.map((item) => (
           <DishRow

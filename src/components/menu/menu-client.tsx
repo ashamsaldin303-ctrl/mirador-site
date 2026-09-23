@@ -112,6 +112,19 @@ export function MenuClient({
     0,
   );
 
+  // P-095 (prompt-6 R4 · E94): THE FLOOR PLATES — the menu's six sections
+  // key to the building's floors. The numeral derives at render from the
+  // section's index-within-collection (the six-floor spine; NO schema
+  // change, no migration) and rides the DEFERRED display face beside the
+  // existing title — Western digits, the locked numeral policy, aria-hidden
+  // decoration. The floors stay pinned to their sections through filtering
+  // (derived BEFORE the filter drops sections — floor 3 is floor 3 whether
+  // or not floors 1–2 survive the active diet).
+  const sectionsWithFloors = sections.map((section, index) => ({
+    ...section,
+    floor: index + 1,
+  }));
+
   const toggleFilter = (tag: DietTag) => {
     const motion = motionRef.current;
     // capture the FLIP "First" state BEFORE the DOM mutates — only when the
@@ -171,9 +184,9 @@ export function MenuClient({
       <SectionNav
         // FRM-1 (prompt-4 R6): sections emptied by the active filter drop out
         // of the nav too — a sticky link to an unmounted anchor is a dead link.
-        items={sections
+        items={sectionsWithFloors
           .filter((section) => section.items.some((item) => matchesFilters(item, filters)))
-          .map(({ slug, title }) => ({ slug, title }))}
+          .map(({ slug, title, floor }) => ({ slug, title, floor }))}
         label={strings.sectionsLabel}
       />
       <DietFilterBar
@@ -186,10 +199,11 @@ export function MenuClient({
         labels={strings.filters}
       />
       <div ref={listRef}>
-        {sections.map((section) => (
+        {sectionsWithFloors.map((section) => (
           <DishList
             key={section.slug}
             section={section}
+            floor={section.floor}
             strings={strings}
             filters={filters}
           />

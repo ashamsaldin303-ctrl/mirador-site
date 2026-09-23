@@ -73,7 +73,14 @@ function e79RowOf(docPath: string): string | null {
   return row ?? "(no E79 row found)";
 }
 
-const E79_DOCS = ["evidence/r1/DONE.md", "evidence/r1/close-out.md"];
+const E79_DOCS = [
+  "evidence/r1/DONE.md",
+  "evidence/r1/close-out.md",
+  // P6/R9 (E99): the round's DONE binds the same law — its E79 row must
+  // quote the raw failing cells verbatim (the D3 check; binds once the file
+  // exists, exactly like close-out.md did in prompt-5 R6).
+  "evidence/ui/DONE.md",
+];
 const required = failingTokens();
 for (const [i, doc] of E79_DOCS.entries()) {
   const row = e79RowOf(doc);

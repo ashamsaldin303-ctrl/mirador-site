@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/prod-run/lighthouse/medians.md + prod-run/lighthouse/devtools-lhr-1790184716231.json
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T18:01:42.272Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T23:45:07.452Z)

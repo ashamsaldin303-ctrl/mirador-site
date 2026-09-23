@@ -65,6 +65,21 @@ export default async function GalleryPage({
             next: dict["gallery.next"],
             close: dict["gallery.close"],
             imageFail: dict["gallery.imageFail"],
+            // P-099 (prompt-6 R5 · E95): the authored bilingual sighting
+            // locution — one line per exhibit, floors pinned to the six-floor
+            // spine (Floor 1–6 only), landed in content/{en,ar}.json and
+            // registered in docs/copy-parity.md
+            floorTag: dict["gallery.floorTag"],
+            sightings: {
+              0: dict["gallery.sighting.0"],
+              1: dict["gallery.sighting.1"],
+              2: dict["gallery.sighting.2"],
+              3: dict["gallery.sighting.3"],
+              4: dict["gallery.sighting.4"],
+              5: dict["gallery.sighting.5"],
+              6: dict["gallery.sighting.6"],
+              7: dict["gallery.sighting.7"],
+            },
           }}
         />
       </section>

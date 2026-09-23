@@ -6,6 +6,11 @@ import { XIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+// P-094 (prompt-6 R2 · E92): the mobile sheet is THE REGISTERED EXCEPTION —
+// it keeps its slide ergonomics (idiom-contracts.md) but inherits the
+// window's scrim grading (.window-scrim — the one graded night all three
+// surfaces share) + the close law (size-11 touch target at end-4, the
+// localized sr-only label).
 function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />
 }
@@ -36,7 +41,7 @@ function SheetOverlay({
     <SheetPrimitive.Overlay
       data-slot="sheet-overlay"
       className={cn(
-        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:duration-fast data-[state=open]:duration-base fixed inset-0 z-50 bg-scrim",
+        "window-scrim data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:duration-fast data-[state=open]:duration-base fixed inset-0 z-50",
         className
       )}
       {...props}
@@ -48,9 +53,12 @@ function SheetContent({
   className,
   children,
   side = "right",
+  closeLabel = "Close",
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Content> & {
   side?: "top" | "right" | "bottom" | "left"
+  /** the localized sr-only label on the one close affordance (the close law) */
+  closeLabel?: string
 }) {
   return (
     <SheetPortal>
@@ -72,9 +80,11 @@ function SheetContent({
         {...props}
       >
         {children}
-        <SheetPrimitive.Close className="data-[state=open]:bg-secondary absolute top-4 end-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 disabled:pointer-events-none">
+        {/* the close law (P-094): size-11 touch target at end-4, the localized
+            sr-only label — the sheet inherits it with the scrim grading */}
+        <SheetPrimitive.Close className="absolute end-4 top-4 flex size-11 items-center justify-center rounded text-muted transition-colors duration-base hover:text-ink">
           <XIcon className="size-4" />
-          <span className="sr-only">Close</span>
+          <span className="sr-only">{closeLabel}</span>
         </SheetPrimitive.Close>
       </SheetPrimitive.Content>
     </SheetPortal>

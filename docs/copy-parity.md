@@ -2,7 +2,7 @@
 
 Every §7 UI string (plus structural labels disclosed in worklog) as an AR/EN
 pair — generated from `content/en.json` + `content/ar.json` by `pnpm audit:copy`
-(158 rows).
+(167 rows).
 
 | key | EN | AR |
 |---|---|---|
@@ -61,10 +61,19 @@ pair — generated from `content/en.json` + `content/ar.json` by `pnpm audit:cop
 | forms.submitting | Sending… | جارٍ الإرسال… |
 | gallery.close | Close | إغلاق |
 | gallery.counter | of | من |
+| gallery.floorTag | Floor | الطابق |
 | gallery.h1 | Gallery | المعرض |
 | gallery.imageFail | This image rests tonight — the caption remains. | هذه الصورة ترتاح الليلة — التعليق باقٍ. |
 | gallery.next | Next image | الصورة التالية |
 | gallery.prev | Previous image | الصورة السابقة |
+| gallery.sighting.0 | From the sixth floor, the city keeps its own hours. | من الطابق السادس، تعيش المدينة على وقتها الخاص. |
+| gallery.sighting.1 | Six floors up, the traffic below reads as candlelight. | ستة طوابق فوق، يصير المرور تحته شموعاً. |
+| gallery.sighting.2 | The second floor's fire works all evening. | نار الطابق الثاني تشتغل طوال المساء. |
+| gallery.sighting.3 | On the second floor, the hearth banks itself between services. | في الطابق الثاني، يخمد الموقد بين خدمتين. |
+| gallery.sighting.4 | A place set on the fifth floor, waiting. | غطاءٌ في الطابق الخامس، بانتظار. |
+| gallery.sighting.5 | The fifth floor's first pour, at opening. | أول سكبٍ في الطابق الخامس، عند الافتتاح. |
+| gallery.sighting.6 | The fourth-floor window holds the day's last amber. | نافذة الطابق الرابع تحفظ آخر عنبرٍ من النهار. |
+| gallery.sighting.7 | The final flight ends six floors above the street. | الدرج الأخير ينتهي ستة طوابق فوق الشارع. |
 | hero.cta | Reserve a table | احجز طاولتك |
 | hero.line | Above the city, a table worth the climb. | فوق المدينة، مائدة تستحقّ الصعود. |
 | hero.quiet | The menu | القائمة |

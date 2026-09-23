@@ -1,0 +1,35 @@
+# E96 contrast receipt (P-097 the city's clock) — machine-generated
+# every token pair keeps its AAA/AA class per night bucket (the raw arithmetic)
+# surfaces: full #141417 (the :root default) · dusk #15151A · late #121215
+# text tokens on the page base #0A0A0B are bucket-invariant (listed once)
+
+## bucket full (surface #141417)
+  ink     on surface: 16.01:1  AAA  (class held: AAA)
+  muted   on surface:  7.16:1  AAA  (class held: AAA)
+  amber   on surface:  7.82:1  AAA  (class held: AAA)
+  error   on surface:  5.17:1  AA  (class held: AA — large text/UI)
+  success on surface:  6.86:1  AA  (class held: AA+)
+
+## bucket dusk (surface #15151A)
+  ink     on surface: 15.85:1  AAA  (class held: AAA)
+  muted   on surface:  7.09:1  AAA  (class held: AAA)
+  amber   on surface:  7.74:1  AAA  (class held: AAA)
+  error   on surface:  5.12:1  AA  (class held: AA — large text/UI)
+  success on surface:  6.78:1  AA  (class held: AA+)
+
+## bucket late (surface #121215)
+  ink     on surface: 16.28:1  AAA  (class held: AAA)
+  muted   on surface:  7.28:1  AAA  (class held: AAA)
+  amber   on surface:  7.95:1  AAA  (class held: AAA)
+  error   on surface:  5.26:1  AA  (class held: AA — large text/UI)
+  success on surface:  6.97:1  AA  (class held: AA+)
+
+## page-base pairs (bucket-invariant — night #0A0A0B never changes)
+  #F2EFE8 on night: 17.23:1 (class held: AAA)
+  #A6A199 on night:  7.71:1 (class held: AAA)
+  #CBA35C on night:  8.42:1 (class held: AAA)
+  #C96F5A on night:  5.56:1 (class held: AA)
+  #7FA974 on night:  7.38:1 (class held: AA)
+
+VERDICT: every token pair keeps its AAA/AA class in every bucket — the surface
+lift is ±2 luminance steps; ink stays ≥16:1, muted stays ≥7:1, amber ≥7:1.
