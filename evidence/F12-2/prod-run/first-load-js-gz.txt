@@ -1,4 +1,4 @@
-# per-route first-load JS (gzip -9) from the SERVED HTML script set — machine-generated 2026-09-23T16:59:44.350Z
+# per-route first-load JS (gzip -9) from the SERVED HTML script set — machine-generated 2026-09-23T17:20:09.003Z
 # derivation: <script src> + <link preload|modulepreload href> per route (noModule polyfills excluded)
 # budget (FROZEN, parent Appendix A): ≤150KB gz per route (hard 200KB)
 /en/ — files=13 raw=588048B gz=180258B (176.0KB) → FAIL (soft budget exceeded — under hard cap)
@@ -98,7 +98,7 @@
     static/chunks/685943c535c00040.js gz=737B
     static/chunks/039516ed03da1f6d.js gz=5342B
     static/chunks/406880850b4bfaea.js gz=7256B
-/en/confirmation/cmuecl6cr001y425krp879i6v — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
+/en/confirmation/cmuedbgqt001y4275e441iqbx — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
     static/chunks/f091501564eb2ea3.js gz=7225B
     static/chunks/b137c16b75c8591f.js gz=32244B
     static/chunks/c284ff537f4f1dda.js gz=70263B
@@ -208,7 +208,7 @@
     static/chunks/685943c535c00040.js gz=737B
     static/chunks/039516ed03da1f6d.js gz=5342B
     static/chunks/406880850b4bfaea.js gz=7256B
-/ar/confirmation/cmuecl6cr001y425krp879i6v — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
+/ar/confirmation/cmuedbgqt001y4275e441iqbx — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
     static/chunks/f091501564eb2ea3.js gz=7225B
     static/chunks/b137c16b75c8591f.js gz=32244B
     static/chunks/c284ff537f4f1dda.js gz=70263B

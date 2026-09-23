@@ -1,4 +1,4 @@
-# motion stack (gsap core + ScrollTrigger + Flip + lenis) in the shared base — machine-generated 2026-09-23T16:59:44.949Z
+# motion stack (gsap core + ScrollTrigger + Flip + lenis) in the shared base — machine-generated 2026-09-23T17:20:09.558Z
 # gate (F2 bonus / Appendix A, FROZEN): ≤90KB gz in base
 base motion chunk: static/chunks/b556dceee35d0404.js gz=11692B
 motion stack total: gz=11692B (11.4KB)

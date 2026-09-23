@@ -1,4 +1,4 @@
-# snapshot grep summary — machine-generated 2026-09-23T17:01:47Z
+# snapshot grep summary — machine-generated 2026-09-23T17:22:10Z
 # gate (E13): every CONTENT snapshot ≥3 rel=alternate hreflang + ≥1 wa.me/963955000111
 # gate (E45/COP-2): confirmation snapshots — self-canonical + noindex + ZERO per-id alternates
 # gate (E71): «يرجى» rendered count = 0 across all snapshots (the term-ledger purge)

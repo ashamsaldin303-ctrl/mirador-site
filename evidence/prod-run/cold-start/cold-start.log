@@ -1,7 +1,8 @@
-# cold-start handoff (F12-3) — machine-generated 2026-09-23T17:13:57Z
+# cold-start handoff (F12-3) — machine-generated 2026-09-23T17:34:17Z
 # fresh clone of ashamsaldin303-ctrl/mirador-site → bun install · migrate · seed · dev → GET /en 200
 Cloning into '/tmp/coldstart'...
-clone HEAD: 48b46471fa5f062d0dc7977e3f0d843cd73df724
+Updating files:  69% (715/1028)Updating files:  70% (720/1028)Updating files:  71% (730/1028)Updating files:  72% (741/1028)Updating files:  73% (751/1028)Updating files:  74% (761/1028)Updating files:  75% (771/1028)Updating files:  76% (782/1028)Updating files:  77% (792/1028)Updating files:  78% (802/1028)Updating files:  79% (813/1028)Updating files:  80% (823/1028)Updating files:  81% (833/1028)Updating files:  82% (843/1028)Updating files:  83% (854/1028)Updating files:  84% (864/1028)Updating files:  85% (874/1028)Updating files:  86% (885/1028)Updating files:  87% (895/1028)Updating files:  88% (905/1028)Updating files:  89% (915/1028)Updating files:  90% (926/1028)Updating files:  91% (936/1028)Updating files:  92% (946/1028)Updating files:  93% (957/1028)Updating files:  94% (967/1028)Updating files:  95% (977/1028)Updating files:  96% (987/1028)Updating files:  97% (998/1028)Updating files:  98% (1008/1028)Updating files:  99% (1018/1028)Updating files: 100% (1028/1028)Updating files: 100% (1028/1028), done.
+clone HEAD: bbc2e4bb0fca18483f98a72ff7108bdd49c02966
 bun install v1.3.14 (0d9b296a)
 
 + @axe-core/playwright@4.13.0
@@ -36,7 +37,7 @@ bun install v1.3.14 (0d9b296a)
 + three@0.186.0
 + zod@4.3.5
 
-448 packages installed [2.82s]
+448 packages installed [2.76s]
 $ prisma generate
 warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).
 For more information, see: https://pris.ly/prisma-config

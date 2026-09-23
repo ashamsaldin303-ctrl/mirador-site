@@ -1,5 +1,5 @@
 
-===== webgl-kill · run 2026-09-23T17:00:12.600Z =====
+===== webgl-kill · run 2026-09-23T17:20:37.254Z =====
 # F6-4 · ?webgl=off → 0 <canvas>, poster treatment
 # canvases=0 journeyPosterImgs=3 heroPosterImgs=1 localStorage.mirador-webgl=null
 # VERDICT: PASS — canvas unmounted, poster treatment present

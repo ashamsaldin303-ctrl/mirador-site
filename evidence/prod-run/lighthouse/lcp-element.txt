@@ -1,27 +1,21 @@
-# lcpElement per run — machine-generated 2026-09-23T17:13:55.096Z
-/en lhr-1790183430871.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-hero text-h1 text-ink">
+# lcpElement per run — machine-generated 2026-09-23T17:34:15.666Z
+/en lhr-1790184651919.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-hero text-h1 text-ink">
    → hero H1 (font-hero text): YES
-/en lhr-1790183405882.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-hero text-h1 text-ink">
+/en lhr-1790184639739.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-hero text-h1 text-ink">
    → hero H1 (font-hero text): YES
-/en lhr-1790183418699.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-hero text-h1 text-ink">
+/en lhr-1790184626926.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-hero text-h1 text-ink">
    → hero H1 (font-hero text): YES
-/ar lhr-1790183467626.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-hero text-h1 text-ink">
+/ar lhr-1790184688648.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-hero text-h1 text-ink">
    → hero H1 (font-hero text): YES
-/ar lhr-1790183455422.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-hero text-h1 text-ink">
+/ar lhr-1790184664204.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-hero text-h1 text-ink">
    → hero H1 (font-hero text): YES
-/ar lhr-1790183443167.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-hero text-h1 text-ink">
+/ar lhr-1790184676459.json — lcpElement selector: main#main > section.media-grain > div.relative > h1.max-w-4xl | snippet: <h1 class="max-w-4xl font-hero text-h1 text-ink">
    → hero H1 (font-hero text): YES
-# raw trace corroboration — hero poster URL occurrences per trace JSON — machine-generated 2026-09-23T17:13:55.097Z
-localhost_2026-09-23_17-10-58-0.trace.json (5.0MB) — poster URL occurrences: 26
-localhost_2026-09-23_17-10-46-0.trace.json (5.1MB) — poster URL occurrences: 36
-localhost_2026-09-23_17-10-21-0.trace.json (4.7MB) — poster URL occurrences: 26
-localhost_2026-09-23_17-10-33-0.trace.json (5.1MB) — poster URL occurrences: 36
-localhost_2026-09-23_17-09-56-0.trace.json (4.8MB) — poster URL occurrences: 26
-localhost_2026-09-23_17-10-09-0.trace.json (4.8MB) — poster URL occurrences: 26
-localhost_2026-09-23_17-11-39-0.trace.json (14.3MB) — poster URL occurrences: 46
-localhost_2026-09-23_17-13-29-0.trace.json (16.4MB) — poster URL occurrences: 66
-localhost_2026-09-23_17-11-11-0.trace.json (14.3MB) — poster URL occurrences: 46
-localhost_2026-09-23_17-12-33-0.trace.json (16.3MB) — poster URL occurrences: 66
-localhost_2026-09-23_17-13-01-0.trace.json (16.2MB) — poster URL occurrences: 66
-localhost_2026-09-23_17-12-06-0.trace.json (14.3MB) — poster URL occurrences: 46
+# raw trace corroboration — hero poster URL occurrences per trace JSON — machine-generated 2026-09-23T17:34:15.677Z
+localhost_2026-09-23_17-30-55-0.trace.json (5.1MB) — poster URL occurrences: 26
+localhost_2026-09-23_17-30-30-0.trace.json (4.7MB) — poster URL occurrences: 26
+localhost_2026-09-23_17-31-07-0.trace.json (5.1MB) — poster URL occurrences: 36
+localhost_2026-09-23_17-31-19-0.trace.json (5.1MB) — poster URL occurrences: 36
+localhost_2026-09-23_17-30-17-0.trace.json (4.7MB) — poster URL occurrences: 26
+localhost_2026-09-23_17-30-42-0.trace.json (4.7MB) — poster URL occurrences: 26
 GATE E28: see lcpElement rows above — the LCP candidate on both locales is the hero H1 (font-hero text; runs 18+ raw machine truth — P5/R1 J-5 relabel). The poster rides below the H1 in the LCP graph; its load is corroborated in every trace row above.
