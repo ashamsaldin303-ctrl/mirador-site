@@ -1,0 +1,7 @@
+
+===== filter-pair--en · run 2026-09-23T02:00:49.855Z =====
+# F3-5/E50 · menu filter pair RE-SHOT · EN · 2026-09-23T02:00:49.855Z
+before: 28 rows · aria-live "28 dishes" · md5 5beff2f9e6aa7d32a34ec1e4a4851a9e
+after : 4 rows · aria-pressed true · aria-live "4 dishes" · md5 e433bee64df5892ae84998de0f9598fb
+pair  : md5s differ = true
+VERDICT: PASS

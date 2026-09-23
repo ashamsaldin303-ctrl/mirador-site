@@ -1,1 +1,11 @@
-(server.log absent)
+▲ Next.js 16.1.3
+- Local:         http://localhost:3000
+- Network:       http://0.0.0.0:3000
+
+✓ Starting...
+✓ Ready in 81ms
+prisma:error 
+Invalid `prisma.reservation.create()` invocation:
+
+
+Unique constraint failed on the fields: (`phone`,`slot`)

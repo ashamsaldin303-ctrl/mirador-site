@@ -1,0 +1,16 @@
+
+===== sec-r5 · run 2026-09-23T02:00:32.165Z =====
+# E47 · SEC-2: oversized POST body → 413 (raw request/response pair)
+POST /api/reservations (9KB body, ip=10.99.5.1) → HTTP 413 {"error":"PAYLOAD_TOO_LARGE"}
+Content-Length declared: 9096B (> 8192B cap)
+# E48 · BKG-1: only 18:00–22:30 Damascus (UTC+3) service instants persist
+POST slot=2026-09-25T02:00:00.000Z (05:00 Damascus (pre-service), 2026-09-25) → HTTP 400 {"error":"VALIDATION","fields":{"slot":["invalid_slot"]}}
+POST slot=2026-09-25T14:30:00.000Z (17:30 Damascus (pre-service, on 30-min grid), 2026-09-25) → HTTP 400 {"error":"VALIDATION","fields":{"slot":["invalid_slot"]}}
+POST slot=2026-09-25T20:00:00.000Z (23:00 Damascus (post-service, on 30-min grid), 2026-09-25) → HTTP 400 {"error":"VALIDATION","fields":{"slot":["invalid_slot"]}}
+POST slot=2026-09-28T16:00:00.000Z (closed Monday control (19:00 Damascus — valid time, closed day), 2026-09-28) → HTTP 400 {"error":"VALIDATION","fields":{"slot":["invalid_slot"]}}
+# DB rows persisted for the BKG-1 probe phone family: 0 (expect 0)
+# E47 · SEC-4: rate-limiter bucket Map bound (synthetic fill ≤ declared cap)
+synthetic fill: 10500 distinct IPs through limitRead → buckets 0 → 10000 (cap 10000)
+# in-module evict() keeps Map size ≤ the declared cap; the cap constant is imported from src/lib/rate-limit.ts (single source)
+# VERDICT: PASS — SEC-2 413 · SEC-4 bounded map · BKG-1 off-service instants rejected with zero rows
+# CLEANUP: deleted 0 reservations (phones +96399900*)

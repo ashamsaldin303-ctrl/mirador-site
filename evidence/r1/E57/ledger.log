@@ -1,0 +1,36 @@
+# P-041 LEDGER — machine-generated 2026-09-23T02:00:31.268Z
+## Font cells (disk-assertable — run on every push)
+[PASS] amiri 400 payload 43112B ≤ 60KB (42.1KB)
+[PASS] amiri 700 payload 43452B ≤ 60KB (42.4KB)
+[PASS] plex-arabic 400 payload 35056B ≤ 60KB (34.2KB)
+[PASS] plex-arabic 500 payload 37544B ≤ 60KB (36.7KB)
+[PASS] plex-arabic 600 payload 37740B ≤ 60KB (36.9KB)
+[PASS] font disk 299320B ≤ frozen baseline 334,880B (Δ -35560B)
+
+## Wire cells (from the prod-run raw files — asserted on the Actions surface)
+  /en/ — files=13 raw=588024B gz=180253B (176.0KB) → FAIL (soft budget exceeded — under hard cap)
+  /en/menu — files=13 raw=591833B gz=181414B (177.2KB) → FAIL (soft budget exceeded — under hard cap)
+  /en/reserve — files=13 raw=567590B gz=173072B (169.0KB) → FAIL (soft budget exceeded — under hard cap)
+  /en/story — files=13 raw=580647B gz=177891B (173.7KB) → FAIL (soft budget exceeded — under hard cap)
+  /en/gallery — files=13 raw=586809B gz=179760B (175.5KB) → FAIL (soft budget exceeded — under hard cap)
+  /en/private-dining — files=13 raw=572389B gz=174577B (170.5KB) → FAIL (soft budget exceeded — under hard cap)
+  /en/contact — files=12 raw=565291B gz=172174B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
+  /en/confirmation/cmudgg8bp001y4277al5fzeyk — files=12 raw=565291B gz=172174B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
+  /ar/ — files=13 raw=588024B gz=180253B (176.0KB) → FAIL (soft budget exceeded — under hard cap)
+  /ar/menu — files=13 raw=591833B gz=181414B (177.2KB) → FAIL (soft budget exceeded — under hard cap)
+  /ar/reserve — files=13 raw=567590B gz=173072B (169.0KB) → FAIL (soft budget exceeded — under hard cap)
+  /ar/story — files=13 raw=580647B gz=177891B (173.7KB) → FAIL (soft budget exceeded — under hard cap)
+  /ar/gallery — files=13 raw=586809B gz=179760B (175.5KB) → FAIL (soft budget exceeded — under hard cap)
+  /ar/private-dining — files=13 raw=572389B gz=174577B (170.5KB) → FAIL (soft budget exceeded — under hard cap)
+  /ar/contact — files=12 raw=565291B gz=172174B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
+  /ar/confirmation/cmudgg8bp001y4277al5fzeyk — files=12 raw=565291B gz=172174B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
+[PASS] route table covers 16/16 (found 16)
+[PASS] first-load ≤200KB gz hard gate: 0 breaches (max 177.2KB)
+  static/chunks/cf825f9323e59b35.js raw=42984B gz=17376B refs=0 (lazy — not in any route first-load) markers=[ScrollTrigger]
+  static/chunks/1ed51ea2f0b78898.js raw=70198B gz=27108B refs=0 (lazy — not in any route first-load) markers=[ScrollTrigger]
+  static/chunks/9e7ca211b57b3a61.js raw=14185B gz=3976B refs=0 (lazy — not in any route first-load) markers=[lenis]
+  static/chunks/93c7a36f75cc1202.js raw=23916B gz=9080B refs=0 (lazy — not in any route first-load) markers=[Flip]
+[PASS] motion family (lazy, marker chunks) 57540B gz ≤ 62KB (56.2KB)
+[PASS] three-pack (lazy) 235263B gz ≤ 235KB (229.7KB)
+
+VERDICT: PASS

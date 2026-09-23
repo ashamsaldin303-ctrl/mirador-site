@@ -1,0 +1,26 @@
+# P-024 route census — machine-generated from build-output.log
+# ○ = prerendered static · ●/ƒ = dynamic (server-rendered per request)
+# Turbopack emits ƒ for dynamic routes in the Route (app) table.
+
+## ○ static (prerendered)
+  (none parsed)
+
+## ●/ƒ dynamic — each justified (P-024)
+  (none parsed)
+
+## justification table
+  /[locale]/[...rest] → the honest-404 catch-all (R3/B-1): every unmatched URL, localized floor + HTTP 404
+  /[locale]/menu → menu SSR — 28 dishes + JSON-LD rendered fresh from PostgreSQL (F3-2, pinned)
+  /[locale]/gallery → gallery SSR — 8 tiles + intrinsics from PostgreSQL (pinned)
+  /[locale]/reserve → reserve SSR — 60-day Damascus date strip computed per request (server clock)
+  /[locale]/confirmation/[id] → per-id dynamic lookup — force-dynamic (COP-2 noindex)
+
+[FAIL] no route rows parsed from the build output — table format changed?
+[FAIL] ○ /en prerendered
+[FAIL] ○ /ar prerendered
+[FAIL] ○ /en/story prerendered
+[FAIL] ○ /ar/story prerendered
+[FAIL] ○ /en/contact prerendered
+[FAIL] ○ /ar/contact prerendered
+[FAIL] ○ /en/private-dining prerendered
+[FAIL] ○ /ar/private-dining prerendered

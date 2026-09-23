@@ -1,17 +1,27 @@
 Route (app)
 ┌ ○ /_not-found
-├ ƒ /[locale]
+├ ● /[locale]
+│ ├ /en
+│ └ /ar
 ├ ƒ /[locale]/[...rest]
 ├ ƒ /[locale]/confirmation/[id]
-├ ƒ /[locale]/contact
+├ ● /[locale]/contact
+│ ├ /en/contact
+│ └ /ar/contact
 ├ ƒ /[locale]/gallery
 ├ ƒ /[locale]/menu
-├ ƒ /[locale]/private-dining
+├ ● /[locale]/private-dining
+│ ├ /en/private-dining
+│ └ /ar/private-dining
 ├ ƒ /[locale]/reserve
-├ ƒ /[locale]/story
+├ ● /[locale]/story
+│ ├ /en/story
+│ └ /ar/story
 ├ ƒ /api/availability
+├ ƒ /api/house
 ├ ƒ /api/inquiries
-└ ƒ /api/reservations
+├ ƒ /api/reservations
+└ ○ /sitemap.xml
 
 (Turbopack's Route (app) table carries no size columns — sizes are derived from the
 served HTML's initial script set + gzip -9 of the emitted chunks; wire sizes corroborate.)

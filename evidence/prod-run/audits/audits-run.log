@@ -20,10 +20,10 @@ $ bun scripts/audit-tokens.ts
   PASS  --radius-sm: 2px  (§5.4 radius sm)
   PASS  --radius: 4px  (§5.4 radius)
   PASS  --radius-lg: 8px  (§5.4 radius lg)
-  FAIL  --font-display-en: "Fraunces", serif  (§5.3 font var)
-  FAIL  --font-display-ar: "Amiri", serif  (§5.3 font var)
-  FAIL  --font-body-en: "Instrument Sans", sans-serif  (§5.3 font var)
-  FAIL  --font-body-ar: "IBM Plex Sans Arabic", sans-serif  (§5.3 font var)
+  PASS  --font-display-en: "Fraunces", "Fraunces Fallback", serif  (§5.3 font var (+P-082 fallback))
+  PASS  --font-display-ar: "Amiri", "Amiri Fallback", serif  (§5.3 font var (+P-082 fallback))
+  PASS  --font-body-en: "Instrument Sans", "Instrument Sans Fallback", sans-serif  (§5.3 font var (+P-082 fallback))
+  PASS  --font-body-ar: "IBM Plex Sans Arabic", "IBM Plex Sans Arabic Fallback", sans-serif  (§5.3 font var (+P-082 fallback))
   PASS  --text-display-xl: clamp(3.5rem, 9vw, 10rem)  (§5.3 display XL)
   PASS  --text-h1: clamp(2.75rem, 6vw, 8.75rem)  (§5.3 H1)
   PASS  --text-h2: clamp(2rem, 4vw, 3.5rem)  (§5.3 H2)
@@ -42,4 +42,10 @@ $ bun scripts/audit-tokens.ts
   PASS  --text-small--line-height: 1.7;  (§5.3 AR small lh ≥1.7)
   PASS  --text-micro--letter-spacing: 0;  (§5.3 AR zero tracking)
   PASS  tailwind.config.* absent (F2-5)
-error: script "audit:tokens" exited with code 1
+$ bun scripts/audit-copy.ts
+G1 banned wordlist: 0 hits PASS
+G5 placeholder tokens: 0 hits PASS
+F9-4 menu descriptions (28 dishes): EN over 0 · AR over 0 PASS
+Locale key parity: 158 keys PASS
+F9-5 docs/copy-parity.md: 158 rows PASS
+F10-3 image register: 38/38 files covered PASS
