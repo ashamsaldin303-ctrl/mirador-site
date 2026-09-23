@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/r1/E60-E62/ + ../../docs/spec/tab-lamp.md
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T17:17:48.365Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T17:38:18.462Z)

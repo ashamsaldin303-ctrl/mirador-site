@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/F1-5/ + screenshots/manifest.txt
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T17:17:48.364Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T17:38:18.461Z)

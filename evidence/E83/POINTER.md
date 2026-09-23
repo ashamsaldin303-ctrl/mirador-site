@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/r1/E83/ledger-repairs.md
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T17:17:48.365Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T17:38:18.463Z)

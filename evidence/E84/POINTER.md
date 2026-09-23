@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/tools/lcp-floor.ts + ../../docs/lcp-floor-derivation.md
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T17:17:48.365Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T17:38:18.463Z)
