@@ -9,14 +9,25 @@
 // hero H1 (font-hero text) is the LCP element on both locales; the poster
 // rides below the H1 in the LCP graph. This label must never regress to the
 // poster claim the round-1 era asserted.
+// P5/R4 (E86): the PARALLEL INSTRUMENT — a devtools-method battery
+// (throttlingMethod=devtools, same runner/build/URLs) is recorded BESIDE the
+// lantern medians, never INSTEAD (N27). Its block is labeled RECORDED-NOT-GATE,
+// carries no gate verdict, and is DURABLE: when a regeneration has no fresh
+// devtools raws, the previously committed block is carried forward verbatim —
+// never silently dropped, never overwritten with nothing.
 // Gates (FROZEN, parent Appendix A): performance ≥90 · LCP ≤2500ms · CLS ≤0.1 · TBT ≤300ms.
 import { readFileSync, writeFileSync, readdirSync, copyFileSync, existsSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { outDir, EVIDENCE_OUT } from "./lib";
 
-const LHCI_DIR = ".lighthouseci";
+// P5/R4: the workflow renames the lantern runs aside when the devtools battery
+// also ran; a bare .lighthouseci (local/legacy runs) is still the lantern.
+const LHCI_DIR = existsSync(".lighthouseci-lantern") ? ".lighthouseci-lantern" : ".lighthouseci";
+const DT_DIR = ".lighthouseci-devtools";
+const RUN_ID = process.env.GITHUB_RUN_NUMBER ? `Actions run ${process.env.GITHUB_RUN_NUMBER}` : `local ${new Date().toISOString().slice(0, 19)}Z`;
 const dir = `${outDir("lighthouse")}`;
 const GATES = { score: 0.9, lcp: 2500, cls: 0.1, tbt: 300 };
+const DT_BANNER = "# ——— devtools-method — RECORDED, NOT THE SANCTIONED GATE (N27) ———";
 
 type LHR = {
   requestedUrl?: string;
@@ -34,11 +45,18 @@ if (!existsSync(LHCI_DIR)) {
 }
 const files = readdirSync(LHCI_DIR).filter((f) => f.startsWith("lhr-") && f.endsWith(".json"));
 // saveAssets streams traces to CWD as localhost_*.trace.json (Lighthouse's own
-// output convention) — collect them from both locations.
+// output convention) — collect them from the lantern dir and CWD.
 const traces = [
   ...readdirSync(LHCI_DIR).filter((f) => f.endsWith(".trace.json")),
   ...readdirSync(".").filter((f) => /^localhost_.*\.trace\.json$/.test(f)),
 ];
+// P5/R4 (E86): the devtools-method raws, when the parallel battery ran.
+const dtFiles = existsSync(DT_DIR)
+  ? readdirSync(DT_DIR).filter((f) => f.startsWith("lhr-") && f.endsWith(".json"))
+  : [];
+const dtTraces = existsSync(DT_DIR)
+  ? readdirSync(DT_DIR).filter((f) => f.endsWith(".trace.json"))
+  : [];
 
 function median(nums: number[]): number {
   const s = [...nums].sort((a, b) => a - b);
@@ -104,6 +122,63 @@ for (const loc of ["en", "ar"] as const) {
   }
 }
 rows.push(gateFail === 0 ? `GATE E27: PASS — medians meet all four frozen thresholds on both locales` : `GATE E27: FAIL — ${gateFail} locale gates failed`);
+rows.push(`# instrument: lantern (throttlingMethod=simulate) — the sanctioned gate · ${RUN_ID}`);
+
+// ——— P5/R4 (E86): the devtools-method block — RECORDED, NOT THE GATE ————————
+// Durability clause: with fresh devtools raws the block regenerates from them;
+// without, the previously committed block carries forward verbatim — never
+// silently dropped. No gate verdicts, no "GATE E27" text, no FAIL tokens
+// (verify-battery scans the prod-run tree; this block must never gate).
+function devtoolsBlock(): string[] {
+  if (dtFiles.length > 0) {
+    const dtRuns: { loc: "en" | "ar"; lhr: LHR; file: string }[] = [];
+    for (const f of dtFiles) {
+      const lhr = JSON.parse(readFileSync(join(DT_DIR, f), "utf8")) as LHR;
+      const url = lhr.finalUrl ?? lhr.requestedUrl ?? "";
+      const loc = url.endsWith("/ar") ? "ar" : url.endsWith("/en") ? "en" : null;
+      if (loc) dtRuns.push({ loc, lhr, file: f });
+    }
+    const methods = new Set(
+      dtRuns.map((r) => (r.lhr as unknown as { configSettings?: { throttlingMethod?: string } }).configSettings?.throttlingMethod ?? "(unset)"),
+    );
+    const out = [
+      DT_BANNER,
+      `# recorded beside the lantern medians per prompt-5 R4/E86 · ${RUN_ID} · raws: devtools-lhr-*.json (+ devtools-localhost-*.trace.json) beside this file`,
+      `# throttlingMethod observed in the raws: ${[...methods].join(", ")} (the config requests "devtools" — a mismatch here means the flag did not pass through and the run must be repeated)`,
+    ];
+    for (const loc of ["en", "ar"] as const) {
+      const mine = dtRuns.filter((r) => r.loc === loc);
+      if (mine.length === 0) continue;
+      const score = median(mine.map((r) => r.lhr.categories.performance.score ?? 0)) * 100;
+      const lcp = median(mine.map((r) => r.lhr.audits["largest-contentful-paint"]?.numericValue ?? 0));
+      const cls = median(mine.map((r) => r.lhr.audits["cumulative-layout-shift"]?.numericValue ?? 0));
+      const tbt = median(mine.map((r) => r.lhr.audits["total-blocking-time"]?.numericValue ?? 0));
+      // NOTE: deliberately NOT the lantern line shape — verify-docs' E79-cell
+      // parser must only ever match the sanctioned block above.
+      out.push(
+        `devtools /${loc} — performance=${score.toFixed(0)} · LCP=${lcp.toFixed(0)}ms · CLS=${cls.toFixed(4)} · TBT=${tbt.toFixed(0)}ms (recorded; no gate — N27)`,
+      );
+      out.push(
+        `  per-run: ${mine.map((r) => `${(r.lhr.categories.performance.score! * 100).toFixed(0)}/${r.lhr.audits["largest-contentful-paint"]?.numericValue?.toFixed(0)}ms-lcp/${r.lhr.audits["cumulative-layout-shift"]?.numericValue?.toFixed(3)}cls/${r.lhr.audits["total-blocking-time"]?.numericValue?.toFixed(0)}ms-tbt`).join("  |  ")}`,
+      );
+    }
+    return out;
+  }
+  // carry-forward: preserve the committed block verbatim if one exists
+  const committed = `${dir}/medians.md`;
+  if (existsSync(committed)) {
+    const prev = readFileSync(committed, "utf8");
+    const i = prev.indexOf(DT_BANNER);
+    if (i >= 0) {
+      return [
+        `${DT_BANNER} (carried — no fresh devtools raws in this regeneration; the block below is the last recorded battery, raw paths cited inside)`,
+        ...prev.slice(i + DT_BANNER.length).trimEnd().split("\n"),
+      ];
+    }
+  }
+  return [`${DT_BANNER}`, `# (no devtools battery recorded yet — this regeneration had no devtools raws and no prior block to carry)`];
+}
+const dtBlock = devtoolsBlock();
 
 // raw-trace corroboration: the poster URL appears in every trace (its load is recorded)
 const traceRows: string[] = [`# raw trace corroboration — hero poster URL occurrences per trace JSON — machine-generated ${new Date().toISOString()}`];
@@ -116,11 +191,16 @@ for (const t of traces) {
 lcpRows.push(...traceRows);
 lcpRows.push(`GATE E28: see lcpElement rows above — the LCP candidate on both locales is the hero H1 (font-hero text; runs 18+ raw machine truth — P5/R1 J-5 relabel). The poster rides below the H1 in the LCP graph; its load is corroborated in every trace row above.`);
 
-writeFileSync(`${dir}/medians.md`, rows.join("\n") + "\n");
+writeFileSync(`${dir}/medians.md`, rows.join("\n") + "\n\n" + dtBlock.join("\n") + "\n");
 writeFileSync(`${dir}/lcp-element.txt`, lcpRows.join("\n") + "\n");
 for (const f of [...files, ...traces]) {
   const src = readdirSync(".").includes(f) ? f : join(LHCI_DIR, f);
   copyFileSync(src, join(dir, f));
 }
-console.log(`lighthouse-summary done → ${EVIDENCE_OUT}lighthouse/ (${files.length} LHRs, ${traces.length} traces, gateFail=${gateFail})`);
+// P5/R4 (E86): the devtools raws land beside the lantern raws, prefixed — the
+// two instrument sets are never confused on disk.
+for (const f of [...dtFiles, ...dtTraces]) {
+  copyFileSync(join(DT_DIR, f), join(dir, `devtools-${f}`));
+}
+console.log(`lighthouse-summary done → ${EVIDENCE_OUT}lighthouse/ (${files.length} lantern LHRs, ${traces.length} lantern traces, gateFail=${gateFail}; devtools: ${dtFiles.length} LHRs + ${dtTraces.length} traces${dtFiles.length === 0 ? " (block carried)" : ""})`);
 // gate FAILs ship verbatim in medians.md/lcp-element.txt; verify-battery.sh is the exit gate.

@@ -288,22 +288,43 @@ jobs:
       - name: "Q4h: DOM AC probes (state matrix + §9 battery)"
         run: bun evidence/tools/dom-ac-probes.ts
 
-      - name: "Q4i: Lighthouse CI (E27) — mobile · 3 runs · medians"
+      - name: "Q4i: Lighthouse CI (E27 lantern + E86 devtools-method RECORDED) — mobile · 3 runs each · medians"
         # continue-on-error: LHCI's assert exits 1 on threshold failure — the raw
         # verdicts ship in lhci-run.log + medians.md; verify-battery (final gate)
         # fails the job after ALL evidence is collected and committed.
+        # P5/R4 (E86): the SAME battery runs a second, PARALLEL instrument —
+        # throttlingMethod=devtools — whose results are RECORDED BESIDE the
+        # lantern medians, never instead (N27). No assertions on that config.
         continue-on-error: true
         run: |
           set -eo pipefail
           export CHROME_PATH="$(ls /home/runner/.cache/ms-playwright/chromium-*/chrome-linux*/chrome 2>/dev/null | head -1)"
           echo "CHROME_PATH resolved: ${CHROME_PATH:-NOT-FOUND}"
           [ -n "${CHROME_PATH:-}" ] || { echo "FATAL: chromium binary not found"; exit 1; }
-          bunx @lhci/cli@0.15.1 autorun --config=.lighthouserc.json 2>&1 | tee lhci-run.log
+          # instrument 1 — the sanctioned lantern (throttlingMethod=simulate)
+          bunx @lhci/cli@0.15.1 autorun --config=.lighthouserc.json 2>&1 | tee lhci-run.log || echo "(lantern assert verdict ships in the raw — the honest FAIL is expected while E27 stands)"
+          mkdir -p .lighthouseci-lantern
+          mv .lighthouseci/lhr-*.json .lighthouseci-lantern/ 2>/dev/null || true
+          mv localhost_*.trace.json .lighthouseci-lantern/ 2>/dev/null || true
+          # instrument 2 — the parallel devtools-method (RECORDED, never the gate)
+          bunx @lhci/cli@0.15.1 autorun --config=.lighthouserc-devtools.json 2>&1 | tee lhci-devtools-run.log
+          mkdir -p .lighthouseci-devtools
+          mv .lighthouseci/lhr-*.json .lighthouseci-devtools/ 2>/dev/null || true
+          mv localhost_*.trace.json .lighthouseci-devtools/ 2>/dev/null || true
+          # the flag must actually pass through — a silently-simulated "devtools"
+          # run would poison the E86 record (the summary tool also asserts this)
+          for f in .lighthouseci-devtools/lhr-*.json; do
+            [ -e "$f" ] || { echo "FATAL: no devtools LHRs produced"; exit 1; }
+            m=$(python3 -c "import json,sys;print(json.load(open('$f'))['configSettings'].get('throttlingMethod'))" 2>/dev/null || echo unset)
+            echo "devtools raw $(basename $f): throttlingMethod=$m"
+            [ "$m" = "devtools" ] || { echo "FATAL: throttlingMethod did not pass through (got '$m') — the E86 record must not be silently simulated"; exit 1; }
+          done
 
-      - name: "Q4i: Lighthouse medians + lcpElement (E27/E28) → evidence/prod-run/lighthouse/"
+      - name: "Q4i: Lighthouse medians + lcpElement (E27/E28 + E86 dual-block) → evidence/prod-run/lighthouse/"
         run: |
           mkdir -p evidence/prod-run/lighthouse
           cp lhci-run.log evidence/prod-run/lighthouse/ 2>/dev/null || true
+          cp lhci-devtools-run.log evidence/prod-run/lighthouse/ 2>/dev/null || true
           bun evidence/tools/lighthouse-summary.ts
 
       - name: "Q4j: cold-start handoff (F12-3) — fresh clone + migrate + seed + dev"
@@ -395,4 +416,7 @@ jobs:
             evidence/
             build-output.log
             lhci-run.log
+            lhci-devtools-run.log
             .lighthouseci/
+            .lighthouseci-lantern/
+            .lighthouseci-devtools/

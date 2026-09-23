@@ -1,0 +1,13 @@
+{
+  "ci": {
+    "collect": {
+      "url": ["http://localhost:3000/en", "http://localhost:3000/ar"],
+      "numberOfRuns": 3,
+      "settings": {
+        "saveAssets": true,
+        "chromeFlags": "--no-sandbox --disable-dev-shm-usage",
+        "throttlingMethod": "devtools"
+      }
+    }
+  }
+}
