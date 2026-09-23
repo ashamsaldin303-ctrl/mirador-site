@@ -84,24 +84,13 @@ export default async function LocaleLayout({
   const fontPreloads =
     locale === "ar"
       ? [
-          // R13/E79 (the LCP close): the HERO face FIRST — the home H1's exact
-          // line subset (21,228B, full Amiri joining), preloaded so the swap
-          // lands in the first network wave. Run-18's raw Lighthouse proved the
-          // H1 is the LCP element and its paint waited on the CSS-discovered
-          // full face (36,108B at LOW priority, queued behind the first-load).
-          { href: "/fonts/amiri-hero-arabic.woff2", as: "font" },
           // R9 (P-082/P-025): preload the WORDMARK face (nav lockup, 6,020B) — the
           // full Amiri display face arrives via swap for headings. Body stays.
           { href: "/fonts/amiri-wordmark-arabic.woff2", as: "font" },
           { href: "/fonts/plex-arabic-400-arabic.woff2", as: "font" },
         ]
       : [
-          // R13/E79 (the LCP close): the HERO face FIRST — "Above the city, a
-          // table worth the climb." as a 4,564B Fraunces subset (wght instanced
-          // 400, opsz left VARIABLE — auto optical sizing preserved, zero visual
-          // delta), preloaded ahead of everything else.
-          { href: "/fonts/fraunces-hero-latin.woff2", as: "font" },
-          // R9: wordmark subset (7,176B) over the full Fraunces.
+          // R9: same rule EN — wordmark subset (7,176B) over the full Fraunces.
           { href: "/fonts/fraunces-wordmark-latin.woff2", as: "font" },
           { href: "/fonts/instrument-sans-var-latin.woff2", as: "font" },
         ];

@@ -10,47 +10,16 @@
    (§5.3) are enforced via [dir="rtl"] variable overrides.
    --------------------------------------------------------------------------- */
 
-/* — self-hosted WOFF2 subsets (public/fonts/) — display: swap, unicode-range — */
-/* EN display: Fraunces variable (wght 400–600, latin) */
-@font-face {
-  font-family: "Fraunces";
-  src: url("/fonts/fraunces-var-latin.woff2") format("woff2");
-  font-weight: 400 600;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0000-007E, U+00A0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026;
-}
-/* R9 (prompt-4 P-082/P-025): THE WORDMARK FACES — "MIRADOR" (Fraunces subset,
-   7,176B) and "ميرادور" (Amiri subset, 6,020B). Narrow unicode-ranges: the
-   browser fetches them only for the lockup's exact glyphs; the full display
-   families above keep serving every other display context (swap). */
-@font-face {
-  font-family: "Fraunces Wordmark";
-  src: url("/fonts/fraunces-wordmark-latin.woff2") format("woff2");
-  font-weight: 400 600;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0041, U+0044, U+0049, U+004D, U+004F, U+0052; /* A D I M O R */
-}
-@font-face {
-  font-family: "Amiri Wordmark";
-  src: url("/fonts/amiri-wordmark-arabic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0627, U+062F, U+0631, U+0645, U+0648, U+064A; /* ا د ر م و ي */
-}
-/* R13/E79 (THE EXIT GATE LCP close): THE HERO FACES — the home H1's exact line
-   ("Above the city, a table worth the climb." / «فوق المدينة، مائدة تستحقّ
-   الصعود.»). Run-18's raw Lighthouse proved the LCP element is the hero H1 and
-   its paint waits on the CSS-discovered display face (55KB EN / 36KB AR at LOW
-   priority, queued behind ~176KB of first-load). These subsets are the SAME
-   faces (Fraunces instanced at wght=400 with opsz left VARIABLE — auto optical
-   sizing preserved, zero visual delta; Amiri full joining features) — tiny
-   enough to PRELOAD, so the swap lands in the first network wave and LCP rides
-   the poster/FCP instead of the font tail. If the hero line's copy ever
-   changes, regenerate the subsets (scripts/subset-fonts-r9.sh §3) — a missed
-   glyph simply falls through to the full family (safe degradation). */
+/* — self-hosted WOFF2 subsets (public/fonts/) — display: swap, unicode-range —
+   R13/E79 (run-22 lesson): the HERO + WORDMARK faces are declared FIRST.
+   Chrome assigns CSS-discovered fonts the VeryHigh tier (render-blocking) —
+   declaration order decides initiation order within it — while <link
+   rel=preload> fonts stay High and queue BEHIND the whole VeryHigh set in
+   lantern's connection model (run-21/22: the H1's LCP pinned at ~3.56s/
+   ~4.5s behind ~110-190KB of full-display faces whose glyphs the hero line
+   never uses). First-declared + first-initiated = the hero font rides the
+   front of the VeryHigh tier; the preloads for it are REMOVED (a preloaded
+   font keeps its High priority even after CSS discovery). — */
 @font-face {
   font-family: "Fraunces Hero";
   src: url("/fonts/fraunces-hero-latin.woff2") format("woff2");
@@ -71,6 +40,46 @@
   font-display: swap;
   unicode-range: U+0020, U+002E, U+060C, U+0626, U+0627, U+0629, U+062A, U+062D, U+062F, U+0633, U+0635, U+0639, U+0641, U+0642, U+0644, U+0645, U+0646, U+0648, U+064A, U+0651; /* «فوق المدينة، مائدة تستحقّ الصعود.» — U+0020 INCLUDED (see the EN face note) */
 }
+@font-face {
+  font-family: "Fraunces Wordmark";
+  src: url("/fonts/fraunces-wordmark-latin.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0041, U+0044, U+0049, U+004D, U+004F, U+0052; /* A D I M O R */
+}
+@font-face {
+  font-family: "Amiri Wordmark";
+  src: url("/fonts/amiri-wordmark-arabic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0627, U+062F, U+0631, U+0645, U+0648, U+064A; /* ا د ر م و ي */
+}
+/* EN display: Fraunces variable (wght 400–600, latin) */
+@font-face {
+  font-family: "Fraunces";
+  src: url("/fonts/fraunces-var-latin.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-007E, U+00A0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026;
+}
+/* R9 (prompt-4 P-082/P-025): THE WORDMARK FACES — "MIRADOR" (Fraunces subset,
+   7,176B) and "ميرادور" (Amiri subset, 6,020B). Narrow unicode-ranges: the
+   browser fetches them only for the lockup's exact glyphs; the full display
+   families above keep serving every other display context (swap). */
+/* R13/E79 (THE EXIT GATE LCP close): THE HERO FACES — the home H1's exact line
+   ("Above the city, a table worth the climb." / «فوق المدينة، مائدة تستحقّ
+   الصعود.»). Run-18's raw Lighthouse proved the LCP element is the hero H1 and
+   its paint waits on the CSS-discovered display face (55KB EN / 36KB AR at LOW
+   priority, queued behind ~176KB of first-load). These subsets are the SAME
+   faces (Fraunces instanced at wght=400 with opsz left VARIABLE — auto optical
+   sizing preserved, zero visual delta; Amiri full joining features) — tiny
+   enough to PRELOAD, so the swap lands in the first network wave and LCP rides
+   the poster/FCP instead of the font tail. If the hero line's copy ever
+   changes, regenerate the subsets (scripts/subset-fonts-r9.sh §3) — a missed
+   glyph simply falls through to the full family (safe degradation). */
 /* EN body: Instrument Sans variable (wght 400–600, latin) */
 @font-face {
   font-family: "Instrument Sans";
@@ -211,8 +220,8 @@
      hero column, repainting the H1 LATE (the LCP tail: shift-watch showed
      the H1's geometry changing at 1478ms + 2187ms on the wordmark/full-face
      swaps — the last one waits on the 55KB CSS-discovered full family). */
-  --font-wordmark-en: "Fraunces Wordmark", "Fraunces Fallback", "Fraunces", serif;
-  --font-wordmark-ar: "Amiri Wordmark", "Amiri Fallback", "Amiri", serif;
+  --font-wordmark-en: "Fraunces Wordmark", "Fraunces Fallback", serif;
+  --font-wordmark-ar: "Amiri Wordmark", "Amiri Fallback", serif;
   /* R13/E79: the hero faces — the home H1's exact line, subset from the SAME
      display families and preloaded (the LCP close; see @font-face above).
      The FULL family is deliberately NOT in this stack: the subset covers the
