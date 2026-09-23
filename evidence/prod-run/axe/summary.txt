@@ -1,4 +1,4 @@
-# axe summary — machine-generated 2026-09-23T04:31:46.783Z
+# axe summary — machine-generated 2026-09-23T04:50:20.718Z
 # gate: 0 critical + 0 serious per route × locale × viewport (parent §9, E10)
 # @axe-core/playwright 4.13.0 (axe-core pinned by it — see lockfile)
 home--en--375.json | critical=0 serious=0 moderate=0 minor=0 | rules: none

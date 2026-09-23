@@ -1,5 +1,5 @@
 
-===== keyboard-reserve-errors--ar · run 2026-09-23T04:34:16.784Z =====
+===== keyboard-reserve-errors--ar · run 2026-09-23T04:52:49.231Z =====
 # F8-3 · empty submit → per-field ARABIC (RTL-correct) errors
 html: lang=ar dir=rtl (before submit dir=rtl)
 name error:  "أدخل اسماً صحيحاً."
