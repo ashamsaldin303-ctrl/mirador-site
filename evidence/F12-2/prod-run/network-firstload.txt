@@ -1,18 +1,18 @@
-# network first-load JS (transferSize, wire gz) — machine-generated 2026-09-23T02:34:20.115Z
+# network first-load JS (transferSize, wire gz) — machine-generated 2026-09-23T03:38:18.001Z
 # corroborates first-load-js-gz.txt (manifest-derived); server compression: Next standalone gzip
-/en/ — scripts=18 wireJS=256075B (250.1KB)
-/en/menu — scripts=19 wireJS=265640B (259.4KB)
-/en/reserve — scripts=19 wireJS=257273B (251.2KB)
-/en/story — scripts=19 wireJS=262106B (256.0KB)
-/en/gallery — scripts=19 wireJS=263980B (257.8KB)
-/en/private-dining — scripts=19 wireJS=258789B (252.7KB)
-/en/contact — scripts=18 wireJS=256075B (250.1KB)
-/ar/ — scripts=18 wireJS=256075B (250.1KB)
-/ar/menu — scripts=19 wireJS=265640B (259.4KB)
-/ar/reserve — scripts=19 wireJS=257273B (251.2KB)
-/ar/story — scripts=19 wireJS=262106B (256.0KB)
-/ar/gallery — scripts=19 wireJS=263980B (257.8KB)
-/ar/private-dining — scripts=19 wireJS=258789B (252.7KB)
-/ar/contact — scripts=18 wireJS=256075B (250.1KB)
+/en/ — scripts=18 wireJS=256238B (250.2KB)
+/en/menu — scripts=19 wireJS=265803B (259.6KB)
+/en/reserve — scripts=19 wireJS=257436B (251.4KB)
+/en/story — scripts=19 wireJS=262269B (256.1KB)
+/en/gallery — scripts=19 wireJS=264143B (258.0KB)
+/en/private-dining — scripts=19 wireJS=258952B (252.9KB)
+/en/contact — scripts=18 wireJS=256238B (250.2KB)
+/ar/ — scripts=18 wireJS=256238B (250.2KB)
+/ar/menu — scripts=19 wireJS=265803B (259.6KB)
+/ar/reserve — scripts=19 wireJS=257436B (251.4KB)
+/ar/story — scripts=19 wireJS=262269B (256.1KB)
+/ar/gallery — scripts=19 wireJS=264143B (258.0KB)
+/ar/private-dining — scripts=19 wireJS=258952B (252.9KB)
+/ar/contact — scripts=18 wireJS=256238B (250.2KB)
 lazy JS loaded after journey scroll: e6e5a7e72d1d5089.js wire=238278B
 lazy wire total: 238278B

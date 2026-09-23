@@ -1,6 +1,6 @@
 
-===== route-announcer--ar · run 2026-09-23T02:36:16.411Z =====
-# P-028/E70 · the route announcer fires on soft navigation · AR · 2026-09-23T02:36:16.411Z
+===== route-announcer--ar · run 2026-09-23T03:40:14.365Z =====
+# P-028/E70 · the route announcer fires on soft navigation · AR · 2026-09-23T03:40:14.366Z
 handrail: skip=true main=true nav=true footer=true announcer-present=true → PASS
 announcer spoke: "القائمة — ميرادور" (document.title "القائمة — ميرادور") → PASS
 VERDICT: PASS

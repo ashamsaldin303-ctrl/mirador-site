@@ -1,8 +1,8 @@
 
-===== readers--confirmation--ar · run 2026-09-23T02:36:09.240Z =====
-# P-042/E75 · the three readers · confirmation · AR · 2026-09-23T02:36:09.240Z
+===== readers--confirmation--ar · run 2026-09-23T03:40:06.877Z =====
+# P-042/E75 · the three readers · confirmation · AR · 2026-09-23T03:40:06.877Z
 Hands: 8 tab stops · 8 with the bezel → PASS
 Ears: h1=1 main=true footer=true live-regions=1 title="الطاولة لك. — ميرادور" → PASS
 Ears/axe: critical violations=0 → PASS
-Calm: h1="الطاولة لك." · animated elements=0 · body=19380 chars → PASS
+Calm: h1="الطاولة لك." · animated elements=0 · body=19674 chars → PASS
 VERDICT: PASS

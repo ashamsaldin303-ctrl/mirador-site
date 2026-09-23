@@ -1,8 +1,8 @@
 
-===== readers--home--ar · run 2026-09-23T02:35:25.386Z =====
-# P-042/E75 · the three readers · home · AR · 2026-09-23T02:35:25.387Z
+===== readers--home--ar · run 2026-09-23T03:39:22.933Z =====
+# P-042/E75 · the three readers · home · AR · 2026-09-23T03:39:22.933Z
 Hands: 8 tab stops · 8 with the bezel → PASS
 Ears: h1=1 main=true footer=true live-regions=1 title="ميرادور — دمشق" → PASS
 Ears/axe: critical violations=0 → PASS
-Calm: h1="فوق المدينة، مائدة تستحقّ الصعود." · animated elements=0 · body=21119 chars → PASS
+Calm: h1="فوق المدينة، مائدة تستحقّ الصعود." · animated elements=0 · body=21410 chars → PASS
 VERDICT: PASS

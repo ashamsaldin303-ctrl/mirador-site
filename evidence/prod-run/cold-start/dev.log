@@ -1,6 +1,6 @@
 ▲ Next.js 16.1.3 (Turbopack)
 - Local:         http://localhost:3000
-- Network:       http://10.1.1.110:3000
+- Network:       http://10.1.0.32:3000
 
 ✓ Starting...
 Attention: Next.js now collects completely anonymous telemetry regarding usage.
@@ -8,7 +8,7 @@ This information is used to shape Next.js' roadmap and prioritize features.
 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
 https://nextjs.org/telemetry
 
-✓ Ready in 976ms
+✓ Ready in 990ms
 ○ Compiling /[locale] ...
- GET /en 200 in 4.4s (compile: 3.9s, proxy.ts: 102ms, generate-params: 373ms, render: 355ms)
- GET /ar 200 in 114ms (compile: 32ms, proxy.ts: 7ms, generate-params: 26ms, render: 75ms)
+ GET /en 200 in 4.6s (compile: 4.1s, proxy.ts: 104ms, generate-params: 384ms, render: 365ms)
+ GET /ar 200 in 101ms (compile: 31ms, proxy.ts: 5ms, generate-params: 25ms, render: 64ms)

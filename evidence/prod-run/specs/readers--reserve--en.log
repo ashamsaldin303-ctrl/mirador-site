@@ -1,8 +1,8 @@
 
-===== readers--reserve--en · run 2026-09-23T02:35:45.637Z =====
-# P-042/E75 · the three readers · reserve · EN · 2026-09-23T02:35:45.637Z
+===== readers--reserve--en · run 2026-09-23T03:39:43.288Z =====
+# P-042/E75 · the three readers · reserve · EN · 2026-09-23T03:39:43.288Z
 Hands: 8 tab stops · 8 with the bezel → PASS
 Ears: h1=1 main=true footer=true live-regions=1 title="Reserve a table — MIRADOR" → PASS
 Ears/axe: critical violations=0 → PASS
-Calm: h1="Reserve a table" · animated elements=0 · body=16827 chars → PASS
+Calm: h1="Reserve a table" · animated elements=0 · body=17127 chars → PASS
 VERDICT: PASS
