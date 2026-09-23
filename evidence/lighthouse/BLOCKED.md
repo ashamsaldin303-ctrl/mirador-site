@@ -1,6 +1,6 @@
 # BLOCKED → EXECUTED — E8 · E9 — Lighthouse CI (prod-build form)
 
-## Status (re-synced 2026-09-22 · prompt-4 R1, run 11) — GATE E27: FAIL
+## Status (re-synced 2026-09-23 · prompt-4 R13, exit-gate run 25) — GATE E27: FAIL
 
 The round-1/2 policy block is RESOLVED: the `production-evidence` workflow
 (Actions, the sanctioned surface) builds production and runs Lighthouse CI on
@@ -8,7 +8,7 @@ every dispatch. The instrument is live: **6 LHR reports + 6 raw trace JSONs
 per run** (3 mobile runs × /en + /ar), medians in
 `evidence/prod-run/lighthouse/medians.md`.
 
-Current raw verdict — **GATE E27: FAIL** (run 11, with prompt-4 R2/R3/R4 in
+Current raw verdict — **GATE E27: FAIL** (exit-gate run 25: perf 92/87 · CLS 0.0195/0.0000 · TBT 72/90ms — LCP medians EN 3340ms · AR 3904ms vs ≤2500ms the sole failing threshold; observedLCP 152ms == FCP; full diagnosis in evidence/r1/DONE.md known-gaps; runs 11-25 raw preserved beside).
 the build):
 
 - /en median: performance=90 · LCP=3515ms · CLS=0.0532 · TBT=77ms

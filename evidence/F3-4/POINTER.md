@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/F3-4/menu--soldout--768.png + specs/dom-ac-probes.log
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T00:34:17.596Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T06:00:29.006Z)

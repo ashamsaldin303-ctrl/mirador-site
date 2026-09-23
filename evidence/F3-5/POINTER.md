@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/specs/filter-pair--{en,ar}.log + F3-5/menu--{en,ar}--{unfiltered,filtered-vegan}--1440.png
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T00:34:17.596Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T06:00:29.006Z)

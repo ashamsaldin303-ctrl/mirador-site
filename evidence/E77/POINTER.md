@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/prod-run/house/counters.json
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T00:34:17.602Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T06:00:29.007Z)

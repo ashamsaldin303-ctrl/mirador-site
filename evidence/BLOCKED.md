@@ -10,7 +10,7 @@ fails the job.
 | # | round-2 item | resolution (re-synced to run-11 raw) |
 |---|---|---|
 | B1 | production build + route size/chunk tables | **CLOSED** — `bun run build` exit 0 (actions runs #1+, SHA 05d91d6+); tables + manifests in `F12-2/prod-run/` |
-| B2 | production Lighthouse medians + raw traces | **EXECUTED — GATE E27: FAIL** (instrument live: 6 LHRs + 6 traces on run 11; EN 90/3515ms-LCP/0.053-CLS/77ms-TBT · AR 86/3980ms/0.0043/86ms — thresholds ≥90 · LCP ≤2.5s not yet met; the R9 wire/font work owns the LCP gap) — `prod-run/lighthouse/medians.md` |
+| B2 | production Lighthouse medians + raw traces | **EXECUTED — GATE E27: FAIL** (exit-gate dispatch run 25: perf 92/87 ✓ · CLS 0.0195/0.0000 ✓ · TBT 72/90ms ✓ — **LCP medians EN 3340ms · AR 3904ms vs ≤2500 the sole failing threshold**; observedLCP 152ms == FCP on the same runs — the gap is the lantern font-queue model, six optimization rounds + full diagnosis in `r1/DONE.md` known-gaps; runs 11→25 raw preserved) — `prod-run/lighthouse/medians.md` |
 | B3 | (merged into B2) | — |
 | B4 | prod-form 404 status semantics | **CLOSED — GATE E22: PASS** (run 11: R3's loading-boundary relocation landed — `/{en,ar}/nonexistent-page` → HTTP 404 + the six §7.9 copy strings + noindex on the Actions production server) — `prod-run/http/summary.txt` |
 

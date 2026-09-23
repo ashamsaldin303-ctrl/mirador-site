@@ -2,8 +2,8 @@
 
 - check: route census ○/● + every ● justified
 - expected: P-024 conversion
-- actual: headers()-poison removed; static floors restructured; menu/gallery pinned; census asserts ○×8 + justified ●
+- actual: census reads the MACHINE truth (prerender-manifest.json — run-15 lesson): 8/8 content routes prerendered + HTML artifacts on disk · 5/5 ƒ justified · 4/4 ● = generateStaticParams fallbacks (unknown-locale → STATIC EN floor + 404)
 - verdict: PASS
 - evidence: /evidence/prod-run/route-census.txt
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T00:34:17.600Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T06:00:29.007Z)
