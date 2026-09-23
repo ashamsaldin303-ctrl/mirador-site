@@ -398,3 +398,28 @@ Work Log:
 
 Stage Summary:
 - Environment fully recovered to the R8-tip state: PG 16.2 local (start-pg.sh idempotent), dev daemon healthy on real seeded data, working tree clean (2 session artifacts to commit), zero code changes needed — the release surface (401991f) is intact and re-verified end-to-end.
+
+---
+Task ID: p4-r13-exitgate
+Agent: Z.ai Code (main orchestrator)
+Task: prompt-4 R13 — THE EXIT GATE (E79/E80/E81): drive the one-dispatch run green, then MATRIX + DONE report
+
+Work Log:
+- Repo state at open: R0–R12 all landed (commits through c765dfc); runs 12–14 had failed (12/13 at Q2-prep deterministic suite — fixed by 71b0efe/c765dfc; 14 at Q4b2 filter-pair + E33 rebase). Run 14's failure chain diagnosed from its artifact: the P-028 route announcer (aria-live=polite role=status, FIRST in DOM) collided with every bare [aria-live]/[role=status] probe.
+- FIX 1 (announcer collisions): data-dish-count hook on the menu count region (filter-pair + dom-ac-probes read the hook); data-inquiry-success hook on the inquiry success region (browser-specs inquiry spec — run 15's raw showed the form WORKED with a FAIL verdict beside it).
+- FIX 2 (evidence hygiene): spec logs TRUNCATE per run on the prod surface (lib.ts specLog + dom-ac-probes — stale FAIL verdicts from prior runs would poison every future verify-battery scan); E33 stages the regenerated docs + r1/E57+E59 raw logs (run 14's evidence commit died to "unstaged changes" on the pre-push rebase).
+- FIX 3 (P-081 completion): errors.validation "Please review…" → "Check the highlighted fields." / «راجع…» → «تحقّق…» — the term audit's named drift, the last F9-3 social-proof false positive (0 hits after).
+- FIX 4 (keyboard): lightbox hydration settle + the R11-purged AR error expectations (the spec still asserted «يرجى…» strings R11 deleted); mobile-sheet scrim step: settled-read + one logged retry with diagnostics.
+- FIX 5 (announcer component hardening): title-wait bounded poll — the empty-title window under dev on-demand compile permanently spoke the URL pathname to SR users.
+- RUN 15 (ef15754): Q4b2/E50/E55/E70/E75/E53/E54/E77 ALL PASS on prod; evidence commit landed (rebase fix works); died at Q1b — the route census parsed the HUMAN console tree (0 rows) — REWRITTEN to read the MACHINE truth (.next/prerender-manifest.json: routes=○ prerendered · dynamicRoutes=● generateStaticParams fallbacks + the ƒ tree rows). The manifest PROVES the P-024 conversion: 8/8 content routes prerendered + HTML artifacts + 5/5 ƒ justified + 4/4 ● fallback.
+- RUN 16 (census PASS on Actions, cancelled during readers; its E33 still landed via the rebase safety net).
+- RUN 17 (inquiry fix in): died at Q4c — the snapshot grep gate killed itself with its own success: zero-match greps exit 1 under pipefail (the يرجى=0 count = the purge WORKING) + the gate demanded ≥3 alternates from the confirmation snapshots (the exact surface COP-2 demotes). REWRITTEN: (grep || true) | wc -l everywhere + confirmation asserts its OWN contract (0 alternates + self-canonical + noindex + wa.me — E45 wired into Q4c).
+- RUN 18 (b95b3b1): ALL steps ran; died ONLY at verify-battery on E27 Lighthouse (EN 91/3431ms · AR 83/4194ms — LCP) + a mobile-sheet scrim runner flake. EVERYTHING ELSE GREEN (16/16 ≤200KB, axe 0/0, 404, race, cold-start, all specs).
+- THE LCP CLOSE (E79): run-18's raw proved the LCP element is the hero H1 (text) with ~3.3s resource-load — the CSS-discovered full display face at LOW priority queued behind the first-load. LEVER 1: THE HERO FACES — the H1's exact line subset from the SAME families (Fraunces 13,652B pipeline-parity instancing SOFT=0 WONK=0 wght=400:600 + features '*'; Amiri 21,228B full joining), PRELOADED first. FONT LESSONS: the CSS unicode-range must list U+0020 (a spaceless range silently splits the H1 across faces — metric identity FAIL until fixed); metric identity VERIFIED (hero line == full line both locales). Font disk 299,320→334,200B (−680B under the frozen ceiling).
+- RUN 19 (4ffb8dd): fonts first-wave High at 19ms ✓ but LCP unchanged — the POSTER: next/16 emits the preload link for priority but NOT the img fetchPriority → the poster fetched LOW → LEVER 2: explicit fetchPriority=high (network-verified first-wave).
+- RUN 20 (0a9e9d3): poster first-wave ✓ but LCP STILL ~3.6s → shift-watch (4x CPU + slow-4G emulation) exposed THE SHIFT CHAIN: the H1's box changed at 1186/1478/2187ms — the wordmark lockup's font swaps (no metric-matched fallback in its stacks!) + the AR fallbacks listed local("Arial") FIRST (no Arabic glyphs → unpinned per-char fallback). The H1's LAST repaint waited on the 55KB CSS-discovered full face. LEVER 3: wordmark stacks gain their fallbacks + AR fallbacks re-tuned against DejaVu Sans (Arabic-capable, present on Linux runners) with Arabic-capable locals first. After: the H1 paints ONCE (~943ms) and never moves; CLS 0.064→0.0004; local lantern LCP 3995→2981 (sandbox CPU loaded — runner models lower).
+- RUN 21 (74f8bba) dispatched — the exit-gate attempt with the full LCP chain closed.
+- E80 prep: generate-matrix.ts rows updated (F9-5 158 rows · E35 runs 9–21 · E43 fresh · E50 PROD re-shot citations · E65 machine-truth census) — MATRIX.md regeneration + E79/E80 row finalization + the doc re-sync (BLOCKED.md/deploy-pre.md E27 verdict) wait on run 21.
+
+Stage Summary:
+- Runs 15–20 each died one NEW lesson deep; every prior layer held (E33 rebase, census, Q4c COP-2, all specs). All E-cells except E27's medians are PROD-proven across runs 15–20's committed raw evidence. Run 21 = the full-chain exit gate; E80 MATRIX + E81 DONE report are staged to finalize on its verdict.

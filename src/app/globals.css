@@ -214,9 +214,15 @@
   --font-wordmark-en: "Fraunces Wordmark", "Fraunces Fallback", "Fraunces", serif;
   --font-wordmark-ar: "Amiri Wordmark", "Amiri Fallback", "Amiri", serif;
   /* R13/E79: the hero faces — the home H1's exact line, subset from the SAME
-     display families and preloaded (the LCP close; see @font-face above) */
-  --font-hero-en: "Fraunces Hero", "Fraunces", "Fraunces Fallback", serif;
-  --font-hero-ar: "Amiri Hero", "Amiri", "Amiri Fallback", serif;
+     display families and preloaded (the LCP close; see @font-face above).
+     The FULL family is deliberately NOT in this stack: the subset covers the
+     entire line (incl. U+0020), and lantern models a text-LCP against its
+     stack's font SET — carrying the 55KB CSS-discovered full face kept the
+     modeled LCP chained to its arrival (run-21: CLS 0.0004 · TBT 71 · score 90
+     — LCP alone held 3564ms). Missed glyphs (a future copy change) degrade to
+     the metric-matched fallback — regenerate the subset instead. */
+  --font-hero-en: "Fraunces Hero", "Fraunces Fallback", serif;
+  --font-hero-ar: "Amiri Hero", "Amiri Fallback", serif;
 
   /* — type scale (§5.3): fluid display clamps, modular body track —
        line-heights are EN defaults; [dir="rtl"] overrides below apply AR values */
