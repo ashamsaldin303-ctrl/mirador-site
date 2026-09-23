@@ -1,6 +1,6 @@
 
-===== journey-emulation--control-60fps · run 2026-09-23T03:59:10.794Z =====
-# JRN-1/E55 · journey auto-kill · control-60fps · 2026-09-23T03:59:10.794Z
+===== journey-emulation--control-60fps · run 2026-09-23T04:26:33.003Z =====
+# JRN-1/E55 · journey auto-kill · control-60fps · 2026-09-23T04:26:33.003Z
 canvas mounted under shim, survives 6s: canvas=1
-fps trace (per-second): [15, 62, 62, 62, 62, 62]
+fps trace (per-second): [20, 62, 62, 62, 62, 62]
 VERDICT: PASS — control: canvas survives at emulated 60fps

@@ -1,6 +1,6 @@
 
-===== route-announcer--en · run 2026-09-23T04:00:21.804Z =====
-# P-028/E70 · the route announcer fires on soft navigation · EN · 2026-09-23T04:00:21.804Z
+===== route-announcer--en · run 2026-09-23T04:27:43.426Z =====
+# P-028/E70 · the route announcer fires on soft navigation · EN · 2026-09-23T04:27:43.426Z
 handrail: skip=true main=true nav=true footer=true announcer-present=true → PASS
 announcer spoke: "Menu — MIRADOR" (document.title "Menu — MIRADOR") → PASS
 VERDICT: PASS

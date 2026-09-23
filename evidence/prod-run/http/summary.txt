@@ -1,4 +1,4 @@
-# HTTP semantics on the production server — machine-generated 2026-09-23T03:58:48.537Z
+# HTTP semantics on the production server — machine-generated 2026-09-23T04:26:11.713Z
 # gate (E22): /en /ar → 200 · /{en,ar}/nonexistent-page → 404 + §7.9 designed copy + noindex
 GET /en → 200 PASS
 GET /en/nonexistent-page → status 404 PASS

@@ -1,5 +1,5 @@
 
-===== dom-ac-probes · run 2026-09-23T04:07:01.760Z =====
+===== dom-ac-probes · run 2026-09-23T04:34:19.373Z =====
 
 ## F1-1 — html lang/dir per route × locale (live probe)
 /en/ lang=en dir=ltr → OK
@@ -9,7 +9,7 @@
 /en/gallery lang=en dir=ltr → OK
 /en/private-dining lang=en dir=ltr → OK
 /en/contact lang=en dir=ltr → OK
-/en/confirmation/cmudkoe51001y2g2v07zy7mbw lang=en dir=ltr → OK
+/en/confirmation/cmudlnmwj001y428n3c0x27lq lang=en dir=ltr → OK
 /ar/ lang=ar dir=rtl → OK
 /ar/menu lang=ar dir=rtl → OK
 /ar/reserve lang=ar dir=rtl → OK
@@ -17,7 +17,7 @@
 /ar/gallery lang=ar dir=rtl → OK
 /ar/private-dining lang=ar dir=rtl → OK
 /ar/contact lang=ar dir=rtl → OK
-/ar/confirmation/cmudkoe51001y2g2v07zy7mbw lang=ar dir=rtl → OK
+/ar/confirmation/cmudlnmwj001y428n3c0x27lq lang=ar dir=rtl → OK
 F1-1 VERDICT: PASS — 16/16 correct lang+dir
 
 ## F3-2 — dish names in raw SSR HTML (snapshots, no JS)
@@ -54,8 +54,8 @@ after selecting 2026-09-30: disabled slot buttons=1 labels=["19:00Sold out"]
 F4-2 VERDICT: PASS — live availability loads; remaining:0 renders disabled with sold-out label
 
 ## F5-1 / F5-2 — journey horizontal scrub + RTL mirrored track
-/en track transforms @0/+900/+1800 scroll: ["matrix(1, 0, 0, 1, 0, 0)","matrix(1, 0, 0, 1, -468.982, 0)","matrix(1, 0, 0, 1, -1740.04, 0)"]
-/ar track transforms @0/+900/+1800 scroll: ["matrix(1, 0, 0, 1, 0, 0)","matrix(1, 0, 0, 1, 1125.45, 0)","matrix(1, 0, 0, 1, 2404.41, 0)"]
+/en track transforms @0/+900/+1800 scroll: ["matrix(1, 0, 0, 1, 0, 0)","matrix(1, 0, 0, 1, -468.829, 0)","matrix(1, 0, 0, 1, -1760.37, 0)"]
+/ar track transforms @0/+900/+1800 scroll: ["matrix(1, 0, 0, 1, 0, 0)","matrix(1, 0, 0, 1, 1125.47, 0)","matrix(1, 0, 0, 1, 2420.65, 0)"]
 F5-1 VERDICT: PASS — track translates under pinned scrub
 F5-2 VERDICT: PASS — RTL track mirrors (translate sign opposite LTR)
 
@@ -76,7 +76,7 @@ F5-4 VERDICT: PASS — all three acts in raw SSR HTML both locales
 /en/gallery canvases=0 → OK
 /en/private-dining canvases=0 → OK
 /en/contact canvases=0 → OK
-/en/confirmation/cmudkoe51001y2g2v07zy7mbw canvases=0 → OK
+/en/confirmation/cmudlnmwj001y428n3c0x27lq canvases=0 → OK
 /ar/ canvases=1 → OK
 /ar/menu canvases=0 → OK
 /ar/reserve canvases=0 → OK
@@ -84,7 +84,7 @@ F5-4 VERDICT: PASS — all three acts in raw SSR HTML both locales
 /ar/gallery canvases=0 → OK
 /ar/private-dining canvases=0 → OK
 /ar/contact canvases=0 → OK
-/ar/confirmation/cmudkoe51001y2g2v07zy7mbw canvases=0 → OK
+/ar/confirmation/cmudlnmwj001y428n3c0x27lq canvases=0 → OK
 F6-5 VERDICT: PASS - no route ever exceeds one canvas
 
 ## F7-2 — below-fold gallery images not fetched before scroll (@375, BOTH network profiles)
