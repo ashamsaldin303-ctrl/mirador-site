@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/specs/keyboard-lightbox--en.log
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-21T12:09:43.844Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T00:34:17.596Z)

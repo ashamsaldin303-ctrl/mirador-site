@@ -1,9 +1,9 @@
 # F11-1
 
-- check: curl -i + screenshot
+- check: curl -i + screenshot (prod E22 re-proven)
 - expected: designed 404 surface + HTTP 404
-- actual: designed copy 6/6 + noindex + screenshot; status 200-in-dev = documented Turbopack dev quirk (B4) — prod commits 404
-- verdict: PASS*
-- evidence: /evidence/http/en-nonexistent.txt + http/ar-nonexistent.txt + F11/404--designed--1440.png
+- actual: EXECUTED — /{en,ar}/nonexistent → HTTP 404 + designed floor + noindex on the prod surface (R3/B-1; confirmation bad-ids honest too)
+- verdict: PASS
+- evidence: /evidence/prod-run/http/ + r1/E41/dev-pairs.log
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-21T12:09:43.845Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T00:34:17.596Z)

@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/audits/audits-run.log + F1-4/
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-21T12:09:43.843Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T00:34:17.595Z)

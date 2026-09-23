@@ -1,10 +1,9 @@
-# F3-5 (re-shot, prompt-4 R6/E50)
+# F3-5
 
-- check: filter evidence pair, REAL this time
-- expected: 28 rows → 4 vegan rows + aria-live announcement change + md5s differ
-- actual (dev run 2026-09-22T23:20Z): EN 28→4 "28 dishes"→"4 dishes" md5s differ · AR 28→4 «28 أطباق»→«4 أطباق» md5s differ
+- check: filter-pair spec (RE-SHOT, prompt-4 E50)
+- expected: 28→4 rows + aria-live change + md5s differ
+- actual: EN+AR: 28→4 rows, announcements change, pair md5s differ; the byte-identical round-1 pair deleted
 - verdict: PASS
-- evidence: /evidence/specs/filter-pair--{en,ar}.log + /evidence/F3-5/menu--{en,ar}--{unfiltered,filtered-vegan}--1440.png
-- history: the round-1 pair (menu--en--filter-{mid,after}.png) was byte-identical (md5 68182B×2) — DELETED and replaced by this re-shoot (spec: evidence/tools/filter-pair.ts)
+- evidence: /evidence/specs/filter-pair--{en,ar}.log + F3-5/menu--{en,ar}--{unfiltered,filtered-vegan}--1440.png
 
-(machine-generated from the E50 re-shoot — 2026-09-22)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T00:34:17.596Z)

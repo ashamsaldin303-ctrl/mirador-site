@@ -18,9 +18,11 @@ export function RouteAnnouncer() {
       initial.current = false;
       return; // no announcement on first load — the load itself speaks
     }
-    // soft-nav: the document title has swapped by the time this effect runs
-    const title = document.title;
-    setAnnouncement(title || pathname);
+    // soft-nav: the document title has swapped by the time this effect runs.
+    // One-shot external-store sync (document.title per pathname change) — not
+    // derived state, no cascading renders (runs once per route change).
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- external sync, one-shot per route
+    setAnnouncement(document.title || pathname);
   }, [pathname, setAnnouncement]);
 
   return (

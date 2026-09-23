@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/F11/state-matrix/gallery--image-fail--768.png
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-21T12:09:43.844Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T00:34:17.596Z)

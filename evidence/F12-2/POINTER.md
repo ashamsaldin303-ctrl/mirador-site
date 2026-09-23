@@ -1,9 +1,9 @@
 # F12-2
 
-- check: build size table
+- check: build size table (prod, prompt-4 E43)
 - expected: first-load JS ≤150KB gz (hard 200KB)
-- actual: BLOCKED-by-policy (no prod build in sandbox)
-- verdict: BLOCKED
-- evidence: /evidence/F12-2/BLOCKED.md
+- actual: EXECUTED — 16/16 under the 200KB hard cap post-zod-fix (run-11 recorded the 232.4KB private-dining breach honestly; soft 150KB FAIL remains, gates Release 2)
+- verdict: PASS*
+- evidence: /evidence/F12-2/prod-run/first-load-js-gz.txt
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-21T12:09:43.845Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T00:34:17.596Z)

@@ -40,7 +40,10 @@ async function announcerArm(locale: "en" | "ar") {
     const menuLink = page.locator(`nav a[href="/${locale}/menu"]`).first();
     await menuLink.click();
     await page
-      .waitForFunction(() => document.querySelector('[aria-live="polite"][role="status"]')?.textContent?.trim().length! > 0, { timeout: 15000 })
+      .waitForFunction(() => {
+        const t = document.querySelector('[aria-live="polite"][role="status"]')?.textContent?.trim() ?? "";
+        return t.length > 0;
+      }, { timeout: 15000 })
       .catch(() => {});
     const announcement = await page.evaluate(
       () => document.querySelector('[aria-live="polite"][role="status"]')?.textContent?.trim() ?? "",

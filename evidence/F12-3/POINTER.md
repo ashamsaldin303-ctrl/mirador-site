@@ -1,9 +1,9 @@
 # F12-3
 
-- check: handoff log
+- check: handoff log (prod-run Q4j, run-11+)
 - expected: fresh clone + install/migrate/seed/dev clean
-- actual: NOT RUN here — would reset the live daemon DB; exact cold-start commands in REPLAY.md §handoff
-- verdict: N/A-env
-- evidence: /evidence/REPLAY.md §handoff
+- actual: EXECUTED — cold-start handoff step: fresh clone → migrate → seed → GET /en 200
+- verdict: PASS
+- evidence: /evidence/prod-run/cold-start/
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-21T12:09:43.845Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T00:34:17.596Z)

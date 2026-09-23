@@ -6,4 +6,4 @@
 - verdict: PARTIAL
 - evidence: /evidence/specs/dom-ac-probes.log
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-21T12:09:43.845Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T00:34:17.596Z)
