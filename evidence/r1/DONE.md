@@ -9,6 +9,8 @@
 
 **E34–E78, E80, E81: PASS (raw evidence committed). E79: FAIL — three failing cells per the raw gates (/en LCP=3522ms · /ar LCP=4056ms · /ar performance=85 score:false — the current raw, Actions run 27; runs 25/26 recorded the same three cells at 3340/3904/87 and 3349/3888/87), diagnosed below. The contract's DONE definition is therefore NOT met; this report is the honest close of the round per §8/N16/N24 — every number regenerates from the run's raw artifacts.**
 
+**Instrument standing (prompt-5 R5/E87): Option A stands — the lantern (simulate) is the sanctioned LCP instrument and NO instrument change has occurred; the devtools-method battery is recorded beside (never instead, N27) in `medians.md`'s RECORDED-NOT-GATE block, and `docs/instrument-decision.md` awaits the human signature — unsigned.**
+
 ## Per-AC table (E34–E81)
 
 | AC | Verdict | Evidence (raw path) |

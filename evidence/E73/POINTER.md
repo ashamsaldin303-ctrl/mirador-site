@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/content/{en,ar}.json + git log ee82a23
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T17:38:18.462Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T17:39:49.897Z)
