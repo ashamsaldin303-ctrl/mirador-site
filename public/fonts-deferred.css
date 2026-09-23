@@ -1,0 +1,49 @@
+/* MIRADOR — deferred full display families (R13/E79, run-23 lesson).
+   Loaded via <link rel="stylesheet" media="print" onload="this.media='all'">
+   in the [locale] layout — print-media stylesheets are non-render-blocking,
+   so these faces never enter the LCP's dependency graph; they fetch after
+   window load and swap the BELOW-FOLD display text (h2/h3) from the
+   metric-matched fallbacks. The @font-face bodies are byte-identical to the
+   rules that lived in globals.css (the design-token contract file keeps the
+   eager faces + the stacks + the fallbacks). */
+/* EN display: Fraunces variable (wght 400–600, latin) */
+@font-face {
+  font-family: "Fraunces";
+  src: url("/fonts/fraunces-var-latin.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-007E, U+00A0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026;
+}
+@font-face {
+  font-family: "Amiri";
+  src: url("/fonts/amiri-400-arabic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: "Amiri";
+  src: url("/fonts/amiri-400-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-007E, U+00A0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026;
+}
+@font-face {
+  font-family: "Amiri";
+  src: url("/fonts/amiri-700-arabic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: "Amiri";
+  src: url("/fonts/amiri-700-latin.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-007E, U+00A0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026;
+}

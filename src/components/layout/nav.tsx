@@ -95,6 +95,13 @@ export function Nav({ locale, strings }: { locale: Locale; strings: NavStrings }
         <div className="flex items-center gap-2">
           <Link
             href={mirroredPath(pathname, otherLocale(locale))}
+            // R13/E79: NO prefetch — the switcher flips the whole page's
+            // language; its RSC payload carries the OTHER locale's font
+            // preloads, and React's head adoption pulls them into THIS
+            // page's request queue mid-load (amiri-wordmark + 29KB
+            // plex-arabic on the EN door — inside the modeled LCP path on
+            // runs 21-23). A locale flip is a full navigation anyway.
+            prefetch={false}
             className="inline-flex min-h-11 items-center px-3 text-small text-muted transition-colors duration-200 hover:text-ink"
             aria-label={strings.localeSwitch}
           >
@@ -141,6 +148,7 @@ export function Nav({ locale, strings }: { locale: Locale; strings: NavStrings }
                 })}
                 <Link
                   href={mirroredPath(pathname, otherLocale(locale))}
+                  prefetch={false}
                   onClick={() => setOpen(false)}
                   className="flex min-h-11 items-center py-3 text-body text-copper"
                 >

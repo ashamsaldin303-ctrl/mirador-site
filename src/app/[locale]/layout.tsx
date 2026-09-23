@@ -107,6 +107,23 @@ export default async function LocaleLayout({
           crossOrigin="anonymous"
         />
       ))}
+      {/* R13/E79 (run-23 lesson): the FULL display families (Fraunces + Amiri,
+          below-fold h2/h3 text) ride a print-media stylesheet that flips to
+          all once fetched — non-render-blocking, so the LCP's dependency
+          graph carries only the eager above-fold faces. The stacks fall to
+          the metric-matched fallbacks until the flip (box-stable, CLS-safe).
+          The flip is wired at PARSE TIME by the inline script below (a
+          hydration-attached onLoad would MISS the load event on slow
+          devices — the sheet loads well before React hydrates). CSP: the
+          inline script rides script-src 'unsafe-inline' — the documented
+          Next Flight bootstrap allowance. */}
+      <link id="fonts-deferred" rel="stylesheet" href="/fonts-deferred.css" media="print" />
+      <script
+        dangerouslySetInnerHTML={{
+          __html:
+            "(function(){var d=document.getElementById('fonts-deferred');d.addEventListener('load',function(){d.media='all'});if(d.sheet)d.media='all';})();",
+        }}
+      />
       <body className="min-h-dvh bg-night font-sans text-ink">
         {/* P-028 (prompt-4 R11): the route announcer — soft navigations speak
             their landing title to screen readers (the aural route change). */}

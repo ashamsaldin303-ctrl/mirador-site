@@ -56,15 +56,6 @@
   font-display: swap;
   unicode-range: U+0627, U+062F, U+0631, U+0645, U+0648, U+064A; /* ا د ر م و ي */
 }
-/* EN display: Fraunces variable (wght 400–600, latin) */
-@font-face {
-  font-family: "Fraunces";
-  src: url("/fonts/fraunces-var-latin.woff2") format("woff2");
-  font-weight: 400 600;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0000-007E, U+00A0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026;
-}
 /* R9 (prompt-4 P-082/P-025): THE WORDMARK FACES — "MIRADOR" (Fraunces subset,
    7,176B) and "ميرادور" (Amiri subset, 6,020B). Narrow unicode-ranges: the
    browser fetches them only for the lockup's exact glyphs; the full display
@@ -80,44 +71,23 @@
    the poster/FCP instead of the font tail. If the hero line's copy ever
    changes, regenerate the subsets (scripts/subset-fonts-r9.sh §3) — a missed
    glyph simply falls through to the full family (safe degradation). */
+/* R13/E79 (run-23 lesson — the deferred full display families): the FULL
+   Fraunces + Amiri faces serve BELOW-FOLD display text (h2/h3 — journey acts,
+   reserve band, section headings) — they are declared in
+   /fonts-deferred.css, loaded via a media="print"→all stylesheet that flips
+   after window load (the act-1-poster-lazy pattern applied to fonts).
+   Lantern models a text-LCP against the page's render-blocking font SET
+   (serialized per-request latency: ~110KB EN / ~190KB AR of full faces held
+   the H1's modeled LCP at ~3.6-4.1s while the OBSERVED LCP was 152ms ==
+   FCP). The stacks above still name "Fraunces"/"Amiri" — before the flip
+   they resolve to the metric-matched fallbacks (box-stable, CLS-safe);
+   after it, the full faces arrive and swap. Above-fold type (hero H1,
+   wordmark lockup, body) rides the eager faces above. */
 /* EN body: Instrument Sans variable (wght 400–600, latin) */
 @font-face {
   font-family: "Instrument Sans";
   src: url("/fonts/instrument-sans-var-latin.woff2") format("woff2");
   font-weight: 400 600;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0000-007E, U+00A0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026;
-}
-/* AR display: Amiri 400 + 700 (corpus-subset arabic + latin for digits/«»/punct) */
-@font-face {
-  font-family: "Amiri";
-  src: url("/fonts/amiri-400-arabic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
-}
-@font-face {
-  font-family: "Amiri";
-  src: url("/fonts/amiri-400-latin.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0000-007E, U+00A0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026;
-}
-@font-face {
-  font-family: "Amiri";
-  src: url("/fonts/amiri-700-arabic.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
-}
-@font-face {
-  font-family: "Amiri";
-  src: url("/fonts/amiri-700-latin.woff2") format("woff2");
-  font-weight: 700;
   font-style: normal;
   font-display: swap;
   unicode-range: U+0000-007E, U+00A0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026;
