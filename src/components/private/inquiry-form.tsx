@@ -224,7 +224,7 @@ export function InquiryForm({
 
   if (referenceId !== null) {
     return (
-      <div role="status" className="flex max-w-xl flex-col gap-6">
+      <div role="status" data-inquiry-success className="flex max-w-xl flex-col gap-6">
         <p className="font-sans text-body-lg text-ink/90">{success.message}</p>
         <p className="text-small text-muted">
           {success.referenceLabel}: <span dir="ltr">{referenceId.slice(0, 8)}</span>

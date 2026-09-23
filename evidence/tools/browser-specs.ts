@@ -227,10 +227,14 @@ async function inquiry() {
     await page.fill('input[name="phone"]', "+963 999 00902");
     await page.fill('textarea[name="message"]', "Evidence-run inquiry happy path: a quiet table for a private celebration.");
     await page.getByRole("button", { name: "Send inquiry" }).click();
-    const status = page.locator('[role="status"]');
+    // run-15 lesson: the P-028 route announcer is also role="status" (sr-only,
+    // first in DOM, empty at rest) — a bare [role="status"] waitFor resolved on
+    // the ANNOUNCER and read "" while the real success region rendered fine.
+    // Target the inquiry success region via its dedicated hook.
+    const status = page.locator("[data-inquiry-success]");
     await status.waitFor({ state: "visible", timeout: 20000 });
     const statusText = await status.innerText();
-    const refText = await page.locator('[role="status"] p').nth(1).innerText().catch(() => "");
+    const refText = await page.locator("[data-inquiry-success] p").nth(1).innerText().catch(() => "");
     log(`# success status (role=status): "${statusText.replace(/\n/g, " | ")}"`);
     log(`# reference line: "${refText.replace(/\n/g, " ")}"`);
     const row = await prisma.inquiry.findFirst({ where: { phone: "+96399900902" }, orderBy: { createdAt: "desc" } });
