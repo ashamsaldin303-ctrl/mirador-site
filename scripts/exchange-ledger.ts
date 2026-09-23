@@ -19,7 +19,9 @@ import { gzipSync } from "node:zlib";
 import { join } from "node:path";
 
 const FONTS = "public/fonts";
-const NEXT_CSS = ".next/static/css";
+// Next 16 emits the compiled route CSS under .next/static/chunks (Turbopack)
+// and/or .next/static/css (the webpack layout) — the instrument walks both.
+const NEXT_CSS_DIRS = [".next/static/css", ".next/static/chunks"];
 const CSS_RECEIPT = "evidence/prod-run/css-cells.txt";
 const CSS_BASELINE = "evidence/ui/css-baseline.txt";
 // Option B (signed 2026-09-23): +5.5KB TOTAL additions — cumulative = the
@@ -48,10 +50,9 @@ for (const f of readdirSync(FONTS)) fontDisk += statSync(join(FONTS, f)).size;
 // — P6/R9: the CSS-cell measurement (the compiled route CSS, gz) —
 // On the Actions runner the production build precedes this script; locally
 // the build is forbidden (the sandbox law) and the cell carries the last
-// measured receipt. gz via Bun.gzipSync (deterministic level default).
+// measured receipt. gz via node:zlib gzipSync (deterministic default level).
 type CssFile = { file: string; raw: number; gz: number };
 function measureCss(): CssFile[] | null {
-  if (!existsSync(NEXT_CSS)) return null;
   const out: CssFile[] = [];
   const walk = (dir: string) => {
     for (const e of readdirSync(dir, { withFileTypes: true })) {
@@ -59,11 +60,13 @@ function measureCss(): CssFile[] | null {
       if (e.isDirectory()) walk(p);
       else if (e.name.endsWith(".css")) {
         const buf = readFileSync(p);
-        out.push({ file: p.replace(/^\.next\/static\/css\//, ""), raw: buf.length, gz: gzipSync(buf).length });
+        out.push({ file: p.replace(/^\.next\/static\//, ""), raw: buf.length, gz: gzipSync(buf).length });
       }
     }
   };
-  walk(NEXT_CSS);
+  for (const dir of NEXT_CSS_DIRS) {
+    if (existsSync(dir)) walk(dir);
+  }
   return out.length > 0 ? out.sort((a, b) => a.file.localeCompare(b.file)) : null;
 }
 
