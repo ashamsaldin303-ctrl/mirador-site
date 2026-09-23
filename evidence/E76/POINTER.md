@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/r1/E76/audit-motion.log
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T16:52:25.538Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T16:55:12.271Z)

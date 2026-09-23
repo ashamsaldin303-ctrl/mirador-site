@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/probes/scroll-width--375.log
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T16:52:25.538Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T16:55:12.270Z)

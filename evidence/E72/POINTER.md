@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/package.json + bun.lock + src/app/globals.css
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T16:52:25.538Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T16:55:12.271Z)
