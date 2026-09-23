@@ -1,8 +1,8 @@
-# cold-start handoff (F12-3) — machine-generated 2026-09-23T23:18:09Z
+# cold-start handoff (F12-3) — machine-generated 2026-09-23T23:47:36Z
 # fresh clone of ashamsaldin303-ctrl/mirador-site → bun install · migrate · seed · dev → GET /en 200
 Cloning into '/tmp/coldstart'...
-Updating files:  67% (728/1086)Updating files:  68% (739/1086)Updating files:  69% (750/1086)Updating files:  70% (761/1086)Updating files:  71% (772/1086)Updating files:  72% (782/1086)Updating files:  73% (793/1086)Updating files:  74% (804/1086)Updating files:  75% (815/1086)Updating files:  76% (826/1086)Updating files:  77% (837/1086)Updating files:  78% (848/1086)Updating files:  79% (858/1086)Updating files:  80% (869/1086)Updating files:  81% (880/1086)Updating files:  82% (891/1086)Updating files:  83% (902/1086)Updating files:  84% (913/1086)Updating files:  85% (924/1086)Updating files:  86% (934/1086)Updating files:  87% (945/1086)Updating files:  88% (956/1086)Updating files:  89% (967/1086)Updating files:  90% (978/1086)Updating files:  91% (989/1086)Updating files:  92% (1000/1086)Updating files:  93% (1010/1086)Updating files:  94% (1021/1086)Updating files:  95% (1032/1086)Updating files:  96% (1043/1086)Updating files:  97% (1054/1086)Updating files:  98% (1065/1086)Updating files:  99% (1076/1086)Updating files: 100% (1086/1086)Updating files: 100% (1086/1086), done.
-clone HEAD: c5aa1abfa06bce2898dcb3a8f4ae04ff4e649ea0
+Updating files:  67% (746/1110)Updating files:  68% (755/1110)Updating files:  69% (766/1110)Updating files:  70% (777/1110)Updating files:  71% (789/1110)Updating files:  72% (800/1110)Updating files:  73% (811/1110)Updating files:  74% (822/1110)Updating files:  75% (833/1110)Updating files:  76% (844/1110)Updating files:  77% (855/1110)Updating files:  78% (866/1110)Updating files:  79% (877/1110)Updating files:  80% (888/1110)Updating files:  81% (900/1110)Updating files:  82% (911/1110)Updating files:  83% (922/1110)Updating files:  84% (933/1110)Updating files:  85% (944/1110)Updating files:  86% (955/1110)Updating files:  87% (966/1110)Updating files:  88% (977/1110)Updating files:  89% (988/1110)Updating files:  90% (999/1110)Updating files:  91% (1011/1110)Updating files:  92% (1022/1110)Updating files:  93% (1033/1110)Updating files:  94% (1044/1110)Updating files:  95% (1055/1110)Updating files:  96% (1066/1110)Updating files:  97% (1077/1110)Updating files:  98% (1088/1110)Updating files:  99% (1099/1110)Updating files: 100% (1110/1110)Updating files: 100% (1110/1110), done.
+clone HEAD: 8a1816e74a4ecf9dd4593c4638cf5960bc200857
 bun install v1.3.14 (0d9b296a)
 
 + @axe-core/playwright@4.13.0
@@ -37,7 +37,7 @@ bun install v1.3.14 (0d9b296a)
 + three@0.186.0
 + zod@4.3.5
 
-448 packages installed [2.74s]
+448 packages installed [2.28s]
 $ prisma generate
 warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).
 For more information, see: https://pris.ly/prisma-config
@@ -54,7 +54,7 @@ Prisma schema loaded from prisma/schema.prisma
 │    npm i @prisma/client@latest                          │
 └─────────────────────────────────────────────────────────┘
 
-✔ Generated Prisma Client (v6.19.2) to ./node_modules/@prisma/client in 68ms
+✔ Generated Prisma Client (v6.19.2) to ./node_modules/@prisma/client in 52ms
 
 Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
 

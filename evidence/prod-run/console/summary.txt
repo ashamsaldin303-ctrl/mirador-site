@@ -1,4 +1,4 @@
-# console capture — machine-generated 2026-09-23T23:05:56.714Z
+# console capture — machine-generated 2026-09-23T23:35:55.970Z
 # gate (F12-5): zero console ERRORS on all 8 paths × 2 locales
 # note: dev-mode info/warning noise (HMR, React DevTools hint, THREE deprecation) is recorded raw and NOT counted as errors
 
@@ -16,7 +16,7 @@
 
 ## /en/contact — messages: 0 total, ERRORS: 0
 
-## /en/confirmation/cmuepli9z001y426esmuwve36 — messages: 0 total, ERRORS: 0
+## /en/confirmation/cmueqod4u001y421y0ncqx93w — messages: 0 total, ERRORS: 0
 
 ## /ar/ — messages: 0 total, ERRORS: 0
 
@@ -32,7 +32,7 @@
 
 ## /ar/contact — messages: 0 total, ERRORS: 0
 
-## /ar/confirmation/cmuepli9z001y426esmuwve36 — messages: 0 total, ERRORS: 0
+## /ar/confirmation/cmueqod4u001y421y0ncqx93w — messages: 0 total, ERRORS: 0
 
 TOTAL console ERRORS across 16 pages: 0
 GATE F12-5: PASS — zero console errors on 8 paths × 2 locales
