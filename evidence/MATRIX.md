@@ -1,6 +1,6 @@
 # MIRADOR — verification matrix (prompt-2 F-rows + prompt-4 E-rows + prompt-5 close-out rows, N25-regenerated)
 
-Generated from executed runs 2026-09-23T16:47:36.246Z — every row cites its run's output path (N20); the path self-check (E83) proves every citation resolves.
+Generated from executed runs 2026-09-23T16:52:25.537Z — every row cites its run's output path (N20); the path self-check (E83) proves every citation resolves.
 
 AC-ID | check (command/script) | expected | actual | PASS/FAIL | evidence path (/evidence/…)
 ---|---|---|---|---|---
@@ -119,12 +119,13 @@ E80 | MATRIX regenerated from runs (N25) | every row cites raw; honest re-labels
 E81 | DONE report | per-AC table + LANDED registry + known gaps | evidence/r1/DONE.md committed with the exit-gate results | PASS | r1/DONE.md
 E82 | ACK posted before the first close-out commit | six items verbatim (§2 / Appendix A) | evidence/r1/E82-ACK.md on record (commit 675df08 precedes all close-out code); seven contradictions registered, incl. 6.1 judgment-r1.md/enhancement-plan.md not delivered as files — the decision form carries the contract-side record, never fabricated verbatim words | PASS | r1/E82-ACK.md
 E83 | the ledger repairs (J-1..J-6) land in the generators | path self-check green · MATRIX+POINTERS regenerated · DONE rows corrected · verify-docs green with the E79 probe | the generator's path-resolution self-check armed (fails on any unresolving citation — the judge's path-walk is now the generator's own gate); E79's three failing cells quoted verbatim in MATRIX + DONE (/en LCP=3340ms · /ar LCP=3904ms · /ar performance=87 score:false); E43 units synced to the raw table (177.2KB KiB); F6-1 relabeled to the H1 truth in the matrix AND lighthouse-summary.ts's E28 gate; the soft line parameterized to the 165KB standing default; J-3 citations re-pointed to the prod-run raws; verify-docs D1/D2 + PROBE-2 (the J-1 antibody) green on HEAD | PASS | r1/E83/ledger-repairs.md
+E84 | the lantern floor derivation — machine-checked from the committed LHRs | script + doc committed · reproducible cold · every number cites its LHR path | evidence/tools/lcp-floor.ts regenerates docs/lcp-floor-derivation.md from the 48 committed simulate LHRs: observed==FCP 48/48 (127–178ms) · the render-blocking chains itemized (EN: CSS+2 chain fonts, 4 queued faces / AR: CSS+7 chain fonts) with bytes+tiers · Lighthouse's own phase attribution (Load Delay 0 · Load Time 0 · Render Delay 86–88%) · the slot arithmetic (EN 5×562.5+72ms · AR 6×562.5+17ms) · the floors (EN 1653ms · AR 1598ms) · the closing requirement (≤3 post-TTFB slots → defer 3 non-LCP faces on EN · 4 on AR — the conversion-surface typography trade) · AR−EN = +562.5ms exactly (one serialized face) · the run-20 control regenerated from its own LHR (all LCP resources in observed wave 1 ≤329ms, simulated LCP still 3647ms) | PASS | tools/lcp-floor.ts + ../../docs/lcp-floor-derivation.md
 
-## Summary — 115 rows (65 F + 50 E)
+## Summary — 116 rows (65 F + 51 E)
 
 | verdict | count | meaning |
 |---|---|---|
-| PASS | 109 | check ran green with committed raw output |
+| PASS | 110 | check ran green with committed raw output |
 | PASS* | 3 | green where runnable; named component BLOCKED-by-policy (see BLOCKED.md) |
 | BLOCKED | 0 | unproducible in this sandbox (single root cause: production builds forbidden) |
 | PARTIAL | 1 | copy verified in source; live render needs fault injection that would violate N18 |
