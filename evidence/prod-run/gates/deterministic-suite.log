@@ -7,3 +7,10 @@ GATE G6 2nd runtime: PASS (0 hits)
 GATE G7 transition-all: PASS (0 hits)
 --- tsc --noEmit (whole repo) ---
 --- eslint . --max-warnings 0 ---
+
+/home/runner/work/mirador-site/mirador-site/src/app/[locale]/layout.tsx
+  120:7  warning  Do not include stylesheets manually. See: https://nextjs.org/docs/messages/no-css-tags  @next/next/no-css-tags
+
+✖ 1 problem (0 errors, 1 warning)
+
+ESLint found too many warnings (maximum: 0).
