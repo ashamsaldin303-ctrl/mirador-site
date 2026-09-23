@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/MATRIX.md
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T16:55:12.271Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T17:17:48.365Z)

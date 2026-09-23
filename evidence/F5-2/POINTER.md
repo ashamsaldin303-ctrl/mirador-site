@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/specs/dom-ac-probes.log + F1-5/
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T16:55:12.270Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T17:17:48.364Z)

@@ -7,7 +7,7 @@
 
 > DONE = E34–E81 all PASS with regenerated raw evidence + the E79 exit-gate run green + the ACK on record. When every gate passes — **STOP**. A failing threshold is reported as FAIL with diagnosis — never polished, never relabeled, never re-surfaced.
 
-**E34–E78, E80, E81: PASS (raw evidence committed). E79: FAIL — three failing cells per the raw gates (/en LCP=3340ms · /ar LCP=3904ms · /ar performance=87 score:false), diagnosed below. The contract's DONE definition is therefore NOT met; this report is the honest close of the round per §8/N16/N24 — every number regenerates from the run's raw artifacts.**
+**E34–E78, E80, E81: PASS (raw evidence committed). E79: FAIL — three failing cells per the raw gates (/en LCP=3349ms · /ar LCP=3888ms · /ar performance=87 score:false — the current raw, Actions run 26; the exit-gate run 25 recorded 3340/3904, same three cells), diagnosed below. The contract's DONE definition is therefore NOT met; this report is the honest close of the round per §8/N16/N24 — every number regenerates from the run's raw artifacts.**
 
 ## Per-AC table (E34–E81)
 
@@ -58,7 +58,7 @@
 | E76 audit:motion M-2/3/4/6 | PASS | `r1/E76/audit-motion.log` |
 | E77 counters + zero RUM | PASS | `prod-run/house/counters.json` |
 | E78 audit:twins | PASS | `r1/E78/audit-twins.log` |
-| **E79 THE EXIT GATE** | **FAIL** | `prod-run/lighthouse/medians.md` — CLS 0.0195/0.0000 · TBT 72/90ms all PASS; **THREE failing cells per the raw gates: /en LCP=3340ms (lcp:false) · /ar LCP=3904ms (lcp:false) · /ar performance=87 (score:false, below the ≥90 gate — the LCP weight drives the AR score down; EN performance=92 passes).** Every other exit-gate component green in the same dispatch: 16/16 budgets, axe 0/0, honest 404, race guard, 0 spinners, six organs, ΣΔ≤0 ledger |
+| **E79 THE EXIT GATE** | **FAIL** | `prod-run/lighthouse/medians.md` (current raw = Actions run 26) — CLS 0.0195/0.0000 · TBT 80/87ms all PASS; **THREE failing cells per the raw gates: /en LCP=3349ms (lcp:false) · /ar LCP=3888ms (lcp:false) · /ar performance=87 (score:false, below the ≥90 gate — the LCP weight drives the AR score down; EN performance=92 passes; the exit-gate run 25 recorded the same three cells at 3340/3904/87).** Every other exit-gate component green in the same dispatch: 16/16 budgets, axe 0/0, honest 404, race guard, 0 spinners, six organs, ΣΔ≤0 ledger |
 | E80 MATRIX from runs | PASS | `evidence/MATRIX.md` (machine-regenerated; 113 rows, every row cites raw) |
 | E81 DONE report | PASS | this file |
 

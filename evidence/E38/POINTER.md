@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/r1/E37-E38/doc-truth.md + .github/workflows/ci.yml
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T16:55:12.270Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T17:17:48.365Z)

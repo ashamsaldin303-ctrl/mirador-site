@@ -306,8 +306,13 @@ jobs:
           mkdir -p .lighthouseci-lantern
           mv .lighthouseci/lhr-*.json .lighthouseci-lantern/ 2>/dev/null || true
           mv localhost_*.trace.json .lighthouseci-lantern/ 2>/dev/null || true
-          # instrument 2 — the parallel devtools-method (RECORDED, never the gate)
-          bunx @lhci/cli@0.15.1 autorun --config=.lighthouserc-devtools.json 2>&1 | tee lhci-devtools-run.log
+          # instrument 2 — the parallel devtools-method (RECORDED, never the gate).
+          # `collect`, NOT `autorun`: autorun applies LHCI's DEFAULT assertions
+          # even when the config has no assert section (run-26 lesson: the
+          # defaults failed on max-potential-fid/render-blocking → exit 1 → the
+          # step died before the rename → the E86 block came up empty). collect
+          # never asserts — the parallel instrument records, it does not gate.
+          bunx @lhci/cli@0.15.1 collect --config=.lighthouserc-devtools.json 2>&1 | tee lhci-devtools-run.log
           mkdir -p .lighthouseci-devtools
           mv .lighthouseci/lhr-*.json .lighthouseci-devtools/ 2>/dev/null || true
           mv localhost_*.trace.json .lighthouseci-devtools/ 2>/dev/null || true
