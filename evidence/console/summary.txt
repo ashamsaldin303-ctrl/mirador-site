@@ -1,4 +1,4 @@
-# console capture — machine-generated 2026-09-21T11:42:06.886Z
+# console capture — machine-generated 2026-09-23T02:23:09.280Z
 # gate (F12-5): zero console ERRORS on all 8 paths × 2 locales
 # note: dev-mode info/warning noise (HMR, React DevTools hint, THREE deprecation) is recorded raw and NOT counted as errors
 
@@ -30,7 +30,7 @@
   [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
   [log] [HMR] connected
 
-## /en/confirmation/cmuax6xbe001ypxqpcebj2fv2 — messages: 2 total, ERRORS: 0
+## /en/confirmation/cmud92doz001ylhojwo7lgz5b — messages: 2 total, ERRORS: 0
   [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
   [log] [HMR] connected
 
@@ -62,7 +62,7 @@
   [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
   [log] [HMR] connected
 
-## /ar/confirmation/cmuax6xbe001ypxqpcebj2fv2 — messages: 2 total, ERRORS: 0
+## /ar/confirmation/cmud92doz001ylhojwo7lgz5b — messages: 2 total, ERRORS: 0
   [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
   [log] [HMR] connected
 
