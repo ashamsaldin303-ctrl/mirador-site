@@ -167,6 +167,9 @@ jobs:
       - name: "Q4b4: the readers suite (E75) — Hands/Ears/Calm ×4 routes ×2 locales"
         run: bun evidence/tools/readers.ts
 
+      - name: "Q4b6: the route announcer + handrail (E70) — soft-nav speaks"
+        run: bun evidence/tools/route-announcer.ts
+
       - name: "Q4b5: kitchen counters live (E77) — the house counts its own events"
         run: |
           set -eo pipefail

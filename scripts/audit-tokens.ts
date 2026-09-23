@@ -20,11 +20,13 @@ const EXPECTED: [string, string][] = [
   ["--radius-sm: 2px", "§5.4 radius sm"],
   ["--radius: 4px", "§5.4 radius"],
   ["--radius-lg: 8px", "§5.4 radius lg"],
-  // §5.3 font variables (exact names)
-  ['--font-display-en: "Fraunces", serif', "§5.3 font var"],
-  ['--font-display-ar: "Amiri", serif', "§5.3 font var"],
-  ['--font-body-en: "Instrument Sans", sans-serif', "§5.3 font var"],
-  ['--font-body-ar: "IBM Plex Sans Arabic", sans-serif', "§5.3 font var"],
+  // §5.3 font variables (exact names; P-082's metric-matched fallback face
+  // sits between the real family and the generic — the CLS-kill addition,
+  // script-generated — the audit accepts it as part of the stack)
+  ['--font-display-en: "Fraunces", "Fraunces Fallback", serif', "§5.3 font var (+P-082 fallback)"],
+  ['--font-display-ar: "Amiri", "Amiri Fallback", serif', "§5.3 font var (+P-082 fallback)"],
+  ['--font-body-en: "Instrument Sans", "Instrument Sans Fallback", sans-serif', "§5.3 font var (+P-082 fallback)"],
+  ['--font-body-ar: "IBM Plex Sans Arabic", "IBM Plex Sans Arabic Fallback", sans-serif', "§5.3 font var (+P-082 fallback)"],
   // §5.3 type scale (fluid clamps, verbatim)
   ["--text-display-xl: clamp(3.5rem, 9vw, 10rem)", "§5.3 display XL"],
   ["--text-h1: clamp(2.75rem, 6vw, 8.75rem)", "§5.3 H1"],

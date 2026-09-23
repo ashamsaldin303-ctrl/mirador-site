@@ -9,6 +9,7 @@ import { siteUrl } from "@/lib/venue";
 import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
+import { RouteAnnouncer } from "@/components/layout/route-announcer";
 
 export const viewport: Viewport = {
   themeColor: "rgb(10 10 11)", // --color-night, rgb form (G2-safe)
@@ -107,6 +108,9 @@ export default async function LocaleLayout({
         />
       ))}
       <body className="min-h-dvh bg-night font-sans text-ink">
+        {/* P-028 (prompt-4 R11): the route announcer — soft navigations speak
+            their landing title to screen readers (the aural route change). */}
+        <RouteAnnouncer />
         <SmoothScroll>
           <div className="flex min-h-dvh flex-col">
             <a
