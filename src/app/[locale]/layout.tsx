@@ -142,6 +142,7 @@ export default async function LocaleLayout({
                 reservationsLabel: dict["footer.reservationsLabel"],
                 sypLine: dict["footer.sypLine"],
                 whatsappCta: dict["contact.whatsappCta"],
+                whatsappNote: dict["contact.whatsappNote"],
               }}
             />
           </div>

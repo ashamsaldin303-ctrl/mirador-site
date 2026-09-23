@@ -84,7 +84,7 @@ export default async function ConfirmationPage({
         slot={reservation.slot}
         tableNumber={reservation.tableNumber}
       />
-      <WhatsAppConfirm href={href} label={dict["confirm.whatsapp"]} />
+      <WhatsAppConfirm href={href} label={dict["confirm.whatsapp"]} note={dict["contact.whatsappNote"]} />
       <p className="text-small text-muted">{dict["confirm.note"]}</p>
     </section>
   );

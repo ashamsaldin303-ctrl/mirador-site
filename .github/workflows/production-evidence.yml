@@ -225,15 +225,18 @@ jobs:
           done
           { echo "# snapshot grep summary — machine-generated $(date -u +%FT%TZ)";
             echo "# gate (E13): every snapshot ≥3 rel=alternate hreflang + ≥1 wa.me/963955000111";
-            PASS=0; TOTAL=0
+            echo "# gate (E71): «يرجى» rendered count = 0 across all snapshots (the term-ledger purge)";
+            PASS=0; TOTAL=0; YARJO=0
             for f in *.html; do
               alt=$(grep -o 'rel="alternate"' "$f" | wc -l); wa=$(grep -o 'wa\.me/963955000111' "$f" | wc -l)
+              yj=$(grep -o 'يرجى' "$f" | wc -l); YARJO=$((YARJO+yj))
               TOTAL=$((TOTAL+1)); ok=$([ "$alt" -ge 3 ] && [ "$wa" -ge 1 ] && echo 1 || echo 0); PASS=$((PASS+ok))
-              echo "$f alternates=$alt wa.me=$wa"
+              echo "$f alternates=$alt wa.me=$wa يرجى=$yj"
             done
-            echo "SUMMARY: $PASS/$TOTAL PASS"; } > grep-summary.txt
+            echo "SUMMARY: $PASS/$TOTAL PASS · يرجى-rendered=$YARJO"; } > grep-summary.txt
           cat grep-summary.txt
           [ "$(grep -c 'SUMMARY: 16/16 PASS' grep-summary.txt)" = "1" ] || { echo "snapshot grep gate failed"; exit 1; }
+          [ "$(grep -o 'يرجى-rendered=[0-9]*' grep-summary.txt)" = "يرجى-rendered=0" ] || { echo "E71 FAIL: يرجى still rendered"; exit 1; }
 
       - name: "Q4d: console ×16 + probes (E24)"
         run: bun evidence/tools/console-probes.ts

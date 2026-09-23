@@ -33,6 +33,11 @@ export async function generateMetadata({
   const dict = getDictionary(locale);
   return {
     title: dict["menu.h1"],
+    // R11 minor: per-route OG — this door carries its own social card.
+    openGraph: {
+      title: dict["meta.og.menu.title"],
+      description: dict["meta.og.menu.desc"],
+    },
     alternates: {
       canonical: `/${locale}/menu`,
       languages: {
@@ -92,8 +97,13 @@ export default async function MenuPage({
       gf: dict["menu.filter.gf"],
       pescatarian: dict["menu.filter.pescatarian"],
     },
-    countSingular: dict["menu.filter.countSingular"],
-    countPlural: dict["menu.filter.countPlural"],
+    countForms: {
+      one: dict["menu.filter.countOne"],
+      two: dict["menu.filter.countTwo"],
+      few: dict["menu.filter.countFew"],
+      many: dict["menu.filter.countMany"],
+      other: dict["menu.filter.countOther"],
+    },
     allergenNames,
   };
 
@@ -123,14 +133,18 @@ export default async function MenuPage({
     <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          // R11 minor: \u003c hardening — < and > escaped so the inline
+          // JSON-LD can never terminate its own <script> context.
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c").replace(/>/g, "\\u003e"),
+        }}
       />
       <header className="pt-24">
         <h1 className="font-display text-h1 text-ink">{dict["menu.h1"]}</h1>
         <hr className="hud-rule mt-8" />
       </header>
 
-      <MenuClient sections={data} strings={strings} />
+      <MenuClient locale={locale} sections={data} strings={strings} />
 
       <footer className="border-t border-line py-8">
         <p className="text-small text-muted">{dict["menu.notes.currency"]}</p>

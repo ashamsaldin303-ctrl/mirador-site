@@ -4,6 +4,7 @@
 // The WhatsApp CTA is rebuilt server-side via waHref(confirmationMessage(...))
 // per §8.4 — the deep link encodes name, party, date, time and the ref.
 import { damascusDate, damascusTime } from "@/lib/slots";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export type ReservationSummaryStrings = {
@@ -48,21 +49,21 @@ export function ReservationSummary({ strings, name, partySize, slot, tableNumber
 export type WhatsAppConfirmProps = {
   href: string;
   label: string;
+  note: string;
   className?: string;
 };
 
-export function WhatsAppConfirm({ href, label, className }: WhatsAppConfirmProps) {
+export function WhatsAppConfirm({ href, label, note, className }: WhatsAppConfirmProps) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={cn(
-        "inline-flex min-h-11 w-full items-center justify-center rounded-full bg-amber px-8 font-sans text-small font-semibold text-night transition-colors duration-base hover:bg-amber/90  sm:w-auto",
-        className,
-      )}
-    >
-      {label}
-    </a>
+    <div className={cn("flex flex-col items-start gap-2", className)}>
+      <Button variant="cta" size="full" asChild className="w-full sm:w-auto">
+        <a href={href} target="_blank" rel="noopener noreferrer">
+          {label}
+        </a>
+      </Button>
+      {/* R11 minor: the WhatsApp egress disclosure — the handoff leaves the
+          house (external app); the guest knows before the tap. */}
+      <p className="text-micro text-muted">{note}</p>
+    </div>
   );
 }

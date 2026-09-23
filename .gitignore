@@ -55,3 +55,13 @@ server.log
 # lighthouse CI local outputs (evidence copies live under /evidence/)
 .lighthouseci/
 localhost_*.json
+
+# R11 hygiene (prompt-4): the six never-committed paths — machine-local state,
+# session tool artifacts, and the sandbox's runtime scripts. The canonical
+# values live in .env.example; local .env stays on disk (gitignored).
+.env
+db/
+.zscripts/
+agent-ctx/
+tool-results/
+download/

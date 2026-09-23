@@ -52,7 +52,9 @@ export async function GET(req: NextRequest) {
       past || closedDay
         ? 0
         : Math.max(0, VENUE.tablesPerSlot - (countBySlot.get(instant.getTime()) ?? 0));
-    return { time: SLOT_TIMES[i], remaining };
+    // R11 minor: `past` rides the wire so the grid can label ended slots
+    // («انتهى»/"Past") instead of conflating them with sold-out («نفدت").
+    return { time: SLOT_TIMES[i], remaining, past };
   });
 
   return NextResponse.json(

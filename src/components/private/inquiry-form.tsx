@@ -121,12 +121,16 @@ export function InquiryForm({
   labels,
   errors,
   success,
+  partyHint,
+  whatsappNote,
 }: {
   locale: Locale;
   whatsappHref: string;
   labels: Labels;
   errors: ErrorStrings;
   success: SuccessStrings;
+  partyHint: string;
+  whatsappNote: string;
 }) {
   const formId = useId();
   const [submitting, setSubmitting] = useState(false);
@@ -230,6 +234,9 @@ export function InquiryForm({
             {success.whatsappCta}
           </a>
         </Button>
+        {/* R11 minor: the WhatsApp egress disclosure — the handoff leaves the
+            house (external app); the guest knows before the tap. */}
+        <p className="text-micro text-muted">{whatsappNote}</p>
       </div>
     );
   }
@@ -277,6 +284,9 @@ export function InquiryForm({
           name="phone"
           type="tel"
           autoComplete="tel"
+          // R11 minor: numbers are an LTR island inside RTL flow — the ledger
+          // family's third law (inputs: LTR island).
+          dir="ltr"
           className="h-11 min-h-11"
           aria-invalid={fieldErrors.phone ? true : undefined}
           aria-describedby={describedBy("phone")}
@@ -329,6 +339,9 @@ export function InquiryForm({
             {fieldErrors.partySize}
           </p>
         )}
+        {/* R11 minor: the party copy states its real range — 1–60 (the wire
+            schema's own bounds), so the affordance matches the contract. */}
+        <p className="text-small text-muted">{partyHint}</p>
       </div>
 
       <div className="flex flex-col gap-2">

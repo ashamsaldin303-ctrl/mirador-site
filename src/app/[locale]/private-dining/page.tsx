@@ -14,8 +14,16 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale: raw } = await params;
   const locale: Locale = raw === "ar" ? "ar" : "en";
+  const dict = getDictionary(locale);
   return {
-    title: getDictionary(locale)["private.h1"],
+    title: dict["private.h1"],
+    // R11 minor: per-route OG — each door carries its own social card
+    // (title/description typed to the route; image pair ships JPEG, PRF-4).
+    openGraph: {
+      title: dict["meta.og.private.title"],
+      description: dict["meta.og.private.desc"],
+    },
+
     alternates: {
       canonical: `/${locale}/private-dining`,
       languages: {
@@ -54,6 +62,8 @@ export default async function PrivateDiningPage({
         <InquiryForm
           locale={locale}
           whatsappHref={waHref(generalMessage(locale))}
+          partyHint={dict["private.partyHint"]}
+          whatsappNote={dict["contact.whatsappNote"]}
           labels={{
             name: dict["forms.name"],
             phone: dict["forms.phone"],

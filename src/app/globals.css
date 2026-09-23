@@ -245,14 +245,9 @@
   --color-input: var(--color-line);
   --color-ring: var(--color-amber);
   --color-overlay: rgba(10, 10, 11, 0.72);
-  --color-sidebar: var(--color-surface);
-  --color-sidebar-foreground: var(--color-ink);
-  --color-sidebar-primary: var(--color-amber);
-  --color-sidebar-primary-foreground: var(--color-night);
-  --color-sidebar-accent: var(--color-surface);
-  --color-sidebar-accent-foreground: var(--color-ink);
-  --color-sidebar-border: var(--color-line);
-  --color-sidebar-ring: var(--color-amber);
+  /* R11 dead-code: the eight --color-sidebar-* tokens DELETED (0 uses — the
+     stock shadcn sidebar layer never shipped a sidebar; surface/ink/amber
+     above cover every real surface). */
 }
 
 :root {
@@ -339,18 +334,12 @@
 }
 
 @layer components {
-  /* — elevation ladder (§5.4): E1..E4, dithered shadows on near-black — */
+  /* — elevation ladder (§5.4): E1..E4, dithered shadows on near-black.
+     R11 dead-code: elev-2 DELETED (0 uses — the ladder's rung was never
+     climbed; the surface it promised is elev-1's flat matte). — */
   .elev-1 {
     background-color: var(--color-surface);
     border: 1px solid var(--color-line);
-  }
-  .elev-2 {
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-line);
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.45),
-      0 8px 24px rgba(0, 0, 0, 0.45),
-      inset 0 0 0 1px rgba(242, 239, 232, 0.06);
   }
   .elev-3 {
     background-color: var(--color-surface);

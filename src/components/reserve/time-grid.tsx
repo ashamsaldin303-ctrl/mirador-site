@@ -9,7 +9,7 @@ import { SLOT_TIMES } from "@/lib/slots";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
-export type SlotAvailability = { time: string; remaining: number };
+export type SlotAvailability = { time: string; remaining: number; past?: boolean };
 
 export type TimeGridProps = {
   slots: SlotAvailability[] | null;
@@ -23,6 +23,7 @@ export type TimeGridProps = {
   retryLabel: string;
   soldOutLabel: string;
   tablesRemainingLabel: string;
+  pastLabel: string;
   disabled?: boolean;
 };
 
@@ -40,6 +41,7 @@ export function TimeGrid({
   retryLabel,
   soldOutLabel,
   tablesRemainingLabel,
+  pastLabel,
   disabled,
 }: TimeGridProps) {
   if (loading) {
@@ -74,11 +76,13 @@ export function TimeGrid({
 
   return (
     <div className={GRID}>
-      {slots.map(({ time, remaining }) => {
-        const soldOut = remaining <= 0;
+      {slots.map(({ time, remaining, past }) => {
+        const ended = past === true; // R11: «انتهى» — the night moved on (≠ sold out)
+        const soldOut = !ended && remaining <= 0;
         const isSelected = selected === time;
-        const ariaLabel = soldOut
-          ? `${time} — ${soldOutLabel}`
+        const stateLabel = ended ? pastLabel : soldOut ? soldOutLabel : null;
+        const ariaLabel = stateLabel
+          ? `${time} — ${stateLabel}`
           : `${time} — ${remaining} ${tablesRemainingLabel}`;
         return (
           <button
@@ -86,18 +90,20 @@ export function TimeGrid({
             type="button"
             aria-pressed={isSelected}
             aria-label={ariaLabel}
-            disabled={soldOut || disabled}
+            disabled={ended || soldOut || disabled}
             onClick={() => onSelect(time)}
             className={cn(
               "flex min-h-11 flex-col items-center justify-center gap-1 rounded-sm border px-2 py-3 transition-colors duration-fast",
               "",
               isSelected && "border-amber bg-amber/10 text-amber",
-              !isSelected && !soldOut && "border-line text-ink hover:border-amber/60 hover:text-amber",
-              soldOut && "cursor-not-allowed border-line text-muted opacity-60",
+              !isSelected && !soldOut && !ended && "border-line text-ink hover:border-amber/60 hover:text-amber",
+              (soldOut || ended) && "cursor-not-allowed border-line text-muted opacity-60",
             )}
           >
             <span className="text-body tabular-nums">{time}</span>
-            {soldOut ? (
+            {ended ? (
+              <span className="text-micro text-muted">{pastLabel}</span>
+            ) : soldOut ? (
               <span className="text-micro text-error">{soldOutLabel}</span>
             ) : (
               <span className="text-micro tabular-nums text-muted">

@@ -54,7 +54,11 @@ export default async function HomePage({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          // R11 minor: \u003c hardening — < and > escaped so the inline
+          // JSON-LD can never terminate its own <script> context.
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c").replace(/>/g, "\\u003e"),
+        }}
       />
       <Hero locale={locale} line={dict["hero.line"]} cta={dict["hero.cta"]} quiet={dict["hero.quiet"]} />
       <ChapterIntro hud={dict["intro.hud"]} paragraph={dict["intro.paragraph"]} />

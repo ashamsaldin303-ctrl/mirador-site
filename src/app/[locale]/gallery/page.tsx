@@ -19,8 +19,16 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale: raw } = await params;
   const locale: Locale = raw === "ar" ? "ar" : "en";
+  const dict = getDictionary(locale);
   return {
-    title: getDictionary(locale)["gallery.h1"],
+    title: dict["gallery.h1"],
+    // R11 minor: per-route OG — each door carries its own social card
+    // (title/description typed to the route; image pair ships JPEG, PRF-4).
+    openGraph: {
+      title: dict["meta.og.gallery.title"],
+      description: dict["meta.og.gallery.desc"],
+    },
+
     alternates: {
       canonical: `/${locale}/gallery`,
       languages: { en: "/en/gallery", ar: "/ar/gallery", "x-default": "/en/gallery" },

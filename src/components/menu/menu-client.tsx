@@ -10,8 +10,9 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { DURATIONS, EASE_EXPO_OUT, getMotion, prefersReducedMotion, type Motion } from "@/lib/motion";
 import { DIET_TAGS, type Allergen, type DietTag } from "@/lib/menu";
+import type { Locale } from "@/lib/i18n";
 import { SectionNav } from "./section-nav";
-import { DietFilterBar } from "./diet-filter-bar";
+import { DietFilterBar, type CountForms } from "./diet-filter-bar";
 import { DishList } from "./dish-list";
 
 // SSR-safe layout effect (useLayoutEffect warns during server render)
@@ -44,8 +45,7 @@ export type MenuStrings = {
   allergensLabel: string;
   openDish: string;
   filters: Record<DietTag, string>;
-  countSingular: string;
-  countPlural: string;
+  countForms: CountForms;
   allergenNames: Record<Allergen, string>;
 };
 
@@ -62,12 +62,18 @@ export function matchesFilters(
 }
 
 export function MenuClient({
+  locale,
   sections,
   strings,
 }: {
+  locale: Locale;
   sections: MenuSectionDTO[];
   strings: MenuStrings;
 }) {
+  // R11 (prompt-4): filter state syncs to the URL (?diet=vegan,gf) — a filter
+  // is shareable and survives refresh/back; replaceState keeps history clean
+  // (no per-click entries). Initial state hydrates FROM the URL on mount
+  // (after hydration, so SSR/ESR markup stays canonical — crawlers see all 28).
   const [filters, setFilters] = useState<DietTag[]>([]);
   // FlipState derived from the singleton's own getState signature (type-level only)
   const flipStateRef = useRef<ReturnType<Motion["Flip"]["getState"]> | null>(null);
@@ -86,6 +92,20 @@ export function MenuClient({
     };
   }, []);
 
+  // URL-sync arm 1: hydrate the filter state from ?diet= on mount.
+  // One-time external-store hydration (the URL), post-mount by design — the
+  // SSR markup stays canonical (all 28) so crawlers + first paint never see
+  // a mismatch; no cascading renders (runs once, guarded, not derived state).
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const fromUrl = (params.get("diet") ?? "")
+      .split(",")
+      .map((t) => t.trim())
+      .filter((t): t is DietTag => (DIET_TAGS as readonly string[]).includes(t));
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time URL hydration, not derived state
+    if (fromUrl.length > 0) setFilters(fromUrl);
+  }, []);
+
   const visibleCount = sections.reduce(
     (sum, section) =>
       sum + section.items.filter((item) => matchesFilters(item, filters)).length,
@@ -102,9 +122,16 @@ export function MenuClient({
         root.querySelectorAll("[data-dish-row]"),
       );
     }
-    setFilters((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
-    );
+    setFilters((prev) => {
+      const next = prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag];
+      // URL-sync arm 2: the filter state rides the query string (replaceState)
+      const params = new URLSearchParams(window.location.search);
+      if (next.length > 0) params.set("diet", next.join(","));
+      else params.delete("diet");
+      const qs = params.toString();
+      window.history.replaceState(null, "", `${window.location.pathname}${qs ? `?${qs}` : ""}`);
+      return next;
+    });
   };
 
   useIsomorphicLayoutEffect(() => {
@@ -150,12 +177,12 @@ export function MenuClient({
         label={strings.sectionsLabel}
       />
       <DietFilterBar
+        locale={locale}
         tags={DIET_TAGS}
         active={filters}
         onToggle={toggleFilter}
         count={visibleCount}
-        countSingular={strings.countSingular}
-        countPlural={strings.countPlural}
+        countForms={strings.countForms}
         labels={strings.filters}
       />
       <div ref={listRef}>

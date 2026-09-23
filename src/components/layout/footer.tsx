@@ -12,6 +12,7 @@ export type FooterStrings = {
   reservationsLabel: string;
   sypLine: string;
   whatsappCta: string;
+  whatsappNote: string;
 };
 
 export function Footer({ locale, strings }: { locale: Locale; strings: FooterStrings }) {
@@ -33,7 +34,10 @@ export function Footer({ locale, strings }: { locale: Locale; strings: FooterStr
 
         <div>
           <h2 className="hud-label mb-4">{strings.hoursLabel}</h2>
-          <p className="text-body text-muted">
+          {/* R11 minor (footer hours @375): the hours line carries the kitchen
+              detail — text-balance keeps the wraps even on narrow phones
+              (no orphaned fragments at 375px). */}
+          <p className="text-balance text-body text-muted">
             {dir === "ar" ? VENUE.hoursAr : VENUE.hoursEn}
           </p>
         </div>
@@ -59,6 +63,9 @@ export function Footer({ locale, strings }: { locale: Locale; strings: FooterStr
               >
                 {strings.whatsappCta}
               </a>
+              {/* R11 minor: the WhatsApp egress disclosure — the handoff leaves
+                  the house (external app). */}
+              <p className="text-micro text-muted">{strings.whatsappNote}</p>
             </li>
             <li>
               <a

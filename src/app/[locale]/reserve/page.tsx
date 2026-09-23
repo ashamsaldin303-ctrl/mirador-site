@@ -20,8 +20,16 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale: raw } = await params;
   const locale: Locale = raw === "ar" ? "ar" : "en";
+  const dict = getDictionary(locale);
   return {
-    title: getDictionary(locale)["reserve.h1"],
+    title: dict["reserve.h1"],
+    // R11 minor: per-route OG — each door carries its own social card
+    // (title/description typed to the route; image pair ships JPEG, PRF-4).
+    openGraph: {
+      title: dict["meta.og.reserve.title"],
+      description: dict["meta.og.reserve.desc"],
+    },
+
     alternates: {
       canonical: `/${locale}/reserve`,
       languages: {
@@ -73,6 +81,7 @@ export default async function ReservePage({
           loadingSlots: dict["reserve.loadingSlots"],
           retry: dict["reserve.retry"],
           slotSoldOut: dict["reserve.slotSoldOut"],
+          slotPast: dict["reserve.slotPast"],
           largePartyNote: dict["reserve.largePartyNote"],
           largePartyLink: dict["reserve.largePartyLink"],
           tablesRemaining: dict["reserve.tablesRemaining"],

@@ -44,6 +44,7 @@ export type ReserveStrings = {
   loadingSlots: string;
   retry: string;
   slotSoldOut: string;
+  slotPast: string;
   largePartyNote: string;
   largePartyLink: string;
   tablesRemaining: string;
@@ -241,7 +242,12 @@ export function ReserveForm({ locale, strings, days, initialDate }: ReserveFormP
         disabled={submitting}
       />
 
-      <div role="group" aria-labelledby="reserve-party-label" className="flex flex-col gap-2">
+      <div
+        role="group"
+        aria-labelledby="reserve-party-label"
+        aria-describedby={fieldErrors.partySize ? "reserve-party-error" : undefined}
+        className="flex flex-col gap-2"
+      >
         <span id="reserve-party-label" className="hud-label">
           {strings.partySize}
         </span>
@@ -257,7 +263,7 @@ export function ReserveForm({ locale, strings, days, initialDate }: ReserveFormP
           disabled={submitting}
         />
         {fieldErrors.partySize ? (
-          <p className="text-start text-small text-error">
+          <p id="reserve-party-error" className="text-start text-small text-error">
             {strings.errors[fieldErrors.partySize]}
           </p>
         ) : null}
@@ -308,6 +314,7 @@ export function ReserveForm({ locale, strings, days, initialDate }: ReserveFormP
           networkErrorLabel={strings.errors.network}
           retryLabel={strings.retry}
           soldOutLabel={strings.slotSoldOut}
+          pastLabel={strings.slotPast}
           tablesRemainingLabel={strings.tablesRemaining}
           disabled={submitting}
         />
