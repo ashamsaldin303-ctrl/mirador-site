@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/prod-run/img-surface/og-{en,ar}-jpeg.txt + prod-run/img-surface/magic-{en,ar}.txt
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T17:39:49.897Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T18:01:42.272Z)

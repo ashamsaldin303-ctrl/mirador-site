@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/.github/workflows/production-evidence.yml + .env.example
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T17:39:49.897Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-23T18:01:42.271Z)
