@@ -24,6 +24,11 @@ export function Hero({
         alt={line}
         fill
         priority
+        // R13/E79: next/16 emits the preload link for `priority` but NOT the
+        // img-level fetchPriority — the full-bleed poster (the LCP candidate
+        // on throttled mobile) fetched at LOW priority and lantern's modeled
+        // LCP waited ~3.4s behind the queue (run-19 raw). Explicit high.
+        fetchPriority="high"
         sizes="100vw"
         className="object-cover"
       />
