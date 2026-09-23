@@ -10,9 +10,10 @@ export const DURATIONS = {
 export const ENTRANCE_MAX = 0.4; // entrances ≤400ms
 export const STAGGER = { min: 0.06, max: 0.12 } as const; // 60–120ms
 
-// easings: expo.out + cubic-bezier(0.16,1,0.3,1)
+// easings: P-078 (prompt-4 R10) — THE ONE CURVE. EASE_OUT_SOFT (the duplicate
+// cubic-bezier alias for the same expo.out) is DELETED; gsap accepts "expo.out"
+// everywhere it was used. The CSS twin is --ease-out-expo (globals.css).
 export const EASE_EXPO_OUT = "expo.out" as const;
-export const EASE_OUT_SOFT = "cubic-bezier(0.16,1,0.3,1)" as const;
 
 // reduced-motion designed fallbacks (§5.4): ≤0.3s fades, ≤8px lifts, all content present
 export const RM_FADE_MAX = 0.3;

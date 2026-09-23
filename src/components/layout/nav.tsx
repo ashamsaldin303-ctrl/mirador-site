@@ -100,10 +100,7 @@ export function Nav({ locale, strings }: { locale: Locale; strings: NavStrings }
           >
             {strings.localeSwitch}
           </Link>
-          <Button
-            asChild
-            className="hidden min-h-11 rounded-full bg-amber px-6 font-sans text-small font-semibold text-night hover:bg-amber/90 sm:inline-flex"
-          >
+          <Button variant="cta" size="compact" asChild className="hidden sm:inline-flex">
             <Link href={localePath(locale, "/reserve")}>{strings.cta}</Link>
           </Button>
 
@@ -149,10 +146,7 @@ export function Nav({ locale, strings }: { locale: Locale; strings: NavStrings }
                 >
                   {strings.localeSwitch}
                 </Link>
-                <Button
-                  asChild
-                  className="mt-4 min-h-11 rounded-full bg-amber px-6 font-sans text-small font-semibold text-night hover:bg-amber/90"
-                >
+                <Button variant="cta" size="compact" asChild className="mt-4">
                   <Link href={localePath(locale, "/reserve")} onClick={() => setOpen(false)}>
                     {strings.cta}
                   </Link>

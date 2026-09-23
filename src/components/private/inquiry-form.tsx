@@ -225,10 +225,7 @@ export function InquiryForm({
         <p className="text-small text-muted">
           {success.referenceLabel}: <span dir="ltr">{referenceId.slice(0, 8)}</span>
         </p>
-        <Button
-          asChild
-          className="min-h-11 self-start rounded-full bg-amber px-6 font-sans text-small font-semibold text-night hover:bg-amber/90"
-        >
+        <Button variant="cta" size="compact" asChild className="self-start">
           <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
             {success.whatsappCta}
           </a>

@@ -134,6 +134,11 @@ jobs:
           # P-044: the gatebook drift guard (also armed in ci.yml)
           bun scripts/verify-gatebook.ts
 
+      - name: "Q2c: R10 idiom audit (E66) — Button API A1–A12 on the tree as built"
+        run: |
+          set -eo pipefail
+          bun scripts/audit-idioms.ts
+
       - name: "Q3: HTTP semantics (E22) → evidence/prod-run/http/"
         run: |
           set -eo pipefail

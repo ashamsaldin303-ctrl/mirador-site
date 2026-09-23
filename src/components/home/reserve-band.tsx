@@ -24,18 +24,12 @@ export function ReserveBand({
         <h2 className="font-display text-h2 text-ink">{title}</h2>
         <p className="font-sans text-body-lg text-muted">{sub}</p>
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-          <Button
-            asChild
-            className="min-h-11 rounded-full bg-amber px-8 font-sans text-small font-semibold text-night hover:bg-amber/90"
-          >
+          <Button variant="cta" size="full" asChild>
             <Link href={`/${locale}/reserve`}>{cta}</Link>
           </Button>
-          <Link
-            href={`/${locale}/menu`}
-            className="inline-flex min-h-11 items-center text-small text-muted underline decoration-line underline-offset-8 transition-colors duration-200 hover:text-ink hover:decoration-amber"
-          >
-            {quiet}
-          </Link>
+          <Button variant="quiet" asChild>
+            <Link href={`/${locale}/menu`}>{quiet}</Link>
+          </Button>
         </div>
         <hr className="hud-rule w-24" />
         <p className="font-sans text-small text-muted">{hours}</p>

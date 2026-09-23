@@ -36,18 +36,12 @@ export function Hero({
         <WordmarkLockup size="xl" />
         <h1 className="max-w-4xl font-display text-h1 text-ink">{line}</h1>
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-          <Button
-            asChild
-            className="min-h-11 rounded-full bg-amber px-8 font-sans text-small font-semibold text-night hover:bg-amber/90"
-          >
+          <Button variant="cta" size="full" asChild>
             <Link href={`/${locale}/reserve`}>{cta}</Link>
           </Button>
-          <Link
-            href={`/${locale}/menu`}
-            className="inline-flex min-h-11 items-center text-small text-muted underline decoration-line underline-offset-8 transition-colors duration-200 hover:text-ink hover:decoration-amber"
-          >
-            {quiet}
-          </Link>
+          <Button variant="quiet" asChild>
+            <Link href={`/${locale}/menu`}>{quiet}</Link>
+          </Button>
         </div>
       </div>
     </section>

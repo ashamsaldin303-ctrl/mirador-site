@@ -24,10 +24,7 @@ export default function RouteError({
         <p className="font-sans text-body-lg text-muted" dir="rtl" lang="ar">
           ارتجّ الضوء لحظة. أعد المحاولة — المدينة ما تزال هناك.
         </p>
-        <Button
-          onClick={reset}
-          className="mt-2 min-h-11 rounded-full bg-amber px-8 font-sans text-small font-semibold text-night hover:bg-amber/90"
-        >
+        <Button variant="cta" size="full" onClick={reset} className="mt-2">
           <RotateCcw className="size-4" strokeWidth={1.5} aria-hidden />
           Retry
         </Button>

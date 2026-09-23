@@ -29,11 +29,7 @@ export function DishOverlay({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button
-          variant="outline"
-          disabled={item.isSoldOut}
-          className="min-h-11 rounded-full border-line bg-transparent px-4 font-sans text-small text-muted transition-colors duration-base hover:border-amber hover:bg-transparent hover:text-ink"
-        >
+        <Button variant="quietOutline" size="flow" disabled={item.isSoldOut}>
           {strings.openDish}
         </Button>
       </DialogTrigger>

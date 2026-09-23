@@ -8,7 +8,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { LoaderCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { reservationSchema } from "@/lib/validation";
 import { slotInstant } from "@/lib/slots";
 import type { Locale } from "@/lib/i18n";
@@ -324,20 +324,16 @@ export function ReserveForm({ locale, strings, days, initialDate }: ReserveFormP
             {formError}
           </p>
         ) : null}
-        <button
+        <Button
           type="submit"
+          variant="cta"
+          size="full"
           disabled={submitting}
-          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-amber px-8 font-sans text-small font-semibold text-night transition-colors duration-base hover:bg-amber/90  disabled:pointer-events-none disabled:opacity-60"
+          aria-busy={submitting || undefined}
+          className={submitting ? "motion-safe:breathe" : undefined}
         >
-          {submitting ? (
-            <>
-              <LoaderCircle className="size-5 animate-spin" strokeWidth={1.5} aria-hidden />
-              {strings.submitting}
-            </>
-          ) : (
-            strings.submit
-          )}
-        </button>
+          {submitting ? strings.submitting : strings.submit}
+        </Button>
       </div>
     </form>
   );

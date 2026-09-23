@@ -20,14 +20,12 @@ export function NotFoundFloor({ locale }: { locale: Locale }) {
         className="object-cover"
       />
       <div aria-hidden="true" className="absolute inset-0 bg-night/70" />
-      <div className="relative z-10 flex max-w-xl flex-col items-center gap-6 py-24">
+      {/* P-037 settle (R10): the floor arrives — 600ms expo-out, motion-safe. */}
+      <div className="relative z-10 flex max-w-xl flex-col items-center gap-6 py-24 motion-safe:settle">
         <p className="hud-label">404 · FLOOR</p>
         <h1 className="font-display text-h1 text-ink">{dict["meta.404.title"]}</h1>
         <p className="font-sans text-body-lg text-muted">{dict["meta.404.sub"]}</p>
-        <Button
-          asChild
-          className="mt-4 min-h-11 rounded-full bg-amber px-8 font-sans text-small font-semibold text-night hover:bg-amber/90"
-        >
+        <Button variant="cta" size="full" asChild className="mt-4">
           <Link href={`/${locale}`}>{dict["meta.404.cta"]}</Link>
         </Button>
       </div>

@@ -411,6 +411,48 @@
   }
 }
 
+/* ————————————————————————————————————————————————————————
+     P-037 (prompt-4 R10) · THE MOTION PRIMITIVES — shared, named, documented.
+     The CONDUCTOR RULE (binding): CSS owns paint/pointer-time (these
+     primitives + hover/focus transitions) · GSAP owns scroll/diff-time
+     (journey scrub, Flip) · Lenis owns scroll-feel only. Every primitive
+     carries its reduced-motion twin by construction: they mount behind
+     motion-safe: (RM = static, content fully present) and their durations
+     sit inside the NEVER-9 envelope (fade ≤0.3s … vertical arrival ≤600ms
+     for the ONE settle exception, P-027's RM audit documents it).
+     ———————————————————————————————————————————————————————— */
+@utility settle {
+  /* vertical arrival: 8px lift + fade, 600ms expo-out (the settle law) —
+     the ONLY >300ms primitive, exempt as the §2 doctrine's vertical
+     arrival ceiling (≤600ms) itself. Center-out, direction-neutral (RTL-free). */
+  animation: settle 600ms var(--ease-out-expo) both;
+}
+@utility draw {
+  /* hairline draw: center-out scale 0→1, 200ms (the frozen tempo) —
+     1px = state; the line grows to its fact. Scale (not scaleX) keeps the
+     draw direction-neutral in RTL. */
+  animation: draw 200ms var(--ease-out-expo) both;
+}
+@utility breathe {
+  /* light breathe: opacity 1↔0.55, 2.4s loop — the busy/alive state
+   (NEVER a spinner, M-2). motion-safe: gated; the global RM block below
+   also kills it outright. */
+  animation: breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes settle {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes draw {
+  from { transform: scale(0, 1); }
+  to { transform: scale(1, 1); }
+}
+@keyframes breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
 @layer utilities {
   /* — custom thin scrollbar for long lists (menu sections, date strip) — */
   .scroll-thin {
