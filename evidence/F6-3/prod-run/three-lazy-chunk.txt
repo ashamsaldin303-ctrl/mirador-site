@@ -1,4 +1,4 @@
-# three/fiber/drei lazy pack — machine-generated 2026-09-23T05:06:02.130Z
+# three/fiber/drei lazy pack — machine-generated 2026-09-23T05:43:16.198Z
 # gate (F6-3, FROZEN): pack gz ≤400KB AND absent from every route's first-load JS
 lazy chunk: static/chunks/e6e5a7e72d1d5089.js raw=901500B gz=235263B
 pack total: raw=901500B gz=235263B (229.7KB)
