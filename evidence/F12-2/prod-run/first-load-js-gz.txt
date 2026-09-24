@@ -1,222 +1,222 @@
-# per-route first-load JS (gzip -9) from the SERVED HTML script set — machine-generated 2026-09-23T23:34:01.506Z
+# per-route first-load JS (gzip -9) from the SERVED HTML script set — machine-generated 2026-09-23T23:56:21.743Z
 # derivation: <script src> + <link preload|modulepreload href> per route (noModule polyfills excluded)
 # budget (FROZEN, parent Appendix A): ≤150KB gz per route (hard 200KB)
-/en/ — files=13 raw=588048B gz=180258B (176.0KB) → FAIL (soft budget exceeded — under hard cap)
+/en/ — files=13 raw=589210B gz=180588B (176.4KB) → FAIL (soft budget exceeded — under hard cap)
     static/chunks/f091501564eb2ea3.js gz=7225B
     static/chunks/b137c16b75c8591f.js gz=32244B
     static/chunks/c284ff537f4f1dda.js gz=70263B
     static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
     static/chunks/f3a7c96ddb389a71.js gz=6395B
     static/chunks/d2be314c3ece3fbe.js gz=7448B
-    static/chunks/b556dceee35d0404.js gz=11692B
-    static/chunks/5b9140adf06ce694.js gz=11285B
+    static/chunks/fadceae8b21e5292.js gz=12038B
+    static/chunks/049b86ba72cbd0ae.js gz=11266B
     static/chunks/f58ccb5ac991160e.js gz=8260B
     static/chunks/685943c535c00040.js gz=737B
     static/chunks/039516ed03da1f6d.js gz=5342B
-    static/chunks/0c4df7d02512866a.js gz=8079B
+    static/chunks/1b007e5e7eedff5d.js gz=8082B
     static/chunks/406880850b4bfaea.js gz=7256B
-/en/menu — files=13 raw=591857B gz=181419B (177.2KB) → FAIL (soft budget exceeded — under hard cap)
+/en/menu — files=13 raw=593288B gz=181842B (177.6KB) → FAIL (soft budget exceeded — under hard cap)
     static/chunks/f091501564eb2ea3.js gz=7225B
     static/chunks/b137c16b75c8591f.js gz=32244B
     static/chunks/c284ff537f4f1dda.js gz=70263B
     static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
     static/chunks/f3a7c96ddb389a71.js gz=6395B
     static/chunks/d2be314c3ece3fbe.js gz=7448B
-    static/chunks/b556dceee35d0404.js gz=11692B
-    static/chunks/5b9140adf06ce694.js gz=11285B
+    static/chunks/fadceae8b21e5292.js gz=12038B
+    static/chunks/049b86ba72cbd0ae.js gz=11266B
     static/chunks/f58ccb5ac991160e.js gz=8260B
     static/chunks/685943c535c00040.js gz=737B
     static/chunks/039516ed03da1f6d.js gz=5342B
-    static/chunks/3cadb390d0198db3.js gz=9240B
+    static/chunks/0bfc14f9a6612960.js gz=9336B
     static/chunks/406880850b4bfaea.js gz=7256B
-/en/reserve — files=13 raw=567614B gz=173077B (169.0KB) → FAIL (soft budget exceeded — under hard cap)
+/en/reserve — files=13 raw=568770B gz=173405B (169.3KB) → FAIL (soft budget exceeded — under hard cap)
     static/chunks/f091501564eb2ea3.js gz=7225B
     static/chunks/b137c16b75c8591f.js gz=32244B
     static/chunks/c284ff537f4f1dda.js gz=70263B
     static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
     static/chunks/f3a7c96ddb389a71.js gz=6395B
     static/chunks/d2be314c3ece3fbe.js gz=7448B
-    static/chunks/b556dceee35d0404.js gz=11692B
-    static/chunks/5b9140adf06ce694.js gz=11285B
+    static/chunks/fadceae8b21e5292.js gz=12038B
+    static/chunks/049b86ba72cbd0ae.js gz=11266B
     static/chunks/f58ccb5ac991160e.js gz=8260B
     static/chunks/685943c535c00040.js gz=737B
     static/chunks/039516ed03da1f6d.js gz=5342B
-    static/chunks/e16ba43efbbce58a.js gz=898B
+    static/chunks/940a7004cd14e60f.js gz=899B
     static/chunks/406880850b4bfaea.js gz=7256B
-/en/story — files=13 raw=580671B gz=177896B (173.7KB) → FAIL (soft budget exceeded — under hard cap)
+/en/story — files=13 raw=581827B gz=178223B (174.0KB) → FAIL (soft budget exceeded — under hard cap)
     static/chunks/f091501564eb2ea3.js gz=7225B
     static/chunks/b137c16b75c8591f.js gz=32244B
     static/chunks/c284ff537f4f1dda.js gz=70263B
     static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
     static/chunks/f3a7c96ddb389a71.js gz=6395B
     static/chunks/d2be314c3ece3fbe.js gz=7448B
-    static/chunks/b556dceee35d0404.js gz=11692B
-    static/chunks/5b9140adf06ce694.js gz=11285B
-    static/chunks/f58ccb5ac991160e.js gz=8260B
-    static/chunks/685943c535c00040.js gz=737B
-    static/chunks/039516ed03da1f6d.js gz=5342B
-    static/chunks/7eefc4a9a71ed2e9.js gz=5717B
-    static/chunks/406880850b4bfaea.js gz=7256B
-/en/gallery — files=13 raw=586833B gz=179765B (175.6KB) → FAIL (soft budget exceeded — under hard cap)
-    static/chunks/f091501564eb2ea3.js gz=7225B
-    static/chunks/b137c16b75c8591f.js gz=32244B
-    static/chunks/c284ff537f4f1dda.js gz=70263B
-    static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
-    static/chunks/f3a7c96ddb389a71.js gz=6395B
-    static/chunks/d2be314c3ece3fbe.js gz=7448B
-    static/chunks/b556dceee35d0404.js gz=11692B
-    static/chunks/5b9140adf06ce694.js gz=11285B
-    static/chunks/f58ccb5ac991160e.js gz=8260B
-    static/chunks/685943c535c00040.js gz=737B
-    static/chunks/039516ed03da1f6d.js gz=5342B
-    static/chunks/9b0aefb16e2b6214.js gz=7586B
-    static/chunks/406880850b4bfaea.js gz=7256B
-/en/private-dining — files=13 raw=572439B gz=174591B (170.5KB) → FAIL (soft budget exceeded — under hard cap)
-    static/chunks/f091501564eb2ea3.js gz=7225B
-    static/chunks/b137c16b75c8591f.js gz=32244B
-    static/chunks/c284ff537f4f1dda.js gz=70263B
-    static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
-    static/chunks/f3a7c96ddb389a71.js gz=6395B
-    static/chunks/d2be314c3ece3fbe.js gz=7448B
-    static/chunks/b556dceee35d0404.js gz=11692B
-    static/chunks/5b9140adf06ce694.js gz=11285B
-    static/chunks/f58ccb5ac991160e.js gz=8260B
-    static/chunks/685943c535c00040.js gz=737B
-    static/chunks/039516ed03da1f6d.js gz=5342B
-    static/chunks/58acd09725589627.js gz=2412B
-    static/chunks/406880850b4bfaea.js gz=7256B
-/en/contact — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
-    static/chunks/f091501564eb2ea3.js gz=7225B
-    static/chunks/b137c16b75c8591f.js gz=32244B
-    static/chunks/c284ff537f4f1dda.js gz=70263B
-    static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
-    static/chunks/f3a7c96ddb389a71.js gz=6395B
-    static/chunks/d2be314c3ece3fbe.js gz=7448B
-    static/chunks/b556dceee35d0404.js gz=11692B
-    static/chunks/5b9140adf06ce694.js gz=11285B
-    static/chunks/f58ccb5ac991160e.js gz=8260B
-    static/chunks/685943c535c00040.js gz=737B
-    static/chunks/039516ed03da1f6d.js gz=5342B
-    static/chunks/406880850b4bfaea.js gz=7256B
-/en/confirmation/cmueqod4u001y421y0ncqx93w — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
-    static/chunks/f091501564eb2ea3.js gz=7225B
-    static/chunks/b137c16b75c8591f.js gz=32244B
-    static/chunks/c284ff537f4f1dda.js gz=70263B
-    static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
-    static/chunks/f3a7c96ddb389a71.js gz=6395B
-    static/chunks/d2be314c3ece3fbe.js gz=7448B
-    static/chunks/b556dceee35d0404.js gz=11692B
-    static/chunks/5b9140adf06ce694.js gz=11285B
-    static/chunks/f58ccb5ac991160e.js gz=8260B
-    static/chunks/685943c535c00040.js gz=737B
-    static/chunks/039516ed03da1f6d.js gz=5342B
-    static/chunks/406880850b4bfaea.js gz=7256B
-/ar/ — files=13 raw=588048B gz=180258B (176.0KB) → FAIL (soft budget exceeded — under hard cap)
-    static/chunks/f091501564eb2ea3.js gz=7225B
-    static/chunks/b137c16b75c8591f.js gz=32244B
-    static/chunks/c284ff537f4f1dda.js gz=70263B
-    static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
-    static/chunks/f3a7c96ddb389a71.js gz=6395B
-    static/chunks/d2be314c3ece3fbe.js gz=7448B
-    static/chunks/b556dceee35d0404.js gz=11692B
-    static/chunks/5b9140adf06ce694.js gz=11285B
-    static/chunks/f58ccb5ac991160e.js gz=8260B
-    static/chunks/685943c535c00040.js gz=737B
-    static/chunks/039516ed03da1f6d.js gz=5342B
-    static/chunks/0c4df7d02512866a.js gz=8079B
-    static/chunks/406880850b4bfaea.js gz=7256B
-/ar/menu — files=13 raw=591857B gz=181419B (177.2KB) → FAIL (soft budget exceeded — under hard cap)
-    static/chunks/f091501564eb2ea3.js gz=7225B
-    static/chunks/b137c16b75c8591f.js gz=32244B
-    static/chunks/c284ff537f4f1dda.js gz=70263B
-    static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
-    static/chunks/f3a7c96ddb389a71.js gz=6395B
-    static/chunks/d2be314c3ece3fbe.js gz=7448B
-    static/chunks/b556dceee35d0404.js gz=11692B
-    static/chunks/5b9140adf06ce694.js gz=11285B
-    static/chunks/f58ccb5ac991160e.js gz=8260B
-    static/chunks/685943c535c00040.js gz=737B
-    static/chunks/039516ed03da1f6d.js gz=5342B
-    static/chunks/3cadb390d0198db3.js gz=9240B
-    static/chunks/406880850b4bfaea.js gz=7256B
-/ar/reserve — files=13 raw=567614B gz=173077B (169.0KB) → FAIL (soft budget exceeded — under hard cap)
-    static/chunks/f091501564eb2ea3.js gz=7225B
-    static/chunks/b137c16b75c8591f.js gz=32244B
-    static/chunks/c284ff537f4f1dda.js gz=70263B
-    static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
-    static/chunks/f3a7c96ddb389a71.js gz=6395B
-    static/chunks/d2be314c3ece3fbe.js gz=7448B
-    static/chunks/b556dceee35d0404.js gz=11692B
-    static/chunks/5b9140adf06ce694.js gz=11285B
-    static/chunks/f58ccb5ac991160e.js gz=8260B
-    static/chunks/685943c535c00040.js gz=737B
-    static/chunks/039516ed03da1f6d.js gz=5342B
-    static/chunks/e16ba43efbbce58a.js gz=898B
-    static/chunks/406880850b4bfaea.js gz=7256B
-/ar/story — files=13 raw=580671B gz=177896B (173.7KB) → FAIL (soft budget exceeded — under hard cap)
-    static/chunks/f091501564eb2ea3.js gz=7225B
-    static/chunks/b137c16b75c8591f.js gz=32244B
-    static/chunks/c284ff537f4f1dda.js gz=70263B
-    static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
-    static/chunks/f3a7c96ddb389a71.js gz=6395B
-    static/chunks/d2be314c3ece3fbe.js gz=7448B
-    static/chunks/b556dceee35d0404.js gz=11692B
-    static/chunks/5b9140adf06ce694.js gz=11285B
+    static/chunks/fadceae8b21e5292.js gz=12038B
+    static/chunks/049b86ba72cbd0ae.js gz=11266B
     static/chunks/f58ccb5ac991160e.js gz=8260B
     static/chunks/685943c535c00040.js gz=737B
     static/chunks/039516ed03da1f6d.js gz=5342B
     static/chunks/7eefc4a9a71ed2e9.js gz=5717B
     static/chunks/406880850b4bfaea.js gz=7256B
-/ar/gallery — files=13 raw=586833B gz=179765B (175.6KB) → FAIL (soft budget exceeded — under hard cap)
+/en/gallery — files=13 raw=588168B gz=180200B (176.0KB) → FAIL (soft budget exceeded — under hard cap)
     static/chunks/f091501564eb2ea3.js gz=7225B
     static/chunks/b137c16b75c8591f.js gz=32244B
     static/chunks/c284ff537f4f1dda.js gz=70263B
     static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
     static/chunks/f3a7c96ddb389a71.js gz=6395B
     static/chunks/d2be314c3ece3fbe.js gz=7448B
-    static/chunks/b556dceee35d0404.js gz=11692B
-    static/chunks/5b9140adf06ce694.js gz=11285B
+    static/chunks/fadceae8b21e5292.js gz=12038B
+    static/chunks/049b86ba72cbd0ae.js gz=11266B
     static/chunks/f58ccb5ac991160e.js gz=8260B
     static/chunks/685943c535c00040.js gz=737B
     static/chunks/039516ed03da1f6d.js gz=5342B
-    static/chunks/9b0aefb16e2b6214.js gz=7586B
+    static/chunks/1f3bd7c9a79c37e9.js gz=7694B
     static/chunks/406880850b4bfaea.js gz=7256B
-/ar/private-dining — files=13 raw=572439B gz=174591B (170.5KB) → FAIL (soft budget exceeded — under hard cap)
+/en/private-dining — files=13 raw=573595B gz=174918B (170.8KB) → FAIL (soft budget exceeded — under hard cap)
     static/chunks/f091501564eb2ea3.js gz=7225B
     static/chunks/b137c16b75c8591f.js gz=32244B
     static/chunks/c284ff537f4f1dda.js gz=70263B
     static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
     static/chunks/f3a7c96ddb389a71.js gz=6395B
     static/chunks/d2be314c3ece3fbe.js gz=7448B
-    static/chunks/b556dceee35d0404.js gz=11692B
-    static/chunks/5b9140adf06ce694.js gz=11285B
+    static/chunks/fadceae8b21e5292.js gz=12038B
+    static/chunks/049b86ba72cbd0ae.js gz=11266B
     static/chunks/f58ccb5ac991160e.js gz=8260B
     static/chunks/685943c535c00040.js gz=737B
     static/chunks/039516ed03da1f6d.js gz=5342B
     static/chunks/58acd09725589627.js gz=2412B
     static/chunks/406880850b4bfaea.js gz=7256B
-/ar/contact — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
+/en/contact — files=12 raw=566471B gz=172506B (168.5KB) → FAIL (soft budget exceeded — under hard cap)
     static/chunks/f091501564eb2ea3.js gz=7225B
     static/chunks/b137c16b75c8591f.js gz=32244B
     static/chunks/c284ff537f4f1dda.js gz=70263B
     static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
     static/chunks/f3a7c96ddb389a71.js gz=6395B
     static/chunks/d2be314c3ece3fbe.js gz=7448B
-    static/chunks/b556dceee35d0404.js gz=11692B
-    static/chunks/5b9140adf06ce694.js gz=11285B
+    static/chunks/fadceae8b21e5292.js gz=12038B
+    static/chunks/049b86ba72cbd0ae.js gz=11266B
     static/chunks/f58ccb5ac991160e.js gz=8260B
     static/chunks/685943c535c00040.js gz=737B
     static/chunks/039516ed03da1f6d.js gz=5342B
     static/chunks/406880850b4bfaea.js gz=7256B
-/ar/confirmation/cmueqod4u001y421y0ncqx93w — files=12 raw=565315B gz=172179B (168.1KB) → FAIL (soft budget exceeded — under hard cap)
+/en/confirmation/cmuerh3vo001y2g0hqxdmhqdw — files=12 raw=566471B gz=172506B (168.5KB) → FAIL (soft budget exceeded — under hard cap)
     static/chunks/f091501564eb2ea3.js gz=7225B
     static/chunks/b137c16b75c8591f.js gz=32244B
     static/chunks/c284ff537f4f1dda.js gz=70263B
     static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
     static/chunks/f3a7c96ddb389a71.js gz=6395B
     static/chunks/d2be314c3ece3fbe.js gz=7448B
-    static/chunks/b556dceee35d0404.js gz=11692B
-    static/chunks/5b9140adf06ce694.js gz=11285B
+    static/chunks/fadceae8b21e5292.js gz=12038B
+    static/chunks/049b86ba72cbd0ae.js gz=11266B
+    static/chunks/f58ccb5ac991160e.js gz=8260B
+    static/chunks/685943c535c00040.js gz=737B
+    static/chunks/039516ed03da1f6d.js gz=5342B
+    static/chunks/406880850b4bfaea.js gz=7256B
+/ar/ — files=13 raw=589210B gz=180588B (176.4KB) → FAIL (soft budget exceeded — under hard cap)
+    static/chunks/f091501564eb2ea3.js gz=7225B
+    static/chunks/b137c16b75c8591f.js gz=32244B
+    static/chunks/c284ff537f4f1dda.js gz=70263B
+    static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
+    static/chunks/f3a7c96ddb389a71.js gz=6395B
+    static/chunks/d2be314c3ece3fbe.js gz=7448B
+    static/chunks/fadceae8b21e5292.js gz=12038B
+    static/chunks/049b86ba72cbd0ae.js gz=11266B
+    static/chunks/f58ccb5ac991160e.js gz=8260B
+    static/chunks/685943c535c00040.js gz=737B
+    static/chunks/039516ed03da1f6d.js gz=5342B
+    static/chunks/1b007e5e7eedff5d.js gz=8082B
+    static/chunks/406880850b4bfaea.js gz=7256B
+/ar/menu — files=13 raw=593288B gz=181842B (177.6KB) → FAIL (soft budget exceeded — under hard cap)
+    static/chunks/f091501564eb2ea3.js gz=7225B
+    static/chunks/b137c16b75c8591f.js gz=32244B
+    static/chunks/c284ff537f4f1dda.js gz=70263B
+    static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
+    static/chunks/f3a7c96ddb389a71.js gz=6395B
+    static/chunks/d2be314c3ece3fbe.js gz=7448B
+    static/chunks/fadceae8b21e5292.js gz=12038B
+    static/chunks/049b86ba72cbd0ae.js gz=11266B
+    static/chunks/f58ccb5ac991160e.js gz=8260B
+    static/chunks/685943c535c00040.js gz=737B
+    static/chunks/039516ed03da1f6d.js gz=5342B
+    static/chunks/0bfc14f9a6612960.js gz=9336B
+    static/chunks/406880850b4bfaea.js gz=7256B
+/ar/reserve — files=13 raw=568770B gz=173405B (169.3KB) → FAIL (soft budget exceeded — under hard cap)
+    static/chunks/f091501564eb2ea3.js gz=7225B
+    static/chunks/b137c16b75c8591f.js gz=32244B
+    static/chunks/c284ff537f4f1dda.js gz=70263B
+    static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
+    static/chunks/f3a7c96ddb389a71.js gz=6395B
+    static/chunks/d2be314c3ece3fbe.js gz=7448B
+    static/chunks/fadceae8b21e5292.js gz=12038B
+    static/chunks/049b86ba72cbd0ae.js gz=11266B
+    static/chunks/f58ccb5ac991160e.js gz=8260B
+    static/chunks/685943c535c00040.js gz=737B
+    static/chunks/039516ed03da1f6d.js gz=5342B
+    static/chunks/940a7004cd14e60f.js gz=899B
+    static/chunks/406880850b4bfaea.js gz=7256B
+/ar/story — files=13 raw=581827B gz=178223B (174.0KB) → FAIL (soft budget exceeded — under hard cap)
+    static/chunks/f091501564eb2ea3.js gz=7225B
+    static/chunks/b137c16b75c8591f.js gz=32244B
+    static/chunks/c284ff537f4f1dda.js gz=70263B
+    static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
+    static/chunks/f3a7c96ddb389a71.js gz=6395B
+    static/chunks/d2be314c3ece3fbe.js gz=7448B
+    static/chunks/fadceae8b21e5292.js gz=12038B
+    static/chunks/049b86ba72cbd0ae.js gz=11266B
+    static/chunks/f58ccb5ac991160e.js gz=8260B
+    static/chunks/685943c535c00040.js gz=737B
+    static/chunks/039516ed03da1f6d.js gz=5342B
+    static/chunks/7eefc4a9a71ed2e9.js gz=5717B
+    static/chunks/406880850b4bfaea.js gz=7256B
+/ar/gallery — files=13 raw=588168B gz=180200B (176.0KB) → FAIL (soft budget exceeded — under hard cap)
+    static/chunks/f091501564eb2ea3.js gz=7225B
+    static/chunks/b137c16b75c8591f.js gz=32244B
+    static/chunks/c284ff537f4f1dda.js gz=70263B
+    static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
+    static/chunks/f3a7c96ddb389a71.js gz=6395B
+    static/chunks/d2be314c3ece3fbe.js gz=7448B
+    static/chunks/fadceae8b21e5292.js gz=12038B
+    static/chunks/049b86ba72cbd0ae.js gz=11266B
+    static/chunks/f58ccb5ac991160e.js gz=8260B
+    static/chunks/685943c535c00040.js gz=737B
+    static/chunks/039516ed03da1f6d.js gz=5342B
+    static/chunks/1f3bd7c9a79c37e9.js gz=7694B
+    static/chunks/406880850b4bfaea.js gz=7256B
+/ar/private-dining — files=13 raw=573595B gz=174918B (170.8KB) → FAIL (soft budget exceeded — under hard cap)
+    static/chunks/f091501564eb2ea3.js gz=7225B
+    static/chunks/b137c16b75c8591f.js gz=32244B
+    static/chunks/c284ff537f4f1dda.js gz=70263B
+    static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
+    static/chunks/f3a7c96ddb389a71.js gz=6395B
+    static/chunks/d2be314c3ece3fbe.js gz=7448B
+    static/chunks/fadceae8b21e5292.js gz=12038B
+    static/chunks/049b86ba72cbd0ae.js gz=11266B
+    static/chunks/f58ccb5ac991160e.js gz=8260B
+    static/chunks/685943c535c00040.js gz=737B
+    static/chunks/039516ed03da1f6d.js gz=5342B
+    static/chunks/58acd09725589627.js gz=2412B
+    static/chunks/406880850b4bfaea.js gz=7256B
+/ar/contact — files=12 raw=566471B gz=172506B (168.5KB) → FAIL (soft budget exceeded — under hard cap)
+    static/chunks/f091501564eb2ea3.js gz=7225B
+    static/chunks/b137c16b75c8591f.js gz=32244B
+    static/chunks/c284ff537f4f1dda.js gz=70263B
+    static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
+    static/chunks/f3a7c96ddb389a71.js gz=6395B
+    static/chunks/d2be314c3ece3fbe.js gz=7448B
+    static/chunks/fadceae8b21e5292.js gz=12038B
+    static/chunks/049b86ba72cbd0ae.js gz=11266B
+    static/chunks/f58ccb5ac991160e.js gz=8260B
+    static/chunks/685943c535c00040.js gz=737B
+    static/chunks/039516ed03da1f6d.js gz=5342B
+    static/chunks/406880850b4bfaea.js gz=7256B
+/ar/confirmation/cmuerh3vo001y2g0hqxdmhqdw — files=12 raw=566471B gz=172506B (168.5KB) → FAIL (soft budget exceeded — under hard cap)
+    static/chunks/f091501564eb2ea3.js gz=7225B
+    static/chunks/b137c16b75c8591f.js gz=32244B
+    static/chunks/c284ff537f4f1dda.js gz=70263B
+    static/chunks/turbopack-9589c2af93a1c2ee.js gz=4032B
+    static/chunks/f3a7c96ddb389a71.js gz=6395B
+    static/chunks/d2be314c3ece3fbe.js gz=7448B
+    static/chunks/fadceae8b21e5292.js gz=12038B
+    static/chunks/049b86ba72cbd0ae.js gz=11266B
     static/chunks/f58ccb5ac991160e.js gz=8260B
     static/chunks/685943c535c00040.js gz=737B
     static/chunks/039516ed03da1f6d.js gz=5342B

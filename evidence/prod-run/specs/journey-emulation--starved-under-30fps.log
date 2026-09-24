@@ -1,7 +1,7 @@
 
-===== journey-emulation--starved-under-30fps · run 2026-09-23T23:34:51.968Z =====
-# JRN-1/E55 · journey auto-kill · starved-under-30fps · 2026-09-23T23:34:51.968Z
-fps trace (per-second): [15, 18, 18, 18]
+===== journey-emulation--starved-under-30fps · run 2026-09-23T23:57:13.352Z =====
+# JRN-1/E55 · journey auto-kill · starved-under-30fps · 2026-09-23T23:57:13.352Z
+fps trace (per-second): [12, 19, 18, 15]
 final state: canvas=0 · act articles=3 · mounted=true · killed=true
 longest <30fps streak: 4s (trigger needs 3 consecutive)
 poster-swap frame: /home/runner/work/mirador-site/mirador-site/evidence/prod-run/JRN-1/journey--en--autokill-poster--1440.png

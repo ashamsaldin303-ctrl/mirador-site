@@ -46,6 +46,6 @@ $ bun scripts/audit-copy.ts
 G1 banned wordlist: 0 hits PASS
 G5 placeholder tokens: 0 hits PASS
 F9-4 menu descriptions (28 dishes): EN over 0 · AR over 0 PASS
-Locale key parity: 158 keys PASS
-F9-5 docs/copy-parity.md: 158 rows PASS
+Locale key parity: 167 keys PASS
+F9-5 docs/copy-parity.md: 167 rows PASS
 F10-3 image register: 38/38 files covered PASS

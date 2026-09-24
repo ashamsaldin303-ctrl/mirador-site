@@ -1,7 +1,7 @@
 
-===== filter-pair--ar · run 2026-09-23T23:34:43.053Z =====
-# F3-5/E50 · menu filter pair RE-SHOT · AR · 2026-09-23T23:34:43.053Z
-before: 28 rows · aria-live "28 طبقاً" · md5 dbb4c4b2a236d61bed180443e01a62b0
-after : 4 rows · aria-pressed true · aria-live "4 أطباق" · md5 715ff028cda738586b82c9f46dbf35ca
+===== filter-pair--ar · run 2026-09-23T23:57:03.875Z =====
+# F3-5/E50 · menu filter pair RE-SHOT · AR · 2026-09-23T23:57:03.875Z
+before: 28 rows · aria-live "28 طبقاً" · md5 e82eeb90246161b224309acde3068afc
+after : 4 rows · aria-pressed true · aria-live "4 أطباق" · md5 be32a58f8a5500fe63b14546019461eb
 pair  : md5s differ = true
 VERDICT: PASS

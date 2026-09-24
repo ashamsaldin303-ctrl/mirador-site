@@ -1,8 +1,8 @@
-# cold-start handoff (F12-3) — machine-generated 2026-09-23T23:47:36Z
+# cold-start handoff (F12-3) — machine-generated 2026-09-24T00:09:57Z
 # fresh clone of ashamsaldin303-ctrl/mirador-site → bun install · migrate · seed · dev → GET /en 200
 Cloning into '/tmp/coldstart'...
-Updating files:  67% (746/1110)Updating files:  68% (755/1110)Updating files:  69% (766/1110)Updating files:  70% (777/1110)Updating files:  71% (789/1110)Updating files:  72% (800/1110)Updating files:  73% (811/1110)Updating files:  74% (822/1110)Updating files:  75% (833/1110)Updating files:  76% (844/1110)Updating files:  77% (855/1110)Updating files:  78% (866/1110)Updating files:  79% (877/1110)Updating files:  80% (888/1110)Updating files:  81% (900/1110)Updating files:  82% (911/1110)Updating files:  83% (922/1110)Updating files:  84% (933/1110)Updating files:  85% (944/1110)Updating files:  86% (955/1110)Updating files:  87% (966/1110)Updating files:  88% (977/1110)Updating files:  89% (988/1110)Updating files:  90% (999/1110)Updating files:  91% (1011/1110)Updating files:  92% (1022/1110)Updating files:  93% (1033/1110)Updating files:  94% (1044/1110)Updating files:  95% (1055/1110)Updating files:  96% (1066/1110)Updating files:  97% (1077/1110)Updating files:  98% (1088/1110)Updating files:  99% (1099/1110)Updating files: 100% (1110/1110)Updating files: 100% (1110/1110), done.
-clone HEAD: 8a1816e74a4ecf9dd4593c4638cf5960bc200857
+Updating files:  55% (661/1189)Updating files:  56% (666/1189)Updating files:  57% (678/1189)Updating files:  58% (690/1189)Updating files:  59% (702/1189)Updating files:  60% (714/1189)Updating files:  61% (726/1189)Updating files:  62% (738/1189)Updating files:  63% (750/1189)Updating files:  64% (761/1189)Updating files:  65% (773/1189)Updating files:  66% (785/1189)Updating files:  67% (797/1189)Updating files:  68% (809/1189)Updating files:  69% (821/1189)Updating files:  69% (825/1189)Updating files:  70% (833/1189)Updating files:  71% (845/1189)Updating files:  72% (857/1189)Updating files:  73% (868/1189)Updating files:  74% (880/1189)Updating files:  75% (892/1189)Updating files:  76% (904/1189)Updating files:  77% (916/1189)Updating files:  78% (928/1189)Updating files:  79% (940/1189)Updating files:  80% (952/1189)Updating files:  81% (964/1189)Updating files:  82% (975/1189)Updating files:  83% (987/1189)Updating files:  84% (999/1189)Updating files:  85% (1011/1189)Updating files:  86% (1023/1189)Updating files:  87% (1035/1189)Updating files:  88% (1047/1189)Updating files:  89% (1059/1189)Updating files:  90% (1071/1189)Updating files:  91% (1082/1189)Updating files:  92% (1094/1189)Updating files:  93% (1106/1189)Updating files:  94% (1118/1189)Updating files:  95% (1130/1189)Updating files:  96% (1142/1189)Updating files:  97% (1154/1189)Updating files:  98% (1166/1189)Updating files:  99% (1178/1189)Updating files: 100% (1189/1189)Updating files: 100% (1189/1189), done.
+clone HEAD: ae2dc9c7ac3b30b174f1ce31ebc1a6c18fdd487f
 bun install v1.3.14 (0d9b296a)
 
 + @axe-core/playwright@4.13.0
@@ -37,7 +37,7 @@ bun install v1.3.14 (0d9b296a)
 + three@0.186.0
 + zod@4.3.5
 
-448 packages installed [2.28s]
+448 packages installed [1.90s]
 $ prisma generate
 warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).
 For more information, see: https://pris.ly/prisma-config
@@ -54,11 +54,11 @@ Prisma schema loaded from prisma/schema.prisma
 │    npm i @prisma/client@latest                          │
 └─────────────────────────────────────────────────────────┘
 
-✔ Generated Prisma Client (v6.19.2) to ./node_modules/@prisma/client in 52ms
+✔ Generated Prisma Client (v6.19.2) to ./node_modules/@prisma/client in 109ms
 
 Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
 
-Tip: Interested in query caching in just a few lines of code? Try Accelerate today! https://pris.ly/tip-3-accelerate
+Tip: Want to turn off tips and other hints? https://pris.ly/tip-4-nohints
 
 warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).
 For more information, see: https://pris.ly/prisma-config

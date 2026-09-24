@@ -1,4 +1,4 @@
-# interactive target probe — machine-generated 2026-09-23T23:39:10.169Z
+# interactive target probe — machine-generated 2026-09-24T00:01:30.691Z
 # gate (F12-7): effective size ≥44×44 (WCAG floor 24×24 recorded for context)
 # scope per contract: nav · filters · forms · lightbox (visible targets only)
 
@@ -31,12 +31,12 @@
   <a> "MIRADOR" — 130×44px → ≥44
   <a> "العربية" — 63×44px → ≥44
   <button> "Open menu" — 44×44px → ≥44
-  <a> "To Begin" — 89×44px → ≥44
-  <a> "Bread & Butter" — 134×44px → ≥44
-  <a> "From the Hearth" — 148×44px → ≥44
-  <a> "Mains" — 68×44px → ≥44
-  <a> "Sides" — 64×44px → ≥44
-  <a> "To Finish" — 92×44px → ≥44
+  <a> "1To Begin" — 104×44px → ≥44
+  <a> "2Bread & Butter" — 151×44px → ≥44
+  <a> "3From the Hearth" — 165×44px → ≥44
+  <a> "4Mains" — 85×44px → ≥44
+  <a> "5Sides" — 81×44px → ≥44
+  <a> "6To Finish" — 110×44px → ≥44
   <button> "Vegetarian" — 108×44px → ≥44
   <button> "Vegan" — 77×44px → ≥44
   <button> "Gluten-free" — 112×44px → ≥44

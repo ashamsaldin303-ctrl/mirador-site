@@ -1,8 +1,8 @@
 
-===== readers--menu--en · run 2026-09-23T23:35:09.593Z =====
-# P-042/E75 · the three readers · menu · EN · 2026-09-23T23:35:09.593Z
+===== readers--menu--en · run 2026-09-23T23:57:31.029Z =====
+# P-042/E75 · the three readers · menu · EN · 2026-09-23T23:57:31.029Z
 Hands: 8 tab stops · 8 with the bezel → PASS
 Ears: h1=1 main=true footer=true live-regions=2 title="Menu — MIRADOR" → PASS
 Ears/axe: critical violations=0 → PASS
-Calm: h1="Menu" · animated elements=0 · body=39737 chars → PASS
+Calm: h1="Menu" · animated elements=0 · body=40104 chars → PASS
 VERDICT: PASS
