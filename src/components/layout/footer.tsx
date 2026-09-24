@@ -19,12 +19,20 @@ export function Footer({ locale, strings }: { locale: Locale; strings: FooterStr
   const dir = locale === "ar" ? "ar" : "en";
   return (
     <footer className="mt-auto border-t border-line bg-night">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-4 lg:gap-8 lg:px-8">
-        <div className="flex flex-col gap-6">
-          <WordmarkLockup size="md" />
-          <p className="text-small text-muted">{strings.sypLine}</p>
-        </div>
+      {/* THE ENTRANCE ROUND (phase 2): the brand closure — the display lockup
+          centered over the columns (the VLM critique: "footer without brand
+          closure"), the SYP line riding under it, centered and width-capped.
+          Mobile containment: text-display-xl floors at 3.5rem, where the
+          dual-script lockup runs ~430px wide — over a 375px phone it is
+          scaled to fit below 480px and clipped at the padding box as the
+          hard no-overflow backstop (the hero's own containment idiom; the
+          scale keeps every glyph visible down to 360px viewports). */}
+      <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 overflow-hidden px-4 pb-12 pt-16 sm:px-6 lg:px-8">
+        <WordmarkLockup size="xl" className="scale-[0.76] min-[480px]:scale-100" />
+        <p className="max-w-md text-center text-small text-muted">{strings.sypLine}</p>
+      </div>
 
+      <div className="mx-auto grid max-w-7xl gap-12 px-4 pb-16 sm:px-6 lg:grid-cols-3 lg:gap-8 lg:px-8">
         <div>
           <h2 className="hud-label mb-4">{strings.addressLabel}</h2>
           <address className="text-body text-muted not-italic">

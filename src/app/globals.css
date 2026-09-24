@@ -532,6 +532,105 @@ html[data-night="late"] .elev-4 {
 }
 
 /* ————————————————————————————————————————————————————————
+   THE ENTRANCE ROUND (user-directed UI round) · the hero's choreographed
+   arrival + the shared scroll/atmosphere primitives.
+   THE HERO ENTRANCE: the poster settles through its dawn (scale +
+   brightness, compositor-only), the kicker and lockup settle in, the hero
+   line's WORDS rise each through its own sill (the window motif —
+   clip-path masks; layout untouched, baselines untouched), the CTAs
+   settle last, the scroll cue arrives and breathes. Delays are inline
+   (server-rendered, deterministic). Every animation mounts behind
+   prefers-reduced-motion (RM = the static hero, fully present) and the
+   global RM block below is the second net.
+   THE SCROLL REVEAL (.reveal): data-reveal is armed imperatively at
+   effect-time (never in SSR markup — no-JS/crawler HTML stays canonical
+   and visible); the IO flips pending→visible. One transition on the base
+   class serves both states.
+   THE TICKER (.ticker-track): the hours ribbon — a duplicated row, one
+   linear loop, RTL twin runs the reading direction. RM = static first
+   copy, clipped by the band.
+   THE AMBIENT GLOW (.night-glow): the city's light pooling from below
+   the fold — one radial gradient, 6% amber, pointer-dead.
+   ———————————————————————————————————————————————————————— */
+.hero-word {
+  /* the sill: generous clearance above (ascenders + AR's shadda), tight
+     below (the arrival edge). clip-path is purely visual — inline layout,
+     baseline alignment and line boxes are untouched (unlike overflow
+     masks, which re-baseline inline-blocks). */
+  display: inline-block;
+  clip-path: inset(-0.62em -0.16em -0.14em -0.16em);
+}
+[dir="rtl"] .hero-word {
+  /* Amiri's taller ink box: deeper clearance both sides */
+  clip-path: inset(-0.9em -0.16em -0.32em -0.16em);
+}
+.hero-word > span {
+  display: inline-block;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-word > span {
+    animation: word-rise 600ms var(--ease-out-expo) both;
+  }
+
+  .cue-line {
+    /* the scroll cue's drop-line: arrives, then breathes forever —
+       two animations, one element, the second waits for the first */
+    animation:
+      arrive 500ms var(--ease-out-expo) 900ms both,
+      breathe 2.4s ease-in-out 1.8s infinite;
+  }
+
+  .reveal {
+    transition:
+      opacity 600ms var(--ease-out-expo),
+      transform 600ms var(--ease-out-expo);
+  }
+  .reveal[data-reveal="pending"] {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  .reveal[data-reveal="visible"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .ticker-track {
+    animation: ticker 38s linear infinite;
+  }
+  [dir="rtl"] .ticker-track {
+    animation-name: ticker-rtl;
+  }
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+}
+.ticker-sep {
+  width: 4px;
+  height: 4px;
+  background: var(--color-amber);
+  transform: rotate(45deg); /* the city's diamond — no glyph dependency */
+}
+
+.night-glow {
+  /* the city's light pools from below the fold — one radial, 6% amber,
+     pointer-dead, painted behind static content (pseudo = first child) */
+  position: relative;
+}
+.night-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    56% 42% at 50% 100%,
+    rgb(203 163 92 / 0.06),
+    transparent 70%
+  );
+}
+
+/* ————————————————————————————————————————————————————————
      P-037 (prompt-4 R10) · THE MOTION PRIMITIVES — shared, named, documented.
      The CONDUCTOR RULE (binding): CSS owns paint/pointer-time (these
      primitives + hover/focus transitions) · GSAP owns scroll/diff-time
@@ -559,6 +658,18 @@ html[data-night="late"] .elev-4 {
    also kills it outright. */
   animation: breathe 2.4s ease-in-out infinite;
 }
+@utility arrive {
+  /* plain arrival: opacity only, 500ms expo-out (the entrance round's
+     fade verb for elements that must not travel — labels, cues). */
+  animation: arrive 500ms var(--ease-out-expo) both;
+}
+@utility hero-dawn {
+  /* the poster's dawn: scale 1.045→1 + brightness/saturation lift,
+    1200ms expo-out — the night settles to its resting grade.
+    Compositor-only (transform + filter); the poster is never the LCP
+    element on this surface (the H1 is). */
+  animation: dawn 1200ms var(--ease-out-expo) both;
+}
 
 @keyframes settle {
   from { opacity: 0; transform: translateY(8px); }
@@ -571,6 +682,28 @@ html[data-night="late"] .elev-4 {
 @keyframes breathe {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.55; }
+}
+@keyframes arrive {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes word-rise {
+  /* the word arrives through its sill: 0.85em of travel (fully hidden
+     behind the mask's bottom edge), opacity pinned early (30%) so the
+     sliver of arrival is never a ghost — the transform carries the curve */
+  from { transform: translateY(0.85em); opacity: 0; }
+  30% { opacity: 1; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes dawn {
+  from { transform: scale(1.045); filter: brightness(0.7) saturate(0.88); }
+  to { transform: scale(1); filter: brightness(1) saturate(1); }
+}
+@keyframes ticker {
+  to { transform: translateX(-50%); }
+}
+@keyframes ticker-rtl {
+  to { transform: translateX(50%); }
 }
 
 @layer utilities {

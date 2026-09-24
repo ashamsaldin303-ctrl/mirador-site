@@ -91,7 +91,11 @@ function GalleryTile({ item, index, locale, strings, onOpen }: TileProps) {
             loader={isLadderMaster(item.imageUrl) ? miradorImageLoader : undefined}
             priority={index < 2}
             onError={() => setFailed(true)}
-            className="h-auto w-full"
+            // THE ENTRANCE ROUND (phase 2): the window breathes on hover — a
+            // 2% zoom on the slow expo curve, clipped by the tile's frame
+            // (overflow-hidden on the group button); the failed-image branch
+            // above never mounts this node, so the fallback is untouched.
+            className="h-auto w-full transition-transform duration-slow ease-[var(--ease-out-expo)] group-hover:scale-[1.02]"
           />
         )}
       </button>

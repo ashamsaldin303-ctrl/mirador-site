@@ -22,12 +22,15 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  // base: the touch law (44px) + the frozen tempo (200ms color transitions)
-  "inline-flex min-h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap font-sans text-small transition-colors duration-base disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  // base: the touch law (44px) + the frozen tempo (200ms color/shadow transitions)
+  "inline-flex min-h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap font-sans text-small transition duration-base disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
-        cta: "rounded-full bg-amber px-8 font-semibold text-night hover:bg-amber/90",
+        // THE ENTRANCE ROUND: the cta gains its glow — the city light
+        // gathers under the amber pill on hover (shadow-lg geometry,
+        // amber-tinted — a luxury sheen, never a wash).
+        cta: "rounded-full bg-amber px-8 font-semibold text-night hover:bg-amber/90 hover:shadow-lg hover:shadow-amber/30",
         quiet:
           "px-1 text-muted underline decoration-line underline-offset-8 hover:text-ink hover:decoration-amber",
         quietOutline:

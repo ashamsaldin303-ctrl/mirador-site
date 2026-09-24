@@ -27,7 +27,7 @@ export function DishRow({
       hidden={hidden || undefined}
       aria-disabled={item.isSoldOut ? "true" : undefined}
       className={cn(
-        "relative border-b border-line py-6",
+        "relative border-b border-line py-6 transition-colors hover:bg-surface/40",
         item.isSignature && "ps-4",
         item.isSoldOut && "opacity-50",
       )}

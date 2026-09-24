@@ -10,6 +10,7 @@ import type { DietTag } from "@/lib/menu";
 import type { MenuSectionDTO, MenuStrings } from "./menu-client";
 import { matchesFilters } from "./menu-client";
 import { DishRow } from "./dish-row";
+import { Reveal } from "@/components/ui/reveal";
 
 export function DishList({
   section,
@@ -34,22 +35,27 @@ export function DishList({
       aria-labelledby={`${section.slug}-title`}
       className="scroll-mt-32 py-24"
     >
-      <div className="flex items-baseline gap-4">
-        {/* the floor numeral — decoration (aria-hidden): the H2 remains the
-            section's accessible title; the numeral rides the deferred face */}
-        <span
-          aria-hidden="true"
-          className="font-display text-h3 tabular-nums text-amber"
-        >
-          {floor}
-        </span>
-        <h2
-          id={`${section.slug}-title`}
-          className="font-display text-h2 text-ink"
-        >
-          {section.title}
-        </h2>
-      </div>
+      {/* THE ENTRANCE ROUND (phase 2): the floor plate announces itself —
+          the numeral + title row rises in on encounter (this file compiles
+          as client code via menu-client, so the client Reveal is lawful). */}
+      <Reveal>
+        <div className="flex items-baseline gap-4">
+          {/* the floor numeral — decoration (aria-hidden): the H2 remains the
+              section's accessible title; the numeral rides the deferred face */}
+          <span
+            aria-hidden="true"
+            className="font-display text-h3 tabular-nums text-amber"
+          >
+            {floor}
+          </span>
+          <h2
+            id={`${section.slug}-title`}
+            className="font-display text-h2 text-ink"
+          >
+            {section.title}
+          </h2>
+        </div>
+      </Reveal>
       {/* the hairline at the plate's base — the draw verb on plate reveal */}
       <hr className="hud-rule motion-safe:draw mt-6" />
       <ul className="mt-2">

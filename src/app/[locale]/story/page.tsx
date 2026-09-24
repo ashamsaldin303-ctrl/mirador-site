@@ -5,6 +5,7 @@
 // F8-2) — no leading-* overrides. All copy from content/{en,ar}.json.
 import type { Metadata } from "next";
 import { LadderImage } from "@/components/ui/ladder-image";
+import { Reveal } from "@/components/ui/reveal";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { getDictionary, type Locale } from "@/lib/i18n";
@@ -65,13 +66,18 @@ export default async function StoryPage({
 
       {chapters.map((chapter, i) => (
         <div key={chapter.hud}>
-          <section className="mx-auto max-w-3xl px-4 py-24 sm:px-6 sm:py-32">
-            <p className="hud-label">{chapter.hud}</p>
-            <h2 className="mt-4 font-display text-h2 text-ink">{chapter.title}</h2>
-            <p className="mt-6 max-w-[34rem] font-sans text-body-lg text-ink/90">
-              {chapter.body}
-            </p>
-          </section>
+          {/* THE ENTRANCE ROUND (phase 2): each chapter's block rises in on
+              encounter — one Reveal per chapter, the house stagger 0/80/160
+              (chapter 1 rides delay 0: nearest the fold, never waits). */}
+          <Reveal delay={i * 80}>
+            <section className="mx-auto max-w-3xl px-4 py-24 sm:px-6 sm:py-32">
+              <p className="hud-label">{chapter.hud}</p>
+              <h2 className="mt-4 font-display text-h2 text-ink">{chapter.title}</h2>
+              <p className="mt-6 max-w-[34rem] font-sans text-body-lg text-ink/90">
+                {chapter.body}
+              </p>
+            </section>
+          </Reveal>
 
           {i === 1 &&
             (hasNightImage ? (
@@ -95,11 +101,15 @@ export default async function StoryPage({
         </div>
       ))}
 
-      <section className="mx-auto max-w-3xl px-4 py-24 sm:px-6 sm:py-32">
+      {/* the closing quote — the city's light pools from below
+          (night-glow) as the line rises in on encounter */}
+      <section className="night-glow mx-auto max-w-3xl px-4 py-24 sm:px-6 sm:py-32">
         <hr className="hud-rule" />
-        <blockquote className="py-16 text-center font-display text-h2 text-amber">
-          {dict["story.pullQuote"]}
-        </blockquote>
+        <Reveal>
+          <blockquote className="py-16 text-center font-display text-h2 text-amber">
+            {dict["story.pullQuote"]}
+          </blockquote>
+        </Reveal>
         <hr className="hud-rule" />
       </section>
     </article>

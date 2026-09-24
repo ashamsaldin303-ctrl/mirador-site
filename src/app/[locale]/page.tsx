@@ -1,11 +1,14 @@
-// MIRADOR — Home (§4.1): hero → chapter intro → signature journey → reserve band.
-// Brand route: cinematic budget. LCP = the hero poster (priority).
+// MIRADOR — Home (§4.1): hero → hours ribbon → chapter intro → the house in
+// numbers → signature journey → reserve band. Brand route: cinematic budget.
+// LCP = the hero poster (priority).
 import { getDictionary, isLocale } from "@/lib/i18n";
 import { VENUE, siteUrl, telHref } from "@/lib/venue";
 import { Hero } from "@/components/home/hero";
 import { ChapterIntro } from "@/components/home/chapter-intro";
 import { Journey, type Act } from "@/components/home/journey";
 import { ReserveBand } from "@/components/home/reserve-band";
+import { TickerBand } from "@/components/home/ticker-band";
+import { FactStrip } from "@/components/home/fact-strip";
 
 export default async function HomePage({
   params,
@@ -60,8 +63,35 @@ export default async function HomePage({
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c").replace(/>/g, "\\u003e"),
         }}
       />
-      <Hero locale={locale} line={dict["hero.line"]} cta={dict["hero.cta"]} quiet={dict["hero.quiet"]} />
+      <Hero
+        locale={locale}
+        line={dict["hero.line"]}
+        cta={dict["hero.cta"]}
+        quiet={dict["hero.quiet"]}
+        kicker={dict["hero.kicker"]}
+        scroll={dict["hero.scroll"]}
+      />
+      {/* the hours ribbon — the house's facts running under the hero */}
+      <TickerBand
+        items={[
+          dict["ticker.1"],
+          dict["ticker.2"],
+          dict["ticker.3"],
+          dict["ticker.4"],
+          dict["ticker.5"],
+        ]}
+      />
       <ChapterIntro hud={dict["intro.hud"]} paragraph={dict["intro.paragraph"]} />
+      {/* the house in numbers — the HUD facts strip */}
+      <FactStrip
+        hud={dict["facts.hud"]}
+        facts={[
+          { value: dict["facts.floors.value"], label: dict["facts.floors.label"] },
+          { value: dict["facts.window.value"], label: dict["facts.window.label"] },
+          { value: dict["facts.seconds.value"], label: dict["facts.seconds.label"] },
+          { value: dict["facts.doors.value"], label: dict["facts.doors.label"] },
+        ]}
+      />
       <Journey hud={dict["journey.hud"]} acts={acts} />
       <ReserveBand
         locale={locale}
