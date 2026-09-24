@@ -6,4 +6,4 @@
 - verdict: N/A-held-out
 - evidence: /evidence/(§10.4 anti-gaming)
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T23:45:07.451Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-24T00:14:41.642Z)

@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/ui/E92/keyboard-walkthrough.log + ui/E92/before--dish-overlay--en--375.png + ui/E92/after--dish-overlay--en--375.png
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T23:45:07.452Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-24T00:14:41.660Z)

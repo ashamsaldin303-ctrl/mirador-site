@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/prod-run/img-surface/ladder-avif.txt + prod-run/img-surface/optimizer-avif.txt
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T23:45:07.451Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-24T00:14:41.650Z)

@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/ui/E98/404--unbuilt-floor-dial--en--375.png + ui/E98/404--unbuilt-floor-dial--ar--375.png
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T23:45:07.452Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-24T00:14:41.661Z)

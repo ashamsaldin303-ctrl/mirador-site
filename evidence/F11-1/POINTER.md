@@ -6,4 +6,4 @@
 - verdict: PASS
 - evidence: /evidence/prod-run/http/ + r1/E41/dev-pairs.log
 
-(machine-generated from /evidence/MATRIX.md — 2026-09-23T23:45:07.451Z)
+(machine-generated from /evidence/MATRIX.md — 2026-09-24T00:14:41.643Z)
