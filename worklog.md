@@ -760,3 +760,22 @@ Work Log:
 - VERDICT: 10/11 items PASS; item 11 partial-fail (page errors 0; console nonzero — dev-mode warnings, taxonomy recorded). DB cleaned (3 rows). Session vb2 closed.
 
 Stage Summary: Menu/gallery/AR/reserve/private-dining motion + form systems all verified PASS with measured values; one console-hygiene failure (5-7 dev-mode errors per load + filter-toggle render warning) flagged for the console-gate owner; DB left pristine (0 VB2 rows, 12 reservations, 0 inquiries).
+
+---
+Task ID: loop2-close
+Agent: Z.ai Code (orchestrator — strict grading + closure)
+Task: Close Loop 2 of the 100/100 campaign (rebuild wave) — verification, hardening, grading, push.
+
+Work Log:
+- Group 3 (right-sized): 2 parallel browser verifiers (VB1 homepage EN+AR 12 checks; VB2 menu/gallery/reserve/private E2E) instead of 10 (the OOM lesson) — both completed without memory incidents.
+- VB1: 12/12 PASS, ZERO defects — hero v2 layers verified (dusk pair 26s, canvas 1265×800 running, vertical-rl rail, mirrored brackets, live clock); entrance choreography measured mid-flight (h1 matrix 12→0) ending at identity; pointer FX + idle-bail observed; darkening 0.41 @600px; ring dashoffset 74.76→0; counters 06/40/12; hidden sweep 0; footer flush; AR: no overflow @1280/@375, rail LEFT edge, clock WESTERN digits (ar-u-nu-latn fix confirmed), letterSpacing normal on Arabic, journey track +1299.98/+2559.35 (exactly +1/+2 viewport POSITIVE — the RTL contract holds), acts [1,1,1], poster branch + webgl=off clean.
+- VB2: all functional items PASS — dish hover art (plate matrix 1.04, price ±2px mirrored, underline scaleX, sold-out excluded); nav glide Δ0.44px precision; overlay clip choreography + cascade 0/40/80/120ms; filters 10↔28 rows, 0 stuck-hidden; gallery parallax ±19px mid-scroll; lightbox directional slide + 44px buttons + 2px bezel; reserve E2E (44px fields, label float −28px, busy breathe, confirmation ring+check+motes) with DB cleanup (3 test rows); private-dining validation PASS.
+- VB2 found 2 real defects → BOTH FIXED by orchestrator directly: (1) the E-HYD explicit <head> wrapper (my earlier session fix, lost to the box snapshot-restore — 6 React-19 hydration diagnostics/route) re-applied to layout.tsx, SSR-verified (fonts-deferred + js-gate inside <head>); (2) menu filter URL-sync replaceState hoisted out of the setFilters updater (render-phase side effect) — refactor verified both directions (10 rows ?diet=vegetarian ↔ 28 rows clean URL).
+- The 5 defects from the lost wave's static audits all confirmed fixed in the rebuild: western clock digits (VB1 measured "22:31"), closeLabel wired (I4r), --dir-sign exactly ×2 (I4r grep), zero-alloc canvas hot path + 140 windows (I1r), idle bail (VB1 observed).
+- Gates at close: tsc 0 · eslint 0 · 12 route-locale pairs 200 · console ZERO errors/warnings on fresh loads (verified post-hardening) · DB guarded (db-guard.ts wired into dev).
+- Pushed to GitHub: d5f3e02 (the loop-2 wave) + ee03b9e (hardening) on main; the remote's older parallel lineage (p5/p6/entrance, Sep 24) preserved under archive/p5-p6-entrance-lineage — no work destroyed.
+- VLM strict jury on the final AR hero (static screenshot): memorability 6.5/10 — "beautifully composited" but motion-invisible in stills; actionable notes for Loop 3 (magnetic CTA, line-level H1 reveal — Arabic-safe line masks only, never letter-stagger; scroll-reactive chrome; stronger ember presence).
+
+Stage Summary:
+- LOOP 2 CLOSED at a strict 88/100 (from the 70 baseline): all four owner directives delivered and measured — (a) animation density ×20 systems site-wide, (b) the RTL contract proven bit-for-bit in AR (journey track positive parity, mirrors measured everywhere), (c) hero v2 "Dusk Over Damascus" rebuilt (canvas skyline + dusk breath + live clock + rail/brackets + new grid), (d) professionalization (unified field idiom, bezel law, 44px targets, elev ladder, snap, skeletons, clean console).
+- Honest gaps to close in Loop 3 toward 100: perceived-motion strength in the hero (VLM 6.5/10 memorability — ambient subtlety reads static in stills), contact/private-dining animation density (P2 leftovers), magnetic CTA + H1 line-reveal, THREE.Clock deprecation (journey lib), Lenis 24px settle-back, and the environment-impossible production-build Lighthouse (carried since loop-1, code-verified LCP wiring intact).
