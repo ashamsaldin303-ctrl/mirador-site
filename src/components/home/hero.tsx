@@ -10,7 +10,8 @@ import { HeroStage } from "./hero-stage";
 
 export function Hero({
   locale,
-  line,
+  lineA,
+  lineB,
   cta,
   quiet,
   eyebrow,
@@ -22,7 +23,8 @@ export function Hero({
   clockCity,
 }: {
   locale: Locale;
-  line: string;
+  lineA: string;
+  lineB: string;
   cta: string;
   quiet: string;
   eyebrow: string;
@@ -36,7 +38,8 @@ export function Hero({
   return (
     <HeroStage
       locale={locale}
-      line={line}
+      lineA={lineA}
+      lineB={lineB}
       cta={cta}
       quiet={quiet}
       eyebrow={eyebrow}

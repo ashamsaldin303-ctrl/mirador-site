@@ -66,7 +66,8 @@ pair — generated from `content/en.json` + `content/ar.json` by `pnpm audit:cop
 | gallery.next | Next image | الصورة التالية |
 | gallery.prev | Previous image | الصورة السابقة |
 | hero.cta | Reserve a table | احجز طاولتك |
-| hero.line | Above the city, a table worth the climb. | فوق المدينة، مائدة تستحقّ الصعود. |
+| hero.lineA | Above the city, | فوق المدينة، |
+| hero.lineB | a table worth the climb. | مائدة تستحقّ الصعود. |
 | hero.quiet | The menu | القائمة |
 | intro.hud | MIRADOR — DAMASCUS | ميرادور — دمشق |
 | intro.paragraph | MIRADOR sits six floors above Damascus — one dining room, one long window, and a kitchen that answers to fire. We serve an international table: French technique, Mediterranean produce, no shortcuts. Below you, the city; above it, you. | يجلس «ميرادور» في الطابق السادس فوق دمشق: قاعة واحدة، نافذة ممتدة، ومطبخ يستجيب للنار. نقدّم مائدة عالمية: تقنية فرنسية، ومنتجات متوسطية، بلا اختصارات. تحتك المدينة، وفوقها أنت. |

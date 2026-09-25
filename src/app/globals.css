@@ -334,6 +334,28 @@
        under a finger; feedback comes from the bezel + brightness hovers. */
     -webkit-tap-highlight-color: transparent;
   }
+  /* D3-L3 · Lenis required styles (lenis@1.1.22 dist/lenis.css, verbatim) +
+     the scroll-behavior guard from the 1.0.x official sheet. Lenis toggles
+     html.lenis / .lenis-smooth / .lenis-stopped on <html> at runtime; without
+     these, a smooth-scroll UA setting animates non-Lenis programmatic scrolls
+     (skip-link #main, scrollTo fallbacks) and onNativeScroll re-anchors the
+     ticker mid-flight — the measured settle-back (scrollTo(1200) → 1156). */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: clip;
+  }
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
   body {
     @apply bg-night text-ink font-sans antialiased;
     text-rendering: optimizeLegibility;
@@ -610,34 +632,52 @@
 
 /* — THE HERO STAGE v2 "DUSK OVER DAMASCUS" (loop2-I1r): armed post-hydration
    ([data-armed] added by HeroStage mount rAF; the head script's 1.4s self-heal
-   covers slow/broken hydration). The H1 (LCP pair) NEVER hides — transform-
-   only entrance. Pre-arm hidden states exist ONLY under the JS gate.
-   ENTRANCE TIMELINE (expo-out, both): 0ms poster dolly 600ms · 40ms brackets
-   240ms · 80ms eyebrow · 120ms lockup · 170ms H1 translateY 12px→0 340ms ·
-   230/270ms CTAs · 280ms rail 350ms · 320ms hours row (delays inline in
-   hero-stage.tsx except bracket/rail which live here). — */
+   covers slow/broken hydration). The H1 (LCP pair) NEVER hides — L3-I1
+   upgraded it to a LINE-LEVEL reveal: pre-arm = fully visible identity
+   (LCP-safer than the old 12px offset), each dictionary-owned line slides up
+   from beneath its own clip-path mask, and data-line-done (arm + 1000ms)
+   releases the clips at rest. Pre-arm hidden states exist ONLY under the JS
+   gate. ENTRANCE TIMELINE (expo-out, both): 0ms poster dolly 600ms · 40ms
+   brackets 240ms · 80ms eyebrow · 120ms lockup · 170/260ms H1 lines 400ms
+   (line masks) · 230/270ms CTAs · 280ms rail 350ms · 320ms hours row
+   (delays inline in hero-stage.tsx except bracket/rail which live here). — */
 @media (prefers-reduced-motion: no-preference) {
   html[data-js] .hero:not([data-armed]) .hero-rise,
   html[data-js] .hero:not([data-armed]) .hero-hours { opacity: 0; transform: translateY(8px); }
-  html[data-js] .hero:not([data-armed]) .hero-line { transform: translateY(12px); }
   html[data-js] .hero:not([data-armed]) .hero-media-in { transform: scale(1.12); }
   html[data-js] .hero:not([data-armed]) .hero-bracket,
   html[data-js] .hero:not([data-armed]) .hero-rail-text { opacity: 0; }
   html[data-js] .hero[data-armed] .hero-rise { animation: hero-rise 300ms var(--ease-out-expo) both; }
   html[data-js] .hero[data-armed] .hero-hours { animation: hours-in 300ms var(--ease-out-expo) both; }
-  html[data-js] .hero[data-armed] .hero-line { animation: hero-line 340ms var(--ease-out-expo) both; }
   html[data-js] .hero[data-armed] .hero-media-in { animation: hero-media-in 600ms var(--ease-out-expo) both; }
   html[data-js] .hero[data-armed] .hero-bracket { animation: bracket-in 240ms var(--ease-out-expo) 40ms both; }
   html[data-js] .hero[data-armed] .hero-rail-text { animation: rail-in 350ms var(--ease-out-expo) 280ms both; }
   html[data-js][dir="rtl"] .hero[data-armed] .hero-rail-text { animation-name: rail-in-rtl; }
   html[data-js] .hero[data-armed] .cue-drop { animation: cue-drop 2200ms ease-in-out 800ms infinite; }
+  /* L3-I1 · the H1 line reveal (Arabic-safe law: LINE masks only — never
+     letter/word stagger). The masks clip ONLY between arming and
+     data-line-done (set at arm + 1000ms by HeroStage): pre-arm = identity
+     (LCP-safe), at rest = clip removed entirely, so Amiri ink overhang
+     (~0.26em) can never clip. clip-path over overflow:hidden = zero layout
+     side-effects. */
+  html[data-js] .hero[data-armed]:not([data-line-done]) .hero-line-mask {
+    clip-path: inset(-0.35em 0 -0.35em 0);
+  }
+  html[data-js] .hero[data-armed] .hero-line-in {
+    animation: hero-line-in 400ms var(--ease-out-expo) both;
+  }
 }
 @keyframes hero-rise {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: none; }
 }
-@keyframes hero-line {
-  from { transform: translateY(12px); }
+/* L3-I1 · the H1 line masks: block display so the mask box is the full line
+   box; the slide is self-relative (translateY(calc(100% + 0.75em))) so
+   internally-wrapped lines stay fully hidden at from in every locale. */
+.hero-line-mask { display: block; }
+.hero-line-in { display: block; }
+@keyframes hero-line-in {
+  from { transform: translateY(calc(100% + 0.75em)); }
   to { transform: none; }
 }
 @keyframes hero-media-in {
@@ -721,8 +761,14 @@
 /* the corner brackets — L-shaped hairlines (copper/40, 28px arms); the top
    bracket hosts the live Damascus clock, the bottom one the coordinates.
    Arms ride LOGICAL borders (auto-mirrored in RTL); the scale-in entrance
-   transform-origins get physical [dir="rtl"] twins. */
-.hero-bracket { position: absolute; display: flex; align-items: center; gap: 14px; }
+   transform-origins get physical [dir="rtl"] twins.
+   L3-I1 ownership ladder: the OUTER .hero-bracket keeps positioning + the
+   bracket-in entrance (its fill-mode owns the outer transform forever); the
+   INNER .hero-bracket-in carries the box layout + the GSAP scroll drift
+   (vertical only → RTL-safe, no twin); .hero-bracket-arm carries the scroll
+   opacity fade. */
+.hero-bracket { position: absolute; }
+.hero-bracket-in { display: flex; align-items: center; gap: 14px; }
 .hero-bracket-arm {
   width: 28px;
   height: 28px;
@@ -739,6 +785,13 @@
   from { opacity: 0; transform: scale(0.6); }
   to { opacity: 1; transform: scale(1); }
 }
+
+/* — L3-I1 · THE MAGNETIC CTA: the JS pointer loop writes translate3d on
+   .cta-magnet (desktop pointer:fine only — smoothstep attraction toward the
+   pointer, R=120px, ±10px cap; dead under RM/touch via the effect guards).
+   inline-flex because transforms are inert on inline boxes — zero layout
+   change vs the old structure; the hero-rise parent keeps its entrance. — */
+.cta-magnet { display: inline-flex; }
 
 /* — THE CTA GLINT SWEEP (hero CTA pair only — the one signature hover;
    mirrored under RTL via origin+direction flip) — */
@@ -1216,4 +1269,98 @@ html:not([dir="rtl"]) .field-shell:has(textarea:not(:placeholder-shown)) .field-
   }
 }
 /* ===== END LOOP2-I4 ===== */
+
+/* ===== LOOP3-D2 · CONTACT + PRIVATE-DINING MOTION ===== */
+/* I2's section: the contact fact-ledger rules + channel links, the
+   private-dining inquiry success cascade. All reuse — ZERO new grammar:
+   slot-in keyframes, the dish-name-line origin law, the [data-reveal-group]
+   reveal gate. Every hidden/animated state is compound-gated
+   html[data-js] × (prefers-reduced-motion: no-preference); RM and no-JS
+   always render final states. --dir-sign is owned by loop2-I4r — consumed
+   never defined here. Append-only: the sections above (hero block,
+   base-layer rules) belong to parallel agents and stay untouched. */
+
+/* — (C2) THE FACT LEDGER'S COPPER RULES: each .contact-fact row carries an
+   absolutely positioned 1px copper rule laid over its border-b hairline
+   (bottom: -1px). The hidden state keys off the ledger dl's OWN
+   [data-reveal-group]:not([data-revealed]) — the rules draw with the group's
+   reveal, pure CSS, zero JS. Physical left origin with the [dir="rtl"] right
+   twin (the dish-name-line origin law); per-row delays 120/200/280/360
+   (nth-child — DOM order = reading order in both dirs). — */
+.contact-fact {
+  position: relative;
+}
+.contact-rule {
+  position: absolute;
+  inset-inline: 0;
+  bottom: -1px;
+  height: 1px;
+  background: color-mix(in oklab, var(--color-copper) 70%, transparent);
+  transform-origin: left center;
+  pointer-events: none;
+}
+[dir="rtl"] .contact-rule {
+  transform-origin: right center;
+}
+html[data-js] .contact-rule {
+  transition: transform 350ms var(--ease-out-expo);
+}
+html[data-js] .contact-fact:nth-child(1) .contact-rule {
+  transition-delay: 120ms;
+}
+html[data-js] .contact-fact:nth-child(2) .contact-rule {
+  transition-delay: 200ms;
+}
+html[data-js] .contact-fact:nth-child(3) .contact-rule {
+  transition-delay: 280ms;
+}
+html[data-js] .contact-fact:nth-child(4) .contact-rule {
+  transition-delay: 360ms;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html[data-js] [data-reveal-group]:not([data-revealed]) .contact-rule {
+    transform: scaleX(0);
+  }
+}
+
+/* — (C3) THE CHANNEL LINKS: color-only hover + the focus-visible twin the
+   utility classes never had — ink/90 → ink, hairline decoration → amber,
+   200ms on the house curve. Colors survive RM (the global reduce block
+   collapses the durations); no transform ever — the page's "no lifts" law. — */
+.contact-link {
+  color: color-mix(in oklab, var(--color-ink) 90%, transparent);
+  transition:
+    color 200ms var(--ease-out-expo),
+    text-decoration-color 200ms var(--ease-out-expo);
+}
+.contact-link:hover,
+.contact-link:focus-visible {
+  color: var(--color-ink);
+  text-decoration-color: var(--color-amber);
+}
+
+/* — (P4) THE INQUIRY SUCCESS CASCADE: the 201 branch mounts as one ledger —
+   the confirm mark first (confirm-ring/confirm-check, loop2-I4 §6 — the
+   svg-draw animations fire on this DOM insertion), then message ·
+   reference · CTA · note slotting in 40ms a row (the shared slot-in
+   keyframes; DOM order = reading order in both dirs, RTL-safe by
+   construction). RM and no-JS: fully visible, instantly. — */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-js] .inquiry-success-cascade > * {
+    animation: slot-in 300ms var(--ease-out-expo) both;
+  }
+  html[data-js] .inquiry-success-cascade > *:nth-child(2) {
+    animation-delay: 40ms;
+  }
+  html[data-js] .inquiry-success-cascade > *:nth-child(3) {
+    animation-delay: 80ms;
+  }
+  html[data-js] .inquiry-success-cascade > *:nth-child(4) {
+    animation-delay: 120ms;
+  }
+  html[data-js] .inquiry-success-cascade > *:nth-child(n + 5) {
+    animation-delay: 160ms;
+  }
+}
+/* ===== END LOOP3-D2 ===== */
 

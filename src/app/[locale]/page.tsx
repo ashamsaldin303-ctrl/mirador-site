@@ -80,7 +80,8 @@ export default async function HomePage({
       />
       <Hero
         locale={locale}
-        line={dict["hero.line"]}
+        lineA={dict["hero.lineA"]}
+        lineB={dict["hero.lineB"]}
         cta={dict["hero.cta"]}
         quiet={dict["hero.quiet"]}
         eyebrow={dict["hero.eyebrow"]}

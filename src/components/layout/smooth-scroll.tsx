@@ -13,7 +13,13 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     // Lenis answers when alive (smooth); the instant fallback covers RM and
     // the pre-Lenis window. Never native smooth scrolling (fights the ticker).
     const onScrollTop = () => {
-      if (lenis) lenis.scrollTo(0, { duration: 1.1 });
+      if (lenis)
+        lenis.scrollTo(0, {
+          duration: 1.1,
+          // easeOutQuart — analytically terminal-exact at t=1 (the Lenis-docs
+          // curve); arrival value === target by construction, no asymptotic tail.
+          easing: (t: number) => 1 - Math.pow(1 - t, 4),
+        });
       else window.scrollTo(0, 0);
     };
     window.addEventListener("mirador:scroll-top", onScrollTop);
@@ -30,6 +36,12 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       if (disposed) return; // unmounted while the lazy chunks loaded — nothing to wire
       const { gsap, ScrollTrigger } = motion;
       lenis = new lenisModule.default({ duration: 1.15, wheelMultiplier: 0.9 });
+      // D3-L3: dev-only verification handle — the settle-back harness reads
+      // window.__lenis (scrollTo(1200) → window.scrollY === 1200±2). Stripped
+      // from production bundles by the NODE_ENV guard; deleted on cleanup.
+      if (process.env.NODE_ENV === "development") {
+        (window as unknown as { __lenis?: unknown }).__lenis = lenis;
+      }
       lenis.on("scroll", ScrollTrigger.update);
       tick = (t: number) => lenis?.raf(t * 1000);
       gsap.ticker.add(tick);
@@ -43,6 +55,9 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     return () => {
       disposed = true;
       window.removeEventListener("mirador:scroll-top", onScrollTop);
+      if (process.env.NODE_ENV === "development") {
+        delete (window as unknown as { __lenis?: unknown }).__lenis;
+      }
       if (tick && ticker) ticker.remove(tick);
       lenis?.destroy();
     };

@@ -65,6 +65,7 @@ function SheetContent({
     <SheetPortal>
       <SheetOverlay />
       <SheetPrimitive.Content
+        aria-modal={true}
         data-slot="sheet-content"
         className={cn(
           "elev-4 border-line data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col gap-4 transition ease-(--ease-out-expo) [--tw-ease:var(--ease-out-expo)] data-[state=closed]:duration-fast data-[state=open]:duration-base",

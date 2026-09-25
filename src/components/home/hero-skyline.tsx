@@ -5,7 +5,10 @@
 // parallax speeds — far α0.6 @0.4px/s, near α0.85 @0.8px/s, drift direction
 // mirrored in RTL (documentElement.dir read ONCE at mount) — carrying ~140
 // flickering window lights (≈70 per band — the frame-budget cap, NOT 280)
-// and 60 embers rising from the bottom band.
+// and 110 embers rising from the bottom band (L3-I1: 60 → 110 — regulars
+// 2–3px plus ~3% HERO drifters: 4px, brighter, long-lived, wide-sway,
+// spawned in the CONTENT half so they read against the headline; the extra
+// ~50 rects + ~50 alpha writes sit inside the kill-switch frame budget).
 //
 // PERFORMANCE CONTRACT (loop-1 verifier findings folded in — this file owns
 // the "hero-skyline per-frame closure alloc" defect fix):
@@ -27,7 +30,8 @@ import { useEffect, useRef } from "react";
 import type { RefObject } from "react";
 
 const WINDOW_BUDGET = 70; // per band → ~140 total (frame budget)
-const EMBER_COUNT = 60;
+const EMBER_COUNT = 110; // L3-I1: was 60 — variance + hero drifters carry the perceived-motion gain
+const HERO_EMBER_P = 0.03; // hero-drifter share of spawns (seeded + respawn)
 const INTRO_S = 0.7; // band intro duration (canvas clock)
 const INTRO_Y = 40; // intro offset: +40px → 0
 const KILL_MS = 2000; // <30fps sustained 2s → static final frame
@@ -74,7 +78,9 @@ type Band = {
 type Scene = {
   far: Band;
   near: Band;
-  em: Float32Array; // embers, stride 9: x y vy amp phase fr age life spawnY
+  // embers, stride 10: x y vy amp phase fr age life spawnY size
+  // (size slot 9: 2 small · 3 medium · 4 HERO drifter — L3-I1)
+  em: Float32Array;
 };
 
 function buildBand(seed: number, w: number, h: number, far: boolean): Band {
@@ -141,22 +147,29 @@ function buildBand(seed: number, w: number, h: number, far: boolean): Band {
   };
 }
 
-function buildScene(w: number, h: number): Scene {
+function buildScene(w: number, h: number, dirSign: number): Scene {
   const near = buildBand(8117, w, h, false);
   const rand = mulberry32(40503);
-  const em = new Float32Array(EMBER_COUNT * 9);
+  // the hero-drifter spawn range — the CONTENT half (left in LTR, right in
+  // RTL) so the big embers read against the headline, not the empty edge.
+  // Mirrors the effect-scope heroLo/heroSpan set in size() (same formula).
+  const heroLo = dirSign === 1 ? 0.06 * w : 0.5 * w;
+  const heroSpan = 0.44 * w;
+  const em = new Float32Array(EMBER_COUNT * 10);
   for (let i = 0; i < EMBER_COUNT; i++) {
-    const o = i * 9;
+    const o = i * 10;
     const spawnY = h - rand() * near.maxH * 0.85; // its place in the bottom band
-    em[o] = rand() * w; // base x — fixed ("in-place" respawn)
+    const hero = rand() < HERO_EMBER_P; // ~3 seeded hero drifters
+    em[o] = hero ? heroLo + rand() * heroSpan : rand() * w; // base x — fixed ("in-place" respawn; heroes respawn to the content half)
     em[o + 1] = spawnY - rand() * 60; // some already aloft
-    em[o + 2] = 6 + rand() * 8; // rise 6–14 px/s
-    em[o + 3] = 2 + rand() * 6; // sway amplitude (within ±8px)
+    em[o + 2] = hero ? 12 + rand() * 4 : 8 + rand() * 14; // rise px/s
+    em[o + 3] = hero ? 12 + rand() * 6 : 3 + rand() * 9; // sway amplitude (heroes ±18px)
     em[o + 4] = rand() * Math.PI * 2;
-    em[o + 5] = 0.4 + rand() * 0.8; // sway freq
+    em[o + 5] = 0.5 + rand() * 1.1; // sway freq
     em[o + 6] = rand() * 4; // staggered ages
-    em[o + 7] = 3 + rand() * 2; // 3–5s life
+    em[o + 7] = hero ? 4.5 + rand() * 1.5 : 2.6 + rand() * 2; // life
     em[o + 8] = spawnY;
+    em[o + 9] = hero ? 4 : rand() < 0.28 ? 3 : 2; // size slot
   }
   return { far: buildBand(1226, w, h, true), near, em };
 }
@@ -186,6 +199,10 @@ export default function HeroSkyline({ progressRef }: { progressRef: RefObject<nu
     let w = 1;
     let h = 1;
     let scene: Scene | null = null;
+    // the hero-drifter spawn range (content half) — set in size(), consumed
+    // by the respawn in drawEmbers (L3-I1)
+    let heroLo = 0;
+    let heroSpan = 1;
 
     // — hot-path state: pure numerics (zero allocation per frame) —
     let raf = 0;
@@ -209,7 +226,14 @@ export default function HeroSkyline({ progressRef }: { progressRef: RefObject<nu
       canvas.width = Math.round(w * dpr);
       canvas.height = Math.round(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      scene = buildScene(w, h);
+      // same formula as buildScene's local — keep the two in sync
+      heroLo = dirSign === 1 ? 0.06 * w : 0.5 * w;
+      heroSpan = 0.44 * w;
+      scene = buildScene(w, h, dirSign);
+      // dev-only verifier hook (write-once per resize; prod never sees it)
+      if (process.env.NODE_ENV === "development") {
+        (window as unknown as Record<string, number>).__miradorHeroEmbers = EMBER_COUNT;
+      }
     };
 
     // one band pass: silhouettes + its window lights (two color sub-passes —
@@ -256,7 +280,9 @@ export default function HeroSkyline({ progressRef }: { progressRef: RefObject<nu
       ctx.globalAlpha = 1;
     };
 
-    // embers: update (in-place respawn via the numeric LCG) + draw, one pass
+    // embers: update (in-place respawn via the numeric LCG — L3-I1 adds the
+    // ~3% HERO drifters: 4px, bright, long-lived, wide-sway, content-half x)
+    // + draw, one pass
     const drawEmbers = (dt: number, p: number) => {
       const s = scene;
       if (!s) return;
@@ -265,17 +291,30 @@ export default function HeroSkyline({ progressRef }: { progressRef: RefObject<nu
       if (gOp <= 0.02) return;
       ctx.fillStyle = amber;
       for (let i = 0; i < EMBER_COUNT; i++) {
-        const o = i * 9;
+        const o = i * 10;
         let age = em[o + 6]! + dt;
         let y = em[o + 1]! - em[o + 2]! * dt;
         let life = em[o + 7]!;
         if (age >= life) {
           // in-place respawn from the bottom band — zero allocation
           rsp = (rsp * 1664525 + 1013904223) | 0;
+          const roll = ((rsp >>> 10) & 0x3ff) / 1024; // 0..1
           age = 0;
-          life = 3 + ((rsp >>> 9) & 0x7fffff) * (2 / 0x7fffff);
+          if (roll < HERO_EMBER_P) {
+            // HERO EMBER — content-half drifter: 4px, bright, long-lived,
+            // wide sway; the one-time x move lands it in the content half
+            em[o + 9] = 4;
+            life = 4.5 + ((rsp >>> 20) & 0x7ff) * (1.5 / 2048);
+            em[o + 2] = 12 + ((rsp >>> 21) & 0x7ff) * (4 / 2048);
+            em[o + 3] = 12 + ((rsp >>> 8) & 0x7ff) * (6 / 2048);
+            em[o] = heroLo + ((rsp >>> 4) & 0x7ff) * (heroSpan / 2048);
+          } else {
+            em[o + 9] = roll < 0.31 ? 3 : 2;
+            life = 2.6 + ((rsp >>> 20) & 0x7ff) * (2 / 2048);
+            em[o + 2] = 8 + ((rsp >>> 21) & 0x7ff) * (14 / 2048);
+            em[o + 3] = 3 + ((rsp >>> 8) & 0x7ff) * (9 / 2048);
+          }
           y = em[o + 8]!;
-          em[o + 2] = 6 + ((rsp >>> 21) & 0x7ff) * (8 / 0x7ff);
         }
         em[o + 6] = age;
         em[o + 1] = y;
@@ -285,11 +324,12 @@ export default function HeroSkyline({ progressRef }: { progressRef: RefObject<nu
         if (age < 0.6) env = age / 0.6;
         else if (remaining < 0.6) env = remaining / 0.6;
         if (env < 0) env = 0;
-        const a = 0.55 * env * gOp;
+        const sz = em[o + 9]!; // 2 small · 3 medium · 4 hero
+        const a = (sz === 4 ? 0.85 : 0.65) * env * gOp; // hero 0.85 — legible in stills
         if (a <= 0.02) continue;
         ctx.globalAlpha = a;
         const ex = em[o]! + em[o + 3]! * Math.sin(flickT * em[o + 5]! + em[o + 4]!);
-        ctx.fillRect(ex - 1, y - 1, 2, 2);
+        ctx.fillRect(ex - sz * 0.5, y - sz * 0.5, sz, sz);
       }
     };
 

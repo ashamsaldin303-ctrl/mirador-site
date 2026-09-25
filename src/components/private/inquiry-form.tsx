@@ -20,6 +20,10 @@ import { cn } from "@/lib/utils";
 // the whole form is SSR'd (client islands still server-render), so RevealProvider
 // observes it on mount and the field blocks rise 6px staggered as one gesture.
 // NO data-reveal on individual inputs — the bezel owns focus, facts stay instant.
+// L3-I2 (D2): cap 4→6 — the full 7-child ladder (honeypot · 5 fields · submit)
+// staggers 70..420ms, the button landing last; the 201 success branch opens
+// with the confirm mark (confirm-ring/confirm-check — class-for-class reuse of
+// the reserve page's) + the .inquiry-success-cascade slot-in ledger.
 
 type FieldKey = "name" | "phone" | "preferredDate" | "partySize" | "message";
 
@@ -232,7 +236,26 @@ export function InquiryForm({
 
   if (referenceId !== null) {
     return (
-      <div role="status" data-inquiry-success className="flex max-w-xl flex-col gap-6">
+      <div
+        role="status"
+        data-inquiry-success
+        className="inquiry-success-cascade flex max-w-xl flex-col gap-6"
+      >
+        {/* L3-I2 (P4): the confirmation mark — the reserve page's mark
+            class-for-class (svg-draw fires on this DOM insertion); the ledger
+            below slots in 40ms a row (CSS cascade). RM: everything renders
+            instantly (the animation gates never match). */}
+        <svg viewBox="0 0 48 48" className="size-10" aria-hidden="true">
+          <circle className="confirm-ring" cx="24" cy="24" r="21" fill="none" strokeWidth="1" />
+          <path
+            className="confirm-check"
+            d="M15 24.5 L21.5 31 L33 19"
+            fill="none"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
         <p className="font-sans text-body-lg text-ink/90">{success.message}</p>
         <p className="text-small text-muted">
           {success.referenceLabel}: <span dir="ltr">{referenceId.slice(0, 8)}</span>
@@ -256,7 +279,7 @@ export function InquiryForm({
       className="flex max-w-xl flex-col gap-6"
       data-reveal-group
       data-reveal-stagger="70"
-      data-reveal-cap="4"
+      data-reveal-cap="6"
     >
       <input
         type="text"

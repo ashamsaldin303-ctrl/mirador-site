@@ -21,6 +21,9 @@ export const VENUE = {
   // the third). Seats = story ch2's "forty seats" — one number, one truth.
   floorNumber: 6,
   seats: 40,
+  // L3-I2 (D2 §P2): the west room's private table — the private-dining
+  // capability HUD's middle figure ("One room. Twelve seats." §4.6).
+  privateSeats: 12,
   coords: "33.5108° N · 36.2745° E",
   sypPerUsd: 12500,
   sypRounding: 500,

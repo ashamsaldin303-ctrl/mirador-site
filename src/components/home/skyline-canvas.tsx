@@ -39,6 +39,12 @@ function Skyline({
   const pointsRef = useRef<THREE.Points>(null);
   const groupRef = useRef<THREE.Group>(null);
   const introRef = useRef(0);
+  // D3-L3: shimmer time accumulator — replaces the deprecated R3F clock read
+  // (three r183 deprecates THREE.Clock in favor of THREE.Timer; R3F
+  // 9.7.0 still instantiates one internally, which keeps ITS warn alive as
+  // documented library noise, but OUR code no longer touches the surface).
+  // delta comes straight from the sanctioned RenderCallback signature.
+  const shimmerT = useRef(0);
   const densityRef = useRef(0.25);
   // lateral parallax direction sign — matches the DOM track's travel direction
   // (EN track moves −x → sign 1 keeps the −14 factor; AR track moves +x → sign
@@ -124,7 +130,8 @@ function Skyline({
     };
   }, [invalidate, onReady, geometry]);
 
-  useFrame((state) => {
+  useFrame((_, delta) => {
+    shimmerT.current += delta;
     const p = progressRef.current;
     // act-based density: 25% → 60% → 100% (density builds act-by-act)
     const target = p < 1 / 3 ? 0.25 : p < 2 / 3 ? 0.6 : 1;
@@ -145,7 +152,7 @@ function Skyline({
     // subtle shimmer on each rendered frame
     const mat = pointsRef.current?.material as THREE.PointsMaterial | undefined;
     if (mat) {
-      mat.opacity = 0.82 + 0.12 * Math.sin(state.clock.elapsedTime * 2.1);
+      mat.opacity = 0.82 + 0.12 * Math.sin(shimmerT.current * 2.1);
     }
   });
 

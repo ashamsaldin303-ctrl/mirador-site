@@ -85,6 +85,7 @@ export function Lightbox({
       <DialogPrimitive.Portal>
         <DialogOverlay className="z-40 bg-scrim" />
         <DialogPrimitive.Content
+          aria-modal={true}
           onKeyDown={onKeyDown}
           className="fixed inset-0 z-40 flex flex-col bg-night duration-200 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0"
         >

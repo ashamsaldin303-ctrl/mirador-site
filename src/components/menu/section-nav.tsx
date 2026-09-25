@@ -62,6 +62,45 @@ export function SectionNav({
     return () => observer.disconnect();
   }, [items]);
 
+  // D4 (loop-3) · THE SETTLED-POSITION RE-SYNC: the IO band ([128px, 34vh])
+  // can never see the two ends of the page — scroll 0 sits inside the page
+  // header, the absolute bottom inside the ~700px footer stack. An instant
+  // jump lands there with no intermediate crossing → no isIntersecting entry
+  // → stale active. The geometric rule matches the observer's intent wherever
+  // the band does intersect, and stays total where it sees nothing.
+  //
+  // arm: mount (scroll restoration / hash), scrollend (any scroll settling),
+  // + trailing-edge debounce fallback for engines without scrollend. One timer
+  // reset per scroll event — never per-frame. (syncFromGeometry lives INSIDE
+  // the effect — the stuck effect's local-listener idiom — so the mount-time
+  // setActive rides the same deferred-callback contract.)
+  useEffect(() => {
+    const syncFromGeometry = () => {
+      const line = window.innerHeight * 0.34; // == the IO band's bottom edge (-66%)
+      let current = items[0]?.slug ?? null;
+      for (const { slug } of items) {
+        const el = document.getElementById(slug);
+        if (el && !el.hidden && el.getBoundingClientRect().top <= line) current = slug;
+      }
+      setActive(current);
+    };
+    syncFromGeometry();
+    const onSettled = () => syncFromGeometry();
+    const hasScrollEnd = "onscrollend" in window;
+    let timer = 0;
+    const onScroll = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(onSettled, 120);
+    };
+    if (hasScrollEnd) window.addEventListener("scrollend", onSettled);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      if (hasScrollEnd) window.removeEventListener("scrollend", onSettled);
+      window.removeEventListener("scroll", onScroll);
+      window.clearTimeout(timer);
+    };
+  }, [items]);
+
   // stuck: the bar has reached its sticky slot under the fixed header
   useEffect(() => {
     const nav = navRef.current;

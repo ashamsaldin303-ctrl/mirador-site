@@ -44,6 +44,7 @@ export function DishOverlay({
       <DialogPortal>
         <DialogOverlay className="z-40 bg-overlay" />
         <DialogPrimitive.Content
+          aria-modal={true}
           className="dish-panel elev-3 scroll-thin fixed inset-x-4 top-1/2 z-40 mx-auto max-h-dvh w-full max-w-lg -translate-y-1/2 rounded-lg p-6"
         >
           <div className="dish-overlay-cascade">

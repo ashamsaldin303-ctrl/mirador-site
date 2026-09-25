@@ -276,7 +276,7 @@ export function ReserveForm({ locale, strings, days, initialDate }: ReserveFormP
         ) : null}
         {/* loop2-I3 a11y: the large-party note is the party hint — id-paired
             into the group's aria-describedby (with the error when present). */}
-        <p id="reserve-party-hint" className="text-small text-muted">
+        <p id="reserve-party-hint" className="text-start text-micro text-muted">
           {strings.largePartyNote}{" "}
           <Link
             href={`/${locale}/private-dining`}
