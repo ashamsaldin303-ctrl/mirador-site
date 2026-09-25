@@ -122,16 +122,19 @@ export function MenuClient({
         root.querySelectorAll("[data-dish-row]"),
       );
     }
-    setFilters((prev) => {
-      const next = prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag];
-      // URL-sync arm 2: the filter state rides the query string (replaceState)
-      const params = new URLSearchParams(window.location.search);
-      if (next.length > 0) params.set("diet", next.join(","));
-      else params.delete("diet");
-      const qs = params.toString();
-      window.history.replaceState(null, "", `${window.location.pathname}${qs ? `?${qs}` : ""}`);
-      return next;
-    });
+    // VB2-D2 fix (loop-2): the replaceState previously rode INSIDE the
+    // setFilters updater — updaters run during render (and double-invoke under
+    // StrictMode), so the history side-effect fired render-phase (React 19
+    // router warning). Hoisted: compute next outside, sync the URL in the
+    // event-handler context, then commit state once.
+    const next = filters.includes(tag) ? filters.filter((t) => t !== tag) : [...filters, tag];
+    // URL-sync arm 2: the filter state rides the query string (replaceState)
+    const params = new URLSearchParams(window.location.search);
+    if (next.length > 0) params.set("diet", next.join(","));
+    else params.delete("diet");
+    const qs = params.toString();
+    window.history.replaceState(null, "", `${window.location.pathname}${qs ? `?${qs}` : ""}`);
+    setFilters(next);
   };
 
   useIsomorphicLayoutEffect(() => {

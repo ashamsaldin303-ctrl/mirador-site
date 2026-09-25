@@ -99,17 +99,26 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
-      {fontPreloads.map((f) => (
-        <link
-          key={f.href}
-          rel="preload"
-          href={f.href}
-          as={f.as}
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-      ))}
-      {/* R13/E79 (run-23 lesson): the FULL display families (Fraunces + Amiri,
+      {/* E-HYD (re-applied loop-2; lost to the box snapshot-restore): an
+          EXPLICIT <head> wrapper — React 19 refuses to manage <link>/<script>
+          rendered as direct children of <html> ("outside the main document
+          without knowing its precedence/order") and flags the tree as a
+          hydration mismatch (6 console diagnostics on every route, VB2's
+          finding). Hosting the font preloads, the deferred-font sheet and the
+          two parse-time inline scripts inside a real <head> keeps the SSR
+          stream and the hydrated tree identical. */}
+      <head>
+        {fontPreloads.map((f) => (
+          <link
+            key={f.href}
+            rel="preload"
+            href={f.href}
+            as={f.as}
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+        ))}
+        {/* R13/E79 (run-23 lesson): the FULL display families (Fraunces + Amiri,
           below-fold h2/h3 text) ride a print-media stylesheet that flips to
           all once fetched — non-render-blocking, so the LCP's dependency
           graph carries only the eager above-fold faces. The stacks fall to
@@ -119,30 +128,37 @@ export default async function LocaleLayout({
           devices — the sheet loads well before React hydrates). CSP: the
           inline script rides script-src 'unsafe-inline' — the documented
           Next Flight bootstrap allowance. */}
-      {/* eslint-disable-next-line @next/next/no-css-tags -- the deferred-font
-          pattern REQUIRES a manual link: the media print→all flip (parse-time
-          inline script below) is impossible with imported CSS, and imported
-          CSS would be render-blocking — the whole point (R13/E79 run-23). */}
-      <link id="fonts-deferred" rel="stylesheet" href="/fonts-deferred.css" media="print" />
-      <script
-        dangerouslySetInnerHTML={{
-          __html:
-            "(function(){var d=document.getElementById('fonts-deferred');if(d){d.addEventListener('load',function(){d.media='all'});if(d.sheet)d.media='all';}})();",
-        }}
-      />
-      {/* P-100 (loop-1) · THE JS GATE (spec 1-e §5.2 — the ONE canonical gate
-          site-wide): parse-time attribute so reveal/hero hidden-state CSS
-          only ever matches when JS is alive. No-JS browsers and crawlers see
-          final-state content from the raw SSR stream. The 1400ms self-heal
-          arms the hero entrance even if hydration is slow or dies — the
-          composition always completes. CSP: rides the same documented
-          script-src 'unsafe-inline' allowance as the fonts-deferred flip. */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html:
-            "(function(){var h=document.documentElement;h.setAttribute('data-js','1');setTimeout(function(){var s=document.querySelector('.hero');if(s&&!s.hasAttribute('data-armed'))s.setAttribute('data-armed','1')},1400)})();",
-        }}
-      />
+        {/* eslint-disable-next-line @next/next/no-css-tags -- the deferred-font
+            pattern REQUIRES a manual link: the media print→all flip (parse-time
+            inline script below) is impossible with imported CSS, and imported
+            CSS would be render-blocking — the whole point (R13/E79 run-23). */}
+        <link
+          id="fonts-deferred"
+          rel="stylesheet"
+          href="/fonts-deferred.css"
+          media="print"
+          suppressHydrationWarning
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){var d=document.getElementById('fonts-deferred');if(d){d.addEventListener('load',function(){d.media='all'});if(d.sheet)d.media='all';}})();",
+          }}
+        />
+        {/* P-100 (loop-1) · THE JS GATE (spec 1-e §5.2 — the ONE canonical gate
+            site-wide): parse-time attribute so reveal/hero hidden-state CSS
+            only ever matches when JS is alive. No-JS browsers and crawlers see
+            final-state content from the raw SSR stream. The 1400ms self-heal
+            arms the hero entrance even if hydration is slow or dies — the
+            composition always completes. CSP: rides the same documented
+            script-src 'unsafe-inline' allowance as the fonts-deferred flip. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){var h=document.documentElement;h.setAttribute('data-js','1');setTimeout(function(){var s=document.querySelector('.hero');if(s&&!s.hasAttribute('data-armed'))s.setAttribute('data-armed','1')},1400)})();",
+          }}
+        />
+      </head>
       <body className="min-h-dvh bg-night font-sans text-ink">
         {/* P-028 (prompt-4 R11): the route announcer — soft navigations speak
             their landing title to screen readers (the aural route change). */}
