@@ -1,9 +1,10 @@
-// MIRADOR — Home hero (§4.1, spec 1-a "The Sixth-Floor Window"): full-bleed
+// MIRADOR — Home hero v2 "DUSK OVER DAMASCUS" (§4.1, loop2-I1r): full-bleed
 // night-city poster (LCP element), dual-script wordmark lockup, hero line +
-// CTA pair + the bottom data strip (hours · scroll cue · coordinates).
-// Server shell — the interactive stage (ARM / scroll parallax / pointer FX)
-// lives in hero-stage.tsx (client; journey.tsx precedent: the section ref
-// must live client-side, so the whole <section> renders there).
+// CTA pair + the hours · scroll-cue row, framed by the desktop chrome (rail,
+// corner brackets, live Damascus clock — coords live in the bottom bracket).
+// Server shell — the interactive stage (ARM / scroll parallax / pointer FX /
+// ambient canvas) lives in hero-stage.tsx (client; journey.tsx precedent:
+// the section ref must live client-side, so the whole <section> renders there).
 import type { Locale } from "@/lib/i18n";
 import { HeroStage } from "./hero-stage";
 
@@ -16,6 +17,9 @@ export function Hero({
   scroll,
   hoursShort,
   coords,
+  rail,
+  clockLabel,
+  clockCity,
 }: {
   locale: Locale;
   line: string;
@@ -25,6 +29,9 @@ export function Hero({
   scroll: string;
   hoursShort: string;
   coords: string;
+  rail: string;
+  clockLabel: string;
+  clockCity: string;
 }) {
   return (
     <HeroStage
@@ -36,6 +43,9 @@ export function Hero({
       scroll={scroll}
       hoursShort={hoursShort}
       coords={coords}
+      rail={rail}
+      clockLabel={clockLabel}
+      clockCity={clockCity}
     />
   );
 }

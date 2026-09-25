@@ -5,6 +5,15 @@
 // Keyboard: Esc closes, ArrowLeft/ArrowRight navigate — mirrored in RTL, where
 // ArrowLeft means next. Focus trap + initial focus are provided by Radix.
 // Missing images degrade to the bilingual caption card (F7-4).
+//
+// LOOP2-I2 rebuild · DIRECTIONAL SLIDE: every prev/next navigation stamps
+// data-dir="next|prev" on the KEYED media wrapper (React key = index, so it
+// remounts and the entry animation fires). Entry: translateX(±12px · dirSign)
+// scale(.97) → settle, 300ms expo — dirSign next=+1 / prev=−1, multiplied by
+// --dir-sign so RTL mirrors exactly (globals.css .lb-media). RM: fade only.
+// D4 focus fixes folded in: NO outline-none anywhere (the global 2px amber
+// bezel owns focus); close/prev/next are 44px (size-11) rounded-full targets
+// with sr-only labels and size-5 icons.
 import { useState, type KeyboardEvent } from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -36,6 +45,9 @@ export function Lightbox({
   // Per-index failure memory: navigating away and back keeps the designed
   // caption card for an image that already failed — no state-reset effects.
   const [failed, setFailed] = useState<ReadonlySet<number>>(new Set());
+  // Direction of the LAST navigation — stamped on the keyed media wrapper so
+  // the entry slide reads with the gesture (and mirrors under RTL).
+  const [dir, setDir] = useState<"next" | "prev">("next");
 
   const total = items.length;
   const item = items[index];
@@ -47,6 +59,7 @@ export function Lightbox({
   const imageFailed = failed.has(index);
 
   const go = (direction: 1 | -1) => {
+    setDir(direction === 1 ? "next" : "prev");
     onNavigate((index + direction + total) % total);
   };
 
@@ -82,11 +95,9 @@ export function Lightbox({
             <p className="shrink-0 text-small tabular-nums text-muted">
               {index + 1} {strings.counter} {total}
             </p>
-            <DialogPrimitive.Close
-              aria-label={strings.close}
-              className="inline-flex size-11 shrink-0 items-center justify-center rounded-full text-ink transition-colors duration-200 outline-none hover:text-amber "
-            >
-              <X className="size-6" strokeWidth={1.5} aria-hidden />
+            <DialogPrimitive.Close className="inline-flex size-11 shrink-0 items-center justify-center rounded-full text-muted transition-colors duration-base hover:text-amber">
+              <X className="size-5" strokeWidth={1.5} aria-hidden />
+              <span className="sr-only">{strings.close}</span>
             </DialogPrimitive.Close>
           </div>
 
@@ -94,19 +105,21 @@ export function Lightbox({
             {imageFailed ? (
               <div
                 key={index}
-                className="w-full max-w-lg border border-line bg-surface p-8 text-center"
+                data-dir={dir}
+                className="lb-media w-full max-w-lg border border-line bg-surface p-8 text-center"
               >
                 <p className="text-small text-muted">{strings.imageFail}</p>
                 <p className="mt-4 font-display text-h3 text-ink">{title}</p>
                 <p className="mt-2 text-small text-muted">{caption}</p>
               </div>
             ) : (
-              // keyed by index: every prev/next swap remounts the media
-              // wrapper and .slot-in settles it (4px rise, 300ms — CSS-gated,
-              // dead under reduced-motion by construction).
+              // keyed by index + data-dir: every prev/next swap remounts the
+              // media wrapper and .lb-media settles it directionally (300ms
+              // expo, RTL-mirrored; CSS-gated, fade-only under RM).
               <div
                 key={index}
-                className="media-grain relative h-full w-full slot-in"
+                data-dir={dir}
+                className="lb-media media-grain relative h-full w-full"
               >
                 <Image
                   src={item.imageUrl}
@@ -138,18 +151,18 @@ export function Lightbox({
           <button
             type="button"
             onClick={() => go(-1)}
-            aria-label={strings.prev}
-            className="absolute start-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-night/80 text-ink transition-colors duration-200 outline-none hover:border-amber hover:text-amber"
+            className="absolute start-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full text-muted transition-colors duration-base hover:text-amber"
           >
-            <ChevronLeft className="size-6 rtl:-scale-x-100" strokeWidth={1.5} aria-hidden />
+            <ChevronLeft className="size-5 rtl:-scale-x-100" strokeWidth={1.5} aria-hidden />
+            <span className="sr-only">{strings.prev}</span>
           </button>
           <button
             type="button"
             onClick={() => go(1)}
-            aria-label={strings.next}
-            className="absolute end-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-night/80 text-ink transition-colors duration-200 outline-none hover:border-amber hover:text-amber"
+            className="absolute end-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full text-muted transition-colors duration-base hover:text-amber"
           >
-            <ChevronRight className="size-6 rtl:-scale-x-100" strokeWidth={1.5} aria-hidden />
+            <ChevronRight className="size-5 rtl:-scale-x-100" strokeWidth={1.5} aria-hidden />
+            <span className="sr-only">{strings.next}</span>
           </button>
         </DialogPrimitive.Content>
       </DialogPrimitive.Portal>

@@ -8,11 +8,16 @@
 // share one visual rhythm). Signature dishes are the ONLY display-face rows
 // (font-display); every other name is font-sans font-medium at text-body-lg
 // — display type stays scarce, so signatures read as events.
-// Hover life: the row lifts on a surface wash (bg transition only — no
-// transforms on rows: the gsap Flip filter choreography owns their layout),
-// the name draws the amber center-out hairline (.link-draw), the price warms
-// to amber. Rows NEVER carry data-reveal — the section ul is the reveal
-// group; rows mounting after a diet filter must appear instantly.
+// Hover life (LOOP2-I2 rebuild): on hover/focus-within the INNER parts
+// perform — the plate scales 1→1.04 (350ms expo, direction-neutral), the
+// price nudges 2px toward the reading direction (translateX · --dir-sign),
+// a copper hairline draws under the name from the inline-start edge
+// (200ms, [dir=rtl] origin twin), and the title ink lifts ink/85→ink. The
+// row itself carries NO transform (the gsap Flip filter choreography owns
+// its layout); sold-out rows are excluded (:not([aria-disabled])) — their
+// state stays a fact, not a performance. RM: color/wash only survive.
+// Rows NEVER carry data-reveal — the section ul is the reveal group; rows
+// mounting after a diet filter must appear instantly.
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import type { DishDTO, MenuStrings } from "./menu-client";
@@ -46,7 +51,7 @@ export function DishRow({
       aria-disabled={item.isSoldOut ? "true" : undefined}
       className={cn(
         "group relative isolate border-b border-line py-6",
-        "before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:bg-surface/50 before:opacity-0 before:transition-opacity before:duration-fast hover:before:opacity-100",
+        "before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:bg-surface/50 before:opacity-0 before:transition-opacity before:duration-fast hover:before:opacity-100 focus-within:before:opacity-100",
         item.isSignature && "ps-4",
         item.isSoldOut && "opacity-60",
       )}
@@ -59,7 +64,7 @@ export function DishRow({
       )}
       <div className="flex gap-4">
         {item.imageUrl && (
-          <div className="relative size-20 shrink-0 overflow-hidden rounded border border-line bg-surface">
+          <div className="dish-plate relative size-20 shrink-0 overflow-hidden rounded border border-line bg-surface">
             {/* image files land with the image agent; until then the alt text
                 renders inside the hairline frame — the designed fail state */}
             <Image
@@ -79,7 +84,7 @@ export function DishRow({
             <div className="min-w-0">
               <h3
                 className={cn(
-                  "text-body-lg text-ink",
+                  "dish-title text-body-lg",
                   item.isSignature ? "font-display" : "font-sans font-medium",
                 )}
               >
@@ -90,7 +95,7 @@ export function DishRow({
                 )}
                 <span
                   className={cn(
-                    item.isSoldOut ? "text-muted" : "link-draw inline-block",
+                    item.isSoldOut ? "text-muted" : "dish-name-line inline-block",
                   )}
                 >
                   {item.name}
@@ -101,7 +106,7 @@ export function DishRow({
             <PriceTag
               price={item.price}
               className={cn(
-                "justify-self-end transition-colors",
+                "dish-price justify-self-end transition-colors",
                 item.isSoldOut ? "text-muted" : "group-hover:text-amber",
               )}
             />

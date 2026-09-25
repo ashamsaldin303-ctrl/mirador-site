@@ -16,6 +16,11 @@ export const VENUE = {
   // geography as brand. Fictional per A5, registered in ASSETS-REPLACE.md.
   floorLabelEn: "Floor 6",
   floorLabelAr: "الطابق السادس",
+  // loop2-I4 (§8): the HUD stat row's source-of-truth figures — chapter-intro
+  // StatCounters renders floor · seats · tables (tablesPerSlot below covers
+  // the third). Seats = story ch2's "forty seats" — one number, one truth.
+  floorNumber: 6,
+  seats: 40,
   coords: "33.5108° N · 36.2745° E",
   sypPerUsd: 12500,
   sypRounding: 500,

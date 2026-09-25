@@ -161,6 +161,9 @@
   "hero.scroll": "Scroll",
   "hero.hoursShort": "Tue – Sun · 18:00 – 23:30",
   "hero.coords": "33.5108° N · 36.2745° E",
+  "hero.rail": "MIRADOR — ميرادور — FLOOR 06",
+  "hero.clockCity": "Damascus",
+  "hero.clockLabel": "Floor 6",
   "nav.backToTop": "Back to top",
   "menu.kicker": "The evening table",
   "menu.countLine": "Twenty-eight dishes · six sections · USD authoritative",
@@ -178,5 +181,8 @@
   "private.figureCaption": "The west room · floor 6",
   "reserve.kicker": "Reservations",
   "reserve.reassurance": "No deposit — we hold your table for fifteen minutes.",
-  "confirm.floor": "Floor 6"
+  "confirm.floor": "Floor 6",
+  "stats.floor": "Floor",
+  "stats.seats": "Seats",
+  "stats.tables": "Tables"
 }

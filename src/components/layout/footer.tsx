@@ -38,10 +38,12 @@ export function Footer({ locale, strings }: { locale: Locale; strings: FooterStr
   return (
     <footer className="mt-auto border-t border-line bg-night">
       <div className="relative mx-auto grid max-w-7xl gap-12 overflow-hidden px-4 py-20 sm:px-6 lg:grid-cols-4 lg:gap-8 lg:px-8 lg:py-24">
-        {/* the ghost watermark — the wordmark at 3% ink, bleeding off the top */}
+        {/* the ghost watermark — the wordmark at 3% ink, bleeding off the top;
+            loop2-I4 (§9): .watermark-shimmer breathes 0.03↔0.05 over 9s (the
+            ink never quite settles — RM/no-JS hold the static 0.03) */}
         <span
           aria-hidden
-          className="pointer-events-none absolute -top-6 start-4 font-display text-display-xl leading-none text-ink/[0.03] select-none"
+          className="watermark-shimmer pointer-events-none absolute -top-6 start-4 font-display text-display-xl leading-none text-ink opacity-[0.03] select-none"
         >
           {isAr ? VENUE.nameAr : VENUE.nameEn}
         </span>

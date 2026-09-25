@@ -13,11 +13,21 @@
 // The hover group sits on the FIGURE so the image scale, the amber hairline
 // and the caption title warm together (the figure is one visual unit);
 // focus-visible stays bound to the button itself.
-import { useState } from "react";
+//
+// LOOP2-I2 rebuild · TILE PARALLAX (tiles 2+ only — tiles 0–1 are this
+// route's LCP candidates and stay fully static, LCP doctrine): GSAP arrives
+// via the getMotion() singleton in-effect; a gsap.context (reverted on
+// cleanup) builds one scrub ScrollTrigger per tile — yPercent −4→+4 on a
+// scale-1.09 cover (4.5% headroom per side — no edge gaps at the extremes),
+// ease none (scrub owns time), invalidateOnRefresh. NEVER created under
+// reduced-motion. The CSS hover scale lives on a WRAPPER div so GSAP owns
+// the Image transform alone (no transition-vs-tween fight).
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { GalleryItem } from "@prisma/client";
 import type { Locale } from "@/lib/i18n";
 import { isLadderMaster, miradorImageLoader } from "@/lib/image-loader";
+import { getMotion, prefersReducedMotion, type Motion } from "@/lib/motion";
 import { Lightbox } from "./lightbox";
 
 export type GalleryStrings = {
@@ -39,14 +49,54 @@ type TileProps = {
 
 function GalleryTile({ item, index, locale, strings, onOpen }: TileProps) {
   const [failed, setFailed] = useState(false);
+  // parallax anchors: the figure is the ScrollTrigger's trigger; the Image
+  // element is the tween's target (GSAP owns its transform exclusively).
+  const tileRef = useRef<HTMLElement | null>(null);
+  const mediaRef = useRef<HTMLImageElement | null>(null);
   const title = locale === "ar" ? item.titleAr : item.titleEn;
   const caption = locale === "ar" ? item.captionAr : item.captionEn;
   // tiles 0–1 = priority images = the route's LCP candidates: NO reveal, no
   // mask, no caption delay — they paint exactly as the server sent them.
   const reveal = index >= 2;
 
+  // LOOP2-I2 · the tile parallax (see file header). Tiles 0–1 exempt; RM:
+  // the tween is never created (content renders statically, fully visible).
+  useEffect(() => {
+    if (index < 2 || prefersReducedMotion()) return;
+    let disposed = false;
+    let ctx: ReturnType<Motion["gsap"]["context"]> | null = null;
+    void getMotion().then((motion) => {
+      const tile = tileRef.current;
+      const media = mediaRef.current;
+      if (disposed || !tile || !media) return;
+      const { gsap } = motion;
+      ctx = gsap.context(() => {
+        gsap.fromTo(
+          media,
+          { yPercent: -4 },
+          {
+            yPercent: 4,
+            scale: 1.09,
+            ease: "none",
+            scrollTrigger: {
+              trigger: tile,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+              invalidateOnRefresh: true,
+            },
+          },
+        );
+      });
+    });
+    return () => {
+      disposed = true;
+      ctx?.revert();
+    };
+  }, [index]);
+
   return (
-    <figure className="group mb-6 break-inside-avoid">
+    <figure ref={tileRef} className="group mb-6 break-inside-avoid">
       <button
         type="button"
         onClick={() => onOpen(index)}
@@ -64,24 +114,29 @@ function GalleryTile({ item, index, locale, strings, onOpen }: TileProps) {
           </span>
         ) : (
           <div className="reveal-scale">
-            <Image
-              src={item.imageUrl}
-              alt={`${title} — ${caption}`}
-              width={item.width}
-              height={item.height}
-              // P-082 (prompt-4 R9): the masonry tile is NEVER viewport-wide —
-              // columns-1 <640px (minus 2rem page padding), 2 cols at sm, 3 cols
-              // at lg inside the max-w-7xl (80rem) container. Without `sizes` the
-              // optimizer assumed 100vw and shipped ~viewport-wide AVIF/WebP to
-              // 375px phones (council estimate −378KB wire @375).
-              sizes="(min-width: 1024px) calc((min(100vw - 4rem, 80rem) - 3rem) / 3), (min-width: 640px) calc((min(100vw - 3rem, 80rem) - 1.5rem) / 2), calc(100vw - 2rem)"
-              // PRF-3: skyline masters carry the pre-graded AVIF ladder — they
-              // serve rung files directly; every other tile keeps the optimizer.
-              loader={isLadderMaster(item.imageUrl) ? miradorImageLoader : undefined}
-              priority={index < 2}
-              onError={() => setFailed(true)}
-              className="h-auto w-full transition-transform duration-slow group-hover:scale-[1.03]"
-            />
+            {/* the hover-scale WRAPPER — GSAP owns the Image transform alone;
+                this div carries the pointer-time scale (CSS/conductor rule) */}
+            <div className="transition-transform duration-slow group-hover:scale-[1.03]">
+              <Image
+                ref={mediaRef}
+                src={item.imageUrl}
+                alt={`${title} — ${caption}`}
+                width={item.width}
+                height={item.height}
+                // P-082 (prompt-4 R9): the masonry tile is NEVER viewport-wide —
+                // columns-1 <640px (minus 2rem page padding), 2 cols at sm, 3 cols
+                // at lg inside the max-w-7xl (80rem) container. Without `sizes` the
+                // optimizer assumed 100vw and shipped ~viewport-wide AVIF/WebP to
+                // 375px phones (council estimate −378KB wire @375).
+                sizes="(min-width: 1024px) calc((min(100vw - 4rem, 80rem) - 3rem) / 3), (min-width: 640px) calc((min(100vw - 3rem, 80rem) - 1.5rem) / 2), calc(100vw - 2rem)"
+                // PRF-3: skyline masters carry the pre-graded AVIF ladder — they
+                // serve rung files directly; every other tile keeps the optimizer.
+                loader={isLadderMaster(item.imageUrl) ? miradorImageLoader : undefined}
+                priority={index < 2}
+                onError={() => setFailed(true)}
+                className="h-auto w-full"
+              />
+            </div>
           </div>
         )}
       </button>

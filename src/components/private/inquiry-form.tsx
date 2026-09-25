@@ -9,9 +9,13 @@
 // success line + reference (id first 8) + WhatsApp CTA.
 import { useId, useState, type FormEvent } from "react";
 import type { Locale } from "@/lib/i18n";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Field } from "@/components/ui/field";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+// loop2-I3: the five hand-rolled field blocks are GONE — every field rides
+// the ONE Field idiom (ui/field.tsx): floating label, hairline surface, id-
+// paired errors + hints (partyHint wires aria-describedby), LTR phone island.
+// Uncontrolled (FormData) — the submit handler reads the FormData natively.
 // P-100 (loop-1, design audit 2-d): the form rides the reveal GROUP grammar —
 // the whole form is SSR'd (client islands still server-render), so RevealProvider
 // observes it on mount and the field blocks rise 6px staggered as one gesture.
@@ -245,9 +249,6 @@ export function InquiryForm({
     );
   }
 
-  const describedBy = (key: FieldKey) =>
-    fieldErrors[key] ? `${formId}-${key}-error` : undefined;
-
   return (
     <form
       onSubmit={onSubmit}
@@ -266,121 +267,66 @@ export function InquiryForm({
         className="pointer-events-none absolute opacity-0"
       />
 
-      <div className="flex flex-col gap-2">
-        <label htmlFor={`${formId}-name`} className="hud-label">
-          {labels.name}
-        </label>
-        <Input
-          id={`${formId}-name`}
-          name="name"
-          type="text"
-          autoComplete="name"
-          className="h-11 min-h-11"
-          aria-invalid={fieldErrors.name ? true : undefined}
-          aria-describedby={describedBy("name")}
-        />
-        {fieldErrors.name && (
-          <p id={`${formId}-name-error`} className="text-small text-error">
-            {fieldErrors.name}
-          </p>
-        )}
-      </div>
+      <Field
+        id={`${formId}-name`}
+        name="name"
+        label={labels.name}
+        autoComplete="name"
+        error={fieldErrors.name}
+      />
 
-      <div className="flex flex-col gap-2">
-        <label htmlFor={`${formId}-phone`} className="hud-label">
-          {labels.phone}
-        </label>
-        <Input
-          id={`${formId}-phone`}
-          name="phone"
-          type="tel"
-          autoComplete="tel"
-          // R11 minor: numbers are an LTR island inside RTL flow — the ledger
-          // family's third law (inputs: LTR island).
-          dir="ltr"
-          className="h-11 min-h-11"
-          aria-invalid={fieldErrors.phone ? true : undefined}
-          aria-describedby={describedBy("phone")}
-        />
-        {fieldErrors.phone && (
-          <p id={`${formId}-phone-error`} className="text-small text-error">
-            {fieldErrors.phone}
-          </p>
-        )}
-      </div>
+      <Field
+        id={`${formId}-phone`}
+        name="phone"
+        label={labels.phone}
+        type="tel"
+        autoComplete="tel"
+        // R11 minor: numbers are an LTR island inside RTL flow — the ledger
+        // family's third law (inputs: LTR island).
+        dir="ltr"
+        error={fieldErrors.phone}
+      />
 
-      <div className="flex flex-col gap-2">
-        <label htmlFor={`${formId}-date`} className="hud-label">
-          {labels.preferredDate}
-        </label>
-        <Input
-          id={`${formId}-date`}
-          name="preferredDate"
-          type="date"
-          autoComplete="off"
-          className="h-11 min-h-11"
-          aria-invalid={fieldErrors.preferredDate ? true : undefined}
-          aria-describedby={describedBy("preferredDate")}
-        />
-        {fieldErrors.preferredDate && (
-          <p id={`${formId}-preferredDate-error`} className="text-small text-error">
-            {fieldErrors.preferredDate}
-          </p>
-        )}
-      </div>
+      <Field
+        id={`${formId}-date`}
+        name="preferredDate"
+        label={labels.preferredDate}
+        type="date"
+        autoComplete="off"
+        required={false}
+        error={fieldErrors.preferredDate}
+      />
 
-      <div className="flex flex-col gap-2">
-        <label htmlFor={`${formId}-party`} className="hud-label">
-          {labels.partySize}
-        </label>
-        <Input
-          id={`${formId}-party`}
-          name="partySize"
-          type="number"
-          min={1}
-          max={60}
-          step={1}
-          autoComplete="off"
-          className="h-11 min-h-11"
-          aria-invalid={fieldErrors.partySize ? true : undefined}
-          aria-describedby={describedBy("partySize")}
-        />
-        {fieldErrors.partySize && (
-          <p id={`${formId}-partySize-error`} className="text-small text-error">
-            {fieldErrors.partySize}
-          </p>
-        )}
-        {/* R11 minor: the party copy states its real range — 1–60 (the wire
-            schema's own bounds), so the affordance matches the contract. */}
-        <p className="text-small text-muted">{partyHint}</p>
-      </div>
+      <Field
+        id={`${formId}-party`}
+        name="partySize"
+        label={labels.partySize}
+        type="number"
+        min={1}
+        max={60}
+        step={1}
+        autoComplete="off"
+        required={false}
+        hint={partyHint}
+        error={fieldErrors.partySize}
+      />
 
-      <div className="flex flex-col gap-2">
-        <label htmlFor={`${formId}-message`} className="hud-label">
-          {labels.message}
-        </label>
-        <Textarea
-          id={`${formId}-message`}
-          name="message"
-          rows={4}
-          className="min-h-24"
-          aria-invalid={fieldErrors.message ? true : undefined}
-          aria-describedby={describedBy("message")}
-        />
-        {fieldErrors.message && (
-          <p id={`${formId}-message-error`} className="text-small text-error">
-            {fieldErrors.message}
-          </p>
-        )}
-      </div>
+      <Field
+        id={`${formId}-message`}
+        name="message"
+        label={labels.message}
+        as="textarea"
+        rows={4}
+        error={fieldErrors.message}
+      />
 
       <Button
         type="submit"
         disabled={submitting}
-        aria-busy={submitting}
+        aria-busy={submitting || undefined}
         variant="cta"
         size="compact"
-        className="self-start"
+        className={cn("self-start", submitting && "motion-safe:breathe")}
       >
         {submitting ? labels.submitting : labels.submit}
       </Button>

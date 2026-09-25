@@ -46,13 +46,19 @@ function DialogOverlay({
   )
 }
 
+// MIRADOR (loop2-I3): the dialog close trigger joins the touch law — a 44px
+// circle (text-muted → amber), X at size-5, screen-reader label via the
+// optional closeLabel prop. The bezel owns focus.
 function DialogContent({
   className,
   children,
   showCloseButton = true,
+  closeLabel = "Close",
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
   showCloseButton?: boolean
+  /** screen-reader label for the close trigger (localized by the caller) */
+  closeLabel?: string
 }) {
   return (
     <DialogPortal data-slot="dialog-portal">
@@ -69,10 +75,10 @@ function DialogContent({
         {showCloseButton && (
           <DialogPrimitive.Close
             data-slot="dialog-close"
-            className="data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 end-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+            className="absolute top-4 end-4 flex size-11 items-center justify-center rounded-full text-muted transition-colors duration-base hover:text-amber disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0"
           >
-            <XIcon />
-            <span className="sr-only">Close</span>
+            <XIcon className="size-5" aria-hidden />
+            <span className="sr-only">{closeLabel}</span>
           </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Content>

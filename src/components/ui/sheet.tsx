@@ -44,13 +44,22 @@ function SheetOverlay({
   )
 }
 
+// MIRADOR (loop2-I3): the sheet rides the elevation ladder — elev-4 surface
+// (blurred night glass + hairline frame) replaces the stock shadow-lg
+// bg-background. Entry/exit timing on the house curve: --tw-ease feeds the
+// tw-animate-css enter/exit keyframes. The close trigger is a 44px touch-law
+// circle (text-muted → amber), X at size-5, screen-reader label via the
+// optional closeLabel prop (nav passes the localized one).
 function SheetContent({
   className,
   children,
   side = "right",
+  closeLabel = "Close",
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Content> & {
   side?: "top" | "right" | "bottom" | "left"
+  /** screen-reader label for the close trigger (localized by the caller) */
+  closeLabel?: string
 }) {
   return (
     <SheetPortal>
@@ -58,7 +67,7 @@ function SheetContent({
       <SheetPrimitive.Content
         data-slot="sheet-content"
         className={cn(
-          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col gap-4 shadow-lg transition ease-in-out data-[state=closed]:duration-fast data-[state=open]:duration-base",
+          "elev-4 border-line data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col gap-4 transition ease-(--ease-out-expo) [--tw-ease:var(--ease-out-expo)] data-[state=closed]:duration-fast data-[state=open]:duration-base",
           side === "right" &&
             "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm",
           side === "left" &&
@@ -72,9 +81,9 @@ function SheetContent({
         {...props}
       >
         {children}
-        <SheetPrimitive.Close className="data-[state=open]:bg-secondary absolute top-4 end-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 disabled:pointer-events-none">
-          <XIcon className="size-4" />
-          <span className="sr-only">Close</span>
+        <SheetPrimitive.Close className="absolute top-4 end-4 flex size-11 items-center justify-center rounded-full text-muted transition-colors duration-base hover:text-amber disabled:pointer-events-none">
+          <XIcon className="size-5" aria-hidden />
+          <span className="sr-only">{closeLabel}</span>
         </SheetPrimitive.Close>
       </SheetPrimitive.Content>
     </SheetPortal>

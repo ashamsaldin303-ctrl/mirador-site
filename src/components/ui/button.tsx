@@ -15,6 +15,10 @@
 //   1px = state · 2px = fact  ·  error = color, never weight  ·  inputs: no
 //   hover, caret amber, LTR island. Focus is NOT styled here — the site-wide
 //   BEZEL owns it (P-075).
+// loop2-I3: the press transition — filter+colors on the house curve via the
+// transition-press utility (a transition-[filter,colors,transform] literal is
+// invalid in Tailwind 4), active:brightness-90 gives every press a physical
+// dim. The cta pill speaks at text-body (16px) — command text, not caption.
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -22,12 +26,13 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  // base: the touch law (44px) + the frozen tempo (200ms color transitions)
-  "inline-flex min-h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap font-sans text-small transition-colors duration-base disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  // base: the touch law (44px) + the press transition (filter+colors, 200ms,
+  // expo-out — see @utility transition-press in globals.css)
+  "inline-flex min-h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap font-sans text-small transition-press active:brightness-90 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
-        cta: "rounded-full bg-amber px-8 font-semibold text-night hover:bg-amber/90",
+        cta: "rounded-full bg-amber px-8 font-semibold text-body text-night hover:bg-amber/90",
         quiet:
           "px-1 text-muted underline decoration-line underline-offset-8 hover:text-ink hover:decoration-amber",
         quietOutline:

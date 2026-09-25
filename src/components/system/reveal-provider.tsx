@@ -37,6 +37,14 @@ export function RevealProvider() {
     const timers: number[] = [];
 
     const reveal = (el: HTMLElement) => {
+      // loop2-I4 (§2) — REVEAL-DELAY FIX: the inline transition-delay must be
+      // on the element BEFORE [data-revealed] flips the transition on (style
+      // recalc sees both together, but writing delay first is the contract —
+      // and it keeps the group-stagger branch below ordering-safe). The SAME
+      // delay is cleared when [data-done] lands so hover/Flip transitions
+      // never inherit a stale stagger — same for the group children's delays.
+      const delay = Number(el.dataset.revealDelay ?? "0");
+      if (delay > 0) el.style.transitionDelay = `${delay}ms`;
       el.setAttribute("data-revealed", "");
       if (el.hasAttribute("data-reveal-group")) {
         // per-child stagger via inline transition-delay (DOM order =
@@ -47,9 +55,19 @@ export function RevealProvider() {
           (child as HTMLElement).style.transitionDelay = `${Math.min(i, cap) * stagger}ms`;
         });
       }
-      const delay = Number(el.dataset.revealDelay ?? "0");
       timers.push(
-        window.setTimeout(() => el.setAttribute("data-done", ""), delay + REVEAL_DONE_MS),
+        window.setTimeout(() => {
+          el.setAttribute("data-done", "");
+          // data-done strips ALL reveal CSS — the inline delays ride with it:
+          // from here on the element's transitions belong to hover/Flip/GSAP
+          // alone (no inherited stagger ever delays them).
+          el.style.transitionDelay = "";
+          if (el.hasAttribute("data-reveal-group")) {
+            Array.from(el.children).forEach((child) => {
+              (child as HTMLElement).style.transitionDelay = "";
+            });
+          }
+        }, delay + REVEAL_DONE_MS),
       );
     };
 

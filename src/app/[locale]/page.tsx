@@ -87,8 +87,11 @@ export default async function HomePage({
         scroll={dict["hero.scroll"]}
         hoursShort={dict["hero.hoursShort"]}
         coords={dict["hero.coords"]}
+        rail={dict["hero.rail"]}
+        clockLabel={dict["hero.clockLabel"]}
+        clockCity={dict["hero.clockCity"]}
       />
-      <ChapterIntro hud={dict["intro.hud"]} paragraph={dict["intro.paragraph"]} />
+      <ChapterIntro locale={locale} hud={dict["intro.hud"]} paragraph={dict["intro.paragraph"]} />
       <Journey hud={dict["journey.hud"]} acts={acts} />
       <ReserveBand
         locale={locale}

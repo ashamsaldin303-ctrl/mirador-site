@@ -85,7 +85,7 @@ export function Nav({ locale, strings }: { locale: Locale; strings: NavStrings }
         href={href}
         aria-current={active ? "page" : undefined}
         className={cn(
-          "inline-flex min-h-11 items-center px-3 text-small text-muted transition-colors duration-200 hover:text-ink",
+          "inline-flex min-h-11 items-center px-3 text-small text-muted transition-colors duration-base hover:text-ink",
           // link-draw (hover underline draw) only on NON-active links — the
           // active link already carries its amber underline. The ::after also
           // draws on focus-visible — decoration ON TOP of the bezel, never a
@@ -142,7 +142,7 @@ export function Nav({ locale, strings }: { locale: Locale; strings: NavStrings }
                   prefetch={false}
                   aria-current={isActive ? "true" : undefined}
                   className={cn(
-                    "inline-flex min-h-11 items-center rounded-full px-3 text-micro transition-colors duration-200",
+                    "inline-flex min-h-11 items-center rounded-full px-3 text-micro transition-colors duration-base",
                     isActive ? "bg-surface text-ink" : "text-muted hover:text-ink",
                   )}
                 >
@@ -167,6 +167,9 @@ export function Nav({ locale, strings }: { locale: Locale; strings: NavStrings }
             </SheetTrigger>
             <SheetContent
               side={locale === "ar" ? "left" : "right"}
+              // loop2-I4 (§5): the localized sr-only string for the sheet's X —
+              // the lost run shipped it unwired (hardcoded "Close" under AR).
+              closeLabel={strings.closeMenu}
               className="w-[20rem] border-line bg-night p-6"
             >
               <SheetTitle className="sr-only">{strings.closeMenu}</SheetTitle>
@@ -186,8 +189,13 @@ export function Nav({ locale, strings }: { locale: Locale; strings: NavStrings }
                       href={href}
                       onClick={() => setOpen(false)}
                       aria-current={active ? "page" : undefined}
+                      // loop2-I4 (§5): the open cascade — .sheet-nav-link rides
+                      // the [data-state=open] slot-in animation in globals.css;
+                      // --sheet-i drives the i×40ms (cap 6) delay. DOM order =
+                      // reading order in BOTH directions — RTL-safe by design.
+                      style={{ "--sheet-i": Math.min(i, 6) } as React.CSSProperties}
                       className={cn(
-                        "flex min-h-11 items-center gap-4 border-b border-line py-3 text-body-lg",
+                        "sheet-nav-link flex min-h-11 items-center gap-4 border-b border-line py-3 text-body-lg",
                         active ? "text-ink" : "text-muted",
                       )}
                     >
@@ -202,7 +210,8 @@ export function Nav({ locale, strings }: { locale: Locale; strings: NavStrings }
                   href={mirroredPath(pathname, otherLocale(locale))}
                   prefetch={false}
                   onClick={() => setOpen(false)}
-                  className="flex min-h-11 items-center py-3 text-body text-copper"
+                  style={{ "--sheet-i": 6 } as React.CSSProperties}
+                  className="sheet-nav-link flex min-h-11 items-center py-3 text-body text-copper"
                 >
                   {strings.localeSwitch}
                 </Link>

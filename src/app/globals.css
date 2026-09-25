@@ -284,6 +284,11 @@
   --font-display-stack: var(--font-display-en);
   --font-body-stack: var(--font-body-en);
   --font-hero-stack: var(--font-hero-en);
+  /* loop2-I4 (§1) · THE DIRECTION SIGN — the ONE canonical definition
+     (the lost run shipped it twice; this is the only one — I1r/I2r consume,
+     never define). +1 in LTR, −1 under [dir="rtl"]; physical x transforms
+     multiply by it to express INLINE direction (start/end variants below). */
+  --dir-sign: 1;
 }
 
 /* — AR typography contract (§5.3, NEVER-10): mirrored leading, zero tracking — */
@@ -291,6 +296,9 @@
   --font-display-stack: var(--font-display-ar);
   --font-body-stack: var(--font-body-ar);
   --font-hero-stack: var(--font-hero-ar);
+  /* loop2-I4 (§1): the RTL arm of the ONE --dir-sign definition — physical
+     +x is inline-END here, so inline-start transforms read −1. */
+  --dir-sign: -1;
 
   --text-display-xl--line-height: 1.25;
   --text-h1--line-height: 1.3;
@@ -528,13 +536,18 @@
    own the element afterwards. Vertical/direction-neutral transforms ONLY.
    ———————————————————————————————————————————————————————————————— */
 
-/* — THE REVEAL SYSTEM (data-reveal grammar; engine = RevealProvider IO) — */
+/* — THE REVEAL SYSTEM (data-reveal grammar; engine = RevealProvider IO) —
+   loop2-I4 (§1) · THE VARIANT GRAMMAR: fade/scale/draw/mask (loop-1) +
+   start/end/blur/clip. "start"/"end" are INLINE-directional — the physical
+   translateX multiplies by --dir-sign (defined ONCE above), so "start" is
+   always inline-start: LTR −24px (left), RTL +24px (physical right). — */
 @media (prefers-reduced-motion: no-preference) {
   html[data-js] [data-reveal]:not([data-done]) {
     transition:
       opacity 350ms var(--ease-out-expo),
       transform 350ms var(--ease-out-expo),
-      clip-path 400ms var(--ease-out-expo);
+      clip-path 400ms var(--ease-out-expo),
+      filter 350ms var(--ease-out-expo);
   }
   html[data-js] [data-reveal]:not([data-revealed]):not([data-done]) {
     opacity: 0;
@@ -555,6 +568,23 @@
   html[data-js] [data-reveal="mask"]:not([data-revealed]):not([data-done]) > .reveal-scale {
     transform: scale(1.06);
   }
+  /* loop2-I4 (§1) — the direction + optics variants: "start" enters FROM
+     inline-start (−24px × dir-sign); "end" from inline-end (+24px × dir-sign);
+     "blur" is the focus pull (opacity 0 + blur 8px on the base rise); "clip"
+     is the top-down curtain (inset wipes the BOTTOM — the top edge holds). */
+  html[data-js] [data-reveal="start"]:not([data-revealed]):not([data-done]) {
+    transform: translateX(calc(-24px * var(--dir-sign)));
+  }
+  html[data-js] [data-reveal="end"]:not([data-revealed]):not([data-done]) {
+    transform: translateX(calc(24px * var(--dir-sign)));
+  }
+  html[data-js] [data-reveal="blur"]:not([data-revealed]):not([data-done]) {
+    opacity: 0;
+    filter: blur(8px);
+  }
+  html[data-js] [data-reveal="clip"]:not([data-revealed]):not([data-done]) {
+    clip-path: inset(0 0 100% 0);
+  }
   /* groups: direct children rise 6px as one gesture (stagger via the
      provider's per-child inline transition-delay — DOM order = reading
      order in both dirs, RTL-safe by construction) */
@@ -574,20 +604,32 @@
     opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;
+    filter: none !important; /* loop2-I4 (§1): every variant hidden state dies — blur included */
   }
 }
 
-/* — THE HERO STAGE (spec 1-a "The Sixth-Floor Window"): armed post-hydration
+/* — THE HERO STAGE v2 "DUSK OVER DAMASCUS" (loop2-I1r): armed post-hydration
    ([data-armed] added by HeroStage mount rAF; the head script's 1.4s self-heal
    covers slow/broken hydration). The H1 (LCP pair) NEVER hides — transform-
-   only entrance. Pre-arm hidden states exist ONLY under the JS gate. — */
+   only entrance. Pre-arm hidden states exist ONLY under the JS gate.
+   ENTRANCE TIMELINE (expo-out, both): 0ms poster dolly 600ms · 40ms brackets
+   240ms · 80ms eyebrow · 120ms lockup · 170ms H1 translateY 12px→0 340ms ·
+   230/270ms CTAs · 280ms rail 350ms · 320ms hours row (delays inline in
+   hero-stage.tsx except bracket/rail which live here). — */
 @media (prefers-reduced-motion: no-preference) {
-  html[data-js] .hero:not([data-armed]) .hero-rise { opacity: 0; transform: translateY(8px); }
+  html[data-js] .hero:not([data-armed]) .hero-rise,
+  html[data-js] .hero:not([data-armed]) .hero-hours { opacity: 0; transform: translateY(8px); }
   html[data-js] .hero:not([data-armed]) .hero-line { transform: translateY(12px); }
   html[data-js] .hero:not([data-armed]) .hero-media-in { transform: scale(1.12); }
+  html[data-js] .hero:not([data-armed]) .hero-bracket,
+  html[data-js] .hero:not([data-armed]) .hero-rail-text { opacity: 0; }
   html[data-js] .hero[data-armed] .hero-rise { animation: hero-rise 300ms var(--ease-out-expo) both; }
-  html[data-js] .hero[data-armed] .hero-line { animation: hero-line 320ms var(--ease-out-expo) both; }
+  html[data-js] .hero[data-armed] .hero-hours { animation: hours-in 300ms var(--ease-out-expo) both; }
+  html[data-js] .hero[data-armed] .hero-line { animation: hero-line 340ms var(--ease-out-expo) both; }
   html[data-js] .hero[data-armed] .hero-media-in { animation: hero-media-in 600ms var(--ease-out-expo) both; }
+  html[data-js] .hero[data-armed] .hero-bracket { animation: bracket-in 240ms var(--ease-out-expo) 40ms both; }
+  html[data-js] .hero[data-armed] .hero-rail-text { animation: rail-in 350ms var(--ease-out-expo) 280ms both; }
+  html[data-js][dir="rtl"] .hero[data-armed] .hero-rail-text { animation-name: rail-in-rtl; }
   html[data-js] .hero[data-armed] .cue-drop { animation: cue-drop 2200ms ease-in-out 800ms infinite; }
 }
 @keyframes hero-rise {
@@ -608,8 +650,14 @@
   70% { transform: translateY(28px); opacity: 0; }
   100% { transform: translateY(28px); opacity: 0; }
 }
-/* the pointer-glint sheen (desktop only; JS drives --gx/--gy — compositor-only) */
-.hero-glint { position: absolute; inset: 0; z-index: 9; pointer-events: none; opacity: 0; }
+@keyframes hours-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+/* the pointer-glint sheen (desktop only; JS drives --gx/--gy — compositor-only).
+   z-5 in the v2 layer stack (was 9): above the skyline canvas + darkening,
+   below the chrome (z-6) and content (z-10). */
+.hero-glint { position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: 0; }
 .hero-glint::before {
   content: "";
   position: absolute;
@@ -622,6 +670,75 @@
 /* the scroll-cue hairline track (spec 1-a §2) */
 .cue-track { position: relative; width: 1px; height: 28px; background: var(--color-line); overflow: hidden; }
 .cue-drop { position: absolute; inset-inline: 0; top: 0; height: 8px; background: var(--color-amber); }
+
+/* — HERO v2 (loop2-I1r) · THE DUSK PAIR: two cross-fading gradients
+   breathing 0.9↔0.4 over 26s ease-in-out alternate infinite (CSS-only,
+   RM-dead — static resting alphas). The GSAP scrub fades the WRAPPER in
+   hero-stage.tsx (child animations beat inline opacity in the cascade). — */
+.hero-dusk { position: absolute; inset: 0; pointer-events: none; }
+.hero-dusk-a {
+  background: linear-gradient(to top, color-mix(in oklab, var(--color-copper) 16%, transparent), transparent 58%);
+  opacity: 0.9;
+}
+.hero-dusk-b {
+  background: linear-gradient(to top, transparent 32%, color-mix(in oklab, var(--color-amber) 10%, transparent) 72%, transparent);
+  opacity: 0.4;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html[data-js] .hero[data-armed] .hero-dusk-a { animation: dusk-breath-a 26s ease-in-out infinite alternate; }
+  html[data-js] .hero[data-armed] .hero-dusk-b { animation: dusk-breath-b 26s ease-in-out infinite alternate; }
+}
+@keyframes dusk-breath-a { from { opacity: 0.9; } to { opacity: 0.4; } }
+@keyframes dusk-breath-b { from { opacity: 0.4; } to { opacity: 0.9; } }
+
+/* — HERO v2 · THE CHROME LAYER (z-6): vertical rail + corner brackets.
+   Desktop-only (mobile keeps the clean bottom-anchored composition — the
+   chrome would collide with the hours row there). — */
+.hero-chrome { position: absolute; inset: 0; z-index: 6; pointer-events: none; display: none; }
+@media (min-width: 64rem) { .hero-chrome { display: block; } }
+
+/* the vertical rail — inline-end edge, writing-mode vertical-rl; the flex
+   wrapper centers it in block-space so the entrance transform stays pure.
+   rail-in is a PHYSICAL translateX keyframe → carries the [dir="rtl"] twin
+   (rail-in-rtl), mandated for every physical axis animation. */
+.hero-rail {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 26px;
+  display: flex;
+  align-items: center;
+}
+.hero-rail-text { writing-mode: vertical-rl; text-orientation: mixed; white-space: nowrap; }
+@keyframes rail-in {
+  from { opacity: 0; transform: translateX(28px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes rail-in-rtl {
+  from { opacity: 0; transform: translateX(-28px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* the corner brackets — L-shaped hairlines (copper/40, 28px arms); the top
+   bracket hosts the live Damascus clock, the bottom one the coordinates.
+   Arms ride LOGICAL borders (auto-mirrored in RTL); the scale-in entrance
+   transform-origins get physical [dir="rtl"] twins. */
+.hero-bracket { position: absolute; display: flex; align-items: center; gap: 14px; }
+.hero-bracket-arm {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  border: 0 solid color-mix(in oklab, var(--color-copper) 40%, transparent);
+}
+.hero-bracket-t { top: 30px; inset-inline-start: 30px; transform-origin: top left; }
+.hero-bracket-t .hero-bracket-arm { border-block-start-width: 1px; border-inline-start-width: 1px; }
+.hero-bracket-b { bottom: 30px; inset-inline-end: 30px; transform-origin: bottom right; }
+.hero-bracket-b .hero-bracket-arm { border-block-end-width: 1px; border-inline-end-width: 1px; }
+[dir="rtl"] .hero-bracket-t { transform-origin: top right; }
+[dir="rtl"] .hero-bracket-b { transform-origin: bottom left; }
+@keyframes bracket-in {
+  from { opacity: 0; transform: scale(0.6); }
+  to { opacity: 1; transform: scale(1); }
+}
 
 /* — THE CTA GLINT SWEEP (hero CTA pair only — the one signature hover;
    mirrored under RTL via origin+direction flip) — */
@@ -702,7 +819,401 @@
   animation: breathe 2.4s ease-in-out infinite;
 }
 
-/* — THE SCROLL PROGRESS HAIRLINE (spec 1-c §7A): 2px amber, scaleX readout,
-     logical-side origin flip under RTL — */
-.progress-hairline { transform-origin: left center; }
-[dir="rtl"] .progress-hairline { transform-origin: right center; }
+/* — THE SCROLL PROGRESS HAIRLINE (spec 1-c §7A): 2px, scaleX readout,
+     logical-side origin flip under RTL. loop2-I4 (§4a) v2: the track is a
+     copper→amber gradient and the GRADIENT MIRRORS with the origin — copper
+     always anchors the reading side (LTR: left; RTL: right). — */
+.progress-hairline {
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--color-copper), var(--color-amber));
+}
+[dir="rtl"] .progress-hairline {
+  transform-origin: right center;
+  background: linear-gradient(270deg, var(--color-copper), var(--color-amber));
+}
+
+/* ===== LOOP2-I2 · MENU + GALLERY MOTION ===== */
+/* Rebuild of the wave lost to the box crash. Five systems, one section:
+   (1) dish-row hover art · (2) dish-overlay open choreography ·
+   (3) section-nav indicator glide · (4) lightbox directional slide ·
+   (5) gallery tile parallax (GSAP-owned — no CSS here; see gallery-grid).
+   Laws: hidden states ONLY under html[data-js]; transforms die under RM
+   (colors/wash survive); every physical translateX/origin carries its
+   [dir="rtl"] twin; --dir-sign is OWNED by loop2-I4r (:root 1 /
+   [dir="rtl"] -1) — only its var() fallback appears here, never a
+   definition. Existing sections above are untouched. */
+
+/* — (1) DISH-ROW HOVER ART — hover/focus-within on a live row moves ONLY
+   the inner parts (the gsap Flip filter choreography owns the li itself):
+   plate scale 1→1.04 (350ms expo, direction-neutral), price nudge 2px
+   toward the reading direction, copper hairline under the name drawing
+   from inline-start (200ms), title ink lifting ink/85→ink (200ms).
+   Sold-out rows are excluded via :not([aria-disabled]) — their state is
+   a fact, not a performance. RM: color/wash only (the transform block is
+   motion-safe-gated; the ink lift survives as an instant color fact). — */
+.dish-title {
+  color: color-mix(in oklab, var(--color-ink) 85%, transparent);
+  transition: color 200ms var(--ease-out-expo);
+}
+[data-dish-row]:not([aria-disabled]):hover .dish-title,
+[data-dish-row]:not([aria-disabled]):focus-within .dish-title {
+  color: var(--color-ink);
+}
+.dish-price {
+  /* shorthand (unlayered) also carries the amber color warm-up the old
+     transition-colors utility owned — one declaration, one tempo */
+  transition:
+    transform 200ms var(--ease-out-expo),
+    color 200ms var(--ease-out-expo);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .dish-plate img {
+    transition: transform 350ms var(--ease-out-expo);
+  }
+  [data-dish-row]:not([aria-disabled]):hover .dish-plate img,
+  [data-dish-row]:not([aria-disabled]):focus-within .dish-plate img {
+    transform: scale(1.04);
+  }
+  /* price nudge: 2px toward the reading direction — twin via --dir-sign */
+  [data-dish-row]:not([aria-disabled]):hover .dish-price,
+  [data-dish-row]:not([aria-disabled]):focus-within .dish-price {
+    transform: translateX(calc(2px * var(--dir-sign, 1)));
+  }
+  /* copper hairline under the dish name: scaleX 0→1 from the inline-start
+     edge — physical left origin, [dir=rtl] right twin (200ms, the frozen
+     tempo; replaces the amber center-out link-draw on dish names) */
+  .dish-name-line { position: relative; }
+  .dish-name-line::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: -2px;
+    height: 1px;
+    background: var(--color-copper);
+    transform: scale(0, 1);
+    transform-origin: left center;
+    transition: transform 200ms var(--ease-out-expo);
+  }
+  [dir="rtl"] .dish-name-line::after { transform-origin: right center; }
+  [data-dish-row]:not([aria-disabled]):hover .dish-name-line::after,
+  [data-dish-row]:not([aria-disabled]):focus-within .dish-name-line::after {
+    transform: scale(1, 1);
+  }
+}
+
+/* — (2) DISH-OVERLAY OPEN CHOREOGRAPHY — the panel opens by CLIP:
+   inset(6% 4% 8px 4%) → inset(0), 300ms expo (vertical + symmetric
+   horizontal insets → RTL-blind). Content blocks slot-in staggered
+   i×40ms, capped at 6 children, via nth-child (the shared slot-in
+   keyframes above; DOM order = reading order in both dirs). Exit is
+   instant-dismiss (Radix unmounts; the scrim keeps its own fade).
+   Gated html[data-js] + motion-safe — under RM the panel and every
+   block render fully visible with zero choreography. — */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-js] .dish-panel[data-state="open"] {
+    animation: dish-panel-open 300ms var(--ease-out-expo) both;
+  }
+  html[data-js] .dish-overlay-cascade > * {
+    animation: slot-in 300ms var(--ease-out-expo) both;
+  }
+  html[data-js] .dish-overlay-cascade > *:nth-child(2) { animation-delay: 40ms; }
+  html[data-js] .dish-overlay-cascade > *:nth-child(3) { animation-delay: 80ms; }
+  html[data-js] .dish-overlay-cascade > *:nth-child(4) { animation-delay: 120ms; }
+  html[data-js] .dish-overlay-cascade > *:nth-child(5) { animation-delay: 160ms; }
+  html[data-js] .dish-overlay-cascade > *:nth-child(6) { animation-delay: 200ms; }
+  html[data-js] .dish-overlay-cascade > *:nth-child(n + 7) { animation-delay: 240ms; }
+}
+@keyframes dish-panel-open {
+  from { clip-path: inset(6% 4% 8px 4%); }
+  to { clip-path: inset(0); }
+}
+
+/* — (3) SECTION-NAV INDICATOR GLIDE — 1px amber bar absolutely positioned
+   in the nav's scroll track: physical left:0 + JS-measured translateX
+   (the active link's offsetLeft against the SAME relative track that
+   anchors the bar) — one coordinate space, self-consistent in LTR and
+   RTL; living inside the scrollable box, it rides the track's content.
+   Glide: transform + width, 300ms expo. RM: the site-wide reduce block
+   collapses the glide to instant (positioning stays exact). no-JS: the
+   bar is gated OFF and the server-rendered static amber underline on
+   the active link owns the state; once data-js is live the underline
+   hands its duty to the bar. — */
+.section-nav-bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-amber);
+  pointer-events: none;
+  transition:
+    transform 300ms var(--ease-out-expo),
+    width 300ms var(--ease-out-expo);
+}
+html:not([data-js]) .section-nav-bar { display: none; }
+html[data-js] .section-track a[aria-current="true"] { text-decoration: none; }
+
+/* — (4) LIGHTBOX DIRECTIONAL SLIDE — prev/next stamps data-dir on the
+   KEYED media wrapper (React key = index → remount → entry fires).
+   Entry: translateX(±12px · dirSign) scale(.97) → settle, 300ms expo;
+   dirSign next=+1 / prev=−1, multiplied by --dir-sign so RTL mirrors
+   exactly (the twin is the var itself — no physical twin needed).
+   RM: fade only. — */
+.lb-media[data-dir="next"] { --lb-dir: 1; }
+.lb-media[data-dir="prev"] { --lb-dir: -1; }
+@media (prefers-reduced-motion: no-preference) {
+  html[data-js] .lb-media {
+    animation: lb-in 300ms var(--ease-out-expo) both;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-js] .lb-media {
+    animation: lb-fade 200ms ease-out both;
+  }
+}
+@keyframes lb-in {
+  from {
+    opacity: 0;
+    transform: translateX(calc(12px * var(--dir-sign, 1) * var(--lb-dir, 1))) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes lb-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===== LOOP2-I3 · FORMS + PRIMITIVES ===== */
+/* The ONE field idiom (ui/field.tsx + ui/input.tsx + ui/textarea.tsx), the
+   press transition (Button), and the 44px close triggers (Sheet/Dialog).
+   Logical properties only; NO Arabic letter-spacing; token stacks only. */
+
+/* — (1) the 16px field floor: inputs and textareas ALWAYS speak body size.
+   tailwind-merge may drop a text-* class from a merged class string; this
+   data-slot rule (unlayered, so it outranks utilities) guarantees the idiom
+   regardless of merge outcomes. iOS zoom-prevention, enforced in CSS. — */
+[data-slot="input"],
+[data-slot="textarea"] {
+  font-size: 1rem;
+}
+
+/* — (2) the press transition (Button base): filter + colors on the house
+   curve. A literal transition-[filter,colors,transform] class is invalid in
+   Tailwind 4 — this @utility is the sanctioned form: duration-base, expo-out. — */
+@utility transition-press {
+  transition-property:
+    color,
+    background-color,
+    border-color,
+    text-decoration-color,
+    fill,
+    stroke,
+    filter;
+  transition-duration: var(--duration-base);
+  transition-timing-function: var(--ease-out-expo);
+}
+
+/* — (3) THE FLOAT LABEL (ui/field.tsx): the label rests INSIDE the field —
+   16px, ink@70, pointer-inert — and rises on :focus-within OR value. The
+   placeholder=" " sentinel keeps empty uncontrolled fields resting (the
+   :placeholder-shown signal); date inputs never match :placeholder-shown, so
+   their label floats permanently (correct: the UA's format hint owns the
+   resting line). Pure CSS, 200ms, on the `translate` property — NOT
+   `transform`: the reveal system's group grammar transitions `transform` on
+   group children; the independent property keeps the two systems apart.
+   The −28px lift clears the field border (−18px measured 7px inside — the
+   lost-run defect). inset-inline-start mirrors RTL for free; the vertical
+   lift is direction-neutral. — */
+.field-shell {
+  position: relative;
+}
+.field-label {
+  position: absolute;
+  inset-inline-start: 0.75rem; /* the px-3 register */
+  top: 50%;
+  translate: 0 -50%;
+  margin: 0;
+  display: block;
+  pointer-events: none;
+  font-family: var(--font-body-stack);
+  font-size: 1rem; /* text-body: the label IS the placeholder */
+  line-height: 1.6;
+  color: color-mix(in oklab, var(--color-ink) 70%, transparent);
+  transition:
+    translate var(--duration-base) var(--ease-out-expo),
+    font-size var(--duration-base) var(--ease-out-expo),
+    color var(--duration-base) var(--ease-out-expo),
+    letter-spacing var(--duration-base) var(--ease-out-expo);
+}
+/* the float: focus OR value (the placeholder sentinel is gone) */
+.field-shell:focus-within .field-label,
+.field-shell:has(input:not(:placeholder-shown)) .field-label,
+.field-shell:has(textarea:not(:placeholder-shown)) .field-label {
+  translate: 0 calc(-50% - 28px);
+  font-size: 0.75rem; /* text-micro */
+  line-height: 1.4;
+  color: var(--color-muted);
+}
+/* EN only: the floated micro label is uppercase + tracked. AR NEVER gets
+   uppercase or letter-spacing (NEVER-10) — gated to non-rtl <html>. */
+html:not([dir="rtl"]) .field-shell:focus-within .field-label,
+html:not([dir="rtl"]) .field-shell:has(input:not(:placeholder-shown)) .field-label,
+html:not([dir="rtl"]) .field-shell:has(textarea:not(:placeholder-shown)) .field-label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+/* textareas rest the label on the py-2 line (not centered); the same −28px
+   lift then parks the micro label fully above the border */
+.field-shell--area .field-label {
+  top: 0.5rem;
+  translate: 0 0;
+}
+.field-shell--area:focus-within .field-label,
+.field-shell--area:has(textarea:not(:placeholder-shown)) .field-label {
+  translate: 0 -28px;
+}
+/* ===== END LOOP2-I3 ===== */
+
+/* ===== LOOP2-I4 · SYSTEM MOTION ===== */
+/* The rebuild of the motion-system wave lost to the box crash. Six systems,
+   one section: (§3) route transitions · (§5) the mobile sheet's link cascade ·
+   (§6) the confirmation success mark · (§7) the story reading rail · (§9) the
+   footer watermark shimmer. (--dir-sign, the reveal variant grammar, and the
+   hairline gradient live in the token/reveal sections above — this section
+   is append-only per the ownership map.) Every hidden/animated state is
+   compound-gated: html[data-js] × (prefers-reduced-motion: no-preference) —
+   RM and no-JS always render final states. */
+
+/* — §3 · ROUTE TRANSITIONS (template.tsx): soft navigations settle once —
+   the existing `settle` keyframe at half-tempo (300ms rise). First load /
+   hard reload never arms the class (LCP untouched); the wrapper is a plain
+   div, layout-neutral under <main>. Vertical translate — RTL-free. — */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-js] .route-in {
+    animation: settle 300ms var(--ease-out-expo) both;
+  }
+}
+
+/* — §5 · THE MOBILE SHEET CASCADE: on [data-state=open] the nav links
+   slot in DOM order, i×40ms capped at 6 (240ms) — reading order in BOTH
+   directions, RTL-safe by construction (no physical axis involved). — */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-js] [data-state="open"] .sheet-nav-link {
+    animation: slot-in 300ms var(--ease-out-expo) both;
+    animation-delay: calc(var(--sheet-i, 0) * 40ms);
+  }
+}
+
+/* — §6 · THE CONFIRMATION SUCCESS MARK: copper ring draws (600ms expo,
+   dasharray stroke) with the amber check landing ~620ms behind it; three
+   amber motes rise once (2.4s) off the mark. Base strokes live OUTSIDE the
+   gates — RM and no-JS render the completed mark instantly; the motes'
+   base opacity is 0, so they simply never ignite. Stroke-dashoffset is a
+   paint-only property (no layout), transform/opacity throughout. — */
+.confirm-ring {
+  stroke: var(--color-copper);
+}
+.confirm-check {
+  stroke: var(--color-amber);
+}
+@media (prefers-reduced-motion: no-preference) {
+  html[data-js] .confirm-ring {
+    stroke-dasharray: 131.9; /* 2πr · r=21 */
+    --draw-len: 131.9;
+    animation: svg-draw 600ms var(--ease-out-expo) both;
+  }
+  html[data-js] .confirm-check {
+    stroke-dasharray: 26; /* measured path length ≈ 25.8 */
+    --draw-len: 26;
+    animation: svg-draw 620ms 140ms var(--ease-out-expo) both;
+  }
+  html[data-js] .confirm-motes i {
+    animation: mote-rise 2.4s 200ms ease-in-out both;
+  }
+  html[data-js] .confirm-motes i:nth-child(2) {
+    animation-delay: 440ms;
+  }
+  html[data-js] .confirm-motes i:nth-child(3) {
+    animation-delay: 680ms;
+  }
+}
+@keyframes svg-draw {
+  from {
+    stroke-dashoffset: var(--draw-len, 131.9);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.confirm-motes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.confirm-motes i {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 9999px;
+  background: var(--color-amber);
+  opacity: 0;
+}
+.confirm-motes i:nth-child(1) {
+  inset-inline-start: 16%;
+  top: 30%;
+}
+.confirm-motes i:nth-child(2) {
+  inset-inline-start: 48%;
+  top: 8%;
+}
+.confirm-motes i:nth-child(3) {
+  inset-inline-start: 78%;
+  top: 46%;
+}
+@keyframes mote-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  12% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-44px);
+  }
+}
+
+/* — §7 · THE STORY READING RAIL: each chapter frame's .story-draw copper
+   overlay scrubs scaleY 0→1 (StoryTimeline · GSAP, origin TOP — vertical,
+   direction-neutral, RTL-safe). The pre-scrub hidden state exists ONLY
+   under this gate; RM and no-JS render the full line. — */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-js] .story-draw {
+    transform: scaleY(0);
+    transform-origin: top center;
+  }
+}
+
+/* — §9 · THE FOOTER WATERMARK SHIMMER: the ghost wordmark's ink breathes
+   0.03↔0.05 over 9s — an aria-hidden layer's ambient drift (opacity only).
+   RM and no-JS hold the static 0.03 (the Tailwind base on the span). — */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-js] .watermark-shimmer {
+    animation: watermark-shimmer 9s ease-in-out infinite;
+  }
+}
+@keyframes watermark-shimmer {
+  0%,
+  100% {
+    opacity: 0.03;
+  }
+  50% {
+    opacity: 0.05;
+  }
+}
+/* ===== END LOOP2-I4 ===== */
+

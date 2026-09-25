@@ -2,12 +2,17 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+// MIRADOR (loop2-I3) — the textarea twin of THE input idiom: same hairline
+// border / surface@30 fill / amber caret / 16px body text (guaranteed via the
+// [data-slot="textarea"] rule in globals.css), min 7 lines of room (min-h-28),
+// content-sized growth. Focus = the global bezel; the 1px border state shift
+// (amber on focus-visible, error on aria-invalid) rides on top.
 function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
   return (
     <textarea
       data-slot="textarea"
       className={cn(
-        "border-input placeholder:text-muted-foreground aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        "field-sizing-content flex min-h-28 w-full rounded-sm border border-line bg-surface/30 px-3 py-2 text-body text-ink transition-colors duration-base placeholder:text-muted caret-amber focus-visible:border-amber aria-invalid:border-error disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
       {...props}

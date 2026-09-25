@@ -9,10 +9,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Field } from "@/components/ui/field";
 import { reservationSchema } from "@/lib/validation";
 import { slotInstant } from "@/lib/slots";
 import type { Locale } from "@/lib/i18n";
-import { FieldInput } from "./field-input";
 import { PartyStepper } from "./party-stepper";
 import { DateStrip } from "./date-strip";
 import { TimeGrid, type SlotAvailability } from "./time-grid";
@@ -217,7 +217,7 @@ export function ReserveForm({ locale, strings, days, initialDate }: ReserveFormP
 
   return (
     <form onSubmit={onSubmit} noValidate className="mt-12 flex flex-col gap-8">
-      <FieldInput
+      <Field
         id="reserve-name"
         label={strings.name}
         value={name}
@@ -230,7 +230,7 @@ export function ReserveForm({ locale, strings, days, initialDate }: ReserveFormP
         disabled={submitting}
       />
 
-      <FieldInput
+      <Field
         id="reserve-phone"
         label={strings.phone}
         type="tel"
@@ -248,7 +248,11 @@ export function ReserveForm({ locale, strings, days, initialDate }: ReserveFormP
       <div
         role="group"
         aria-labelledby="reserve-party-label"
-        aria-describedby={fieldErrors.partySize ? "reserve-party-error" : undefined}
+        aria-describedby={
+          [fieldErrors.partySize ? "reserve-party-error" : null, "reserve-party-hint"]
+            .filter(Boolean)
+            .join(" ") || undefined
+        }
         className="flex flex-col gap-2"
       >
         <span id="reserve-party-label" className="hud-label">
@@ -270,7 +274,9 @@ export function ReserveForm({ locale, strings, days, initialDate }: ReserveFormP
             {strings.errors[fieldErrors.partySize]}
           </p>
         ) : null}
-        <p className="text-small text-muted">
+        {/* loop2-I3 a11y: the large-party note is the party hint — id-paired
+            into the group's aria-describedby (with the error when present). */}
+        <p id="reserve-party-hint" className="text-small text-muted">
           {strings.largePartyNote}{" "}
           <Link
             href={`/${locale}/private-dining`}
@@ -285,8 +291,18 @@ export function ReserveForm({ locale, strings, days, initialDate }: ReserveFormP
           fieldset sizes to its min-w-max strip content (≈4K px) and blows out
           the document scrollWidth at 375 (F12-6). The scroll container inside
           then scrolls internally as designed. */}
-      <fieldset className="flex min-w-0 flex-col gap-2 border-0 p-0" disabled={submitting}>
+      <fieldset
+        className="flex min-w-0 flex-col gap-2 border-0 p-0"
+        disabled={submitting}
+        aria-describedby="reserve-date-hint"
+      >
         <legend className="hud-label">{strings.date}</legend>
+        {/* loop2-I3 a11y: the closed-Monday fact as the date hint — sr-only
+            here (each closed day already carries it per-button via aria-label);
+            the fieldset pairs it so the rule is announced up front. */}
+        <p id="reserve-date-hint" className="sr-only">
+          {strings.closedMonday}
+        </p>
         <DateStrip
           days={days}
           selected={selectedDate}

@@ -161,6 +161,9 @@
   "hero.scroll": "مرّر",
   "hero.hoursShort": "الثلاثاء – الأحد · 18:00 – 23:30",
   "hero.coords": "33.5108° N · 36.2745° E",
+  "hero.rail": "ميرادور — الطابق السادس",
+  "hero.clockCity": "دمشق",
+  "hero.clockLabel": "الطابق 6",
   "nav.backToTop": "العودة إلى الأعلى",
   "menu.kicker": "مائدة المساء",
   "menu.countLine": "ثمانية وعشرون طبقاً · ستة أقسام · الدولار هو المرجع",
@@ -178,5 +181,8 @@
   "private.figureCaption": "الغرفة الغربية · الطابق السادس",
   "reserve.kicker": "الحجوزات",
   "reserve.reassurance": "بلا عربون — نحفظ طاولتك ربع ساعة.",
-  "confirm.floor": "الطابق السادس"
+  "confirm.floor": "الطابق السادس",
+  "stats.floor": "الطابق",
+  "stats.seats": "المقاعد",
+  "stats.tables": "الطاولات"
 }

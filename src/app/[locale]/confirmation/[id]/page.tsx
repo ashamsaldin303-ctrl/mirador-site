@@ -66,8 +66,33 @@ export default async function ConfirmationPage({
     <section className="mx-auto flex w-full max-w-xl flex-col gap-8 px-4 pb-24 pt-32 sm:px-6">
       {/* P-037 primitives (R10): the confirmation arrives — the summary settles
           (600ms expo-out vertical arrival, the §2 law) and the hairline draws
-          (200ms center-out). Both direction-neutral (RTL-free) + motion-safe. */}
-      <header className="flex flex-col gap-6 motion-safe:settle">
+          (200ms center-out). Both direction-neutral (RTL-free) + motion-safe.
+          loop2-I4 (§6) — the success mark above the headline: a copper ring
+          draws (600ms expo, dasharray stroke) with the amber check landing
+          ~620ms behind it, and three amber motes rise once (2.4s). Jewelry
+          only — the h1 text carries the meaning; the whole SVG + motes layer
+          is aria-hidden. RM / no-JS: the completed mark renders instantly and
+          the motes never ignite (globals.css LOOP2-I4 section). */}
+      <header className="relative flex flex-col gap-6 motion-safe:settle">
+        <div className="relative">
+          <svg viewBox="0 0 48 48" className="size-12" aria-hidden="true">
+            <circle className="confirm-ring" cx="24" cy="24" r="21" fill="none" strokeWidth="1" />
+            <path
+              className="confirm-check"
+              d="M15 24.5 L21.5 31 L33 19"
+              fill="none"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          {/* the three motes — one-shot embers drifting up off the mark */}
+          <span className="confirm-motes" aria-hidden="true">
+            <i />
+            <i />
+            <i />
+          </span>
+        </div>
         <h1 className="font-display text-h1 text-amber">{dict["confirm.title"]}</h1>
         <hr className="hud-rule motion-safe:draw" />
       </header>

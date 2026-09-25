@@ -5,7 +5,9 @@
 // discoverable — the WCAG aria-disabled pattern, not a dead native-disable).
 // Western digits in both locales: Intl locale carries the -u-nu-latn extension
 // (numerals policy — never Arabic-Indic). Selected day = amber hairline
-// underline (border-b, matches the nav active-link idiom).
+// underline (border-b, matches the nav active-link idiom). loop2-I3: the
+// strip scrolls with snap — snap-x snap-mandatory on the container, snap-start
+// per day cell, so a flick settles a whole day, not half of one.
 import { useMemo } from "react";
 import { isBookableDay, slotInstant } from "@/lib/slots";
 import { cn } from "@/lib/utils";
@@ -41,7 +43,7 @@ export function DateStrip({ days, selected, onSelect, locale, closedMondayLabel,
   }, [locale]);
 
   return (
-    <div className="scroll-thin -mx-1 overflow-x-auto px-1 pb-2">
+    <div className="scroll-thin -mx-1 snap-x snap-mandatory overflow-x-auto px-1 pb-2">
       <div className="flex min-w-max items-stretch gap-1">
         {days.map((day, i) => {
           const monday = isMonday(day);
@@ -65,8 +67,7 @@ export function DateStrip({ days, selected, onSelect, locale, closedMondayLabel,
                 onSelect(day);
               }}
               className={cn(
-                "flex min-h-11 w-16 shrink-0 flex-col items-center gap-1 border-b px-2 pb-2 pt-2 transition-colors duration-fast",
-                "",
+                "flex min-h-11 w-16 shrink-0 snap-start flex-col items-center gap-1 border-b px-2 pb-2 pt-2 transition-colors duration-fast",
                 isSelected ? "border-amber text-ink" : "border-transparent text-muted",
                 !isSelected && !monday && "hover:bg-surface hover:text-ink",
                 monday && "opacity-50",

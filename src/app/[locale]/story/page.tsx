@@ -9,8 +9,14 @@
 // reveal-scale settle) and carries an overlaid HUD caption; the pull-quote is
 // ink (amber is earned by CTA/active/signature/success only) between centered
 // copper ticks — the page's ONE settle is its signature line.
+// loop2-I4 (§7): every chapter frame carries .story-chapter + a .story-draw
+// copper overlay on the border-s hairline — StoryTimeline (client island at
+// the article's end) scrubs the overlay scaleY 0→1 with the reading and
+// counter-rotates the ghost numerals ±2°. Vertical transforms only — the
+// whole rail is RTL-neutral by construction.
 import type { Metadata } from "next";
 import { LadderImage } from "@/components/ui/ladder-image";
+import { StoryTimeline } from "./story-timeline";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { getDictionary, type Locale } from "@/lib/i18n";
@@ -74,8 +80,14 @@ export default async function StoryPage({
         <div key={chapter.hud}>
           <section className="mx-auto max-w-3xl px-4 py-24 sm:px-6 sm:py-32">
             {/* The editorial kicker frame (chapter-intro idiom) carries the whole
-                chapter; the ghost numeral sits behind the display title. */}
-            <div className="border-s border-line ps-6 sm:ps-8">
+                chapter; the ghost numeral sits behind the display title. The
+                .story-draw overlay rides the frame's border-s hairline — the
+                reading rail StoryTimeline scrubs into place (RM/no-JS: full). */}
+            <div className="story-chapter relative border-s border-line ps-6 sm:ps-8">
+              <span
+                aria-hidden="true"
+                className="story-draw pointer-events-none absolute inset-y-0 start-[-1px] w-px bg-copper/70"
+              />
               <p className="hud-label" data-reveal="fade">
                 {chapter.hud}
               </p>
@@ -154,6 +166,11 @@ export default async function StoryPage({
           className="mx-auto block w-24 border-t border-copper/60"
         />
       </section>
+
+      {/* loop2-I4 (§7): the reading rail — scrubs each chapter's .story-draw
+          hairline + the ghost numeral counter-rotations. Null-rendering client
+          island; nothing here touches SSR content. */}
+      <StoryTimeline />
     </article>
   );
 }
