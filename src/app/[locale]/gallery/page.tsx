@@ -8,6 +8,7 @@
 import type { Metadata } from "next";
 import { db } from "@/lib/db";
 import { getDictionary, type Locale } from "@/lib/i18n";
+import { MetaStrip } from "@/components/system/meta-strip";
 import { GalleryGrid } from "@/components/gallery/gallery-grid";
 
 export const dynamic = "force-dynamic";
@@ -51,8 +52,26 @@ export default async function GalleryPage({
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <header className="py-24 sm:py-32">
-        <h1 className="font-display text-h1 text-ink">{dict["gallery.h1"]}</h1>
+      <header className="pt-32 pb-12">
+        {/* Designed header block (§3-1 HUD motif — mirrors the menu door):
+            kicker in the border-s frame → H1 (static — this route's LCP
+            candidates are the first two priority tiles) → drawn rule →
+            count line + MetaStrip. */}
+        <div className="border-s border-line ps-6">
+          <p className="hud-label" data-reveal="up">
+            {dict["gallery.kicker"]}
+          </p>
+          <h1 className="mt-6 font-display text-h1 text-ink">
+            {dict["gallery.h1"]}
+          </h1>
+        </div>
+        <hr className="hud-rule mt-8" data-reveal="draw" />
+        <p className="hud-label mt-6" data-reveal="up" data-reveal-delay="70">
+          {dict["gallery.countLine"]}
+        </p>
+        <div className="mt-4" data-reveal="fade" data-reveal-delay="140">
+          <MetaStrip locale={locale} hours={dict["hero.hoursShort"]} />
+        </div>
       </header>
 
       <section className="pb-24">
@@ -65,6 +84,7 @@ export default async function GalleryPage({
             next: dict["gallery.next"],
             close: dict["gallery.close"],
             imageFail: dict["gallery.imageFail"],
+            keyboardHint: dict["gallery.keyboardHint"],
           }}
         />
       </section>

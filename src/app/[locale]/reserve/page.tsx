@@ -60,6 +60,9 @@ export default async function ReservePage({
   return (
     <section className="mx-auto w-full max-w-xl px-4 pb-24 pt-32 sm:px-6">
       <header className="flex flex-col gap-6">
+        {/* P-100 (loop-1, design audit 2-d): the editorial kicker frame above the
+            H1 — the same border-s + ps-6 idiom the chapter pages wear. */}
+        <p className="hud-label border-s border-line ps-6">{dict["reserve.kicker"]}</p>
         <h1 className="font-display text-h1">{dict["reserve.h1"]}</h1>
         <hr className="hud-rule" />
       </header>
@@ -85,6 +88,7 @@ export default async function ReservePage({
           largePartyNote: dict["reserve.largePartyNote"],
           largePartyLink: dict["reserve.largePartyLink"],
           tablesRemaining: dict["reserve.tablesRemaining"],
+          reassurance: dict["reserve.reassurance"],
           closedMonday: dict["contact.closedMonday"],
           errors: {
             invalid_name: dict["errors.invalid_name"],

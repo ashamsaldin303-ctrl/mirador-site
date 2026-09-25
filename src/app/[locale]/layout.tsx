@@ -10,6 +10,8 @@ import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
 import { RouteAnnouncer } from "@/components/layout/route-announcer";
+import { RevealProvider } from "@/components/system/reveal-provider";
+import { ScrollArtifacts } from "@/components/system/scroll-artifacts";
 
 export const viewport: Viewport = {
   themeColor: "rgb(10 10 11)", // --color-night, rgb form (G2-safe)
@@ -128,10 +130,27 @@ export default async function LocaleLayout({
             "(function(){var d=document.getElementById('fonts-deferred');if(d){d.addEventListener('load',function(){d.media='all'});if(d.sheet)d.media='all';}})();",
         }}
       />
+      {/* P-100 (loop-1) · THE JS GATE (spec 1-e §5.2 — the ONE canonical gate
+          site-wide): parse-time attribute so reveal/hero hidden-state CSS
+          only ever matches when JS is alive. No-JS browsers and crawlers see
+          final-state content from the raw SSR stream. The 1400ms self-heal
+          arms the hero entrance even if hydration is slow or dies — the
+          composition always completes. CSP: rides the same documented
+          script-src 'unsafe-inline' allowance as the fonts-deferred flip. */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html:
+            "(function(){var h=document.documentElement;h.setAttribute('data-js','1');setTimeout(function(){var s=document.querySelector('.hero');if(s&&!s.hasAttribute('data-armed'))s.setAttribute('data-armed','1')},1400)})();",
+        }}
+      />
       <body className="min-h-dvh bg-night font-sans text-ink">
         {/* P-028 (prompt-4 R11): the route announcer — soft navigations speak
             their landing title to screen readers (the aural route change). */}
         <RouteAnnouncer />
+        {/* P-100 (loop-1): the reveal engine + scroll artifacts (progress
+            hairline + back-to-top) — one IO site-wide, rAF-coalesced. */}
+        <RevealProvider />
+        <ScrollArtifacts backToTopLabel={dict["nav.backToTop"]} />
         <SmoothScroll>
           <div className="flex min-h-dvh flex-col">
             <a

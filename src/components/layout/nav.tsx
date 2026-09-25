@@ -1,6 +1,14 @@
 "use client";
-// MIRADOR — Nav (§4.8): small wordmark lockup · 6 links · Reserve CTA · locale switch
-// (atomic EN⇄AR flip, no reload) · mobile sheet (keyboard-operable). z-20 header.
+// MIRADOR — Nav (§4.8): small wordmark lockup · 6 links · Reserve CTA · locale
+// switch (atomic EN⇄AR flip, no reload — same-route prefix mirror) · mobile sheet
+// (keyboard-operable). z-20 header.
+// P-100 (loop-1, design audit 2-d): the locale switcher is a hairline segmented
+// control (EN | عربي, active = surface fill); scrolled state deepens to
+// bg-night/85 + a 24px drop shadow; non-active desktop links draw the link-draw
+// hairline on hover (the bezel stays the ONLY focus indicator); the mobile sheet
+// widens to 20rem and opens with the lockup + hud-rule, numeraled links
+// (01–06 copper micro), and a bottom mini-meta block (address + hours, VENUE
+// facts, the lamp-dot ember on the hours line) above the CTA.
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -9,6 +17,7 @@ import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/s
 import { Button } from "@/components/ui/button";
 import { WordmarkLockup } from "@/components/brand/wordmark-lockup";
 import { otherLocale, type Locale } from "@/lib/i18n";
+import { VENUE } from "@/lib/venue";
 import { cn } from "@/lib/utils";
 
 export type NavStrings = {
@@ -37,6 +46,15 @@ export function localePath(locale: Locale, path: string): string {
   return `/${locale}${path}`;
 }
 
+/** The segmented control's fixed segment order (EN | عربي — reading order
+ *  stays stable in both directions; only the fill moves). */
+const LOCALE_CODES: readonly Locale[] = ["en", "ar"];
+
+/** The venue's open hours, short form (first VENUE segment — days + times,
+ *  no kitchen/monday detail) for the sheet's mini meta line. */
+const hoursShortOf = (locale: Locale): string =>
+  (locale === "ar" ? VENUE.hoursAr : VENUE.hoursEn).split(" · ")[0] ?? "";
+
 /** Mirrored path for the other locale (same route, flipped prefix). */
 export function mirroredPath(pathname: string, to: Locale): string {
   const segments = pathname.split("/").filter(Boolean);
@@ -49,6 +67,7 @@ export function Nav({ locale, strings }: { locale: Locale; strings: NavStrings }
   const pathname = usePathname() ?? `/${locale}`;
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const hoursShort = hoursShortOf(locale);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -67,6 +86,11 @@ export function Nav({ locale, strings }: { locale: Locale; strings: NavStrings }
         aria-current={active ? "page" : undefined}
         className={cn(
           "inline-flex min-h-11 items-center px-3 text-small text-muted transition-colors duration-200 hover:text-ink",
+          // link-draw (hover underline draw) only on NON-active links — the
+          // active link already carries its amber underline. The ::after also
+          // draws on focus-visible — decoration ON TOP of the bezel, never a
+          // replacement for it.
+          !active && "link-draw",
           active && "text-ink",
           active && "underline decoration-amber decoration-1 underline-offset-8",
         )}
@@ -80,7 +104,9 @@ export function Nav({ locale, strings }: { locale: Locale; strings: NavStrings }
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-20 border-b backdrop-blur-md transition-colors duration-slow",
-        scrolled ? "border-line bg-night/80" : "border-transparent bg-transparent",
+        scrolled
+          ? "border-line bg-night/85 shadow-[0_1px_24px_rgba(0,0,0,0.45)]"
+          : "border-transparent bg-transparent",
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
@@ -93,20 +119,38 @@ export function Nav({ locale, strings }: { locale: Locale; strings: NavStrings }
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
-            href={mirroredPath(pathname, otherLocale(locale))}
-            // R13/E79: NO prefetch — the switcher flips the whole page's
-            // language; its RSC payload carries the OTHER locale's font
-            // preloads, and React's head adoption pulls them into THIS
-            // page's request queue mid-load (amiri-wordmark + 29KB
-            // plex-arabic on the EN door — inside the modeled LCP path on
-            // runs 21-23). A locale flip is a full navigation anyway.
-            prefetch={false}
-            className="inline-flex min-h-11 items-center px-3 text-small text-muted transition-colors duration-200 hover:text-ink"
+          {/* The locale segmented control — a hairline pill, both scripts side by
+              side; the active locale fills with surface. Same-route prefix flip
+              (mirroredPath) exactly as before. */}
+          <div
+            role="group"
             aria-label={strings.localeSwitch}
+            className="inline-flex items-center rounded-full border border-line"
           >
-            {strings.localeSwitch}
-          </Link>
+            {LOCALE_CODES.map((code) => {
+              const isActive = locale === code;
+              return (
+                <Link
+                  key={code}
+                  href={mirroredPath(pathname, code)}
+                  // R13/E79: NO prefetch — the switcher flips the whole page's
+                  // language; its RSC payload carries the OTHER locale's font
+                  // preloads, and React's head adoption pulls them into THIS
+                  // page's request queue mid-load (amiri-wordmark + 29KB
+                  // plex-arabic on the EN door — inside the modeled LCP path on
+                  // runs 21-23). A locale flip is a full navigation anyway.
+                  prefetch={false}
+                  aria-current={isActive ? "true" : undefined}
+                  className={cn(
+                    "inline-flex min-h-11 items-center rounded-full px-3 text-micro transition-colors duration-200",
+                    isActive ? "bg-surface text-ink" : "text-muted hover:text-ink",
+                  )}
+                >
+                  {code === "en" ? "EN" : "عربي"}
+                </Link>
+              );
+            })}
+          </div>
           <Button variant="cta" size="compact" asChild className="hidden sm:inline-flex">
             <Link href={localePath(locale, "/reserve")}>{strings.cta}</Link>
           </Button>
@@ -123,11 +167,16 @@ export function Nav({ locale, strings }: { locale: Locale; strings: NavStrings }
             </SheetTrigger>
             <SheetContent
               side={locale === "ar" ? "left" : "right"}
-              className="w-72 border-line bg-night p-6"
+              className="w-[20rem] border-line bg-night p-6"
             >
               <SheetTitle className="sr-only">{strings.closeMenu}</SheetTitle>
-              <div className="flex flex-col gap-1 pt-8">
-                {NAV_LINKS.map(({ key, path }) => {
+              {/* the sheet opens as the house, not a dropdown — lockup + hairline */}
+              <div className="flex min-h-11 items-center">
+                <WordmarkLockup size="sm" />
+              </div>
+              <hr className="hud-rule" />
+              <nav aria-label={strings.menu} className="flex flex-col">
+                {NAV_LINKS.map(({ key, path }, i) => {
                   const href = localePath(locale, path);
                   const active =
                     path === "" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
@@ -138,10 +187,13 @@ export function Nav({ locale, strings }: { locale: Locale; strings: NavStrings }
                       onClick={() => setOpen(false)}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "flex min-h-11 items-center border-b border-line py-3 text-body text-muted",
-                        active && "text-ink",
+                        "flex min-h-11 items-center gap-4 border-b border-line py-3 text-body-lg",
+                        active ? "text-ink" : "text-muted",
                       )}
                     >
+                      <span aria-hidden className="text-micro tabular-nums text-copper">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
                       {strings[key]}
                     </Link>
                   );
@@ -154,7 +206,17 @@ export function Nav({ locale, strings }: { locale: Locale; strings: NavStrings }
                 >
                   {strings.localeSwitch}
                 </Link>
-                <Button variant="cta" size="compact" asChild className="mt-4">
+              </nav>
+              {/* the bottom block: the house in micro (address + hours, VENUE
+                  facts — the lamp-dot ember on the hours line) above the CTA */}
+              <div className="mt-auto flex flex-col gap-4">
+                <div className="flex flex-col gap-1">
+                  <p className="hud-label">
+                    {locale === "ar" ? VENUE.addressAr : VENUE.addressEn}
+                  </p>
+                  <p className="hud-label lamp-dot">{hoursShort}</p>
+                </div>
+                <Button variant="cta" size="compact" asChild>
                   <Link href={localePath(locale, "/reserve")} onClick={() => setOpen(false)}>
                     {strings.cta}
                   </Link>

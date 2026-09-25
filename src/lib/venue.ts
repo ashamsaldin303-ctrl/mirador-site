@@ -12,6 +12,11 @@ export const VENUE = {
   email: "reservations@miradordamascus.com",
   hoursEn: "Tuesday – Sunday, 18:00 – 23:30 · kitchen last order 22:45 · closed Monday",
   hoursAr: "الثلاثاء – الأحد، 18:00 – 23:30 · آخر طلب للمطبخ 22:45 · مغلق يوم الاثنين",
+  // P-100 loop-1: the meta-strip motif constants (design audit §3-1) —
+  // geography as brand. Fictional per A5, registered in ASSETS-REPLACE.md.
+  floorLabelEn: "Floor 6",
+  floorLabelAr: "الطابق السادس",
+  coords: "33.5108° N · 36.2745° E",
   sypPerUsd: 12500,
   sypRounding: 500,
   tablesPerSlot: 12,

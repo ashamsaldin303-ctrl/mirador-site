@@ -40,6 +40,11 @@ function Skyline({
   const groupRef = useRef<THREE.Group>(null);
   const introRef = useRef(0);
   const densityRef = useRef(0.25);
+  // lateral parallax direction sign — matches the DOM track's travel direction
+  // (EN track moves −x → sign 1 keeps the −14 factor; AR track moves +x → sign
+  // −1 flips it to +14 so the skyline drifts WITH the panels, not against).
+  // Read once at component init, inside the effect (never during render).
+  const parallaxDirRef = useRef(1);
   const { invalidate } = useThree();
 
   const { geometry, fogColor } = useMemo(() => {
@@ -107,6 +112,10 @@ function Skyline({
 
   // report invalidate to the parent (render-on-demand wiring) + shimmer tick
   useEffect(() => {
+    // RTL parity fix: resolve the document direction ONCE at mount — the
+    // parallax drift below then matches the journey track direction per locale.
+    const rtl = document.documentElement.dir === "rtl";
+    parallaxDirRef.current = rtl ? -1 : 1;
     onReady(invalidate);
     const t = setInterval(() => invalidate(), 450); // gentle shimmer refresh
     return () => {
@@ -126,9 +135,10 @@ function Skyline({
     geometry.setDrawRange(0, count);
 
     // parallax: drift the skyline group laterally across the journey
-    // (camera stays fixed; mutating own refs is the sanctioned pattern)
+    // (camera stays fixed; mutating own refs is the sanctioned pattern) —
+    // dir-aware: EN −14 factor · AR +14 factor, so the drift follows the track
     if (groupRef.current) {
-      groupRef.current.position.x = (p - 0.5) * -14;
+      groupRef.current.position.x = (p - 0.5) * -14 * parallaxDirRef.current;
       groupRef.current.position.y = p * 1.6;
     }
 

@@ -18,9 +18,27 @@ export default async function HomePage({
   const dir = locale === "ar" ? "ar" : "en";
 
   const acts: [Act, Act, Act] = [
-    { numeral: dict["acts.act1.numeral"], title: dict["acts.act1.title"], copy: dict["acts.act1.copy"], image: "/img/journey/act-1.avif" },
-    { numeral: dict["acts.act2.numeral"], title: dict["acts.act2.title"], copy: dict["acts.act2.copy"], image: "/img/journey/act-2.avif" },
-    { numeral: dict["acts.act3.numeral"], title: dict["acts.act3.title"], copy: dict["acts.act3.copy"], image: "/img/journey/act-3.avif" },
+    {
+      numeral: dict["acts.act1.numeral"],
+      title: dict["acts.act1.title"],
+      copy: dict["acts.act1.copy"],
+      image: "/img/journey/act-1.avif",
+      alt: dict["acts.act1.alt"],
+    },
+    {
+      numeral: dict["acts.act2.numeral"],
+      title: dict["acts.act2.title"],
+      copy: dict["acts.act2.copy"],
+      image: "/img/journey/act-2.avif",
+      alt: dict["acts.act2.alt"],
+    },
+    {
+      numeral: dict["acts.act3.numeral"],
+      title: dict["acts.act3.title"],
+      copy: dict["acts.act3.copy"],
+      image: "/img/journey/act-3.avif",
+      alt: dict["acts.act3.alt"],
+    },
   ];
 
   // JSON-LD Restaurant (F11-4) — values from the venue constants (fictional per A5)
@@ -60,11 +78,21 @@ export default async function HomePage({
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c").replace(/>/g, "\\u003e"),
         }}
       />
-      <Hero locale={locale} line={dict["hero.line"]} cta={dict["hero.cta"]} quiet={dict["hero.quiet"]} />
+      <Hero
+        locale={locale}
+        line={dict["hero.line"]}
+        cta={dict["hero.cta"]}
+        quiet={dict["hero.quiet"]}
+        eyebrow={dict["hero.eyebrow"]}
+        scroll={dict["hero.scroll"]}
+        hoursShort={dict["hero.hoursShort"]}
+        coords={dict["hero.coords"]}
+      />
       <ChapterIntro hud={dict["intro.hud"]} paragraph={dict["intro.paragraph"]} />
       <Journey hud={dict["journey.hud"]} acts={acts} />
       <ReserveBand
         locale={locale}
+        kicker={dict["reserve.kicker"]}
         title={dict["band.title"]}
         sub={dict["band.sub"]}
         cta={dict["band.cta"]}

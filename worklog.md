@@ -441,3 +441,200 @@ Work Log:
 
 Stage Summary:
 - prompt-4 Release 1 is CLOSED on record: E34–E78/E80/E81 PASS with raw evidence committed; E79 FAIL honestly (diagnosis + six-round optimization ledger + v2.0-I recommendation in r1/DONE.md). origin/main = 9996b64 (close) + this hardening commit; ci green. The dev surface is fully operational for preview (PG 16.2 seeded, daemon healthy). Per §8 STOP: the round ends with the honest verdict — never polished, never relabeled.
+
+---
+Task ID: session-boot-loop1
+Agent: Z.ai Code (main orchestrator)
+Task: User directive "أكمل حتى تصل إلى 100/100" — full-site professional overhaul via multi-agent loops (5 discussion → 4 implementation → 10 verification), strict grading until 100/100.
+
+Work Log:
+- Environment recovery #4: .env lost NEXT_PUBLIC_SITE_URL again (re-added); db/ dir gone (container recreation) → SQLite adaptation REAPPLIED (schema: provider sqlite, enums→String, String[]→JSON String; seed: JSON.stringify for allergens/dietTags; menu.ts parseTags seam already compatible) → db:push + seed green (6 sections / 28 items / 8 gallery / 12 reservations, demo slot 2026-10-02 19:00 Damascus).
+- Dev daemon restarted (bun run dev, port 3000); verified EN:200 AR:200 MENU-EN:200 API:200.
+- Baseline inventory: hero.tsx = static poster + lockup + H1 + 2 CTAs (NO entrance animation, NO parallax, NO interactivity — user complaint confirmed); journey.tsx = pinned horizontal 3-act scrub (GSAP) + WebGL skyline with dirSign RTL handling but containerAnimation start:"left 70%" is PHYSICAL (RTL defect suspect); chapter-intro/reserve-band = fully static; settle/draw/breathe primitives exist in globals.css but barely used.
+- User baseline grade: 55/100. Defects: (a) AR animations bad on homepage cards + scroll interactions; (b) Hero boring/static; (c) not enough site-wide motion; (d) overall polish needed.
+
+Stage Summary:
+- Environment fully operational; beginning Group 1 (5 parallel discussion agents: 1-a Hero concept · 1-b RTL diagnosis · 1-c motion system · 1-d design audit · 1-e safety constraints).
+
+---
+Task ID: g1-synthesis-foundation
+Agent: Z.ai Code (main orchestrator)
+Task: Synthesize the 5-agent council outputs into the shared foundation (conflict-free layer for the 4 parallel implementers).
+
+Work Log:
+- Council outputs received: 1-a hero concept ("Sixth-Floor Window" bottom-anchored title card) · 1-b RTL root-cause (containerAnimation negative _caScrollDist: AR fire times {0.35, 0.85, 1.35} vs EN {-0.35, 0.15, 0.65} — Act 3 NEVER reveals in AR; fix = progress-threshold reveals via scrub onUpdate, enter=(k-0.7)/2 clamped {0, 0.15, 0.65} both locales) · 1-c motion system (data-reveal grammar + single-IO RevealProvider + two-attribute lifecycle [data-revealed]→[data-done]) · 1-d design audit (P0/P1/P2 checklist) · 1-e safety law (LCP/CLS/hydration/RM/no-JS/RTL/perf constraints).
+- FOUNDATION LANDED (orchestrator-owned, frozen for implementers): content/{en,ar}.json +24 keys each with copy fixes (og.reserve.desc, الحوازات, largePartyNote, signature AR, confirm.note, og.menu.desc, contact.h1 "Find us", gallery.h1 "The city, framed.") · venue.ts +floorLabelEn/Ar +coords · motion.ts +REVEAL_STAGGER/CHILD_LIFT/DONE_MS · globals.css: AR display-size compensation (×1.06-1.1) + hud-label AR 13px + reveal system CSS (gated html[data-js], lifecycle, variants up/fade/scale/draw/settle/mask + groups + RM twins) + hero stage CSS (hero-rise/hero-line/hero-media-in/cue-drop keyframes, pre-arm states, glint layer) + .cta-glint (RTL-mirrored sweep) + .link-draw (center-out) + .ghost-numeral (copper AR tint) + .slot-in + .lamp-dot + .progress-hairline (RTL origin flip) · NEW src/components/system/reveal-provider.tsx (single IO, pathname rescan, RM fast-path) · scroll-artifacts.tsx (progress hairline + back-to-top, rAF-coalesced, Lenis CustomEvent bridge) · meta-strip.tsx (brand motif, LTR coords island) · layout.tsx: data-js gate script + 1400ms hero self-heal + provider mounts · smooth-scroll.tsx: mirador:scroll-top bridge + fonts.ready ScrollTrigger.refresh (R1).
+- Verified: tsc 0 · eslint 0 on foundation files · dev server 200s.
+
+Stage Summary:
+- Foundation is FROZEN. Launching Group 2 (4 parallel implementers with strict file ownership): 2-a Hero+Home (hero.tsx, hero-stage.tsx, page.tsx, chapter-intro, reserve-band) · 2-b Journey RTL (journey.tsx, skyline-canvas.tsx, dialog.tsx) · 2-c Menu+Gallery (menu/*, gallery/*) · 2-d Story/Private/Contact/Reserve/Confirmation+Chrome (those pages + nav.tsx + footer.tsx). Shared files (globals.css, content/*.json, layout.tsx, motion.ts) are orchestrator-only.
+
+---
+Task ID: g3-V5
+Agent: V5
+Task: scroll artifacts (progress hairline + back-to-top) verification
+
+Work Log:
+- S1 setup: viewport 1440×900 → /en, 2500ms — PASS.
+- S2 hairline: exists ✓; computed transformOrigin "0px 1px" = `left center` resolved to lengths (x=0 left, y=1px center of the 2px bar; source globals.css `.progress-hairline{transform-origin:left center}`); scaleX matrix(0,…) at top — PASS.
+- S3 scrolled to 3000 (clamped to page max 1855): transform matrix(1,0,0,1,0,0) → scaleX 1 > 0.2 — PASS.
+- S4 scrolled to 2000: scrollY 1503 > 1.5×900=1350, `button[aria-label="Back to top"]` rendered (re-run: scrollY exactly 2000, btn true) — PASS.
+- S5 click "Back to top" via find role button → 1500ms later scrollY=0, button unmounted (Lenis smooth) — PASS. (One CLI timeout from transient sandbox fork exhaustion; recovered and re-ran cleanly — same result.)
+- S6 /ar: dir=rtl, origin "1425px 1px" (= `right center` resolved: x=offsetWidth 1425) vs EN 0px — RTL flip confirmed; scaleX 0.578 grows with scroll — PASS.
+
+Stage Summary:
+- PASS 6/6: hairline scales with scroll from logical-side origin (left EN / right AR), back-to-top appears past 1.5 viewports and Lenis-returns to 0. No code changes; no commits.
+
+---
+Task ID: g3-V3
+Agent: V3
+Task: private inquiry E2E
+
+Work Log:
+- Ran in an isolated agent-browser session (default session was being navigated concurrently by another agent — first attempt landed on /en/menu and /en/gallery mid-flow; a dedicated session fixed it).
+- Step 1 PASS: viewport 1440×900, /en/private-dining opened, 2500ms settle, title "Private Dining — MIRADOR".
+- Step 2 PASS: figure caption "The west room · floor 6" · form h2 "Tell us the date" · kicker "Inquiries".
+- Step 3 PASS: filled NAME "Test Person" · PHONE "+963955000999" · MESSAGE "A quiet birthday for eight" (26 chars) → clicked "Send inquiry".
+- Step 4 PASS: success state = [role=status] region "Inquiry received. We reply within one business day…" + "Reference: cmug9cl5" + WhatsApp CTA (db.inquiry.create path; honeypot not triggered).
+- Step 5 PASS: agent-browser errors → empty output = 0 page errors.
+- Step 6 PASS: prisma db execute DELETE on phone '+963955000999' → bun PrismaClient inquiry.count() = 0 (seed state restored).
+
+Stage Summary: PASS — all 6 steps green; test row cleaned; nothing else edited, no commits.
+
+---
+Task ID: g3-V2
+Agent: V2 (menu interactions verification)
+Task: Verify menu interactivity on dev surface (agent-browser, 1440×900)
+
+Work Log:
+- Step 1 PASS — viewport 1440×900, /en/menu loaded, 2500ms settle.
+- Step 2 PASS — Vegan pill click: count 28→"4 dishes" announced (data-dish-count aria-live); 4 rows render (Focaccia, Charred leeks, Hand-cut fries, Wilted spinach); stuck-invisible eval (li/article/section opacity 0 in viewport) = 0.
+- Step 3 PASS — Vegan toggle off: "28 dishes", 28 visible dish rows restored, 0 stuck-invisible.
+- Step 4 PASS — Details opens Radix dialog: Oysters with price "$18 · 225,000 SYP", allergen table (Gluten—·Dairy—·Nuts—·Shellfish✓·Fish—·Egg—), diet tag "Pescatarian"; Close returns state to closed.
+- Step 5 PASS — /ar/menu «نباتي صرف»: "28 طبقاً"→"4 أطباق" (فوكاتشا، كرّاث محمّر، بطاطا مقطعة يدوياً، سبانخ), 0 stuck-invisible; toggle off returns 28.
+- Step 6 PASS — agent-browser errors: 0 across all steps/pages.
+- Env note (not a product defect): the shared default agent-browser session was concurrently navigated by parallel agents + one daemon EAGAIN crash (stale chrome forks); re-ran cleanly in isolated --session g3v2 and closed it after.
+
+Stage Summary: PASS — 6/6 steps PASS; diet filters, live dish-count announcements, zero stuck-invisible rows, and dish detail dialogs (allergens + diet tags + price) all verified on EN and AR.
+---
+Task ID: g3-V4
+Agent: V4
+Task: story page design verification (agent-browser; used own named session "v4story" — the default session is shared machine-wide and was hijacked mid-run by a parallel agent)
+
+Work Log:
+- EN /en/story @1440×900 (2500ms settle): ghostNumerals 3 (≥3) PASS · kickerFrames 3 (≥3) PASS · figcaption "The long window · west" contains "west" PASS · figure alt "The long west window at night, the Damascus skyline beyond" contains "window" PASS · pullQuoteColor rgb(242,239,232) recorded.
+- copperTicks: strict `.border-copper` = 0, but `[class*=border-copper]` = 2 (`mx-auto w-24 border-t border-copper/60` hairlines, computed copper oklab(0.618 0.058 0.102 / 0.6)) — the Tailwind /60 opacity modifier defeats exact-token matching; design element present → PASS with selector caveat.
+- EN scroll-to-bottom (2 smooth steps): hidden-on-screen = 1 ≠ 0 FAIL — footer coords line "Floor 6 · 33.5108° N · 36.2745° E" (rect 860–876 at max scroll 2311/2311) permanently opacity 0. Root cause: RevealProvider IO rootMargin "0 0 -10% 0" (effective root bottom 810px) vs footer py-6 (24px) → last ~66px of page can never intersect the observer.
+- AR /ar/story: ghostNumerals 3 PASS · kickerFrames 3 PASS (ps-6/border-s hold in RTL) · caption «النافذة الطويلة · غرباً» exact match PASS · alt «النافذة الغربية الطويلة ليلاً وأفق دمشق خلفها» PASS · copper 2 (as /60) PASS · hidden-on-screen = 1 FAIL — same footer line «الطابق السادس · 33.5108° N · 36.2745° E» (857–876), identical root cause (site-wide footer defect, not story-specific).
+- Robustness hazard (diagnostic): instant jump-scrolls skip mid-page reveals entirely — after an instant 2-step scroll 4 elements incl. the figure caption stayed opacity 0 (IO fires no entry when an element jumps clean past the root in one frame); smooth scroll reveals them all. Fix candidates: scrollend/rescan fallback in reveal-provider, smaller bottom rootMargin, or ≥96px footer bottom padding.
+- agent-browser errors: 0 page errors · 0 error-level console entries (68 grep hits were __DEV__-warning text only) PASS.
+
+Stage Summary: FAIL — story design upgrades themselves verified on both locales (ghost numerals ×3, kicker frames ×3, figure caption/alt incl. AR «النافذة الطويلة · غرباً», copper ticks ×2), but the "0 hidden on-screen elements" criterion FAILS on EN and AR from one shared root cause: the footer meta-strip coords line lives inside the reveal observer's dead zone (-10% bottom rootMargin > 24px footer padding) and is permanently invisible at 1440×900.
+---
+Task ID: g3-V1
+Agent: V1 verification
+Task: gallery lightbox
+Work Log:
+- Step 1 PASS: viewport 1440x900 set, opened http://localhost:3000/en/gallery (title "The city, framed. — MIRADOR"), waited 2500ms.
+- Step 2 PASS: snapshot shows H1 "The city, framed." + exactly 8 gallery tile buttons (The City, Switched On → The Final Flight).
+- Step 3 PASS: clicked 4th tile (Embers) → lightbox opens: image loaded (naturalWidth 1080), title "Embers", counter "4 of 8" with computed font-variant-numeric: tabular-nums (note: word form "of", not literal "4 / 8").
+- Step 4 PASS: Next → "A Single Place Set" 5 of 8 (image+alt swap); Previous → back to "Embers" 4 of 8.
+- Step 5 PASS: Escape closes the lightbox (dialog removed from DOM, still on /en/gallery).
+- Step 6 PASS: /ar/gallery H1 "المدينة في إطار." + 8 Arabic tiles; 4th (جمر) opens RTL lightbox with Arabic title/caption "جمر — الموقد بين خدمتين", counter "4 من 8" tabular-nums; Escape closes.
+- Step 7 PASS: `agent-browser errors` → zero console/page errors on both locales.
+- Env note: shared agent-browser daemon intermittently slow under concurrent verifier agents; every step completed via retries, no deviations.
+
+Stage Summary:
+- PASS overall (7/7 steps; counter renders "4 of 8" / "4 من 8" — substance + tabular-nums met, separator is the word not "/").
+---
+Task ID: g3-V7
+Agent: V7
+Task: cross-page reveal sweep
+Work Log:
+- /en/menu PASS 0
+- /ar/menu PASS 0
+- /en/story PASS 0 (V4 footer-coords defect re-verified: FIXED — was 1 hidden, now 0)
+- /ar/story PASS 0 (same fix holds in AR)
+- /en/gallery PASS 0
+- /ar/gallery PASS 0
+- /en/private-dining PASS 0
+- /ar/private-dining PASS 0
+- /en/contact PASS 0
+- /ar/contact PASS 0
+- agent-browser errors: empty output = 0 page errors; isolated --session v7 closed. Method per page: open → 2500ms → scrollTo bottom → 1800ms (teleport healer fires 180ms after scroll end) → count.
+Stage Summary: PASS — 10/10 content pages show 0 stuck-invisible reveal elements after jump-to-bottom, 0 page errors; no code changes, no commits.
+---
+Task ID: g3-V8
+Agent: V8
+Task: AR typography (optical-size compensation + HUD rules)
+
+Work Log:
+- Step 1 PASS — isolated --session v8, viewport 1440×900, /ar opened («ميرادور — دمشق»), 2500ms settle.
+- Step 2 PASS (AR) — h1Size 91.584px = 86.4×1.06 exactly (6vw×1.06 optical bump); hudSize 13px (0.8125rem); hudTracking "normal" (=0px effective; Chrome serializes unset letter-spacing as "normal" — contrast w/ EN 0.96px proves tracking stripped for AR); hudTransform "none"; dir rtl.
+- Step 3 PASS (EN) — h1Size 86.4px (plain 6vw, no multiplier); hudSize 12px; hudTracking 0.96px; hudTransform "uppercase"; dir ltr — confirms the AR overrides are locale-scoped.
+- Step 4 PASS — /ar hero h1 textContent = «فوق المدينة، مائدة تستحقّ الصعود.» exact byte match; shaping intact (shadda on تستحقّ preserved, no isolated/broken letter forms).
+- Step 5 PASS — agent-browser errors → empty output (0 page/console errors); session v8 closed.
+
+Stage Summary: PASS — 5/5 steps green; AR optical-size ×1.06 (91.584 vs 86.4px), AR HUD 13px/none/no-tracking vs EN 12px/uppercase/0.96px, and Arabic shaping verified intact.
+
+---
+Task ID: g3-V9
+Agent: V9
+Task: code law sweep (static verification, Grep/Read only)
+
+Work Log:
+- L1 hidden states PASS: 2 className hits, both aria-hidden non-content — hero-stage.tsx:218 hero-darkening decorative layer + inquiry-form.tsx:266 honeypot trap input (tabIndex -1, pointer-events-none); no content element hidden ungated.
+- L2 gsap PASS: zero `from "gsap"` static imports in src/; all gsap access flows through getMotion() dynamic import() in src/lib/motion.ts (hero-stage, journey, smooth-scroll, menu-client conform).
+- L3 fonts (report): globals.css 15 @font-face (11 webfont + 4 local fallbacks), public/fonts-deferred.css 5 → 20 total.
+- L4 translates PASS: dialog.tsx translate-x-[-50%]/left-[50%] + dish-list.tsx -translate-x-1/2/left-1/2 both symmetric centering; globals.css cta-glint translateX(±130%) fully [dir=rtl]-mirrored (640-644).
+- L5 data-js PASS: exactly ONE script occurrence (layout.tsx:143 setAttribute); reveal-provider.tsx:9 hit is a comment; globals.css selectors don't count.
+- L6 double-reveal PASS: reserve-band = individual data-reveal, NO group; dish-list ul[data-reveal-group] children (DishRow) never carry data-reveal (h2/hr are siblings); site-wide sweep of all 5 group containers (chapter-intro, inquiry-form, dish-list, summary, contact) found zero nested data-reveal.
+- L7 dictionary parity PASS: en/ar = 180 top-level keys AND 180 deep keys, zero key-set differences.
+
+Stage Summary: PASS — 7/7 laws hold (L3 font count reported, no fail criterion); no files edited, no commits.
+
+---
+Task ID: g3-V10
+Agent: V10
+Task: console network sweep
+
+Work Log:
+- Page-error sweep (isolated --session v10, 2000ms settle, `errors --clear` before each URL, empty `agent-browser errors` output every time): /en → 0 · /ar → 0 page errors.
+- /en/menu → 0 · /ar/menu → 0 page errors (the /ar/menu open chain hit the 60s shell timeout mid-command; re-read errors after settle — still 0, URL confirmed via location.href).
+- /en/gallery → 0 · /ar/gallery → 0 · /en/reserve → 0 · /ar/reserve → 0 page errors — 8/8 routes clean.
+- Console spot-check on /en: the only [error]-level entries are the documented pre-existing dev-only __DEV__ noise (link/script precedence + hoisting + hydration child-of notes) — excluded per brief; no uncaught exceptions anywhere.
+- LCP wiring on /en: .hero img src="/img/hero/poster.avif?w=3840", fetchpriority="high" ✓ (expected), loading attr absent — priority ⇒ next/image isLazy=false → browser-default eager (not lazy); head carries <link rel="preload" as="image" imagesrcset="/img/hero/poster-750w.avif?w=640 640w,…" fetchpriority="high">.
+- Session v10 closed after run ("✓ Browser closed"); dev server untouched, nothing else edited, no commits.
+
+Stage Summary: PASS — 0 page errors on all 8 routes; hero poster LCP wiring verified (fetchpriority=high on img + responsive preload link; loading defaults to eager via priority).
+---
+Task ID: g3-V6
+Agent: V6
+Task: hero interactions
+
+Work Log:
+- Step 1 PASS: isolated --session v6, viewport 1440×900, /en open, 3000ms settle.
+- Step 2 PASS: armed=1, h1 opacity=1 (transform settled to identity), eyebrow "Floor 6 · Abu Rummaneh · Damascus", 4 hud-labels in hero.
+- Step 3 PASS (desktop emulation required): headless Chromium here advertises NO input devices (pointer:none/hover:none/any-pointer:none; CDP Emulation.setEmulatedMedia can't override hover/pointer in this build), so the site's correct desktop-only gate kept the FX off. Emulated fine-pointer via CDP Page.addScriptToEvaluateOnNewDocument matchMedia shim (hover/pointer queries only; reduced-motion untouched) + reload, then real `mouse move 1000 400`: .hero-media-pointer transform `matrix(1,0,0,1,3.36,-0.58)` (non-identity translate3d, mid-lerp) and .hero-glint opacity=1 with --gx:1000px/--gy:400px at the cursor.
+- Step 4 PASS: `a[href="#chapter"]` click → scrollY 804 (>500).
+- Step 5 PASS: at scrollY=600 .hero-media = `matrix(1.1067,0,0,1.1067,0,-42)` — translateY −42px = 0.07·900·(600/900) exactly; darkening 0.3667 = 0.55·0.667 (GSAP scrub math exact).
+- Step 6 PASS: /ar armed=1, h1 opacity=1, eyebrow «الطابق السادس · أبو رمانة · دمشق» exact.
+- Step 7 PASS: `agent-browser errors` → empty output (0 page/console errors); session v6 closed, temp CDP scripts removed, nothing else edited, no commits.
+
+Stage Summary: PASS — 7/7 steps green; pointer-FX verified under standard desktop fine-pointer emulation (headless host reports zero input devices, site's (hover:hover)+(pointer:fine) gate is by-design correct there).
+
+---
+Task ID: loop1-verification-close
+Agent: Z.ai Code (main orchestrator)
+Task: Group 3 verification wave (10 agents) + the strict grading loop — close Loop 1 of the 100/100 campaign.
+
+Work Log:
+- Group 2 landed despite subagent timeouts (all 4 implementers completed their file work; only their final report steps died): hero rebuilt (hero.tsx + hero-stage.tsx — bottom-anchored "Sixth-Floor Window"), journey RTL fix + poster-mode reveals + ghost numerals, skyline dirSign, menu/gallery professionalization (ghost numerals, price grid, masks, numbering), story/private/contact/reserve/confirmation upgrades, nav segmented switcher + scrolled shadow + sheet upgrade (lockup, 01-06 copper numerals, meta block), footer redesign (tagline, hours rows, legal meta strip, ghost watermark). tsc 0 · eslint 0.
+- Dev server recovered once (memory thrash from 4 concurrent agent browsers → clean restart, cache cleared).
+- ORCHESTRATOR VERIFICATION (golden paths): AR journey end-state Act 3 opacity 1 (was 0 forever — the RTL defect), AR scroll-up Act 1 stays visible, EN regression identical; reveal system fires on scroll/anchor jumps/self-heals; RM contract (0 hidden, no pin, no Lenis, 0 errors); no-JS contract (no gate, full content); AR booking E2E (name/phone/date/time → confirmation «الطاولة لك.» + MetaStrip + WhatsApp + noindex) — test row cleaned; 375px no overflow ×2 locales; footer sticky 0 gap; all 14 route-locale pairs 200 + API 200 + 404 honest.
+- VLM visual critiques: EN home "visually stunning, on-brand" · AR home "high-quality RTL implementation, shaping excellent" · menu "sophisticated, price axis perfect" · story/private/reserve flagged artifacts (pin-space, dev overlay badge, intent-shell misread, stitch-artifacts) — each cross-verified programmatically as NON-defects (form/footer no overlap: 1850<1946; RTL border-s frame correct: 1px right/32px right-pad; stepper E2E functional).
+- GROUP 3 (10 verification agents): V1 gallery/lightbox PASS 7/7 · V2 menu filters+Flip PASS 6/6 (0 stuck rows) · V3 inquiry E2E PASS 6/6 (DB cleaned) · V4 story FAIL → root cause (footer meta-strip parked under the -10% IO line at max scroll) → FIXED by the teleport healer (debounced scroll-end sweep in reveal-provider) → re-verified PASS · V5 scroll artifacts PASS 6/6 (hairline grows, RTL origin flips, back-to-top via Lenis) · V6 hero interactions PASS 7/7 (armed, pointer-FX matrix, cue anchor, parallax math exact −42px=0.07·900·0.667, AR eyebrow) · V7 cross-page reveal sweep PASS 10/10 (0 hidden on-screen everywhere; V4 fix confirmed) · V8 AR typography PASS 5/5 (h1=91.584px=86.4×1.06 EXACT, HUD 13px, AR tracking normal vs EN 0.96px uppercase) · V9 code laws PASS 7/7 (no ungated hidden states, gsap only via getMotion, RTL mirrors complete, ONE data-js gate, no double reveals, dict parity 180=180 deep) · V10 console/network PASS (0 page errors ×8 routes, LCP wiring intact: fetchpriority=high + preload).
+- Final state: tsc 0 · eslint 0 · 14/14 routes 200 · API 200 · honest 404.
+
+Stage Summary:
+- LOOP 1 CLOSED. The user's four directives are all delivered and verified: (a) site-wide animations everywhere (reveal system + hovers + ambient + scroll artifacts + cascades), (b) the RTL defect root-caused mathematically and fixed (progress-threshold reveals — both locales identical fire times {0, 0.15, 0.65}), (c) the hero rebuilt as an interactive three-system stage (entrance choreography + scroll parallax + pointer glint), (d) full professionalization (AR optical sizes, ghost numerals, meta strips, copy fixes, nav/footer/sheet redesign). One real defect found by the verification wave (footer reveal dead-zone) was fixed and re-verified. Honest remaining gap: production-build Lighthouse (E27/E79 lineage) cannot run in this environment (dev-only mandate); the LCP wiring is code- and DOM-verified intact.

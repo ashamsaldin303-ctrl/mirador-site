@@ -79,7 +79,7 @@ export function Lightbox({
             <DialogTitle className="min-w-0 flex-1 truncate font-display text-h3 text-ink">
               {title}
             </DialogTitle>
-            <p className="shrink-0 text-small text-muted">
+            <p className="shrink-0 text-small tabular-nums text-muted">
               {index + 1} {strings.counter} {total}
             </p>
             <DialogPrimitive.Close
@@ -92,13 +92,22 @@ export function Lightbox({
 
           <div className="relative flex flex-1 items-center justify-center overflow-hidden p-4 sm:p-8">
             {imageFailed ? (
-              <div className="w-full max-w-lg border border-line bg-surface p-8 text-center">
+              <div
+                key={index}
+                className="w-full max-w-lg border border-line bg-surface p-8 text-center"
+              >
                 <p className="text-small text-muted">{strings.imageFail}</p>
                 <p className="mt-4 font-display text-h3 text-ink">{title}</p>
                 <p className="mt-2 text-small text-muted">{caption}</p>
               </div>
             ) : (
-              <div className="media-grain relative h-full w-full">
+              // keyed by index: every prev/next swap remounts the media
+              // wrapper and .slot-in settles it (4px rise, 300ms — CSS-gated,
+              // dead under reduced-motion by construction).
+              <div
+                key={index}
+                className="media-grain relative h-full w-full slot-in"
+              >
                 <Image
                   src={item.imageUrl}
                   alt={`${title} — ${caption}`}
@@ -122,13 +131,15 @@ export function Lightbox({
             <DialogDescription className="text-small text-muted">
               {caption}
             </DialogDescription>
+            {/* the keyboard contract, HUD-register — threaded from the page dict */}
+            <p className="hud-label mt-2">{strings.keyboardHint}</p>
           </div>
 
           <button
             type="button"
             onClick={() => go(-1)}
             aria-label={strings.prev}
-            className="absolute start-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-night/80 text-ink transition-colors duration-200 outline-none hover:border-amber "
+            className="absolute start-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-night/80 text-ink transition-colors duration-200 outline-none hover:border-amber hover:text-amber"
           >
             <ChevronLeft className="size-6 rtl:-scale-x-100" strokeWidth={1.5} aria-hidden />
           </button>
@@ -136,7 +147,7 @@ export function Lightbox({
             type="button"
             onClick={() => go(1)}
             aria-label={strings.next}
-            className="absolute end-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-night/80 text-ink transition-colors duration-200 outline-none hover:border-amber "
+            className="absolute end-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-night/80 text-ink transition-colors duration-200 outline-none hover:border-amber hover:text-amber"
           >
             <ChevronRight className="size-6 rtl:-scale-x-100" strokeWidth={1.5} aria-hidden />
           </button>

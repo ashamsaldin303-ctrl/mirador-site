@@ -171,9 +171,15 @@ export function MenuClient({
       <SectionNav
         // FRM-1 (prompt-4 R6): sections emptied by the active filter drop out
         // of the nav too — a sticky link to an unmounted anchor is a dead link.
+        // Per-link counts show the VISIBLE dish count (matches the rows the
+        // link jumps to and the live-region announcer).
         items={sections
           .filter((section) => section.items.some((item) => matchesFilters(item, filters)))
-          .map(({ slug, title }) => ({ slug, title }))}
+          .map(({ slug, title, items }) => ({
+            slug,
+            title,
+            count: items.filter((item) => matchesFilters(item, filters)).length,
+          }))}
         label={strings.sectionsLabel}
       />
       <DietFilterBar
@@ -186,10 +192,11 @@ export function MenuClient({
         labels={strings.filters}
       />
       <div ref={listRef}>
-        {sections.map((section) => (
+        {sections.map((section, index) => (
           <DishList
             key={section.slug}
             section={section}
+            index={index}
             strings={strings}
             filters={filters}
           />

@@ -8,6 +8,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import { getDictionary, isLocale } from "@/lib/i18n";
+import { MetaStrip } from "@/components/system/meta-strip";
 import {
   ALLERGENS,
   formatPrice,
@@ -84,6 +85,16 @@ export default async function MenuPage({
     ALLERGENS.map((allergen) => [allergen, dict[`menu.allergen.${allergen}`]]),
   ) as Record<Allergen, string>;
 
+  // "Menu updated October 2026" — request-time month+year, server-rendered
+  // only (the page is force-dynamic; the client island never re-renders this
+  // node, so there is no hydration surface). ar-SY-u-nu-latn = the Damascene
+  // Levantine month names (تشرين الأول) with Western digits — the site
+  // numerals policy (same convention as the reserve date strip).
+  const formattedDate = new Intl.DateTimeFormat(
+    locale === "ar" ? "ar-SY-u-nu-latn" : "en",
+    { month: "long", year: "numeric" },
+  ).format(new Date());
+
   const strings: MenuStrings = {
     sectionsLabel: dict["menu.sections"],
     closeLabel: dict["gallery.close"],
@@ -139,15 +150,32 @@ export default async function MenuPage({
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c").replace(/>/g, "\\u003e"),
         }}
       />
-      <header className="pt-24">
-        <h1 className="font-display text-h1 text-ink">{dict["menu.h1"]}</h1>
-        <hr className="hud-rule mt-8" />
+      <header className="pt-32 pb-4">
+        {/* Designed header block (§3-1 HUD motif): kicker in the border-s
+            frame (chapter-intro idiom) → H1 (static — this route's LCP
+            candidate) → drawn rule → count line + MetaStrip. */}
+        <div className="border-s border-line ps-6">
+          <p className="hud-label" data-reveal="up">
+            {dict["menu.kicker"]}
+          </p>
+          <h1 className="mt-6 font-display text-h1 text-ink">
+            {dict["menu.h1"]}
+          </h1>
+        </div>
+        <hr className="hud-rule mt-8" data-reveal="draw" />
+        <p className="hud-label mt-6" data-reveal="up" data-reveal-delay="70">
+          {dict["menu.countLine"]}
+        </p>
+        <div className="mt-4" data-reveal="fade" data-reveal-delay="140">
+          <MetaStrip locale={locale} hours={dict["hero.hoursShort"]} />
+        </div>
       </header>
 
       <MenuClient locale={locale} sections={data} strings={strings} />
 
       <footer className="border-t border-line py-8">
-        <p className="text-small text-muted">{dict["menu.notes.currency"]}</p>
+        <p className="hud-label">{dict["menu.updated"].replace("{date}", formattedDate)}</p>
+        <p className="mt-3 text-small text-muted">{dict["menu.notes.currency"]}</p>
         <p className="mt-2 text-small text-muted">{dict["menu.notes.halal"]}</p>
       </footer>
     </div>

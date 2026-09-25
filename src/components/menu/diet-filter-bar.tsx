@@ -42,7 +42,9 @@ export function DietFilterBar({
 }) {
   const unit = pluralUnit(locale, countForms, count);
   return (
-    <div className="flex flex-wrap items-center gap-3 py-6">
+    // data-reveal="fade" — functional elements never lift (opacity only),
+    // and the reveal CSS is stripped by [data-done] before any interaction.
+    <div className="flex flex-wrap items-center gap-3 py-6" data-reveal="fade">
       {tags.map((tag) => (
         <Toggle
           key={tag}

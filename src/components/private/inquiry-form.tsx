@@ -12,6 +12,10 @@ import type { Locale } from "@/lib/i18n";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+// P-100 (loop-1, design audit 2-d): the form rides the reveal GROUP grammar —
+// the whole form is SSR'd (client islands still server-render), so RevealProvider
+// observes it on mount and the field blocks rise 6px staggered as one gesture.
+// NO data-reveal on individual inputs — the bezel owns focus, facts stay instant.
 
 type FieldKey = "name" | "phone" | "preferredDate" | "partySize" | "message";
 
@@ -245,7 +249,14 @@ export function InquiryForm({
     fieldErrors[key] ? `${formId}-${key}-error` : undefined;
 
   return (
-    <form onSubmit={onSubmit} noValidate className="flex max-w-xl flex-col gap-6">
+    <form
+      onSubmit={onSubmit}
+      noValidate
+      className="flex max-w-xl flex-col gap-6"
+      data-reveal-group
+      data-reveal-stagger="70"
+      data-reveal-cap="4"
+    >
       <input
         type="text"
         name="website"
@@ -256,7 +267,7 @@ export function InquiryForm({
       />
 
       <div className="flex flex-col gap-2">
-        <label htmlFor={`${formId}-name`} className="text-small font-medium text-ink/90">
+        <label htmlFor={`${formId}-name`} className="hud-label">
           {labels.name}
         </label>
         <Input
@@ -276,7 +287,7 @@ export function InquiryForm({
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor={`${formId}-phone`} className="text-small font-medium text-ink/90">
+        <label htmlFor={`${formId}-phone`} className="hud-label">
           {labels.phone}
         </label>
         <Input
@@ -299,7 +310,7 @@ export function InquiryForm({
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor={`${formId}-date`} className="text-small font-medium text-ink/90">
+        <label htmlFor={`${formId}-date`} className="hud-label">
           {labels.preferredDate}
         </label>
         <Input
@@ -319,7 +330,7 @@ export function InquiryForm({
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor={`${formId}-party`} className="text-small font-medium text-ink/90">
+        <label htmlFor={`${formId}-party`} className="hud-label">
           {labels.partySize}
         </label>
         <Input
@@ -345,7 +356,7 @@ export function InquiryForm({
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor={`${formId}-message`} className="text-small font-medium text-ink/90">
+        <label htmlFor={`${formId}-message`} className="hud-label">
           {labels.message}
         </label>
         <Textarea
@@ -367,7 +378,9 @@ export function InquiryForm({
         type="submit"
         disabled={submitting}
         aria-busy={submitting}
-        className="min-h-11 self-start rounded-full bg-amber px-6 font-sans text-small font-semibold text-night hover:bg-amber/90"
+        variant="cta"
+        size="compact"
+        className="self-start"
       >
         {submitting ? labels.submitting : labels.submit}
       </Button>

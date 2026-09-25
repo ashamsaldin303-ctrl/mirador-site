@@ -9,6 +9,7 @@ import { getDictionary, type Locale } from "@/lib/i18n";
 import { damascusDate, damascusTime } from "@/lib/slots";
 import { confirmationMessage, waHref } from "@/lib/whatsapp";
 import { ReservationSummary, WhatsAppConfirm } from "@/components/reserve/summary";
+import { MetaStrip } from "@/components/system/meta-strip";
 
 export const dynamic = "force-dynamic";
 
@@ -84,8 +85,13 @@ export default async function ConfirmationPage({
         slot={reservation.slot}
         tableNumber={reservation.tableNumber}
       />
+      {/* P-100 (design audit 2-d): the geography motif under the summary —
+          floor + coords (no hours here; the guest already picked one). */}
+      <MetaStrip locale={locale} />
       <WhatsAppConfirm href={href} label={dict["confirm.whatsapp"]} note={dict["contact.whatsappNote"]} />
-      <p className="text-small text-muted">{dict["confirm.note"]}</p>
+      <p className="text-small text-muted" data-reveal="fade" data-reveal-delay="200">
+        {dict["confirm.note"]}
+      </p>
     </section>
   );
 }

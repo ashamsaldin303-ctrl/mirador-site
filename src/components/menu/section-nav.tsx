@@ -7,7 +7,7 @@ import type { MouseEvent as ReactMouseEvent } from "react";
 import { cn } from "@/lib/utils";
 import { prefersReducedMotion } from "@/lib/motion";
 
-export type SectionNavItem = { slug: string; title: string };
+export type SectionNavItem = { slug: string; title: string; count: number };
 
 const HEADER_PX = 64; // fixed header height (h-16)
 
@@ -90,7 +90,7 @@ export function SectionNav({
       )}
     >
       <div className="scroll-thin flex items-center gap-1 overflow-x-auto">
-        {items.map(({ slug, title }) => (
+        {items.map(({ slug, title, count }) => (
           <a
             key={slug}
             href={`#${slug}`}
@@ -103,6 +103,8 @@ export function SectionNav({
             )}
           >
             {title}
+            {/* per-link visible-dish count — HUD numeral, copper, tabular */}
+            <span className="ms-1.5 text-micro tabular-nums text-copper">{count}</span>
           </a>
         ))}
       </div>

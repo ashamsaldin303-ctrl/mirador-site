@@ -9,7 +9,17 @@ import { getMotion } from "@/lib/motion";
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // P-100 (loop-1): the scroll-top bridge — ALWAYS registered (RM included).
+    // Lenis answers when alive (smooth); the instant fallback covers RM and
+    // the pre-Lenis window. Never native smooth scrolling (fights the ticker).
+    const onScrollTop = () => {
+      if (lenis) lenis.scrollTo(0, { duration: 1.1 });
+      else window.scrollTo(0, 0);
+    };
+    window.addEventListener("mirador:scroll-top", onScrollTop);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return () => window.removeEventListener("mirador:scroll-top", onScrollTop);
+    }
     let disposed = false;
     let lenis: import("lenis").default | null = null;
     let tick: ((time: number) => void) | null = null;
@@ -25,10 +35,14 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       gsap.ticker.add(tick);
       gsap.ticker.lagSmoothing(0);
       ticker = gsap.ticker;
+      // R1 (spec 1-e §7.3): the deferred full display faces swap h2/h3 boxes —
+      // every ScrollTrigger re-measures once the fonts have settled.
+      document.fonts.ready.then(() => ScrollTrigger.refresh()).catch(() => {});
     })();
 
     return () => {
       disposed = true;
+      window.removeEventListener("mirador:scroll-top", onScrollTop);
       if (tick && ticker) ticker.remove(tick);
       lenis?.destroy();
     };

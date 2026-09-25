@@ -37,8 +37,12 @@ function getServerReducedMotionSnapshot(): boolean {
   return false;
 }
 
-export type Act = { numeral: string; title: string; copy: string; image: string };
+export type Act = { numeral: string; title: string; copy: string; image: string; alt?: string };
 type Mode = "pending" | "webgl" | "poster";
+
+// roman-core glyphs for the act panels' ghost numerals (I/II/III — static
+// glyphs, independent of the localized "ACT I"/«الفصل الأول» numerals)
+const ROMAN_CORE = ["I", "II", "III"] as const;
 
 export function Journey({
   hud,
@@ -101,7 +105,35 @@ export function Journey({
     void getMotion().then(({ gsap }) => {
       if (disposed || !stageRef.current || !trackRef.current || !sectionRef.current) return;
       const ctx = gsap.context(() => {
-        const tween = gsap.to(trackRef.current!, {
+        // RTL FIX (council 1-b, GSAP-source-verified): the old per-act reveals
+        // rode ScrollTrigger's containerAnimation, whose contract assumes a
+        // LEFTWARD-moving container (negative _caScrollDist). In RTL the track
+        // tweens +x (dirSign +1) → _caScrollDist is negative → the value→time
+        // mapping inverts: fire times shift from EN {-0.35, 0.15, 0.65} to AR
+        // {+0.35, +0.85, +1.35} — Act 3 (1.35 > 1) NEVER revealed (an empty
+        // climax panel), Acts 1–2 popped in late, and scrolling back up
+        // un-revealed fully on-screen panels. Replaced with direction-agnostic
+        // progress-threshold reveals keyed off the scrub's own progress: Act k
+        // is 30%-visible at progress (k-0.7)/2 in BOTH locales (verified
+        // geometry) → fire times {0, 0.15, 0.65}, reproducing the EN behavior
+        // bit-for-bit while erasing the RTL defect. The track x math above is
+        // verified correct and untouched.
+        const reveals = gsap.utils.toArray<HTMLElement>("[data-act-content]").map((el, k) => {
+          const enter = Math.max(0, (k - 0.7) / 2);
+          const anim = gsap.fromTo(
+            el,
+            { opacity: 0, y: 24 },
+            { opacity: 1, y: 0, duration: DURATIONS.slow, ease: EASE_EXPO_OUT, paused: true },
+          );
+          return { anim, enter, exit: Math.max(0, enter - 0.05) }; // 0.05 hysteresis anti-flicker
+        });
+        function evaluateReveals(p: number) {
+          for (const { anim, enter, exit } of reveals) {
+            if (p >= enter && anim.progress() === 0) anim.play();
+            else if (p < exit && anim.progress() !== 0) anim.reverse();
+          }
+        }
+        gsap.to(trackRef.current!, {
           x: () => dirSign * window.innerWidth * 2,
           ease: "none",
           scrollTrigger: {
@@ -112,13 +144,40 @@ export function Journey({
             scrub: 1,
             anticipatePin: 1,
             invalidateOnRefresh: true,
+            onRefresh: (self) => evaluateReveals(self.progress),
             onUpdate: (self) => {
               progressRef.current = self.progress;
               invalidateRef.current?.();
+              evaluateReveals(self.progress);
             },
           },
         });
-        // per-act content reveal, timed to the horizontal container animation
+        evaluateReveals(0); // Act 1 visible from pin start (parity with EN)
+      }, sectionRef.current!);
+      revert = () => ctx.revert();
+    });
+    return () => {
+      disposed = true;
+      revert?.();
+    };
+  }, [horizontal]);
+
+  // Poster-mode arrival reveals: the kill-switch/RM fallback branch previously
+  // had NO arrival animation. Regular vertical ScrollTriggers are direction-safe
+  // in both locales — same [data-act-content] reveal values as the horizontal
+  // branch (F5-3 RM keeps its static layout: reduced motion skips this entirely;
+  // "pending" waits for kill-switch resolution so triggers attach exactly once
+  // the stacked branch is the settled treatment, and revert on mode flip/unmount
+  // restores inline styles).
+  useEffect(() => {
+    if (horizontal || reduced || mode !== "poster") return;
+    const section = sectionRef.current;
+    if (!section) return;
+    let disposed = false;
+    let revert: (() => void) | null = null;
+    void getMotion().then(({ gsap }) => {
+      if (disposed || !sectionRef.current) return;
+      const ctx = gsap.context(() => {
         gsap.utils.toArray<HTMLElement>("[data-act-content]").forEach((el) => {
           gsap.fromTo(
             el,
@@ -130,21 +189,20 @@ export function Journey({
               ease: EASE_EXPO_OUT,
               scrollTrigger: {
                 trigger: el,
-                containerAnimation: tween,
-                start: "left 70%",
+                start: "top 75%",
                 toggleActions: "play none none reverse",
               },
             },
           );
         });
-      }, sectionRef.current!);
+      }, section);
       revert = () => ctx.revert();
     });
     return () => {
       disposed = true;
       revert?.();
     };
-  }, [horizontal]);
+  }, [horizontal, mode, reduced]);
 
   return (
     <section ref={sectionRef} aria-label={hud} className="relative">
@@ -168,8 +226,8 @@ export function Journey({
               }}
             />
           </div>
-          {/* horizon hairline grounding the skyline */}
-          <div aria-hidden="true" className="absolute inset-x-0 bottom-[18%] z-[1] border-t border-line/60" />
+          {/* horizon hairline grounding the skyline (copper — the night's own metal) */}
+          <div aria-hidden="true" className="absolute inset-x-0 bottom-[18%] z-[1] border-t border-copper/40" />
           <div ref={trackRef} className="absolute inset-0 z-10 flex w-[300vw]">
             {acts.map((act, i) => (
               <ActPanel key={act.numeral} act={act} index={i} stacked={false} />
@@ -196,7 +254,7 @@ function ActPanel({ act, index, stacked }: { act: Act; index: number; stacked: b
       <article className="media-grain relative flex min-h-[85svh] items-center justify-center overflow-hidden border-t border-line">
         <Image
           src={act.image}
-          alt={act.title}
+          alt={act.alt ?? act.title}
           fill
           sizes="100vw"
           // R11 minor: act-1 is below-fold — LAZY like its siblings (no eager
@@ -219,6 +277,17 @@ function ActPanel({ act, index, stacked }: { act: Act; index: number; stacked: b
       data-act-panel={index}
       className="relative flex h-full w-screen shrink-0 items-center justify-center"
     >
+      {/* oversized ghost numeral behind the act (design audit P2) — roman-core
+          glyph via index, NOT the localized numeral. .ghost-numeral is UNLAYERED
+          CSS (it beats @layer utilities in the cascade), so its top/start ride
+          inline style instead of Tailwind placement classes. */}
+      <span
+        aria-hidden="true"
+        className="ghost-numeral"
+        style={{ top: "-2rem", insetInlineStart: "clamp(1rem, 3vw, 2.5rem)" }}
+      >
+        {ROMAN_CORE[index]}
+      </span>
       <div
         data-act-content
         className="relative z-10 flex max-w-3xl flex-col items-center gap-6 px-6 text-center"
@@ -230,7 +299,7 @@ function ActPanel({ act, index, stacked }: { act: Act; index: number; stacked: b
         <div className="media-grain relative mt-4 h-48 w-72 overflow-hidden border border-line elev-1 sm:h-56 sm:w-96">
           <Image
             src={act.image}
-            alt={act.title}
+            alt={act.alt ?? act.title}
             fill
             sizes="(min-width: 640px) 384px, 288px"
             loading="lazy"

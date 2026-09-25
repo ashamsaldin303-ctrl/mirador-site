@@ -48,6 +48,9 @@ export type ReserveStrings = {
   largePartyNote: string;
   largePartyLink: string;
   tablesRemaining: string;
+  /** P-100 (design audit 2-d): the quiet line under the submit button — no
+   *  deposit, the table is held. Reassurance, not instruction. */
+  reassurance: string;
   closedMonday: string;
   errors: Record<ReserveErrorKey, string>;
 };
@@ -341,6 +344,10 @@ export function ReserveForm({ locale, strings, days, initialDate }: ReserveFormP
         >
           {submitting ? strings.submitting : strings.submit}
         </Button>
+        {/* P-100 (design audit 2-d): the reassurance line — under the submit
+            button, micro + muted. NO data-reveal in here: the form is an intent
+            surface, already visible when interacted. */}
+        <p className="text-micro text-muted">{strings.reassurance}</p>
       </div>
     </form>
   );

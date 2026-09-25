@@ -90,6 +90,10 @@ export function ReserveFormLazy(props: ReserveFormProps) {
           </div>
         ))}
         <div className="h-12 animate-pulse rounded-full bg-surface" />
+        {/* P-100 (design audit 2-d): the reassurance line renders in the shell
+            too — static text, matching the motor form's rhythm so hydration
+            doesn't shift the submit block. */}
+        <p className="text-micro text-muted">{props.strings.reassurance}</p>
       </div>
     </div>
   );

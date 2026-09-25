@@ -301,6 +301,18 @@
   --text-small--line-height: 1.7;
   --text-micro--line-height: 1.6;
   --text-micro--letter-spacing: 0; /* AR never gets letter-spacing */
+  /* P-100 loop-1 (design audit §1.1A): AR OPTICAL SIZE COMPENSATION — Amiri
+     reads ~8–10% optically smaller than Fraunces at identical px. The display
+     scale bumps keep AR display moments equal in presence, not just in pt. */
+  --text-display-xl: calc(clamp(3.5rem, 9vw, 10rem) * 1.06);
+  --text-h1: calc(clamp(2.75rem, 6vw, 8.75rem) * 1.06);
+  --text-h2: calc(clamp(2rem, 4vw, 3.5rem) * 1.08);
+  --text-h3: calc(clamp(1.5rem, 2.5vw, 2rem) * 1.1);
+}
+[dir="rtl"] .hud-label {
+  letter-spacing: 0;
+  text-transform: none; /* no ALL-CAPS for AR (NEVER-10) */
+  font-size: 0.8125rem; /* 13px — Plex Arabic at 12px reads starved */
 }
 
 @layer base {
@@ -505,3 +517,192 @@
     }
   }
 }
+
+/* ————————————————————————————————————————————————————————————————
+   P-100 (loop-1) · THE MOTION UPGRADE FOUNDATION
+   Council synthesis: 1-a hero stage · 1-c reveal system · 1-e safety law.
+   Gate of record: html[data-js] (set parse-time by the ONE head script in
+   [locale]/layout.tsx — no-JS/crawlers never match a hidden-state selector).
+   Lifecycle: [data-revealed] fires the transition · [data-done] (set after
+   the window by RevealProvider) strips ALL reveal CSS so hover/Flip/GSAP
+   own the element afterwards. Vertical/direction-neutral transforms ONLY.
+   ———————————————————————————————————————————————————————————————— */
+
+/* — THE REVEAL SYSTEM (data-reveal grammar; engine = RevealProvider IO) — */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-js] [data-reveal]:not([data-done]) {
+    transition:
+      opacity 350ms var(--ease-out-expo),
+      transform 350ms var(--ease-out-expo),
+      clip-path 400ms var(--ease-out-expo);
+  }
+  html[data-js] [data-reveal]:not([data-revealed]):not([data-done]) {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  html[data-js] [data-reveal="fade"]:not([data-revealed]):not([data-done]) { transform: none; }
+  html[data-js] [data-reveal="scale"]:not([data-revealed]):not([data-done]) { transform: scale(0.96); }
+  html[data-js] [data-reveal="draw"]:not([data-revealed]):not([data-done]) {
+    opacity: 1;
+    transform: scale(0, 1);
+  }
+  html[data-js] [data-reveal="mask"]:not([data-revealed]):not([data-done]) {
+    clip-path: inset(100% 0 0 0);
+  }
+  html[data-js] [data-reveal="mask"]:not([data-done]) > .reveal-scale {
+    transition: transform 400ms var(--ease-out-expo);
+  }
+  html[data-js] [data-reveal="mask"]:not([data-revealed]):not([data-done]) > .reveal-scale {
+    transform: scale(1.06);
+  }
+  /* groups: direct children rise 6px as one gesture (stagger via the
+     provider's per-child inline transition-delay — DOM order = reading
+     order in both dirs, RTL-safe by construction) */
+  html[data-js] [data-reveal-group]:not([data-done]) > * {
+    transition:
+      opacity 350ms var(--ease-out-expo),
+      transform 350ms var(--ease-out-expo);
+  }
+  html[data-js] [data-reveal-group]:not([data-revealed]):not([data-done]) > * {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-js] [data-reveal]:not([data-revealed]):not([data-done]),
+  html[data-js] [data-reveal-group]:not([data-revealed]):not([data-done]) > * {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}
+
+/* — THE HERO STAGE (spec 1-a "The Sixth-Floor Window"): armed post-hydration
+   ([data-armed] added by HeroStage mount rAF; the head script's 1.4s self-heal
+   covers slow/broken hydration). The H1 (LCP pair) NEVER hides — transform-
+   only entrance. Pre-arm hidden states exist ONLY under the JS gate. — */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-js] .hero:not([data-armed]) .hero-rise { opacity: 0; transform: translateY(8px); }
+  html[data-js] .hero:not([data-armed]) .hero-line { transform: translateY(12px); }
+  html[data-js] .hero:not([data-armed]) .hero-media-in { transform: scale(1.12); }
+  html[data-js] .hero[data-armed] .hero-rise { animation: hero-rise 300ms var(--ease-out-expo) both; }
+  html[data-js] .hero[data-armed] .hero-line { animation: hero-line 320ms var(--ease-out-expo) both; }
+  html[data-js] .hero[data-armed] .hero-media-in { animation: hero-media-in 600ms var(--ease-out-expo) both; }
+  html[data-js] .hero[data-armed] .cue-drop { animation: cue-drop 2200ms ease-in-out 800ms infinite; }
+}
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hero-line {
+  from { transform: translateY(12px); }
+  to { transform: none; }
+}
+@keyframes hero-media-in {
+  from { transform: scale(1.12); }
+  to { transform: scale(1.06); }
+}
+@keyframes cue-drop {
+  0% { transform: translateY(-8px); opacity: 0; }
+  15% { opacity: 1; }
+  70% { transform: translateY(28px); opacity: 0; }
+  100% { transform: translateY(28px); opacity: 0; }
+}
+/* the pointer-glint sheen (desktop only; JS drives --gx/--gy — compositor-only) */
+.hero-glint { position: absolute; inset: 0; z-index: 9; pointer-events: none; opacity: 0; }
+.hero-glint::before {
+  content: "";
+  position: absolute;
+  width: 560px;
+  height: 560px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(203, 163, 92, 0.16), transparent 60%);
+  transform: translate3d(var(--gx, 50vw), var(--gy, 30vh), 0) translate(-50%, -50%);
+}
+/* the scroll-cue hairline track (spec 1-a §2) */
+.cue-track { position: relative; width: 1px; height: 28px; background: var(--color-line); overflow: hidden; }
+.cue-drop { position: absolute; inset-inline: 0; top: 0; height: 8px; background: var(--color-amber); }
+
+/* — THE CTA GLINT SWEEP (hero CTA pair only — the one signature hover;
+   mirrored under RTL via origin+direction flip) — */
+@media (prefers-reduced-motion: no-preference) {
+  .cta-glint { position: relative; overflow: hidden; }
+  .cta-glint::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 35%, rgba(242, 239, 232, 0.14) 50%, transparent 65%);
+    transform: translateX(-130%);
+    transition: transform 550ms var(--ease-out-expo);
+  }
+  .cta-glint:hover::after { transform: translateX(130%); }
+  [dir="rtl"] .cta-glint::after {
+    background: linear-gradient(255deg, transparent 35%, rgba(242, 239, 232, 0.14) 50%, transparent 65%);
+    transform: translateX(130%);
+  }
+  [dir="rtl"] .cta-glint:hover::after { transform: translateX(-130%); }
+}
+
+/* — THE LINK-DRAW UNDERLINE (nav links + dish names): 1px amber hairline,
+   center-out scale — direction-neutral in RTL by construction — */
+@media (prefers-reduced-motion: no-preference) {
+  .link-draw { position: relative; }
+  .link-draw::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: -2px;
+    height: 1px;
+    background: var(--color-amber);
+    transform: scale(0, 1);
+    transform-origin: center;
+    transition: transform 200ms var(--ease-out-expo);
+  }
+  .link-draw:hover::after,
+  .link-draw:focus-visible::after { transform: scale(1, 1); }
+}
+
+/* — THE GHOST NUMERAL (design audit §3-2): oversized display digits behind
+     section titles — the jewelry-box register. Copper tint under AR. — */
+.ghost-numeral {
+  position: absolute;
+  top: -0.55em;
+  inset-inline-start: 0;
+  z-index: 0;
+  font-family: var(--font-display-stack);
+  font-size: clamp(5rem, 12vw, 9rem);
+  line-height: 1;
+  font-weight: 400;
+  color: color-mix(in oklab, var(--color-ink) 5%, transparent);
+  user-select: none;
+  pointer-events: none;
+}
+[dir="rtl"] .ghost-numeral { color: color-mix(in oklab, var(--color-copper) 9%, transparent); }
+
+/* — THE SLOT-IN CASCADE (reserve time grid mount): 4px lift, 300ms — */
+@keyframes slot-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .slot-in { animation: slot-in 300ms var(--ease-out-expo) both; }
+}
+
+/* — THE LAMP DOT (reserve-band hours): the breathing city-light ember — */
+.lamp-dot::before {
+  content: "";
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  border-radius: 9999px;
+  background: var(--color-amber);
+  margin-inline-end: 8px;
+  vertical-align: middle;
+  animation: breathe 2.4s ease-in-out infinite;
+}
+
+/* — THE SCROLL PROGRESS HAIRLINE (spec 1-c §7A): 2px amber, scaleX readout,
+     logical-side origin flip under RTL — */
+.progress-hairline { transform-origin: left center; }
+[dir="rtl"] .progress-hairline { transform-origin: right center; }

@@ -8,7 +8,8 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-// (canonical §6.1: allergens/dietTags are native String[] — written as arrays)
+// (sqlite adaptation: allergens/dietTags are JSON-encoded String columns —
+// written via JSON.stringify, parsed back in src/lib/menu.ts)
 
 type DishSeed = {
   slug: string;
@@ -128,8 +129,8 @@ async function main() {
           nameEn: dish.nameEn, descEn: dish.descEn,
           nameAr: dish.nameAr, descAr: dish.descAr,
           priceUsd: dish.priceUsd,
-          allergens: dish.allergens,
-          dietTags: dish.dietTags,
+          allergens: JSON.stringify(dish.allergens),
+          dietTags: JSON.stringify(dish.dietTags),
           isSignature: dish.isSignature ?? false,
           isSoldOut: dish.isSoldOut ?? false,
           imageUrl: dish.isSignature ? `/img/menu/${dish.slug}.avif` : null,

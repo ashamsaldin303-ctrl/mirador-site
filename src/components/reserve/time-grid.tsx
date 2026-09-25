@@ -5,6 +5,11 @@
 // remaining 0 → disabled with the sold-out label (error token is designated
 // "form errors + sold-out" in §5.2); selected slot amber. aria-label composed
 // with reserve.tablesRemaining ("18:00 — 3 tables" / «18:00 — 3 طاولات»).
+// P-100 (loop-1, design audit 2-d): the loaded grid mounts through the
+// slot-in cascade (300ms/4px rise, per-cell delay i*60ms capped at 4) — the
+// grid only renders client-side after the fetch, so the cascade is
+// SSR-stable by construction; the loading → skeleton → grid swap replays it
+// per date change. Numbers are facts — no hover/entrance motion on values.
 import { SLOT_TIMES } from "@/lib/slots";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
@@ -76,7 +81,7 @@ export function TimeGrid({
 
   return (
     <div className={GRID}>
-      {slots.map(({ time, remaining, past }) => {
+      {slots.map(({ time, remaining, past }, i) => {
         const ended = past === true; // R11: «انتهى» — the night moved on (≠ sold out)
         const soldOut = !ended && remaining <= 0;
         const isSelected = selected === time;
@@ -93,12 +98,13 @@ export function TimeGrid({
             disabled={ended || soldOut || disabled}
             onClick={() => onSelect(time)}
             className={cn(
+              "slot-in",
               "flex min-h-11 flex-col items-center justify-center gap-1 rounded-sm border px-2 py-3 transition-colors duration-fast",
-              "",
               isSelected && "border-amber bg-amber/10 text-amber",
               !isSelected && !soldOut && !ended && "border-line text-ink hover:border-amber/60 hover:text-amber",
               (soldOut || ended) && "cursor-not-allowed border-line text-muted opacity-60",
             )}
+            style={{ animationDelay: `${Math.min(i, 4) * 60}ms` }}
           >
             <span className="text-body tabular-nums">{time}</span>
             {ended ? (

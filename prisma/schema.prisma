@@ -1,36 +1,21 @@
-// MIRADOR — data contract (brief §6.1, canonical PostgreSQL form).
-// Prompt-3 E20: the committed schema IS this file; judge-audit asserts the
-// provider. The round-1 SQLite adaptation (ASSUMPTIONS #2) is reversed per
-// docs/deploy-pre.md §1; booking safety (R4) unchanged: interactive
-// transactions + both @@unique guards + P2002→409 mapping.
-// NOTE: §6.1's compact one-line blocks are not valid Prisma DSL (P1012) —
-// formatting is normalized to multi-line blocks, semantics identical
-// (fields, types, defaults, guards — all verbatim; ASSUMPTIONS.md row 11).
+// MIRADOR — data contract (brief §6.1).
+// SQLITE ADAPTATION (sandbox: no PG runtime): provider sqlite · enums → String
+// (documented allowed values kept verbatim in comments) · String[] → JSON String.
+// Booking safety (R4) unchanged: interactive transactions + both @@unique
+// guards + P2002→409 mapping.
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
-enum Locale {
-  EN
-  AR
-}
-
-enum ReservationStatus {
-  PENDING
-  CONFIRMED
-  CANCELLED
-}
-
-enum InquiryType {
-  PRIVATE_DINING
-  GENERAL
-}
+// enum Locale { EN AR } — sqlite: String with allowed values "EN" | "AR"
+// enum ReservationStatus { PENDING CONFIRMED CANCELLED } — String
+// enum InquiryType { PRIVATE_DINING GENERAL } — String
 
 model MenuSection {
   id        String     @id @default(cuid())
@@ -51,8 +36,8 @@ model MenuItem {
   descEn      String
   descAr      String
   priceUsd    Int // USD cents, authoritative
-  allergens   String[] // allowed: gluten dairy nuts shellfish fish egg
-  dietTags    String[] // allowed: vegetarian vegan gf pescatarian
+  allergens   String // JSON array; allowed: gluten dairy nuts shellfish fish egg
+  dietTags    String // JSON array; allowed: vegetarian vegan gf pescatarian
   isSignature Boolean     @default(false)
   isSoldOut   Boolean     @default(false)
   imageUrl    String?
@@ -66,8 +51,8 @@ model Reservation {
   partySize   Int // 1–12
   slot        DateTime // slot start, 30-min grid, stored UTC
   tableNumber Int // 1–12, assigned transactionally
-  status      ReservationStatus @default(PENDING)
-  locale      Locale
+  status      String @default("PENDING") // ReservationStatus: PENDING | CONFIRMED | CANCELLED
+  locale      String // Locale: "EN" | "AR"
   createdAt   DateTime          @default(now())
 
   @@unique([slot, tableNumber]) // hard double-booking guard
@@ -77,13 +62,13 @@ model Reservation {
 
 model Inquiry {
   id            String      @id @default(cuid())
-  type          InquiryType
+  type          String      // InquiryType: "PRIVATE_DINING" | "GENERAL"
   name          String
   phone         String
   preferredDate DateTime?
   partySize     Int?
   message       String
-  locale        Locale
+  locale        String      // Locale: "EN" | "AR"
   createdAt     DateTime    @default(now())
 }
 
