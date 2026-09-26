@@ -35,6 +35,12 @@ const CSP = [
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  // D3-L3 (loop-3): dev-only allow-list — the space-z preview shells
+  // (preview-chat-<id>.space-z.ai …) proxy /_next/* HMR + assets; Next 16
+  // warns on every cross-origin request until explicitly allowed. Wildcard
+  // subdomain form (segment-wise match, verified against Next 16.1.3
+  // csrf-protection.js). No effect on production builds.
+  allowedDevOrigins: ["*.space-z.ai"],
   images: {
     // PRF-3 (prompt-4 R6/P-023): AVIF actually served — the optimizer's
     // preferred output format for responsive sources (gallery tiles, menu
